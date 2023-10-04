@@ -358,6 +358,9 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/DocumentUploadRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DocumentLocalUploadRequest'
       responses:
         200:
           description: Documents successfully uploaded
@@ -717,6 +720,35 @@ components:
                   - pdf
                   - png
                   - jpg
+
+    DocumentLocalUploadRequest:
+      type: object
+      properties:
+        documents:
+          type: array
+          items:
+            type: object
+            properties:
+              bucketId:
+                type: integer
+              fileName:
+                type: string
+              fileType:
+                type: string
+                enum:
+                  - txt
+                  - docx
+                  - pptx
+                  - xlsx
+                  - pdf
+                  - png
+                  - jpg
+              metadata:
+                type: object
+              callbackData:
+                type: string
+              callbackUrl:
+                type: string
 
     IngestResponse:
       type: object
