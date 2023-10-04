@@ -1,5 +1,7 @@
 examples: {}
 examples_2: {}
+examples_3: {}
+ignoreObjectsWithNoProperties: false
 operationIds:
   /v1/apikey:
     get: ApiKeyManagement_list

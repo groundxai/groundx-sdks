@@ -1,0 +1,197 @@
+# groundx-pthon-sdk
+
+[![PyPI](https://img.shields.io/badge/PyPI-v1.0.0-blue)](https://pypi.org/project/groundx-pthon-sdk/1.0.0)
+
+Ground Your RAG Apps in Fact not Fiction
+
+
+## Requirements
+
+Python >=3.7
+
+## Installing
+
+```sh
+pip install groundx-pthon-sdk==1.0.0
+```
+
+## Getting Started
+
+```python
+from pprint import pprint
+from groundx import Groundx, ApiException
+
+groundx = Groundx(
+    # Defining the host is optional and defaults to https://api.groundx.ai/api
+    # See configuration.py for a list of all supported configuration parameters.
+    host="https://api.groundx.ai/api",
+    # Configure API key authorization: ApiKeyAuth
+    api_key="YOUR_API_KEY",
+    # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+    # api_key_prefix = {'ApiKeyAuth': 'Bearer'},
+)
+
+try:
+    # Get API keys
+    list_response = groundx.api_key_management.list()
+    pprint(list_response.body)
+    pprint(list_response.body["api_keys"])
+    pprint(list_response.headers)
+    pprint(list_response.status)
+    pprint(list_response.round_trip_time)
+except ApiException as e:
+    print("Exception when calling APIKeyManagementApi.list: %s\n" % e)
+    pprint(e.body)
+    if e.status == 405:
+        pprint(e.body["message"])
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
+    pprint(e.round_trip_time)
+```
+
+## Async
+
+`async` support is available by prepending `a` to any method.
+
+```python
+import asyncio
+from pprint import pprint
+from groundx import Groundx, ApiException
+
+groundx = Groundx(
+    # Defining the host is optional and defaults to https://api.groundx.ai/api
+    # See configuration.py for a list of all supported configuration parameters.
+    host="https://api.groundx.ai/api",
+    # Configure API key authorization: ApiKeyAuth
+    api_key="YOUR_API_KEY",
+    # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+    # api_key_prefix = {'ApiKeyAuth': 'Bearer'},
+)
+
+
+async def main():
+    try:
+        # Get API keys
+        list_response = await groundx.api_key_management.alist()
+        pprint(list_response.body)
+        pprint(list_response.body["api_keys"])
+        pprint(list_response.headers)
+        pprint(list_response.status)
+        pprint(list_response.round_trip_time)
+    except ApiException as e:
+        print("Exception when calling APIKeyManagementApi.list: %s\n" % e)
+        pprint(e.body)
+        if e.status == 405:
+            pprint(e.body["message"])
+        pprint(e.headers)
+        pprint(e.status)
+        pprint(e.reason)
+        pprint(e.round_trip_time)
+
+
+asyncio.run(main())
+```
+
+
+## Documentation for API Endpoints
+
+All URIs are relative to *https://api.groundx.ai/api*
+
+Tag | Method | HTTP request | Description
+------------ | ------------- | ------------- | -------------
+*API Key Management* | [**list**](docs/apis/tags/APIKeyManagementApi.md#list) | **GET** /v1/apikey | Get API keys
+*Bucket* | [**create**](docs/apis/tags/BucketApi.md#create) | **POST** /v1/bucket | Create a bucket
+*Bucket* | [**delete**](docs/apis/tags/BucketApi.md#delete) | **DELETE** /v1/bucket/{bucketId} | Delete an existing bucket
+*Bucket* | [**get**](docs/apis/tags/BucketApi.md#get) | **GET** /v1/bucket/{bucketId} | Look up an existing bucket
+*Bucket* | [**list**](docs/apis/tags/BucketApi.md#list) | **GET** /v1/bucket | Look up existing buckets
+*Bucket* | [**update**](docs/apis/tags/BucketApi.md#update) | **PUT** /v1/bucket/{bucketId} | Update an existing bucket
+*Document* | [**delete**](docs/apis/tags/DocumentApi.md#delete) | **DELETE** /v1/ingest/document/{documentId} | Delete documents
+*Document* | [**get**](docs/apis/tags/DocumentApi.md#get) | **GET** /v1/ingest/document/{documentId} | Look up an existing document
+*Document* | [**get_processing_status_by_process_id**](docs/apis/tags/DocumentApi.md#get_processing_status_by_process_id) | **GET** /v1/ingest/{processId} | Look up document processing status by processId
+*Document* | [**list**](docs/apis/tags/DocumentApi.md#list) | **GET** /v1/ingest/documents | Look up all existing documents
+*Document* | [**lookup**](docs/apis/tags/DocumentApi.md#lookup) | **GET** /v1/ingest/documents/{id} | Look up existing documents by processId, bucketId, or projectId
+*Document* | [**upload_local**](docs/apis/tags/DocumentApi.md#upload_local) | **POST** /v1/ingest/documents/local | Upload local documents to GroundX
+*Document* | [**upload_remote**](docs/apis/tags/DocumentApi.md#upload_remote) | **POST** /v1/ingest/documents/remote | Upload hosted documents to GroundX
+*Inventory* | [**add**](docs/apis/tags/InventoryApi.md#add) | **POST** /v1/inventory | adds an inventory item
+*Inventory* | [**search**](docs/apis/tags/InventoryApi.md#search) | **GET** /v1/inventory | searches inventory
+*Preprocessor* | [**delete**](docs/apis/tags/PreprocessorApi.md#delete) | **DELETE** /v1/preprocess | Delete Custom Pre-Processor
+*Preprocessor* | [**list**](docs/apis/tags/PreprocessorApi.md#list) | **GET** /v1/preprocess | Query pre-processors
+*Preprocessor* | [**setup**](docs/apis/tags/PreprocessorApi.md#setup) | **POST** /v1/preprocess | Setup Custom Pre-Processor
+*Project* | [**bind_bucket**](docs/apis/tags/ProjectApi.md#bind_bucket) | **POST** /v1/project/{projectId} | Bound project and bucket
+*Project* | [**create**](docs/apis/tags/ProjectApi.md#create) | **POST** /v1/project | Create a project
+*Project* | [**delete**](docs/apis/tags/ProjectApi.md#delete) | **DELETE** /v1/project/{projectId} | Delete an existing project
+*Project* | [**get**](docs/apis/tags/ProjectApi.md#get) | **GET** /v1/project/{projectId} | Look up an existing project
+*Project* | [**list**](docs/apis/tags/ProjectApi.md#list) | **GET** /v1/project | Look up existing projects
+*Project* | [**update**](docs/apis/tags/ProjectApi.md#update) | **PUT** /v1/project/{projectId} | Update an existing project
+*Search* | [**content**](docs/apis/tags/SearchApi.md#content) | **POST** /v1/search/{projectId} | Perform a search query of your content
+
+## Documentation For Models
+
+ - [ApiKeyManagementList405Response](docs/models/ApiKeyManagementList405Response.md)
+ - [ApiKeyManagementListResponse](docs/models/ApiKeyManagementListResponse.md)
+ - [ApiKeyManagementListResponseApiKeys](docs/models/ApiKeyManagementListResponseApiKeys.md)
+ - [ApiKeyManagementListResponseApiKeysItem](docs/models/ApiKeyManagementListResponseApiKeysItem.md)
+ - [BucketCreateRequest](docs/models/BucketCreateRequest.md)
+ - [BucketCreateRequestBucket](docs/models/BucketCreateRequestBucket.md)
+ - [BucketDeleteResponse](docs/models/BucketDeleteResponse.md)
+ - [BucketDetail](docs/models/BucketDetail.md)
+ - [BucketListResponse](docs/models/BucketListResponse.md)
+ - [BucketResponse](docs/models/BucketResponse.md)
+ - [BucketUpdateRequest](docs/models/BucketUpdateRequest.md)
+ - [BucketUpdateRequestBucket](docs/models/BucketUpdateRequestBucket.md)
+ - [DocumentDeleteResponse](docs/models/DocumentDeleteResponse.md)
+ - [DocumentListResponse](docs/models/DocumentListResponse.md)
+ - [DocumentLocalUploadRequest](docs/models/DocumentLocalUploadRequest.md)
+ - [DocumentLocalUploadRequestBlob](docs/models/DocumentLocalUploadRequestBlob.md)
+ - [DocumentLookupResponse](docs/models/DocumentLookupResponse.md)
+ - [DocumentRemoteUploadRequest](docs/models/DocumentRemoteUploadRequest.md)
+ - [DocumentRemoteUploadRequestDocuments](docs/models/DocumentRemoteUploadRequestDocuments.md)
+ - [DocumentRemoteUploadRequestDocumentsItem](docs/models/DocumentRemoteUploadRequestDocumentsItem.md)
+ - [DocumentResponse](docs/models/DocumentResponse.md)
+ - [DocumentResponseDocument](docs/models/DocumentResponseDocument.md)
+ - [DocumentType](docs/models/DocumentType.md)
+ - [IngestResponse](docs/models/IngestResponse.md)
+ - [IngestResponseIngest](docs/models/IngestResponseIngest.md)
+ - [InventoryItem](docs/models/InventoryItem.md)
+ - [InventorySearchResponse](docs/models/InventorySearchResponse.md)
+ - [Manufacturer](docs/models/Manufacturer.md)
+ - [PreprocessorDeleteRequest](docs/models/PreprocessorDeleteRequest.md)
+ - [PreprocessorDeleteRequestPreprocessors](docs/models/PreprocessorDeleteRequestPreprocessors.md)
+ - [PreprocessorResponse](docs/models/PreprocessorResponse.md)
+ - [PreprocessorResponsePreprocess](docs/models/PreprocessorResponsePreprocess.md)
+ - [PreprocessorResponsePreprocessPreprocessors](docs/models/PreprocessorResponsePreprocessPreprocessors.md)
+ - [PreprocessorResponsePreprocessPreprocessorsItem](docs/models/PreprocessorResponsePreprocessPreprocessorsItem.md)
+ - [PreprocessorResponsePreprocessPreprocessorsItemScript](docs/models/PreprocessorResponsePreprocessPreprocessorsItemScript.md)
+ - [PreprocessorSetupRequest](docs/models/PreprocessorSetupRequest.md)
+ - [PreprocessorSetupRequestScript](docs/models/PreprocessorSetupRequestScript.md)
+ - [PreprocessorSetupResponse](docs/models/PreprocessorSetupResponse.md)
+ - [PreprocessorSetupResponsePreprocess](docs/models/PreprocessorSetupResponsePreprocess.md)
+ - [PreprocessorSetupResponsePreprocessPreprocessors](docs/models/PreprocessorSetupResponsePreprocessPreprocessors.md)
+ - [PreprocessorSetupResponsePreprocessPreprocessorsItem](docs/models/PreprocessorSetupResponsePreprocessPreprocessorsItem.md)
+ - [ProcessStatusResponse](docs/models/ProcessStatusResponse.md)
+ - [ProcessStatusResponseIngest](docs/models/ProcessStatusResponseIngest.md)
+ - [ProcessStatusResponseIngestProgress](docs/models/ProcessStatusResponseIngestProgress.md)
+ - [ProcessStatusResponseIngestProgressComplete](docs/models/ProcessStatusResponseIngestProgressComplete.md)
+ - [ProcessStatusResponseIngestProgressErrors](docs/models/ProcessStatusResponseIngestProgressErrors.md)
+ - [ProcessStatusResponseIngestProgressProcessing](docs/models/ProcessStatusResponseIngestProgressProcessing.md)
+ - [ProjectBindBucket400Response](docs/models/ProjectBindBucket400Response.md)
+ - [ProjectBucketBinding](docs/models/ProjectBucketBinding.md)
+ - [ProjectBucketBindingProject](docs/models/ProjectBucketBindingProject.md)
+ - [ProjectCreateRequest](docs/models/ProjectCreateRequest.md)
+ - [ProjectCreateRequestProject](docs/models/ProjectCreateRequestProject.md)
+ - [ProjectDeleteResponse](docs/models/ProjectDeleteResponse.md)
+ - [ProjectDetail](docs/models/ProjectDetail.md)
+ - [ProjectListResponse](docs/models/ProjectListResponse.md)
+ - [ProjectResponse](docs/models/ProjectResponse.md)
+ - [ProjectUpdateRequest](docs/models/ProjectUpdateRequest.md)
+ - [ProjectUpdateRequestProject](docs/models/ProjectUpdateRequestProject.md)
+ - [SearchRequest](docs/models/SearchRequest.md)
+ - [SearchRequestSearch](docs/models/SearchRequestSearch.md)
+ - [SearchResponse](docs/models/SearchResponse.md)
+ - [SearchResponseSearch](docs/models/SearchResponseSearch.md)
+ - [SearchResultItem](docs/models/SearchResultItem.md)
+
+
+## Author
+This Python package is automatically generated by [Konfig](https://konfigthis.com)
