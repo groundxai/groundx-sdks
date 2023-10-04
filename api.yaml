@@ -182,7 +182,7 @@ paths:
           required: true
           description: The ID of the bucket to retrieve.
           schema:
-            type: string
+            type: integer
       responses:
         '200':
           description: Look up success
@@ -204,7 +204,7 @@ paths:
           required: true
           description: The ID of the bucket to update.
           schema:
-            type: string
+            type: integer
       requestBody:
         required: true
         content:
@@ -232,7 +232,7 @@ paths:
           required: true
           description: The ID of the bucket to delete.
           schema:
-            type: string
+            type: integer
       responses:
         '200':
           description: Bucket successfully deleted
@@ -547,7 +547,7 @@ components:
       type: object
       properties:
         bucketId:
-          type: string
+          type: integer
         fileCount:
           type: integer
         fileSize:
@@ -590,7 +590,7 @@ components:
           type: object
           properties:
             bucketId:
-              type: string
+              type: integer
             documentId:
               type: string
             fileName:
