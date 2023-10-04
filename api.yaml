@@ -18,7 +18,26 @@ tags:
   - name: Preprocessor
   - name: Inventory
   - name: Search
+  - name: API Key Management
 paths:
+  /v1/apikey:
+    get:
+      tags:
+        - API Key Management
+      summary: Get API keys
+      operationId: ApiKeyManagement_list
+      description: Retrieve the API keys for the authenticated user.
+      responses:
+        '200':
+          description: Successful retrieval of API keys
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKeyManagementListResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
   /v1/inventory:
     get:
       tags:
@@ -79,6 +98,35 @@ paths:
         '409':
           description: an existing item already exists
   /v1/project/{projectId}:
+    post:
+      tags:
+        - Project
+      summary: Bound project and bucket
+      operationId: Project_bindBucket
+      description: Bind a specific bucket to a project.
+      parameters:
+        - description: The ID of the project to bind the bucket to.
+          name: projectId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: The bucket ID to bind to the project.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectBucketBinding'
+      responses:
+        '200':
+          description: Successful binding of project and bucket.
+        '400':
+          description: Invalid request data.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
     get:
       tags:
         - Project
@@ -539,6 +587,19 @@ paths:
           description: Permission denied
 components:
   schemas:
+    ProjectBucketBinding:
+      type: object
+      required:
+        - project
+      properties:
+        project:
+          type: object
+          required:
+            - bucketId
+          properties:
+            bucketId:
+              description: The ID of the bucket to bind to the project.
+              type: integer
     SearchRequest:
       type: object
       properties:
@@ -962,6 +1023,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DocumentResponse'
+    ApiKeyManagementListResponse:
+      type: object
+      properties:
+        apiKey:
+          description: The API key for the user.
+          type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

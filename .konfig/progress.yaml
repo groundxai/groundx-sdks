@@ -1,6 +1,8 @@
 examples: {}
 examples_2: {}
 operationIds:
+  /v1/apikey:
+    get: ApiKeyManagement_list
   /v1/bucket:
     get: Bucket_list
     post: Bucket_create
@@ -31,6 +33,7 @@ operationIds:
   /v1/project/{projectId}:
     delete: Project_delete
     get: Project_get
+    post: Project_bindBucket
     put: Project_update
   /v1/search/{projectId}:
     post: Search_content
@@ -72,6 +75,10 @@ renameTags: {}
 requestSchemaNames: {}
 responseDescriptions: {}
 responseSchemaNames:
+  /v1/apikey:
+    get:
+      '200':
+        application/json: ApiKeyManagementListResponse
   /v1/bucket:
     get:
       '200':
