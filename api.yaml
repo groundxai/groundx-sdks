@@ -389,6 +389,50 @@ paths:
           description: Invalid document ID
         '401':
           description: Permission denied
+  /v1/ingest/documents/remote:
+    post:
+      tags:
+        - Document
+      summary: Upload hosted documents to GroundX
+      operationId: Document_upload
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DocumentUploadRequest'
+      responses:
+        '200':
+          description: Documents successfully uploaded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IngestResponse'
+        '400':
+          description: Invalid document type or source URL
+        '401':
+          description: Permission denied
+  /v1/ingest/documents/local:
+    post:
+      tags:
+        - Document
+      summary: Upload local documents to GroundX
+      operationId: Document_uploadLocal
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DocumentLocalUploadRequest'
+      responses:
+        '200':
+          description: Documents successfully uploaded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IngestResponse'
+        '400':
+          description: Invalid document type or source URL
+        '401':
+          description: Permission denied
   /v1/ingest/documents:
     get:
       tags:
@@ -402,30 +446,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DocumentListResponse'
-        '401':
-          description: Permission denied
-    post:
-      tags:
-        - Document
-      summary: Upload hosted documents to GroundX
-      operationId: Document_upload
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DocumentUploadRequest'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/DocumentLocalUploadRequest'
-      responses:
-        '200':
-          description: Documents successfully uploaded
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/IngestResponse'
-        '400':
-          description: Invalid document type or source URL
         '401':
           description: Permission denied
   /v1/ingest/documents/{id}:
