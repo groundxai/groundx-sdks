@@ -14,6 +14,7 @@ info:
 tags:
   - name: Project
   - name: Bucket
+  - name: Inventory
   - name: Document
   - name: Preprocessor
   - name: Search
