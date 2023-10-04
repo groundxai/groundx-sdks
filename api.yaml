@@ -289,8 +289,145 @@ paths:
         '401':
           description: Permission denied
 
+  /ingest/document/{documentId}:
+    get:
+      summary: Look up an existing document
+      parameters:
+        - name: documentId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Look up success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentResponse'
+        400:
+          description: Invalid document ID
+        401:
+          description: Permission denied
+
+    delete:
+      summary: Delete documents
+      parameters:
+        - name: documentId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Documents successfully deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        400:
+          description: Invalid document ID
+        401:
+          description: Permission denied
+
+  /ingest/documents:
+    get:
+      summary: Look up all existing documents
+      responses:
+        200:
+          description: Look up success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  documents:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DocumentResponse'
+        401:
+          description: Permission denied
+
+    post:
+      summary: Upload hosted documents to GroundX
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DocumentUploadRequest'
+      responses:
+        200:
+          description: Documents successfully uploaded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IngestResponse'
+        400:
+          description: Invalid document type or source URL
+        401:
+          description: Permission denied
+
+  /ingest/documents/{id}:
+    get:
+      summary: Look up existing documents by processId, bucketId, or projectId
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Look up success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  documents:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DocumentResponse'
+        401:
+          description: Permission denied
+
+  /ingest/{processId}:
+    get:
+      summary: Look up document processing status by processId
+      parameters:
+        - name: processId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Look up success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProcessStatusResponse'
+        401:
+          description: Permission denied
+
 components:
   schemas:
+    ProjectCreateRequest:
+      type: object
+      properties:
+        project:
+          type: object
+          properties:
+            name:
+              type: string
+    ProjectResponse:
+      type: object
+      properties:
+        project:
+          $ref: '#/components/schemas/ProjectDetail'
     InventoryItem:
       type: object
       required:
@@ -379,6 +516,125 @@ components:
           type: object
           properties:
             name:
+              type: string
+    ProjectUpdateRequest:
+      type: object
+      properties:
+        project:
+          type: object
+          properties:
+            name:
+              type: string
+    DocumentResponse:
+      type: object
+      properties:
+        document:
+          type: object
+          properties:
+            bucketId:
+              type: string
+            documentId:
+              type: string
+            fileName:
+              type: string
+            fileSize:
+              type: string
+            fileType:
+              type: string
+            metadata:
+              type: object
+            processId:
+              type: string
+            processedUrl:
+              type: string
+            sourceUrl:
+              type: string
+            status:
+              type: string
+            statusMessage:
+              type: string
+
+    DocumentUploadRequest:
+      type: object
+      properties:
+        documents:
+          type: array
+          items:
+            type: object
+            properties:
+              bucketId:
+                type: integer
+              sourceUrl:
+                type: string
+              callbackData:
+                type: string
+              callbackUrl:
+                type: string
+              metadata:
+                type: object
+              type:
+                type: string
+                enum:
+                  - txt
+                  - docx
+                  - pptx
+                  - xlsx
+                  - pdf
+                  - png
+                  - jpg
+
+    IngestResponse:
+      type: object
+      properties:
+        ingest:
+          type: object
+          properties:
+            processId:
+              type: string
+            status:
+              type: string
+
+    ProcessStatusResponse:
+      type: object
+      properties:
+        ingest:
+          type: object
+          properties:
+            processId:
+              type: string
+            progress:
+              type: object
+              properties:
+                complete:
+                  type: object
+                  properties:
+                    documents:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/DocumentResponse'
+                    total:
+                      type: integer
+                errors:
+                  type: object
+                  properties:
+                    documents:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/DocumentResponse'
+                    total:
+                      type: integer
+                processing:
+                  type: object
+                  properties:
+                    documents:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/DocumentResponse'
+                    total:
+                      type: integer
+            status:
+              type: string
+            statusMessage:
               type: string
   securitySchemes:
     ApiKeyAuth:
