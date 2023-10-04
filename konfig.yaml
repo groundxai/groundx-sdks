@@ -1,13 +1,22 @@
 # yaml-language-server: $schema=https://unpkg.com/konfig-lib@latest/konfig-yaml.schema.json
 
-outputDirectory: /tmp/eyelevel-sdks-out
+outputDirectory: /tmp/groundx-sdks-out
 specPath: api.yaml
 generators:
+  python:
+    version: 1.0.0
+    packageName: groundx
+    projectName: groundx-pthon-sdk
+    outputDirectory: sdks/python
+    clientName: Groundx
+    git:
+      userId: konfigdev
+      repoId: groundx-sdks/tree/main/sdks/python
   typescript:
     version: 1.0.0
-    npmName: eyelevel-typescript-sdk
-    outputDirectory: typescript
-    clientName: Eyelevel
+    npmName: groundx-typescript-sdk
+    outputDirectory: sdks/typescript
+    clientName: Groundx
     git:
       userId: konfig-dev
-      repoId: eyelevel-sdks/tree/main/typescript
+      repoId: eyelevel-sdks/tree/main/sdks/typescript
