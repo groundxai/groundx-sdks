@@ -38,6 +38,12 @@ paths:
           description: Unauthorized
         '403':
           description: Forbidden
+        '405':
+          description: Method Not Allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKeyManagementList405Response'
   /v1/inventory:
     get:
       tags:
@@ -121,8 +127,25 @@ paths:
       responses:
         '200':
           description: Successful binding of project and bucket.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectBindBucketResponse'
         '400':
           description: Invalid request data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectBindBucket400Response'
+              examples:
+                example-0:
+                  summary: Negative_Bound non-existent bucket
+                  value:
+                    message: You do not have access to a bucket with this bucketId
+                example-1:
+                  summary: Negative_Bound to projectID of another user
+                  value:
+                    message: You do not have access to a project with this projectID
         '401':
           description: Unauthorized.
         '403':
@@ -607,8 +630,23 @@ paths:
           description: Permission denied
 components:
   schemas:
+    ProjectBindBucketResponse:
+      type: object
+      properties: {}
+      example: {}
+    ProjectBindBucket400Response:
+      type: object
+      properties:
+        message:
+          type: string
+          example: You do not have access to a bucket with this bucketId
+      example:
+        message: You do not have access to a bucket with this bucketId
     ProjectBucketBinding:
       type: object
+      example:
+        project:
+          bucketId: 6122
       required:
         - project
       properties:
@@ -1046,12 +1084,45 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DocumentResponse'
+    ApiKeyManagementList405Response:
+      type: object
+      properties:
+        message:
+          type: string
+          example: The method you used is not supported for this query
+      example:
+        message: The method you used is not supported for this query
     ApiKeyManagementListResponse:
       type: object
       properties:
-        apiKey:
-          description: The API key for the user.
-          type: string
+        apiKeys:
+          type: array
+          items:
+            type: object
+            properties:
+              created:
+                type: string
+                example: '2023-10-03T08:59:39.312Z'
+              apiKey:
+                type: string
+                example: XXXXXXXX-42c5-4704-a892-81adc9b3e22d
+              name:
+                type: string
+                example: Last recent API key
+      example:
+        apiKeys:
+          - apiKey: XXXXXXXX-42c5-4704-a892-81adc9b3e22d
+            created: '2023-10-03T08:59:39.312Z'
+            name: Last recent API key
+          - apiKey: XXXXXXXX-7ac8-4cb5-ac3a-4638ea360cbf
+            created: '2023-09-21T12:29:55.501Z'
+            name: Recent API key
+          - apiKey: XXXXXXXX-2f96-47a7-9b56-9410051915d9
+            created: '2023-09-20T15:58:50.066Z'
+            name: Lina_Key2
+          - apiKey: XXXXXXXX-05f2-4a16-ab3a-d07fa4661753
+            created: '2023-09-20T09:32:11.161Z'
+            name: default
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
