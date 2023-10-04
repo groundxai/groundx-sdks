@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://unpkg.com/konfig-lib@latest/konfig-yaml.schema.json
+
+outputDirectory: /tmp/eyelevel-sdks-out
+specPath: api.yaml
+generators:
+  typescript:
+    version: 1.0.0
+    npmName: eyelevel-typescript-sdk
+    outputDirectory: typescript
+    clientName: Eyelevel
+    git:
+      userId: konfig-dev
+      repoId: eyelevel-sdks/tree/main/typescript
