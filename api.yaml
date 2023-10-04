@@ -170,6 +170,125 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProjectResponse'
 
+  # Bucket API paths
+  /v1/bucket/{bucketId}:
+    get:
+      summary: Look up an existing bucket
+      description: Look up a bucket by its bucketId.
+      operationId: getBucketById
+      parameters:
+        - in: path
+          name: bucketId
+          required: true
+          description: The ID of the bucket to retrieve.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Look up success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BucketResponse'
+        '400':
+          description: Invalid bucket ID
+        '401':
+          description: Permission denied
+    put:
+      summary: Update an existing bucket
+      description: Update the configurations of an existing bucket.
+      operationId: updateBucket
+      parameters:
+        - in: path
+          name: bucketId
+          required: true
+          description: The ID of the bucket to update.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BucketUpdateRequest'
+      responses:
+        '200':
+          description: Bucket successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BucketResponse'
+        '400':
+          description: Invalid body parameter
+        '401':
+          description: Permission denied
+    delete:
+      summary: Delete an existing bucket
+      description: Deletes a bucket by bucketId.
+      operationId: deleteBucket
+      parameters:
+        - in: path
+          name: bucketId
+          required: true
+          description: The ID of the bucket to delete.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Bucket successfully deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '400':
+          description: Invalid bucket ID
+        '401':
+          description: Permission denied
+
+  /v1/bucket:
+    get:
+      summary: Look up existing buckets
+      description: Look up existing buckets associated with your account.
+      operationId: getBuckets
+      responses:
+        '200':
+          description: Look up success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  buckets:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BucketDetail'
+        '401':
+          description: Permission denied
+    post:
+      summary: Create a bucket
+      description: Create a new bucket for your content.
+      operationId: createBucket
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BucketCreateRequest'
+      responses:
+        '200':
+          description: Bucket successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BucketResponse'
+        '400':
+          description: Invalid body parameter
+        '401':
+          description: Permission denied
+
 components:
   schemas:
     InventoryItem:
@@ -214,8 +333,7 @@ components:
         buckets:
           type: array
           items:
-            type: object
-            description: Refer to the bucket documentation page for the bucket object definition.
+            $ref: '#/components/schemas/BucketDetail'
         created:
           type: string
           format: date-time
@@ -230,23 +348,34 @@ components:
         updated:
           type: string
           format: date-time
-    ProjectResponse:
+    BucketDetail:
       type: object
       properties:
-        project:
-          $ref: '#/components/schemas/ProjectDetail'
-    ProjectCreateRequest:
+        bucketId:
+          type: string
+        fileCount:
+          type: integer
+        fileSize:
+          type: string
+        name:
+          type: string
+    BucketResponse:
       type: object
       properties:
-        project:
+        bucket:
+          $ref: '#/components/schemas/BucketDetail'
+    BucketCreateRequest:
+      type: object
+      properties:
+        bucket:
           type: object
           properties:
             name:
               type: string
-    ProjectUpdateRequest:
+    BucketUpdateRequest:
       type: object
       properties:
-        project:
+        bucket:
           type: object
           properties:
             name:
