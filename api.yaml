@@ -729,6 +729,10 @@ components:
           items:
             type: object
             properties:
+              blob:
+                type: string
+                format: binary
+                description: The actual file being uploaded.
               bucketId:
                 type: integer
               fileName:
