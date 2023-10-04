@@ -897,6 +897,8 @@ components:
           type: string
         metadata:
           type: object
+        type:
+          $ref: '#/components/schemas/DocumentType'
         documents:
           type: array
           items:
@@ -912,6 +914,8 @@ components:
                 type: string
               metadata:
                 type: object
+              type:
+                $ref: '#/components/schemas/DocumentType'
     DocumentType:
       type: string
       enum:
@@ -925,37 +929,24 @@ components:
     DocumentLocalUploadRequest:
       type: object
       properties:
-        documents:
+        blob:
           type: array
           items:
-            type: object
-            properties:
-              blob:
-                type: array
-                items:
-                  description: The actual file being uploaded.
-                  type: string
-                  format: binary
-              bucketId:
-                type: integer
-              fileName:
-                type: string
-              fileType:
-                type: string
-                enum:
-                  - txt
-                  - docx
-                  - pptx
-                  - xlsx
-                  - pdf
-                  - png
-                  - jpg
-              metadata:
-                type: object
-              callbackData:
-                type: string
-              callbackUrl:
-                type: string
+            description: The actual file being uploaded.
+            type: string
+            format: binary
+        bucketId:
+          type: integer
+        fileName:
+          type: string
+        fileType:
+          $ref: '#/components/schemas/DocumentType'
+        metadata:
+          type: object
+        callbackData:
+          type: string
+        callbackUrl:
+          type: string
     IngestResponse:
       type: object
       properties:
