@@ -12,7 +12,7 @@ info:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
 paths:
-  /inventory:
+  /v1/inventory:
     get:
       summary: searches inventory
       operationId: searchInventory
@@ -289,7 +289,7 @@ paths:
         '401':
           description: Permission denied
 
-  /ingest/document/{documentId}:
+  /v1/ingest/document/{documentId}:
     get:
       summary: Look up an existing document
       parameters:
@@ -333,7 +333,7 @@ paths:
         401:
           description: Permission denied
 
-  /ingest/documents:
+  /v1/ingest/documents:
     get:
       summary: Look up all existing documents
       responses:
@@ -370,7 +370,7 @@ paths:
         401:
           description: Permission denied
 
-  /ingest/documents/{id}:
+  /v1/ingest/documents/{id}:
     get:
       summary: Look up existing documents by processId, bucketId, or projectId
       parameters:
@@ -394,7 +394,7 @@ paths:
         401:
           description: Permission denied
 
-  /ingest/{processId}:
+  /v1/ingest/{processId}:
     get:
       summary: Look up document processing status by processId
       parameters:
