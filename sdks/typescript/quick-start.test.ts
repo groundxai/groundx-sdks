@@ -5,11 +5,8 @@ it("quick start", async () => {
     apiKey: process.env.GROUNDX_API_KEY,
   });
 
-  const bucket = await groundx.bucket.create({
-    bucket: { name: "sdk-test-bucket" },
-  });
-
-  const bucketId = bucket.data.bucket.bucketId;
-
-  const ingestProcess = await groundx.document.upload({});
+  // const bucket = await groundx.bucket.create({
+  //   bucket: { name: "sdk-test-bucket" },
+  // });
+  // const bucketId = bucket.data.bucket.bucketId;
 });
