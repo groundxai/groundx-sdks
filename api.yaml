@@ -394,12 +394,12 @@ paths:
       tags:
         - Document
       summary: Upload hosted documents to GroundX
-      operationId: Document_upload
+      operationId: Document_uploadRemote
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DocumentUploadRequest'
+              $ref: '#/components/schemas/DocumentRemoteUploadRequest'
       responses:
         '200':
           description: Documents successfully uploaded
@@ -884,9 +884,19 @@ components:
               type: string
             statusMessage:
               type: string
-    DocumentUploadRequest:
+    DocumentRemoteUploadRequest:
       type: object
       properties:
+        bucketId:
+          type: integer
+        sourceUrl:
+          type: string
+        callbackData:
+          type: string
+        callbackUrl:
+          type: string
+        metadata:
+          type: object
         documents:
           type: array
           items:
@@ -902,16 +912,16 @@ components:
                 type: string
               metadata:
                 type: object
-              type:
-                type: string
-                enum:
-                  - txt
-                  - docx
-                  - pptx
-                  - xlsx
-                  - pdf
-                  - png
-                  - jpg
+    DocumentType:
+      type: string
+      enum:
+        - txt
+        - docx
+        - pptx
+        - xlsx
+        - pdf
+        - png
+        - jpg
     DocumentLocalUploadRequest:
       type: object
       properties:
@@ -921,9 +931,11 @@ components:
             type: object
             properties:
               blob:
-                description: The actual file being uploaded.
-                type: string
-                format: binary
+                type: array
+                items:
+                  description: The actual file being uploaded.
+                  type: string
+                  format: binary
               bucketId:
                 type: integer
               fileName:
