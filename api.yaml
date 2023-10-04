@@ -413,8 +413,66 @@ paths:
         401:
           description: Permission denied
 
+  /v1/preprocess:
+    get:
+      summary: Query pre-processors
+      description: Look up existing pre-processors your account has access to, including those you have created yourself.
+      operationId: queryPreprocessors
+      parameters:
+        - in: query
+          name: preprocess
+          description: An array of preprocessor IDs
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: Look up success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreprocessorResponse'
+        '400':
+          description: Invalid preprocessor_ids
+        '401':
+          description: Permission denied
+
 components:
   schemas:
+    PreprocessorResponse:
+      type: object
+      properties:
+        preprocess:
+          type: object
+          properties:
+            preprocessors:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: preprocessor ID
+                  status:
+                    type: string
+                    enum:
+                      - ok
+                      - error
+                      - warning
+                  status_message:
+                    type: string
+                    description: human readable status description
+                  type:
+                    type: string
+                    enum:
+                      - custom
+                      - standard
+                  script:
+                    type: array
+                    items:
+                      type: string
     ProjectCreateRequest:
       type: object
       properties:
