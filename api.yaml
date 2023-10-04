@@ -414,6 +414,47 @@ paths:
           description: Permission denied
 
   /v1/preprocess:
+    post:
+      summary: Setup Custom Pre-Processor
+      description: Initializes a custom pre-processor that can be applied to your content and search queries.
+      operationId: setupCustomPreprocessor
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PreprocessorSetupRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PreprocessorSetupRequest'
+      responses:
+        '200':
+          description: Pre-processor successfully setup
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreprocessorSetupResponse'
+        '400':
+          description: Invalid script
+        '401':
+          description: Permission denied
+    delete:
+      summary: Delete Custom Pre-Processor
+      description: Deletes existing custom pre-processors that you own or manage.
+      operationId: deleteCustomPreprocessor
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PreprocessorDeleteRequest'
+      responses:
+        '200':
+          description: Pre-processor successfully deleted
+        '400':
+          description: Invalid script
+        '401':
+          description: Permission denied
     get:
       summary: Query pre-processors
       description: Look up existing pre-processors your account has access to, including those you have created yourself.
@@ -441,6 +482,42 @@ paths:
 
 components:
   schemas:
+    PreprocessorSetupRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: A human readable name for your pre-processor
+        script:
+          type: array
+          items:
+            type: string
+          description: An array of GroundedScript commands
+        description:
+          type: string
+          description: A human readable description for your pre-processor
+    PreprocessorSetupResponse:
+      type: object
+      properties:
+        preprocess:
+          type: object
+          properties:
+            preprocessors:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: preprocessor ID
+    PreprocessorDeleteRequest:
+      type: object
+      properties:
+        preprocessors:
+          type: array
+          items:
+            type: string
+          description: An array of preprocessor IDs
     PreprocessorResponse:
       type: object
       properties:
