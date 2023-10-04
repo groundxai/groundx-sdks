@@ -69,6 +69,44 @@ paths:
             schema:
               $ref: '#/components/schemas/InventoryItem'
         description: Inventory item to add
+  /v1/search/{projectId}:
+    post:
+      summary: Perform a search query of your content.
+      description: Search and retrieve relevant content from a project with projectId.
+      operationId: searchProjectContent
+      parameters:
+        - in: path
+          name: projectId
+          required: true
+          description: The ID of the project to search within.
+          schema:
+            type: string
+        - in: query
+          name: n
+          description: Number of results
+          required: false
+          schema:
+            type: integer
+            default: 20
+            minimum: 1
+            maximum: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequestBody'
+      responses:
+        '200':
+          description: Search query success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+        '400':
+          description: Invalid request data
+        '401':
+          description: Permission denied
 components:
   schemas:
     InventoryItem:
@@ -107,3 +145,54 @@ components:
           type: string
           example: 408-867-5309
       type: object
+    SearchRequestBody:
+      type: object
+      properties:
+        query:
+          type: string
+          description: The search query
+        nextToken:
+          type: string
+          description: Token to retrieve the next set of paginated results
+    SearchResultItem:
+      type: object
+      properties:
+        chunkId:
+          type: string
+        documentId:
+          type: string
+        metadata:
+          type: object
+        score:
+          type: number
+        sourceUrl:
+          type: string
+        text:
+          type: string
+    SearchResponse:
+      type: object
+      properties:
+        search:
+          type: object
+          properties:
+            count:
+              type: integer
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/SearchResultItem'
+            query:
+              type: string
+            score:
+              type: number
+            text:
+              type: string
+            nextToken:
+              type: string
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+security:
+  - ApiKeyAuth: []
