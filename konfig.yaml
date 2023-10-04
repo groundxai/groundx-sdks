@@ -19,4 +19,4 @@ generators:
     clientName: Groundx
     git:
       userId: konfig-dev
-      repoId: eyelevel-sdks/tree/main/sdks/typescript
+      repoId: groundx-sdks/tree/main/sdks/typescript
