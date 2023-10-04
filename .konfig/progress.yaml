@@ -1,0 +1,118 @@
+examples: {}
+examples_2: {}
+operationIds:
+  /v1/bucket:
+    get: Bucket_list
+    post: Bucket_create
+  /v1/bucket/{bucketId}:
+    delete: Bucket_delete
+    get: Bucket_get
+    put: Bucket_update
+  /v1/ingest/document/{documentId}:
+    delete: Document_delete
+    get: Document_get
+  /v1/ingest/documents:
+    get: Document_list
+    post: Document_upload
+  /v1/ingest/documents/{id}:
+    get: Document_lookup
+  /v1/ingest/{processId}:
+    get: Document_getProcessingStatusByProcessId
+  /v1/inventory:
+    get: Inventory_search
+    post: Inventory_add
+  /v1/preprocess:
+    delete: Preprocessor_delete
+    get: Preprocessor_list
+    post: Preprocessor_setup
+  /v1/project:
+    get: Project_list
+    post: Project_create
+  /v1/project/{projectId}:
+    delete: Project_delete
+    get: Project_get
+    put: Project_update
+  /v1/search/{projectId}:
+    post: Search_content
+operationTags:
+  /v1/bucket:
+    get: Bucket
+    post: Bucket
+  /v1/bucket/{bucketId}:
+    delete: Bucket
+    get: Bucket
+    put: Bucket
+  /v1/ingest/document/{documentId}:
+    delete: Document
+    get: Document
+  /v1/ingest/documents:
+    get: Document
+    post: Document
+  /v1/ingest/documents/{id}:
+    get: Document
+  /v1/ingest/{processId}:
+    get: Document
+  /v1/inventory:
+    get: Inventory
+    post: Inventory
+  /v1/preprocess:
+    delete: Preprocessor
+    get: Preprocessor
+    post: Preprocessor
+  /v1/project:
+    get: Project
+    post: Project
+  /v1/project/{projectId}:
+    delete: Project
+    get: Project
+    put: Project
+  /v1/search/{projectId}:
+    post: Search
+renameTags: {}
+requestSchemaNames: {}
+responseDescriptions: {}
+responseSchemaNames:
+  /v1/bucket:
+    get:
+      '200':
+        application/json: BucketListResponse
+  /v1/bucket/{bucketId}:
+    delete:
+      '200':
+        application/json: BucketDeleteResponse
+  /v1/ingest/document/{documentId}:
+    delete:
+      '200':
+        application/json: DocumentDeleteResponse
+  /v1/ingest/documents:
+    get:
+      '200':
+        application/json: DocumentListResponse
+  /v1/ingest/documents/{id}:
+    get:
+      '200':
+        application/json: DocumentLookupResponse
+  /v1/inventory:
+    get:
+      '200':
+        application/json: InventorySearchResponse
+  /v1/project:
+    get:
+      '200':
+        application/json: ProjectListResponse
+  /v1/project/{projectId}:
+    delete:
+      '200':
+        application/json: ProjectDeleteResponse
+securityParameters:
+  limit:
+    query: false
+  'n':
+    query: false
+  preprocess:
+    query: false
+  searchString:
+    query: false
+  skip:
+    query: false
+validServerUrls: {}
