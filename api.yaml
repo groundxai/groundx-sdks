@@ -11,6 +11,12 @@ info:
   license:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+tags:
+  - name: Project
+  - name: Bucket
+  - name: Document
+  - name: Preprocessor
+  - name: Search
 paths:
   /v1/inventory:
     get:
