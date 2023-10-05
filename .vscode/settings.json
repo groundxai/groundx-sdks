@@ -12,7 +12,7 @@
   "python.testing.pytestEnabled": true,
   "dotnet-test-explorer.testProjectPath": "**/*.sln",
   "[python]": {
-    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.defaultFormatter": "ms-python.python",
     "editor.formatOnSave": true
   },
   "files.insertFinalNewline": false,
