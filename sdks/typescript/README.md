@@ -1,6 +1,6 @@
 # groundx-typescript-sdk
 
-[![npm](https://img.shields.io/badge/npm-v1.1.0-blue)](https://www.npmjs.com/package/groundx-typescript-sdk/v/1.1.0)
+[![npm](https://img.shields.io/badge/npm-v1.2.0-blue)](https://www.npmjs.com/package/groundx-typescript-sdk/v/1.2.0)
 
 Ground Your RAG Apps in Fact not Fiction
 ## Installing

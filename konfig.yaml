@@ -3,7 +3,7 @@
 outputDirectory: /tmp/groundx-sdks-out
 specPath: api.yaml
 portal:
-  primaryColor: "#6b37d9"
+  primaryColor: '#6b37d9'
   title: Groundx
   logo: portal-logo.png
   favicon: favicon.png
@@ -11,7 +11,7 @@ portal:
     website: https://www.groundx.ai/
 generators:
   python:
-    version: 1.1.0
+    version: 1.2.0
     packageName: groundx
     projectName: groundx-python-sdk
     outputDirectory: sdks/python
@@ -20,7 +20,7 @@ generators:
       userId: groundxai
       repoId: groundx-sdks/tree/main/sdks/python
   typescript:
-    version: 1.1.0
+    version: 1.2.0
     npmName: groundx-typescript-sdk
     outputDirectory: sdks/typescript
     clientName: Groundx
