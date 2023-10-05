@@ -17,12 +17,10 @@ from typing_extensions import TypedDict, Literal
 
 
 class RequiredSearchRequestSearch(TypedDict):
-    pass
-
-class OptionalSearchRequestSearch(TypedDict, total=False):
     # The search query
     query: str
 
+class OptionalSearchRequestSearch(TypedDict, total=False):
     # Token to retrieve the next set of paginated results
     nextToken: str
 

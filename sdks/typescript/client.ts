@@ -11,32 +11,29 @@
 
 import { AxiosRequestConfig } from "axios";
 import {
-  ApiKeyManagementApi,
-  BucketApi,
-  DocumentApi,
-  PreprocessorApi,
-  ProjectApi,
+  ApiKeysApi,
+  BucketsApi,
+  DocumentsApi,
+  ProjectsApi,
   SearchApi,
 } from "./api";
 import { Configuration, ConfigurationParameters } from "./configuration";
 import { GroundxCustom } from "./client-custom";
 
 export class Groundx extends GroundxCustom {
-  readonly apiKeyManagement: ApiKeyManagementApi;
-  readonly bucket: BucketApi;
-  readonly document: DocumentApi;
-  readonly preprocessor: PreprocessorApi;
-  readonly project: ProjectApi;
+  readonly apiKeys: ApiKeysApi;
+  readonly buckets: BucketsApi;
+  readonly documents: DocumentsApi;
+  readonly projects: ProjectsApi;
   readonly search: SearchApi;
 
   constructor(configurationParameters: ConfigurationParameters = {}) {
     super(configurationParameters);
     const configuration = new Configuration(configurationParameters);
-    this.apiKeyManagement = new ApiKeyManagementApi(configuration);
-    this.bucket = new BucketApi(configuration);
-    this.document = new DocumentApi(configuration);
-    this.preprocessor = new PreprocessorApi(configuration);
-    this.project = new ProjectApi(configuration);
+    this.apiKeys = new ApiKeysApi(configuration);
+    this.buckets = new BucketsApi(configuration);
+    this.documents = new DocumentsApi(configuration);
+    this.projects = new ProjectsApi(configuration);
     this.search = new SearchApi(configuration);
   }
 

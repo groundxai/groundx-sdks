@@ -22,16 +22,6 @@ class RequiredDocumentRemoteUploadRequest(TypedDict):
     pass
 
 class OptionalDocumentRemoteUploadRequest(TypedDict, total=False):
-    bucketId: int
-
-    sourceUrl: str
-
-    callbackData: str
-
-    callbackUrl: str
-
-    metadata: typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]
-
     type: DocumentType
 
     documents: DocumentRemoteUploadRequestDocuments

@@ -26,36 +26,6 @@ import { DocumentType } from './document-type';
 export interface DocumentRemoteUploadRequest {
     /**
      * 
-     * @type {number}
-     * @memberof DocumentRemoteUploadRequest
-     */
-    'bucketId'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof DocumentRemoteUploadRequest
-     */
-    'sourceUrl'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof DocumentRemoteUploadRequest
-     */
-    'callbackData'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof DocumentRemoteUploadRequest
-     */
-    'callbackUrl'?: string;
-    /**
-     * 
-     * @type {object}
-     * @memberof DocumentRemoteUploadRequest
-     */
-    'metadata'?: object;
-    /**
-     * 
      * @type {DocumentType}
      * @memberof DocumentRemoteUploadRequest
      */

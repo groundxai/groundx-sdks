@@ -31,7 +31,7 @@ const groundx = new Groundx({
   apiKey: "API_KEY",
 });
 
-const listResponse = await groundx.apiKeyManagement.list();
+const listResponse = await groundx.apiKeys.list();
 
 console.log(listResponse);
 ```
@@ -42,28 +42,20 @@ All URIs are relative to *https://api.groundx.ai/api*
 
 Tag | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*API Key Management* | [**list**](docs/ApiKeyManagementApi.md#list) | **GET** /v1/apikey | Get API keys
-*Bucket* | [**create**](docs/BucketApi.md#create) | **POST** /v1/bucket | Create a bucket
-*Bucket* | [**delete**](docs/BucketApi.md#delete) | **DELETE** /v1/bucket/{bucketId} | Delete an existing bucket
-*Bucket* | [**get**](docs/BucketApi.md#get) | **GET** /v1/bucket/{bucketId} | Look up an existing bucket
-*Bucket* | [**list**](docs/BucketApi.md#list) | **GET** /v1/bucket | Look up existing buckets
-*Bucket* | [**update**](docs/BucketApi.md#update) | **PUT** /v1/bucket/{bucketId} | Update an existing bucket
-*Document* | [**delete**](docs/DocumentApi.md#delete) | **DELETE** /v1/ingest/document/{documentId} | Delete documents
-*Document* | [**get**](docs/DocumentApi.md#get) | **GET** /v1/ingest/document/{documentId} | Look up an existing document
-*Document* | [**getProcessingStatusById**](docs/DocumentApi.md#getProcessingStatusById) | **GET** /v1/ingest/{processId} | Look up document processing status by processId
-*Document* | [**list**](docs/DocumentApi.md#list) | **GET** /v1/ingest/documents | Look up all existing documents
-*Document* | [**lookup**](docs/DocumentApi.md#lookup) | **GET** /v1/ingest/documents/{id} | Look up existing documents by processId, bucketId, or projectId
-*Document* | [**uploadLocal**](docs/DocumentApi.md#uploadLocal) | **POST** /v1/ingest/documents/local | Upload local documents to GroundX
-*Document* | [**uploadRemote**](docs/DocumentApi.md#uploadRemote) | **POST** /v1/ingest/documents/remote | Upload hosted documents to GroundX
-*Preprocessor* | [**delete**](docs/PreprocessorApi.md#delete) | **DELETE** /v1/preprocess | Delete Custom Pre-Processor
-*Preprocessor* | [**list**](docs/PreprocessorApi.md#list) | **GET** /v1/preprocess | Query pre-processors
-*Preprocessor* | [**setup**](docs/PreprocessorApi.md#setup) | **POST** /v1/preprocess | Setup Custom Pre-Processor
-*Project* | [**bindBucket**](docs/ProjectApi.md#bindBucket) | **POST** /v1/project/{projectId} | Add an existing bucket to a project
-*Project* | [**create**](docs/ProjectApi.md#create) | **POST** /v1/project | Create a project
-*Project* | [**delete**](docs/ProjectApi.md#delete) | **DELETE** /v1/project/{projectId} | Delete an existing project
-*Project* | [**get**](docs/ProjectApi.md#get) | **GET** /v1/project/{projectId} | Look up an existing project
-*Project* | [**list**](docs/ProjectApi.md#list) | **GET** /v1/project | Look up existing projects
-*Project* | [**update**](docs/ProjectApi.md#update) | **PUT** /v1/project/{projectId} | Update an existing project
+*API Keys* | [**list**](docs/ApiKeysApi.md#list) | **GET** /v1/apikey | Get API keys
+*Buckets* | [**get**](docs/BucketsApi.md#get) | **GET** /v1/bucket/{bucketId} | Look up an existing bucket by its ID
+*Buckets* | [**list**](docs/BucketsApi.md#list) | **GET** /v1/bucket | Look up existing buckets
+*Buckets* | [**update**](docs/BucketsApi.md#update) | **PUT** /v1/bucket/{bucketId} | Update an existing bucket
+*Documents* | [**delete**](docs/DocumentsApi.md#delete) | **DELETE** /v1/ingest/document/{documentId} | Delete a document
+*Documents* | [**get**](docs/DocumentsApi.md#get) | **GET** /v1/ingest/document/{documentId} | Look up an existing document by its ID
+*Documents* | [**getProcessingStatusById**](docs/DocumentsApi.md#getProcessingStatusById) | **GET** /v1/ingest/{processId} | Look up the processing status of documents for a given processId
+*Documents* | [**list**](docs/DocumentsApi.md#list) | **GET** /v1/ingest/documents | Look up all existing documents
+*Documents* | [**lookup**](docs/DocumentsApi.md#lookup) | **GET** /v1/ingest/documents/{id} | Look up existing documents by processId, bucketId, or projectId
+*Documents* | [**uploadLocal**](docs/DocumentsApi.md#uploadLocal) | **POST** /v1/ingest/documents/local | Upload local documents to GroundX
+*Documents* | [**uploadRemote**](docs/DocumentsApi.md#uploadRemote) | **POST** /v1/ingest/documents/remote | Upload hosted documents to GroundX
+*Projects* | [**get**](docs/ProjectsApi.md#get) | **GET** /v1/project/{projectId} | Look up an existing project by its ID
+*Projects* | [**list**](docs/ProjectsApi.md#list) | **GET** /v1/project | Look up existing projects
+*Projects* | [**update**](docs/ProjectsApi.md#update) | **PUT** /v1/project/{projectId} | Update an existing project
 *Search* | [**content**](docs/SearchApi.md#content) | **POST** /v1/search/{id} | Perform a search query of your content
 
 ## Author

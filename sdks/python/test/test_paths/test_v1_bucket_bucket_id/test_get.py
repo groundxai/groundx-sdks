@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestV1BucketBucketId(ApiTestMixin, unittest.TestCase):
     """
     V1BucketBucketId unit test stubs
-        Look up an existing bucket
+        Look up an existing bucket by its ID
     """
 
     def setUp(self):

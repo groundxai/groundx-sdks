@@ -23,7 +23,7 @@ export interface SearchRequestSearch {
      * @type {string}
      * @memberof SearchRequestSearch
      */
-    'query'?: string;
+    'query': string;
     /**
      * Token to retrieve the next set of paginated results
      * @type {string}

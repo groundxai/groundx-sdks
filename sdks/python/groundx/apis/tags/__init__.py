@@ -6,9 +6,8 @@ import enum
 
 
 class TagValues(str, enum.Enum):
-    DOCUMENT = "Document"
-    PROJECT = "Project"
-    BUCKET = "Bucket"
-    PREPROCESSOR = "Preprocessor"
+    DOCUMENTS = "Documents"
+    PROJECTS = "Projects"
+    BUCKETS = "Buckets"
     SEARCH = "Search"
-    API_KEY_MANAGEMENT = "API Key Management"
+    API_KEYS = "API Keys"
