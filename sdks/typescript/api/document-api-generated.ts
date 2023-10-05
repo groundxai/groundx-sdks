@@ -299,8 +299,9 @@ export const DocumentApiAxiosParamCreator = function (configuration?: Configurat
                 for (const element of blob) { 
                     if (element instanceof Uint8Array) {
                         // Node.js
-                        const { ext } = await fromBuffer(element)
-                        localVarFormParams.append(baseName, element as any, `${baseName}.${ext}`);
+                        const filetype = await fromBuffer(element)
+                        const filename = filetype === undefined ? baseName : `${baseName}.${filetype.ext}`
+                        localVarFormParams.append(baseName, element as any, filename);
                     } else if ("name" in element) {
                         // Browser
                         localVarFormParams.append(baseName, element as any, element.name);
@@ -310,7 +311,7 @@ export const DocumentApiAxiosParamCreator = function (configuration?: Configurat
 
     
             if (metadata !== undefined) { 
-                localVarFormParams.append('metadata', new Blob([JSON.stringify(metadata)], { type: "application/json", }));
+                localVarFormParams.append('metadata', JSON.stringify(metadata), { type: "application/json", filename: "data.json" });
             }
     
     
