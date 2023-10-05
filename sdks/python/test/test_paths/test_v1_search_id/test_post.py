@@ -16,15 +16,15 @@ from unittest.mock import patch
 import urllib3
 
 import groundx
-from groundx.paths.v1_search_project_id import post
+from groundx.paths.v1_search_id import post
 from groundx import configuration, schemas, api_client
 
 from .. import ApiTestMixin
 
 
-class TestV1SearchProjectId(ApiTestMixin, unittest.TestCase):
+class TestV1SearchId(ApiTestMixin, unittest.TestCase):
     """
-    V1SearchProjectId unit test stubs
+    V1SearchId unit test stubs
         Perform a search query of your content
     """
 

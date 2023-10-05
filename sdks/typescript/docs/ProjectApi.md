@@ -4,7 +4,7 @@ All URIs are relative to *https://api.groundx.ai/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**bindBucket**](ProjectApi.md#bindBucket) | **POST** /v1/project/{projectId} | Bound project and bucket
+[**bindBucket**](ProjectApi.md#bindBucket) | **POST** /v1/project/{projectId} | Add an existing bucket to a project
 [**create**](ProjectApi.md#create) | **POST** /v1/project | Create a project
 [**delete**](ProjectApi.md#delete) | **DELETE** /v1/project/{projectId} | Delete an existing project
 [**get**](ProjectApi.md#get) | **GET** /v1/project/{projectId} | Look up an existing project
@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 # **Groundx.project.bindBucket**
 
-Bind a specific bucket to a project.
+Adds the specified bucket to a project.
 
 ### Example
 
@@ -41,18 +41,18 @@ console.log(bindBucketResponse);
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**projectBucketBinding** | **ProjectBucketBinding**| The bucket ID to bind to the project. |
-**projectId** | **number** | The ID of the project to bind the bucket to. | (required)
+**projectBucketBinding** | **ProjectBucketBinding**| The bucket ID to add to the project. |
+**projectId** | **number** | The ID of the project to add the bucket to. | (required)
 
 ### Return type
 
-**object**
+**ProjectBindBucketResponse**
 
 
 ### HTTP response details
 | Status code | Description |
 |-------------|-------------|
-**200** | Successful binding of project and bucket. |
+**200** | Bucket was successfully added to the project. |
 **400** | Invalid request data. |
 **401** | Unauthorized. |
 **403** | Forbidden. |

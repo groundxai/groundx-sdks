@@ -167,7 +167,7 @@ groundx = Groundx(
 try:
     # Look up existing documents by processId, bucketId, or projectId
     lookup_response = groundx.document.lookup(
-        id="id_example",  # required
+        id=1,  # required
     )
     pprint(lookup_response.body)
     pprint(lookup_response.body["documents"])

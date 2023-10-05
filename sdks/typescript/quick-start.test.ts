@@ -35,7 +35,7 @@ it("quick start", async () => {
   }
 
   const search = await groundx.search.content({
-    projectId: project.data.project.projectId,
+    id: project.data.project.projectId,
     search: {
       query: "hello",
     },
@@ -63,7 +63,7 @@ it("quick start - local", async () => {
     metadata: {
       bucketId: bucket.data.bucket.bucketId,
       fileName: "document.txt",
-      fileType: "txt"
+      fileType: "txt",
     },
   });
 
@@ -77,7 +77,7 @@ it("quick start - local", async () => {
   }
 
   const search = await groundx.search.content({
-    projectId: project.data.project.projectId,
+    id: project.data.project.projectId,
     search: {
       query: "hello",
     },

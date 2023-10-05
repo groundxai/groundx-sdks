@@ -19,7 +19,6 @@ from groundx.type_util import copy_signature
 from groundx.apis.tags.api_key_management_api import APIKeyManagementApi
 from groundx.apis.tags.bucket_api import BucketApi
 from groundx.apis.tags.document_api import DocumentApi
-from groundx.apis.tags.inventory_api import InventoryApi
 from groundx.apis.tags.preprocessor_api import PreprocessorApi
 from groundx.apis.tags.project_api import ProjectApi
 from groundx.apis.tags.search_api import SearchApi
@@ -38,7 +37,6 @@ class Groundx(ClientCustom):
         self.api_key_management: APIKeyManagementApi = APIKeyManagementApi(api_client)
         self.bucket: BucketApi = BucketApi(api_client)
         self.document: DocumentApi = DocumentApi(api_client)
-        self.inventory: InventoryApi = InventoryApi(api_client)
         self.preprocessor: PreprocessorApi = PreprocessorApi(api_client)
         self.project: ProjectApi = ProjectApi(api_client)
         self.search: SearchApi = SearchApi(api_client)

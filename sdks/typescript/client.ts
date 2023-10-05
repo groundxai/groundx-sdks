@@ -14,7 +14,6 @@ import {
   ApiKeyManagementApi,
   BucketApi,
   DocumentApi,
-  InventoryApi,
   PreprocessorApi,
   ProjectApi,
   SearchApi,
@@ -26,7 +25,6 @@ export class Groundx extends GroundxCustom {
   readonly apiKeyManagement: ApiKeyManagementApi;
   readonly bucket: BucketApi;
   readonly document: DocumentApi;
-  readonly inventory: InventoryApi;
   readonly preprocessor: PreprocessorApi;
   readonly project: ProjectApi;
   readonly search: SearchApi;
@@ -37,7 +35,6 @@ export class Groundx extends GroundxCustom {
     this.apiKeyManagement = new ApiKeyManagementApi(configuration);
     this.bucket = new BucketApi(configuration);
     this.document = new DocumentApi(configuration);
-    this.inventory = new InventoryApi(configuration);
     this.preprocessor = new PreprocessorApi(configuration);
     this.project = new ProjectApi(configuration);
     this.search = new SearchApi(configuration);

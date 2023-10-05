@@ -4,12 +4,12 @@ All URIs are relative to *https://api.groundx.ai/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**content**](SearchApi.md#content) | **POST** /v1/search/{projectId} | Perform a search query of your content
+[**content**](SearchApi.md#content) | **POST** /v1/search/{id} | Perform a search query of your content
 
 
 # **Groundx.search.content**
 
-Search and retrieve relevant content from a project with projectId.
+Search and retrieve relevant content from a project, group, or bucket by id.
 
 ### Example
 
@@ -23,7 +23,7 @@ const groundx = new Groundx({
 });
 
 const contentResponse = await groundx.search.content({
-  projectId: 1,
+  id: 1,
   n: 20,
 });
 
@@ -35,7 +35,7 @@ console.log(contentResponse);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **searchRequest** | **SearchRequest**|  |
-**projectId** | **number** | The ID of the project to search within. | (required)
+**id** | **number** | The ID of the project, group, or bucket to search within. | (required)
 **n** | **number** | Number of results | (optional)
 
 ### Return type

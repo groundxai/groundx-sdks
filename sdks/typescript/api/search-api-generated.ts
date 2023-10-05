@@ -39,19 +39,19 @@ import { requestBeforeHook } from '../requestBeforeHook';
 export const SearchApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Search and retrieve relevant content from a project with projectId.
+         * Search and retrieve relevant content from a project, group, or bucket by id.
          * @summary Perform a search query of your content
-         * @param {number} projectId The ID of the project to search within.
+         * @param {number} id The ID of the project, group, or bucket to search within.
          * @param {number} [n] Number of results
          * @param {SearchRequest} [searchRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        content: async (projectId: number, n?: number, searchRequest?: SearchRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'projectId' is not null or undefined
-            assertParamExists('content', 'projectId', projectId)
-            const localVarPath = `/v1/search/{projectId}`
-                .replace(`{${"projectId"}}`, encodeURIComponent(String(projectId !== undefined ? projectId : `-projectId-`)));
+        content: async (id: number, n?: number, searchRequest?: SearchRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('content', 'id', id)
+            const localVarPath = `/v1/search/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id !== undefined ? id : `-id-`)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -101,14 +101,14 @@ export const SearchApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = SearchApiAxiosParamCreator(configuration)
     return {
         /**
-         * Search and retrieve relevant content from a project with projectId.
+         * Search and retrieve relevant content from a project, group, or bucket by id.
          * @summary Perform a search query of your content
          * @param {SearchApiContentRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async content(requestParameters: SearchApiContentRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SearchResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.content(requestParameters.projectId, requestParameters.n, requestParameters, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.content(requestParameters.id, requestParameters.n, requestParameters, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -122,7 +122,7 @@ export const SearchApiFactory = function (configuration?: Configuration, basePat
     const localVarFp = SearchApiFp(configuration)
     return {
         /**
-         * Search and retrieve relevant content from a project with projectId.
+         * Search and retrieve relevant content from a project, group, or bucket by id.
          * @summary Perform a search query of your content
          * @param {SearchApiContentRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -142,11 +142,11 @@ export const SearchApiFactory = function (configuration?: Configuration, basePat
 export type SearchApiContentRequest = {
     
     /**
-    * The ID of the project to search within.
+    * The ID of the project, group, or bucket to search within.
     * @type {number}
     * @memberof SearchApiContent
     */
-    readonly projectId: number
+    readonly id: number
     
     /**
     * Number of results
@@ -165,7 +165,7 @@ export type SearchApiContentRequest = {
  */
 export class SearchApiGenerated extends BaseAPI {
     /**
-     * Search and retrieve relevant content from a project with projectId.
+     * Search and retrieve relevant content from a project, group, or bucket by id.
      * @summary Perform a search query of your content
      * @param {SearchApiContentRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

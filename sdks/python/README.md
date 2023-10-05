@@ -101,18 +101,16 @@ Tag | Method | HTTP request | Description
 *Document* | [**lookup**](docs/apis/tags/DocumentApi.md#lookup) | **GET** /v1/ingest/documents/{id} | Look up existing documents by processId, bucketId, or projectId
 *Document* | [**upload_local**](docs/apis/tags/DocumentApi.md#upload_local) | **POST** /v1/ingest/documents/local | Upload local documents to GroundX
 *Document* | [**upload_remote**](docs/apis/tags/DocumentApi.md#upload_remote) | **POST** /v1/ingest/documents/remote | Upload hosted documents to GroundX
-*Inventory* | [**add**](docs/apis/tags/InventoryApi.md#add) | **POST** /v1/inventory | adds an inventory item
-*Inventory* | [**search**](docs/apis/tags/InventoryApi.md#search) | **GET** /v1/inventory | searches inventory
 *Preprocessor* | [**delete**](docs/apis/tags/PreprocessorApi.md#delete) | **DELETE** /v1/preprocess | Delete Custom Pre-Processor
 *Preprocessor* | [**list**](docs/apis/tags/PreprocessorApi.md#list) | **GET** /v1/preprocess | Query pre-processors
 *Preprocessor* | [**setup**](docs/apis/tags/PreprocessorApi.md#setup) | **POST** /v1/preprocess | Setup Custom Pre-Processor
-*Project* | [**bind_bucket**](docs/apis/tags/ProjectApi.md#bind_bucket) | **POST** /v1/project/{projectId} | Bound project and bucket
+*Project* | [**bind_bucket**](docs/apis/tags/ProjectApi.md#bind_bucket) | **POST** /v1/project/{projectId} | Add an existing bucket to a project
 *Project* | [**create**](docs/apis/tags/ProjectApi.md#create) | **POST** /v1/project | Create a project
 *Project* | [**delete**](docs/apis/tags/ProjectApi.md#delete) | **DELETE** /v1/project/{projectId} | Delete an existing project
 *Project* | [**get**](docs/apis/tags/ProjectApi.md#get) | **GET** /v1/project/{projectId} | Look up an existing project
 *Project* | [**list**](docs/apis/tags/ProjectApi.md#list) | **GET** /v1/project | Look up existing projects
 *Project* | [**update**](docs/apis/tags/ProjectApi.md#update) | **PUT** /v1/project/{projectId} | Update an existing project
-*Search* | [**content**](docs/apis/tags/SearchApi.md#content) | **POST** /v1/search/{projectId} | Perform a search query of your content
+*Search* | [**content**](docs/apis/tags/SearchApi.md#content) | **POST** /v1/search/{id} | Perform a search query of your content
 
 
 ## Author

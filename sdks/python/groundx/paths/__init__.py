@@ -7,7 +7,6 @@ import enum
 
 class PathValues(str, enum.Enum):
     V1_APIKEY = "/v1/apikey"
-    V1_INVENTORY = "/v1/inventory"
     V1_PROJECT_PROJECT_ID = "/v1/project/{projectId}"
     V1_PROJECT = "/v1/project"
     V1_BUCKET_BUCKET_ID = "/v1/bucket/{bucketId}"
@@ -19,4 +18,4 @@ class PathValues(str, enum.Enum):
     V1_INGEST_DOCUMENTS_ID = "/v1/ingest/documents/{id}"
     V1_INGEST_PROCESS_ID = "/v1/ingest/{processId}"
     V1_PREPROCESS = "/v1/preprocess"
-    V1_SEARCH_PROJECT_ID = "/v1/search/{projectId}"
+    V1_SEARCH_ID = "/v1/search/{id}"

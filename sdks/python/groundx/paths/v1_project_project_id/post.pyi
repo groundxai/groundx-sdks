@@ -34,8 +34,10 @@ from groundx import schemas  # noqa: F401
 
 from groundx.model.project_bucket_binding import ProjectBucketBinding as ProjectBucketBindingSchema
 from groundx.model.project_bucket_binding_project import ProjectBucketBindingProject as ProjectBucketBindingProjectSchema
+from groundx.model.project_bind_bucket_response import ProjectBindBucketResponse as ProjectBindBucketResponseSchema
 from groundx.model.project_bind_bucket400_response import ProjectBindBucket400Response as ProjectBindBucket400ResponseSchema
 
+from groundx.type.project_bind_bucket_response import ProjectBindBucketResponse
 from groundx.type.project_bucket_binding_project import ProjectBucketBindingProject
 from groundx.type.project_bucket_binding import ProjectBucketBinding
 from groundx.type.project_bind_bucket400_response import ProjectBindBucket400Response
@@ -77,17 +79,17 @@ request_body_project_bucket_binding = api_client.RequestBody(
     },
     required=True,
 )
-SchemaFor200ResponseBodyApplicationJson = schemas.DictSchema
+SchemaFor200ResponseBodyApplicationJson = ProjectBindBucketResponseSchema
 
 
 @dataclass
 class ApiResponseFor200(api_client.ApiResponse):
-    body: typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]
+    body: ProjectBindBucketResponse
 
 
 @dataclass
 class ApiResponseFor200Async(api_client.AsyncApiResponse):
-    body: typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]
+    body: ProjectBindBucketResponse
 
 
 _response_for_200 = api_client.OpenApiResponse(
@@ -189,7 +191,7 @@ class BaseApi(api_client.Api):
         AsyncGeneratorResponse,
     ]:
         """
-        Bound project and bucket
+        Add an existing bucket to a project
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
@@ -316,7 +318,7 @@ class BaseApi(api_client.Api):
         api_client.ApiResponseWithoutDeserialization,
     ]:
         """
-        Bound project and bucket
+        Add an existing bucket to a project
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances

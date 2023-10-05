@@ -187,7 +187,7 @@ const groundx = new Groundx({
 });
 
 const lookupResponse = await groundx.document.lookup({
-  id: "id_example",
+  id: 1,
 });
 
 console.log(lookupResponse);
@@ -197,7 +197,7 @@ console.log(lookupResponse);
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**id** | **string** |  | (required)
+**id** | **number** |  | (required)
 
 ### Return type
 

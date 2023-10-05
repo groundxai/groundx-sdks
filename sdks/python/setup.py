@@ -40,7 +40,7 @@ setup(
     description="GroundX API",
     author="Konfig",
     author_email="support@groundx.ai",
-    url="https://github.com/konfig-dev/groundx-sdks/tree/main/sdks/python",
+    url="https://github.com/groundxai/groundx-sdks/tree/main/sdks/python",
     keywords=["Konfig", "GroundX API"],
     license="MIT",
     python_requires=">=3.7",

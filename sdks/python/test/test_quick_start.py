@@ -49,7 +49,7 @@ class TestSimple(unittest.TestCase):
             time.sleep(3)
 
         # search
-        search = groundx.search.content(project_id=project["project"]["projectId"], search={"query": "Documents"})
+        search = groundx.search.content(id=project["project"]["projectId"], search={"query": "Documents"})
         pprint(search.body)
 
     def test_quick_start_local(self):
@@ -72,7 +72,7 @@ class TestSimple(unittest.TestCase):
             time.sleep(3)
 
         # search
-        search = groundx.search.content(project_id=project["project"]["projectId"], search={"query": "Documents"})
+        search = groundx.search.content(id=project["project"]["projectId"], search={"query": "Documents"})
         pprint(search.body)
 
 

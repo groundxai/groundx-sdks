@@ -4,7 +4,7 @@ All URIs are relative to *https://api.groundx.ai/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**bind_bucket**](#bind_bucket) | **post** /v1/project/{projectId} | Bound project and bucket
+[**bind_bucket**](#bind_bucket) | **post** /v1/project/{projectId} | Add an existing bucket to a project
 [**create**](#create) | **post** /v1/project | Create a project
 [**delete**](#delete) | **delete** /v1/project/{projectId} | Delete an existing project
 [**get**](#get) | **get** /v1/project/{projectId} | Look up an existing project
@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 # **bind_bucket**
 
-Bind a specific bucket to a project.
+Adds the specified bucket to a project.
 
 ### Example
 
@@ -26,13 +26,15 @@ groundx = Groundx(
 )
 
 try:
-    # Bound project and bucket
+    # Add an existing bucket to a project
     bind_bucket_response = groundx.project.bind_bucket(
         project={
             "bucket_id": 6122,
         },  # required
         project_id=1,  # required
     )
+    pprint(bind_bucket_response.body)
+    pprint(bind_bucket_response.body["message"])
     pprint(bind_bucket_response.headers)
     pprint(bind_bucket_response.status)
     pprint(bind_bucket_response.round_trip_time)

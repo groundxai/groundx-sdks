@@ -4,11 +4,11 @@ All URIs are relative to *https://api.groundx.ai/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**content**](#content) | **post** /v1/search/{projectId} | Perform a search query of your content
+[**content**](#content) | **post** /v1/search/{id} | Perform a search query of your content
 
 # **content**
 
-Search and retrieve relevant content from a project with projectId.
+Search and retrieve relevant content from a project, group, or bucket by id.
 
 ### Example
 
@@ -23,7 +23,7 @@ groundx = Groundx(
 try:
     # Perform a search query of your content
     content_response = groundx.search.content(
-        project_id=1,  # required
+        id=1,  # required
         search={
             "query": "my search query",
             "next_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9",

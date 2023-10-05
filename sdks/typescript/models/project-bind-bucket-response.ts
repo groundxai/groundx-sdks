@@ -15,26 +15,14 @@
 /**
  * 
  * @export
- * @interface Manufacturer
+ * @interface ProjectBindBucketResponse
  */
-export interface Manufacturer {
+export interface ProjectBindBucketResponse {
     /**
      * 
      * @type {string}
-     * @memberof Manufacturer
+     * @memberof ProjectBindBucketResponse
      */
-    'name': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Manufacturer
-     */
-    'homePage'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Manufacturer
-     */
-    'phone'?: string;
+    'message': string;
 }
 

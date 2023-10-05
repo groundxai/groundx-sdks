@@ -32,22 +32,23 @@ import frozendict  # noqa: F401
 
 from groundx import schemas  # noqa: F401
 
-from groundx.model.inventory_search_response import InventorySearchResponse as InventorySearchResponseSchema
+from groundx.model.search_request import SearchRequest as SearchRequestSchema
+from groundx.model.search_result_item import SearchResultItem as SearchResultItemSchema
+from groundx.model.search_request_search import SearchRequestSearch as SearchRequestSearchSchema
+from groundx.model.search_response_search import SearchResponseSearch as SearchResponseSearchSchema
+from groundx.model.search_response import SearchResponse as SearchResponseSchema
 
-from groundx.type.inventory_search_response import InventorySearchResponse
+from groundx.type.search_response_search import SearchResponseSearch
+from groundx.type.search_result_item import SearchResultItem
+from groundx.type.search_response import SearchResponse
+from groundx.type.search_request import SearchRequest
+from groundx.type.search_request_search import SearchRequestSearch
 
 # Query params
-SearchStringSchema = schemas.StrSchema
 
 
-class SkipSchema(
-    schemas.Int32Schema
-):
-    pass
-
-
-class LimitSchema(
-    schemas.Int32Schema
+class NSchema(
+    schemas.IntSchema
 ):
     pass
 RequestRequiredQueryParams = typing_extensions.TypedDict(
@@ -58,9 +59,7 @@ RequestRequiredQueryParams = typing_extensions.TypedDict(
 RequestOptionalQueryParams = typing_extensions.TypedDict(
     'RequestOptionalQueryParams',
     {
-        'searchString': typing.Union[SearchStringSchema, str, ],
-        'skip': typing.Union[SkipSchema, decimal.Decimal, int, ],
-        'limit': typing.Union[LimitSchema, decimal.Decimal, int, ],
+        'n': typing.Union[NSchema, decimal.Decimal, int, ],
     },
     total=False
 )
@@ -70,35 +69,59 @@ class RequestQueryParams(RequestRequiredQueryParams, RequestOptionalQueryParams)
     pass
 
 
-request_query_search_string = api_client.QueryParameter(
-    name="searchString",
+request_query_n = api_client.QueryParameter(
+    name="n",
     style=api_client.ParameterStyle.FORM,
-    schema=SearchStringSchema,
+    schema=NSchema,
     explode=True,
 )
-request_query_skip = api_client.QueryParameter(
-    name="skip",
-    style=api_client.ParameterStyle.FORM,
-    schema=SkipSchema,
-    explode=True,
+# Path params
+IdSchema = schemas.IntSchema
+RequestRequiredPathParams = typing_extensions.TypedDict(
+    'RequestRequiredPathParams',
+    {
+        'id': typing.Union[IdSchema, decimal.Decimal, int, ],
+    }
 )
-request_query_limit = api_client.QueryParameter(
-    name="limit",
-    style=api_client.ParameterStyle.FORM,
-    schema=LimitSchema,
-    explode=True,
+RequestOptionalPathParams = typing_extensions.TypedDict(
+    'RequestOptionalPathParams',
+    {
+    },
+    total=False
 )
-SchemaFor200ResponseBodyApplicationJson = InventorySearchResponseSchema
+
+
+class RequestPathParams(RequestRequiredPathParams, RequestOptionalPathParams):
+    pass
+
+
+request_path_id = api_client.PathParameter(
+    name="id",
+    style=api_client.ParameterStyle.SIMPLE,
+    schema=IdSchema,
+    required=True,
+)
+# body param
+SchemaForRequestBodyApplicationJson = SearchRequestSchema
+
+
+request_body_search_request = api_client.RequestBody(
+    content={
+        'application/json': api_client.MediaType(
+            schema=SchemaForRequestBodyApplicationJson),
+    },
+)
+SchemaFor200ResponseBodyApplicationJson = SearchResponseSchema
 
 
 @dataclass
 class ApiResponseFor200(api_client.ApiResponse):
-    body: InventorySearchResponse
+    body: SearchResponse
 
 
 @dataclass
 class ApiResponseFor200Async(api_client.AsyncApiResponse):
-    body: InventorySearchResponse
+    body: SearchResponse
 
 
 _response_for_200 = api_client.OpenApiResponse(
@@ -125,6 +148,22 @@ _response_for_400 = api_client.OpenApiResponse(
     response_cls=ApiResponseFor400,
     response_cls_async=ApiResponseFor400Async,
 )
+
+
+@dataclass
+class ApiResponseFor401(api_client.ApiResponse):
+    body: schemas.Unset = schemas.unset
+
+
+@dataclass
+class ApiResponseFor401Async(api_client.AsyncApiResponse):
+    body: schemas.Unset = schemas.unset
+
+
+_response_for_401 = api_client.OpenApiResponse(
+    response_cls=ApiResponseFor401,
+    response_cls_async=ApiResponseFor401Async,
+)
 _all_accept_content_types = (
     'application/json',
 )
@@ -132,29 +171,36 @@ _all_accept_content_types = (
 
 class BaseApi(api_client.Api):
 
-    def _search_mapped_args(
+    def _content_mapped_args(
         self,
-        search_string: typing.Optional[str] = None,
-        skip: typing.Optional[int] = None,
-        limit: typing.Optional[int] = None,
+        id: int,
+        search: typing.Optional[SearchRequestSearch] = None,
+        n: typing.Optional[int] = None,
     ) -> api_client.MappedArgs:
         args: api_client.MappedArgs = api_client.MappedArgs()
         _query_params = {}
-        if search_string is not None:
-            _query_params["searchString"] = search_string
-        if skip is not None:
-            _query_params["skip"] = skip
-        if limit is not None:
-            _query_params["limit"] = limit
+        _path_params = {}
+        _body = {}
+        if search is not None:
+            _body["search"] = search
+        args.body = _body
+        if n is not None:
+            _query_params["n"] = n
+        if id is not None:
+            _path_params["id"] = id
         args.query = _query_params
+        args.path = _path_params
         return args
 
-    async def _asearch_oapg(
+    async def _acontent_oapg(
         self,
+        body: typing.Any = None,
             query_params: typing.Optional[dict] = {},
+            path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
         timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
+        content_type: str = 'application/json',
         stream: bool = False,
     ) -> typing.Union[
         ApiResponseFor200Async,
@@ -162,19 +208,31 @@ class BaseApi(api_client.Api):
         AsyncGeneratorResponse,
     ]:
         """
-        searches inventory
+        Perform a search query of your content
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
         """
         self._verify_typed_dict_inputs_oapg(RequestQueryParams, query_params)
+        self._verify_typed_dict_inputs_oapg(RequestPathParams, path_params)
         used_path = path.value
+    
+        _path_params = {}
+        for parameter in (
+            request_path_id,
+        ):
+            parameter_data = path_params.get(parameter.name, schemas.unset)
+            if parameter_data is schemas.unset:
+                continue
+            serialized_data = parameter.serialize(parameter_data)
+            _path_params.update(serialized_data)
+    
+        for k, v in _path_params.items():
+            used_path = used_path.replace('{%s}' % k, v)
     
         prefix_separator_iterator = None
         for parameter in (
-            request_query_search_string,
-            request_query_skip,
-            request_query_limit,
+            request_query_n,
         ):
             parameter_data = query_params.get(parameter.name, schemas.unset)
             if parameter_data is schemas.unset:
@@ -190,19 +248,33 @@ class BaseApi(api_client.Api):
         if accept_content_types:
             for accept_content_type in accept_content_types:
                 _headers.add('Accept', accept_content_type)
-        method = 'get'.upper()
+        method = 'post'.upper()
+        _headers.add('Content-Type', content_type)
+    
+        _fields = None
+        _body = None
         request_before_hook(
             resource_path=used_path,
             method=method,
             configuration=self.api_client.configuration,
+            body=body,
             auth_settings=_auth,
             headers=_headers,
         )
+        if body is not schemas.unset:
+            serialized_data = request_body_search_request.serialize(body, content_type)
+            if 'fields' in serialized_data:
+                _fields = serialized_data['fields']
+            elif 'body' in serialized_data:
+                _body = serialized_data['body']
     
         response = await self.api_client.async_call_api(
             resource_path=used_path,
             method=method,
             headers=_headers,
+            fields=_fields,
+            serialized_body=_body,
+            body=body,
             auth_settings=_auth,
             prefix_separator_iterator=prefix_separator_iterator,
             timeout=timeout,
@@ -262,31 +334,46 @@ class BaseApi(api_client.Api):
         return api_response
 
 
-    def _search_oapg(
+    def _content_oapg(
         self,
+        body: typing.Any = None,
             query_params: typing.Optional[dict] = {},
+            path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
         timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
+        content_type: str = 'application/json',
         stream: bool = False,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
         """
-        searches inventory
+        Perform a search query of your content
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
         """
         self._verify_typed_dict_inputs_oapg(RequestQueryParams, query_params)
+        self._verify_typed_dict_inputs_oapg(RequestPathParams, path_params)
         used_path = path.value
+    
+        _path_params = {}
+        for parameter in (
+            request_path_id,
+        ):
+            parameter_data = path_params.get(parameter.name, schemas.unset)
+            if parameter_data is schemas.unset:
+                continue
+            serialized_data = parameter.serialize(parameter_data)
+            _path_params.update(serialized_data)
+    
+        for k, v in _path_params.items():
+            used_path = used_path.replace('{%s}' % k, v)
     
         prefix_separator_iterator = None
         for parameter in (
-            request_query_search_string,
-            request_query_skip,
-            request_query_limit,
+            request_query_n,
         ):
             parameter_data = query_params.get(parameter.name, schemas.unset)
             if parameter_data is schemas.unset:
@@ -302,19 +389,33 @@ class BaseApi(api_client.Api):
         if accept_content_types:
             for accept_content_type in accept_content_types:
                 _headers.add('Accept', accept_content_type)
-        method = 'get'.upper()
+        method = 'post'.upper()
+        _headers.add('Content-Type', content_type)
+    
+        _fields = None
+        _body = None
         request_before_hook(
             resource_path=used_path,
             method=method,
             configuration=self.api_client.configuration,
+            body=body,
             auth_settings=_auth,
             headers=_headers,
         )
+        if body is not schemas.unset:
+            serialized_data = request_body_search_request.serialize(body, content_type)
+            if 'fields' in serialized_data:
+                _fields = serialized_data['fields']
+            elif 'body' in serialized_data:
+                _body = serialized_data['body']
     
         response = self.api_client.call_api(
             resource_path=used_path,
             method=method,
             headers=_headers,
+            fields=_fields,
+            serialized_body=_body,
+            body=body,
             auth_settings=_auth,
             prefix_separator_iterator=prefix_separator_iterator,
             timeout=timeout,
@@ -344,83 +445,91 @@ class BaseApi(api_client.Api):
         return api_response
 
 
-class Search(BaseApi):
+class Content(BaseApi):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
-    async def asearch(
+    async def acontent(
         self,
-        search_string: typing.Optional[str] = None,
-        skip: typing.Optional[int] = None,
-        limit: typing.Optional[int] = None,
+        id: int,
+        search: typing.Optional[SearchRequestSearch] = None,
+        n: typing.Optional[int] = None,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
         AsyncGeneratorResponse,
     ]:
-        args = self._search_mapped_args(
-            search_string=search_string,
-            skip=skip,
-            limit=limit,
+        args = self._content_mapped_args(
+            id=id,
+            search=search,
+            n=n,
         )
-        return await self._asearch_oapg(
+        return await self._acontent_oapg(
+            body=args.body,
             query_params=args.query,
+            path_params=args.path,
         )
     
-    def search(
+    def content(
         self,
-        search_string: typing.Optional[str] = None,
-        skip: typing.Optional[int] = None,
-        limit: typing.Optional[int] = None,
+        id: int,
+        search: typing.Optional[SearchRequestSearch] = None,
+        n: typing.Optional[int] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        args = self._search_mapped_args(
-            search_string=search_string,
-            skip=skip,
-            limit=limit,
+        args = self._content_mapped_args(
+            id=id,
+            search=search,
+            n=n,
         )
-        return self._search_oapg(
+        return self._content_oapg(
+            body=args.body,
             query_params=args.query,
+            path_params=args.path,
         )
 
-class ApiForget(BaseApi):
+class ApiForpost(BaseApi):
     # this class is used by api classes that refer to endpoints by path and http method names
 
-    async def aget(
+    async def apost(
         self,
-        search_string: typing.Optional[str] = None,
-        skip: typing.Optional[int] = None,
-        limit: typing.Optional[int] = None,
+        id: int,
+        search: typing.Optional[SearchRequestSearch] = None,
+        n: typing.Optional[int] = None,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
         AsyncGeneratorResponse,
     ]:
-        args = self._search_mapped_args(
-            search_string=search_string,
-            skip=skip,
-            limit=limit,
+        args = self._content_mapped_args(
+            id=id,
+            search=search,
+            n=n,
         )
-        return await self._asearch_oapg(
+        return await self._acontent_oapg(
+            body=args.body,
             query_params=args.query,
+            path_params=args.path,
         )
     
-    def get(
+    def post(
         self,
-        search_string: typing.Optional[str] = None,
-        skip: typing.Optional[int] = None,
-        limit: typing.Optional[int] = None,
+        id: int,
+        search: typing.Optional[SearchRequestSearch] = None,
+        n: typing.Optional[int] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        args = self._search_mapped_args(
-            search_string=search_string,
-            skip=skip,
-            limit=limit,
+        args = self._content_mapped_args(
+            id=id,
+            search=search,
+            n=n,
         )
-        return self._search_oapg(
+        return self._content_oapg(
+            body=args.body,
             query_params=args.query,
+            path_params=args.path,
         )
 

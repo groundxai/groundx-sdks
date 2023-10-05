@@ -15,7 +15,12 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal
 
-from groundx.type.inventory_item import InventoryItem
-from groundx.type.manufacturer import Manufacturer
 
-InventorySearchResponse = typing.List[InventoryItem]
+class RequiredProjectBindBucketResponse(TypedDict):
+    message: str
+
+class OptionalProjectBindBucketResponse(TypedDict, total=False):
+    pass
+
+class ProjectBindBucketResponse(RequiredProjectBindBucketResponse, OptionalProjectBindBucketResponse):
+    pass

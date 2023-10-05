@@ -37,9 +37,6 @@ from groundx.model.document_response_document import DocumentResponseDocument
 from groundx.model.document_type import DocumentType
 from groundx.model.ingest_response import IngestResponse
 from groundx.model.ingest_response_ingest import IngestResponseIngest
-from groundx.model.inventory_item import InventoryItem
-from groundx.model.inventory_search_response import InventorySearchResponse
-from groundx.model.manufacturer import Manufacturer
 from groundx.model.preprocessor_delete_request import PreprocessorDeleteRequest
 from groundx.model.preprocessor_delete_request_preprocessors import PreprocessorDeleteRequestPreprocessors
 from groundx.model.preprocessor_response import PreprocessorResponse
@@ -61,6 +58,7 @@ from groundx.model.process_status_response_ingest_progress_errors import Process
 from groundx.model.process_status_response_ingest_progress_processing import ProcessStatusResponseIngestProgressProcessing
 from groundx.model.processing_status import ProcessingStatus
 from groundx.model.project_bind_bucket400_response import ProjectBindBucket400Response
+from groundx.model.project_bind_bucket_response import ProjectBindBucketResponse
 from groundx.model.project_bucket_binding import ProjectBucketBinding
 from groundx.model.project_bucket_binding_project import ProjectBucketBindingProject
 from groundx.model.project_create_request import ProjectCreateRequest

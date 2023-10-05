@@ -227,11 +227,11 @@ export const DocumentApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Look up existing documents by processId, bucketId, or projectId
-         * @param {string} id 
+         * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        lookup: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        lookup: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('lookup', 'id', id)
             const localVarPath = `/v1/ingest/documents/{id}`
@@ -601,10 +601,10 @@ export type DocumentApiLookupRequest = {
     
     /**
     * 
-    * @type {string}
+    * @type {number}
     * @memberof DocumentApiLookup
     */
-    readonly id: string
+    readonly id: number
     
 }
 

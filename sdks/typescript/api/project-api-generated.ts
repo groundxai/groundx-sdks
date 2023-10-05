@@ -25,6 +25,8 @@ import { BucketDetail } from '../models';
 // @ts-ignore
 import { ProjectBindBucket400Response } from '../models';
 // @ts-ignore
+import { ProjectBindBucketResponse } from '../models';
+// @ts-ignore
 import { ProjectBucketBinding } from '../models';
 // @ts-ignore
 import { ProjectBucketBindingProject } from '../models';
@@ -53,10 +55,10 @@ import { requestBeforeHook } from '../requestBeforeHook';
 export const ProjectApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Bind a specific bucket to a project.
-         * @summary Bound project and bucket
-         * @param {number} projectId The ID of the project to bind the bucket to.
-         * @param {ProjectBucketBinding} projectBucketBinding The bucket ID to bind to the project.
+         * Adds the specified bucket to a project.
+         * @summary Add an existing bucket to a project
+         * @param {number} projectId The ID of the project to add the bucket to.
+         * @param {ProjectBucketBinding} projectBucketBinding The bucket ID to add to the project.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -328,13 +330,13 @@ export const ProjectApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ProjectApiAxiosParamCreator(configuration)
     return {
         /**
-         * Bind a specific bucket to a project.
-         * @summary Bound project and bucket
+         * Adds the specified bucket to a project.
+         * @summary Add an existing bucket to a project
          * @param {ProjectApiBindBucketRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async bindBucket(requestParameters: ProjectApiBindBucketRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+        async bindBucket(requestParameters: ProjectApiBindBucketRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectBindBucketResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.bindBucket(requestParameters.projectId, requestParameters, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -403,13 +405,13 @@ export const ProjectApiFactory = function (configuration?: Configuration, basePa
     const localVarFp = ProjectApiFp(configuration)
     return {
         /**
-         * Bind a specific bucket to a project.
-         * @summary Bound project and bucket
+         * Adds the specified bucket to a project.
+         * @summary Add an existing bucket to a project
          * @param {ProjectApiBindBucketRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bindBucket(requestParameters: ProjectApiBindBucketRequest, options?: AxiosRequestConfig): AxiosPromise<object> {
+        bindBucket(requestParameters: ProjectApiBindBucketRequest, options?: AxiosRequestConfig): AxiosPromise<ProjectBindBucketResponse> {
             return localVarFp.bindBucket(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
@@ -472,7 +474,7 @@ export const ProjectApiFactory = function (configuration?: Configuration, basePa
 export type ProjectApiBindBucketRequest = {
     
     /**
-    * The ID of the project to bind the bucket to.
+    * The ID of the project to add the bucket to.
     * @type {number}
     * @memberof ProjectApiBindBucket
     */
@@ -545,8 +547,8 @@ export type ProjectApiUpdateRequest = {
  */
 export class ProjectApiGenerated extends BaseAPI {
     /**
-     * Bind a specific bucket to a project.
-     * @summary Bound project and bucket
+     * Adds the specified bucket to a project.
+     * @summary Add an existing bucket to a project
      * @param {ProjectApiBindBucketRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

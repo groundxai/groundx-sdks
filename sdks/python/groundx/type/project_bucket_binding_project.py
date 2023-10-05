@@ -17,7 +17,7 @@ from typing_extensions import TypedDict, Literal
 
 
 class RequiredProjectBucketBindingProject(TypedDict):
-    # The ID of the bucket to bind to the project.
+    # The ID of the bucket to add to the project.
     bucketId: int
 
 class OptionalProjectBucketBindingProject(TypedDict, total=False):

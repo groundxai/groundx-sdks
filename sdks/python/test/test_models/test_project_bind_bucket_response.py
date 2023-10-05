@@ -13,12 +13,12 @@
 import unittest
 
 import groundx
-from groundx.model.inventory_item import InventoryItem
+from groundx.model.project_bind_bucket_response import ProjectBindBucketResponse
 from groundx import configuration
 
 
-class TestInventoryItem(unittest.TestCase):
-    """InventoryItem unit test stubs"""
+class TestProjectBindBucketResponse(unittest.TestCase):
+    """ProjectBindBucketResponse unit test stubs"""
     pass
 
 

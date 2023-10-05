@@ -43,11 +43,11 @@ from groundx.type.document_response import DocumentResponse
 from . import path
 
 # Path params
-IdSchema = schemas.StrSchema
+IdSchema = schemas.IntSchema
 RequestRequiredPathParams = typing_extensions.TypedDict(
     'RequestRequiredPathParams',
     {
-        'id': typing.Union[IdSchema, str, ],
+        'id': typing.Union[IdSchema, decimal.Decimal, int, ],
     }
 )
 RequestOptionalPathParams = typing_extensions.TypedDict(
@@ -121,7 +121,7 @@ class BaseApi(api_client.Api):
 
     def _lookup_mapped_args(
         self,
-        id: str,
+        id: int,
     ) -> api_client.MappedArgs:
         args: api_client.MappedArgs = api_client.MappedArgs()
         _path_params = {}
@@ -324,7 +324,7 @@ class Lookup(BaseApi):
 
     async def alookup(
         self,
-        id: str,
+        id: int,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -339,7 +339,7 @@ class Lookup(BaseApi):
     
     def lookup(
         self,
-        id: str,
+        id: int,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -356,7 +356,7 @@ class ApiForget(BaseApi):
 
     async def aget(
         self,
-        id: str,
+        id: int,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -371,7 +371,7 @@ class ApiForget(BaseApi):
     
     def get(
         self,
-        id: str,
+        id: int,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,

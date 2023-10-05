@@ -19,7 +19,7 @@
  */
 export interface ProjectBucketBindingProject {
     /**
-     * The ID of the bucket to bind to the project.
+     * The ID of the bucket to add to the project.
      * @type {number}
      * @memberof ProjectBucketBindingProject
      */

@@ -10,6 +10,5 @@ class TagValues(str, enum.Enum):
     PROJECT = "Project"
     BUCKET = "Bucket"
     PREPROCESSOR = "Preprocessor"
-    INVENTORY = "Inventory"
     SEARCH = "Search"
     API_KEY_MANAGEMENT = "API Key Management"

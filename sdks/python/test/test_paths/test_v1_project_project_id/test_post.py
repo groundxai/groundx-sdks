@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestV1ProjectProjectId(ApiTestMixin, unittest.TestCase):
     """
     V1ProjectProjectId unit test stubs
-        Bound project and bucket
+        Add an existing bucket to a project
     """
 
     def setUp(self):
