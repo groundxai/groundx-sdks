@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: GroundX API
-  description: Ground Your RAG Apps in Fact not Fiction
+  description: Ground Your RAG Apps in Fact not Fiction test
   version: 1.0.0
   contact:
     email: support@groundx.ai
