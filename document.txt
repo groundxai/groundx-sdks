@@ -1,0 +1,20 @@
+Documents
+Document Upload API
+With GroundX's Document Upload API, you can easily upload a variety of document types to our platform. Whether you're uploading Word documents, presentations, and text files, our Document Upload API is here to simplify your workflow.
+Overview
+The Document Upload API is designed to support various document formats, making it extremely versatile for your content uploading needs. By utilizing this API, you get to streamline the process of adding new content to our platform.
+Key Features
+Wide Format Support: Supports a range of document formats including but not limited to Word documents, presentations, and text files.
+Ease of Integration: Designed to easily integrate into your existing application or system with clear instructions and examples.
+Secure Data Transfer: Uses secure protocols to ensure the safe transmission and storage of your content.
+Supported Document Types
+Currently, the following document file types are supported by the GroundX ingestion pipeline:
+txt
+docx
+pptx
+xlsx
+pdf
+png
+jpg
+Document Uploading Limitations
+There is currently no limit on the number of documents you can upload. However, there is a 10 MB limit on the size of a document.
