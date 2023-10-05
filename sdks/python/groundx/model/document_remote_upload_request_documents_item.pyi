@@ -33,6 +33,10 @@ class DocumentRemoteUploadRequestDocumentsItem(
 
 
     class MetaOapg:
+        required = {
+            "sourceUrl",
+            "bucketId",
+        }
         
         class properties:
             bucketId = schemas.IntSchema
@@ -52,6 +56,9 @@ class DocumentRemoteUploadRequestDocumentsItem(
                 "metadata": metadata,
                 "type": type,
             }
+    
+    sourceUrl: MetaOapg.properties.sourceUrl
+    bucketId: MetaOapg.properties.bucketId
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["bucketId"]) -> MetaOapg.properties.bucketId: ...
@@ -80,10 +87,10 @@ class DocumentRemoteUploadRequestDocumentsItem(
     
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["bucketId"]) -> typing.Union[MetaOapg.properties.bucketId, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["bucketId"]) -> MetaOapg.properties.bucketId: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["sourceUrl"]) -> typing.Union[MetaOapg.properties.sourceUrl, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["sourceUrl"]) -> MetaOapg.properties.sourceUrl: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["callbackData"]) -> typing.Union[MetaOapg.properties.callbackData, schemas.Unset]: ...
@@ -107,8 +114,8 @@ class DocumentRemoteUploadRequestDocumentsItem(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        bucketId: typing.Union[MetaOapg.properties.bucketId, decimal.Decimal, int, schemas.Unset] = schemas.unset,
-        sourceUrl: typing.Union[MetaOapg.properties.sourceUrl, str, schemas.Unset] = schemas.unset,
+        sourceUrl: typing.Union[MetaOapg.properties.sourceUrl, str, ],
+        bucketId: typing.Union[MetaOapg.properties.bucketId, decimal.Decimal, int, ],
         callbackData: typing.Union[MetaOapg.properties.callbackData, str, schemas.Unset] = schemas.unset,
         callbackUrl: typing.Union[MetaOapg.properties.callbackUrl, str, schemas.Unset] = schemas.unset,
         metadata: typing.Union[MetaOapg.properties.metadata, dict, frozendict.frozendict, schemas.Unset] = schemas.unset,
@@ -119,8 +126,8 @@ class DocumentRemoteUploadRequestDocumentsItem(
         return super().__new__(
             cls,
             *args,
-            bucketId=bucketId,
             sourceUrl=sourceUrl,
+            bucketId=bucketId,
             callbackData=callbackData,
             callbackUrl=callbackUrl,
             metadata=metadata,

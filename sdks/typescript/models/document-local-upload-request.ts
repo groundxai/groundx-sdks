@@ -13,6 +13,9 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import { DocumentLocalUploadRequestMetadata } from './document-local-upload-request-metadata';
+// May contain unused imports in some cases
+// @ts-ignore
 import { DocumentType } from './document-type';
 
 /**
@@ -26,42 +29,12 @@ export interface DocumentLocalUploadRequest {
      * @type {Array<Uint8Array | File>}
      * @memberof DocumentLocalUploadRequest
      */
-    'blob'?: Array<Uint8Array | File>;
+    'blob': Array<Uint8Array | File>;
     /**
      * 
-     * @type {number}
+     * @type {DocumentLocalUploadRequestMetadata}
      * @memberof DocumentLocalUploadRequest
      */
-    'bucketId'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof DocumentLocalUploadRequest
-     */
-    'fileName'?: string;
-    /**
-     * 
-     * @type {DocumentType}
-     * @memberof DocumentLocalUploadRequest
-     */
-    'fileType'?: DocumentType;
-    /**
-     * 
-     * @type {object}
-     * @memberof DocumentLocalUploadRequest
-     */
-    'metadata'?: object;
-    /**
-     * 
-     * @type {string}
-     * @memberof DocumentLocalUploadRequest
-     */
-    'callbackData'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof DocumentLocalUploadRequest
-     */
-    'callbackUrl'?: string;
+    'metadata': DocumentLocalUploadRequestMetadata;
 }
 

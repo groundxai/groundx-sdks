@@ -17,19 +17,21 @@ from typing_extensions import TypedDict, Literal
 
 from groundx.type.document_type import DocumentType
 
-class RequiredDocumentRemoteUploadRequestDocumentsItem(TypedDict):
+class RequiredDocumentLocalUploadRequestMetadata(TypedDict):
+    pass
+
+class OptionalDocumentLocalUploadRequestMetadata(TypedDict, total=False):
     bucketId: int
 
-    sourceUrl: str
+    fileName: str
 
-class OptionalDocumentRemoteUploadRequestDocumentsItem(TypedDict, total=False):
+    fileType: DocumentType
+
+    metadata: typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]
+
     callbackData: str
 
     callbackUrl: str
 
-    metadata: typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]
-
-    type: DocumentType
-
-class DocumentRemoteUploadRequestDocumentsItem(RequiredDocumentRemoteUploadRequestDocumentsItem, OptionalDocumentRemoteUploadRequestDocumentsItem):
+class DocumentLocalUploadRequestMetadata(RequiredDocumentLocalUploadRequestMetadata, OptionalDocumentLocalUploadRequestMetadata):
     pass

@@ -930,13 +930,16 @@ components:
               type: string
     DocumentRemoteUploadRequest:
       type: object
+      required:
+        - bucketId
+        - sourceUrl
       properties:
         bucketId:
           type: integer
           example: 1234
         sourceUrl:
           type: string
-          example: https://my.source.url.com
+          example: https://my.source.url.com/file.txt
         callbackData:
           type: string
           example: my_callback_data
@@ -953,13 +956,16 @@ components:
           type: array
           items:
             type: object
+            required:
+              - bucketId
+              - sourceUrl
             properties:
               bucketId:
                 type: integer
                 example: 1234
               sourceUrl:
                 type: string
-                example: https://my.source.url.com
+                example: https://my.source.url.com/file.txt
               callbackData:
                 type: string
                 example: my_callback_data
@@ -984,6 +990,9 @@ components:
         - jpg
     DocumentLocalUploadRequest:
       type: object
+      required:
+        - blob
+        - metadata
       properties:
         blob:
           type: array
@@ -991,24 +1000,27 @@ components:
             description: The actual file being uploaded.
             type: string
             format: binary
-        bucketId:
-          type: integer
-          example: 1234
-        fileName:
-          type: string
-          example: my_file.txt
-        fileType:
-          $ref: '#/components/schemas/DocumentType'
         metadata:
           type: object
-          example:
-            key: value
-        callbackData:
-          type: string
-          example: my_callback_data
-        callbackUrl:
-          type: string
-          example: https://my.callback.url.com
+          properties:
+            bucketId:
+              type: integer
+              example: 1234
+            fileName:
+              type: string
+              example: my_file.txt
+            fileType:
+              $ref: '#/components/schemas/DocumentType'
+            metadata:
+              type: object
+              example:
+                key: value
+            callbackData:
+              type: string
+              example: my_callback_data
+            callbackUrl:
+              type: string
+              example: https://my.callback.url.com
     IngestResponse:
       type: object
       properties:

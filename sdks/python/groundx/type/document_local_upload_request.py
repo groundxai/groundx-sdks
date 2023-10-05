@@ -16,25 +16,16 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal
 
 from groundx.type.document_local_upload_request_blob import DocumentLocalUploadRequestBlob
+from groundx.type.document_local_upload_request_metadata import DocumentLocalUploadRequestMetadata
 from groundx.type.document_type import DocumentType
 
 class RequiredDocumentLocalUploadRequest(TypedDict):
-    pass
-
-class OptionalDocumentLocalUploadRequest(TypedDict, total=False):
     blob: DocumentLocalUploadRequestBlob
 
-    bucketId: int
+    metadata: DocumentLocalUploadRequestMetadata
 
-    fileName: str
-
-    fileType: DocumentType
-
-    metadata: typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]
-
-    callbackData: str
-
-    callbackUrl: str
+class OptionalDocumentLocalUploadRequest(TypedDict, total=False):
+    pass
 
 class DocumentLocalUploadRequest(RequiredDocumentLocalUploadRequest, OptionalDocumentLocalUploadRequest):
     pass

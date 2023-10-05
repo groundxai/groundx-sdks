@@ -25,6 +25,8 @@ import { DocumentDeleteResponse } from '../models';
 // @ts-ignore
 import { DocumentListResponse } from '../models';
 // @ts-ignore
+import { DocumentLocalUploadRequestMetadata } from '../models';
+// @ts-ignore
 import { DocumentLookupResponse } from '../models';
 // @ts-ignore
 import { DocumentRemoteUploadRequest } from '../models';
@@ -265,17 +267,16 @@ export const DocumentApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Upload local documents to GroundX
-         * @param {Array<Uint8Array | File>} [blob] 
-         * @param {number} [bucketId] 
-         * @param {string} [fileName] 
-         * @param {DocumentType} [fileType] 
-         * @param {object} [metadata] 
-         * @param {string} [callbackData] 
-         * @param {string} [callbackUrl] 
+         * @param {Array<Uint8Array | File>} blob 
+         * @param {DocumentLocalUploadRequestMetadata} metadata 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadLocal: async (blob?: Array<Uint8Array | File>, bucketId?: number, fileName?: string, fileType?: DocumentType, metadata?: object, callbackData?: string, callbackUrl?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        uploadLocal: async (blob: Array<Uint8Array | File>, metadata: DocumentLocalUploadRequestMetadata, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'blob' is not null or undefined
+            assertParamExists('uploadLocal', 'blob', blob)
+            // verify required parameter 'metadata' is not null or undefined
+            assertParamExists('uploadLocal', 'metadata', metadata)
             const localVarPath = `/v1/ingest/documents/local`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -306,28 +307,8 @@ export const DocumentApiAxiosParamCreator = function (configuration?: Configurat
             }
 
     
-            if (bucketId !== undefined) { 
-                localVarFormParams.append('bucketId', bucketId as any);
-            }
-    
-            if (fileName !== undefined) { 
-                localVarFormParams.append('fileName', fileName as any);
-            }
-    
-            if (fileType !== undefined) { 
-                localVarFormParams.append('fileType', new Blob([JSON.stringify(fileType)], { type: "application/json", }));
-            }
-    
             if (metadata !== undefined) { 
                 localVarFormParams.append('metadata', new Blob([JSON.stringify(metadata)], { type: "application/json", }));
-            }
-    
-            if (callbackData !== undefined) { 
-                localVarFormParams.append('callbackData', callbackData as any);
-            }
-    
-            if (callbackUrl !== undefined) { 
-                localVarFormParams.append('callbackUrl', callbackUrl as any);
             }
     
     
@@ -463,8 +444,8 @@ export const DocumentApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async uploadLocal(requestParameters: DocumentApiUploadLocalRequest = {}, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IngestResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadLocal(requestParameters.blob, requestParameters.bucketId, requestParameters.fileName, requestParameters.fileType, requestParameters.metadata, requestParameters.callbackData, requestParameters.callbackUrl, options);
+        async uploadLocal(requestParameters: DocumentApiUploadLocalRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IngestResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadLocal(requestParameters.blob, requestParameters.metadata, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -474,7 +455,7 @@ export const DocumentApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async uploadRemote(requestParameters: DocumentApiUploadRemoteRequest = {}, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IngestResponse>> {
+        async uploadRemote(requestParameters: DocumentApiUploadRemoteRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IngestResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.uploadRemote(requestParameters, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -544,7 +525,7 @@ export const DocumentApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadLocal(requestParameters: DocumentApiUploadLocalRequest = {}, options?: AxiosRequestConfig): AxiosPromise<IngestResponse> {
+        uploadLocal(requestParameters: DocumentApiUploadLocalRequest, options?: AxiosRequestConfig): AxiosPromise<IngestResponse> {
             return localVarFp.uploadLocal(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
@@ -554,7 +535,7 @@ export const DocumentApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadRemote(requestParameters: DocumentApiUploadRemoteRequest = {}, options?: AxiosRequestConfig): AxiosPromise<IngestResponse> {
+        uploadRemote(requestParameters: DocumentApiUploadRemoteRequest, options?: AxiosRequestConfig): AxiosPromise<IngestResponse> {
             return localVarFp.uploadRemote(requestParameters, options).then((request) => request(axios, basePath));
         },
     };
@@ -636,49 +617,14 @@ export type DocumentApiUploadLocalRequest = {
     * @type {Array<Uint8Array | File>}
     * @memberof DocumentApiUploadLocal
     */
-    readonly blob?: Array<Uint8Array | File>
+    readonly blob: Array<Uint8Array | File>
     
     /**
     * 
-    * @type {number}
+    * @type {DocumentLocalUploadRequestMetadata}
     * @memberof DocumentApiUploadLocal
     */
-    readonly bucketId?: number
-    
-    /**
-    * 
-    * @type {string}
-    * @memberof DocumentApiUploadLocal
-    */
-    readonly fileName?: string
-    
-    /**
-    * 
-    * @type {DocumentType}
-    * @memberof DocumentApiUploadLocal
-    */
-    readonly fileType?: DocumentType
-    
-    /**
-    * 
-    * @type {object}
-    * @memberof DocumentApiUploadLocal
-    */
-    readonly metadata?: object
-    
-    /**
-    * 
-    * @type {string}
-    * @memberof DocumentApiUploadLocal
-    */
-    readonly callbackData?: string
-    
-    /**
-    * 
-    * @type {string}
-    * @memberof DocumentApiUploadLocal
-    */
-    readonly callbackUrl?: string
+    readonly metadata: DocumentLocalUploadRequestMetadata
     
 }
 
@@ -765,7 +711,7 @@ export class DocumentApiGenerated extends BaseAPI {
      * @throws {RequiredError}
      * @memberof DocumentApiGenerated
      */
-    public uploadLocal(requestParameters: DocumentApiUploadLocalRequest = {}, options?: AxiosRequestConfig) {
+    public uploadLocal(requestParameters: DocumentApiUploadLocalRequest, options?: AxiosRequestConfig) {
         return DocumentApiFp(this.configuration).uploadLocal(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -777,7 +723,7 @@ export class DocumentApiGenerated extends BaseAPI {
      * @throws {RequiredError}
      * @memberof DocumentApiGenerated
      */
-    public uploadRemote(requestParameters: DocumentApiUploadRemoteRequest = {}, options?: AxiosRequestConfig) {
+    public uploadRemote(requestParameters: DocumentApiUploadRemoteRequest, options?: AxiosRequestConfig) {
         return DocumentApiFp(this.configuration).uploadRemote(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 }

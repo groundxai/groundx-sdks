@@ -126,8 +126,8 @@ class BaseApi(api_client.Api):
 
     def _upload_remote_mapped_args(
         self,
-        bucket_id: typing.Optional[int] = None,
-        source_url: typing.Optional[str] = None,
+        bucket_id: int,
+        source_url: str,
         callback_data: typing.Optional[str] = None,
         callback_url: typing.Optional[str] = None,
         metadata: typing.Optional[typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]] = None,
@@ -349,8 +349,8 @@ class UploadRemote(BaseApi):
 
     async def aupload_remote(
         self,
-        bucket_id: typing.Optional[int] = None,
-        source_url: typing.Optional[str] = None,
+        bucket_id: int,
+        source_url: str,
         callback_data: typing.Optional[str] = None,
         callback_url: typing.Optional[str] = None,
         metadata: typing.Optional[typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]] = None,
@@ -376,8 +376,8 @@ class UploadRemote(BaseApi):
     
     def upload_remote(
         self,
-        bucket_id: typing.Optional[int] = None,
-        source_url: typing.Optional[str] = None,
+        bucket_id: int,
+        source_url: str,
         callback_data: typing.Optional[str] = None,
         callback_url: typing.Optional[str] = None,
         metadata: typing.Optional[typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]] = None,
@@ -405,8 +405,8 @@ class ApiForpost(BaseApi):
 
     async def apost(
         self,
-        bucket_id: typing.Optional[int] = None,
-        source_url: typing.Optional[str] = None,
+        bucket_id: int,
+        source_url: str,
         callback_data: typing.Optional[str] = None,
         callback_url: typing.Optional[str] = None,
         metadata: typing.Optional[typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]] = None,
@@ -432,8 +432,8 @@ class ApiForpost(BaseApi):
     
     def post(
         self,
-        bucket_id: typing.Optional[int] = None,
-        source_url: typing.Optional[str] = None,
+        bucket_id: int,
+        source_url: str,
         callback_data: typing.Optional[str] = None,
         callback_url: typing.Optional[str] = None,
         metadata: typing.Optional[typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]] = None,

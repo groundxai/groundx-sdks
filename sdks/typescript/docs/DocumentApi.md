@@ -227,11 +227,14 @@ const groundx = new Groundx({
 });
 
 const uploadLocalResponse = await groundx.document.uploadLocal({
-  bucketId: 1234,
-  fileName: "my_file.txt",
-  fileType: "txt",
-  callbackData: "my_callback_data",
-  callbackUrl: "https://my.callback.url.com",
+  blob: [open("/path/to/file", "rb")],
+  metadata: {
+    bucketId: 1234,
+    fileName: "my_file.txt",
+    fileType: "txt",
+    callbackData: "my_callback_data",
+    callbackUrl: "https://my.callback.url.com",
+  },
 });
 
 console.log(uploadLocalResponse);
@@ -241,13 +244,8 @@ console.log(uploadLocalResponse);
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**blob** | **Array<Uint8Array | File>** |  | (optional)
-**bucketId** | **number** |  | (optional)
-**fileName** | **string** |  | (optional)
-**fileType** | **DocumentType** |  | (optional)
-**metadata** | **object** |  | (optional)
-**callbackData** | **string** |  | (optional)
-**callbackUrl** | **string** |  | (optional)
+**blob** | **Array<Uint8Array | File>** |  | (required)
+**metadata** | **DocumentLocalUploadRequestMetadata** |  | (required)
 
 ### Return type
 
@@ -279,7 +277,7 @@ const groundx = new Groundx({
 
 const uploadRemoteResponse = await groundx.document.uploadRemote({
   bucketId: 1234,
-  sourceUrl: "https://my.source.url.com",
+  sourceUrl: "https://my.source.url.com/file.txt",
   callbackData: "my_callback_data",
   callbackUrl: "https://my.callback.url.com",
   type: "txt",

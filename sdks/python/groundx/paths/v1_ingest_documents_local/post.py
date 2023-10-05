@@ -32,6 +32,7 @@ import frozendict  # noqa: F401
 
 from groundx import schemas  # noqa: F401
 
+from groundx.model.document_local_upload_request_metadata import DocumentLocalUploadRequestMetadata as DocumentLocalUploadRequestMetadataSchema
 from groundx.model.ingest_response_ingest import IngestResponseIngest as IngestResponseIngestSchema
 from groundx.model.document_local_upload_request import DocumentLocalUploadRequest as DocumentLocalUploadRequestSchema
 from groundx.model.ingest_response import IngestResponse as IngestResponseSchema
@@ -43,6 +44,7 @@ from groundx.type.document_local_upload_request_blob import DocumentLocalUploadR
 from groundx.type.document_local_upload_request import DocumentLocalUploadRequest
 from groundx.type.ingest_response_ingest import IngestResponseIngest
 from groundx.type.ingest_response import IngestResponse
+from groundx.type.document_local_upload_request_metadata import DocumentLocalUploadRequestMetadata
 
 from . import path
 
@@ -126,30 +128,15 @@ class BaseApi(api_client.Api):
 
     def _upload_local_mapped_args(
         self,
-        blob: typing.Optional[DocumentLocalUploadRequestBlob] = None,
-        bucket_id: typing.Optional[int] = None,
-        file_name: typing.Optional[str] = None,
-        file_type: typing.Optional[DocumentType] = None,
-        metadata: typing.Optional[typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]] = None,
-        callback_data: typing.Optional[str] = None,
-        callback_url: typing.Optional[str] = None,
+        blob: DocumentLocalUploadRequestBlob,
+        metadata: DocumentLocalUploadRequestMetadata,
     ) -> api_client.MappedArgs:
         args: api_client.MappedArgs = api_client.MappedArgs()
         _body = {}
         if blob is not None:
             _body["blob"] = blob
-        if bucket_id is not None:
-            _body["bucketId"] = bucket_id
-        if file_name is not None:
-            _body["fileName"] = file_name
-        if file_type is not None:
-            _body["fileType"] = file_type
         if metadata is not None:
             _body["metadata"] = metadata
-        if callback_data is not None:
-            _body["callbackData"] = callback_data
-        if callback_url is not None:
-            _body["callbackUrl"] = callback_url
         args.body = _body
         return args
 
@@ -349,13 +336,8 @@ class UploadLocal(BaseApi):
 
     async def aupload_local(
         self,
-        blob: typing.Optional[DocumentLocalUploadRequestBlob] = None,
-        bucket_id: typing.Optional[int] = None,
-        file_name: typing.Optional[str] = None,
-        file_type: typing.Optional[DocumentType] = None,
-        metadata: typing.Optional[typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]] = None,
-        callback_data: typing.Optional[str] = None,
-        callback_url: typing.Optional[str] = None,
+        blob: DocumentLocalUploadRequestBlob,
+        metadata: DocumentLocalUploadRequestMetadata,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -363,12 +345,7 @@ class UploadLocal(BaseApi):
     ]:
         args = self._upload_local_mapped_args(
             blob=blob,
-            bucket_id=bucket_id,
-            file_name=file_name,
-            file_type=file_type,
             metadata=metadata,
-            callback_data=callback_data,
-            callback_url=callback_url,
         )
         return await self._aupload_local_oapg(
             body=args.body,
@@ -376,25 +353,15 @@ class UploadLocal(BaseApi):
     
     def upload_local(
         self,
-        blob: typing.Optional[DocumentLocalUploadRequestBlob] = None,
-        bucket_id: typing.Optional[int] = None,
-        file_name: typing.Optional[str] = None,
-        file_type: typing.Optional[DocumentType] = None,
-        metadata: typing.Optional[typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]] = None,
-        callback_data: typing.Optional[str] = None,
-        callback_url: typing.Optional[str] = None,
+        blob: DocumentLocalUploadRequestBlob,
+        metadata: DocumentLocalUploadRequestMetadata,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
         args = self._upload_local_mapped_args(
             blob=blob,
-            bucket_id=bucket_id,
-            file_name=file_name,
-            file_type=file_type,
             metadata=metadata,
-            callback_data=callback_data,
-            callback_url=callback_url,
         )
         return self._upload_local_oapg(
             body=args.body,
@@ -405,13 +372,8 @@ class ApiForpost(BaseApi):
 
     async def apost(
         self,
-        blob: typing.Optional[DocumentLocalUploadRequestBlob] = None,
-        bucket_id: typing.Optional[int] = None,
-        file_name: typing.Optional[str] = None,
-        file_type: typing.Optional[DocumentType] = None,
-        metadata: typing.Optional[typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]] = None,
-        callback_data: typing.Optional[str] = None,
-        callback_url: typing.Optional[str] = None,
+        blob: DocumentLocalUploadRequestBlob,
+        metadata: DocumentLocalUploadRequestMetadata,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -419,12 +381,7 @@ class ApiForpost(BaseApi):
     ]:
         args = self._upload_local_mapped_args(
             blob=blob,
-            bucket_id=bucket_id,
-            file_name=file_name,
-            file_type=file_type,
             metadata=metadata,
-            callback_data=callback_data,
-            callback_url=callback_url,
         )
         return await self._aupload_local_oapg(
             body=args.body,
@@ -432,25 +389,15 @@ class ApiForpost(BaseApi):
     
     def post(
         self,
-        blob: typing.Optional[DocumentLocalUploadRequestBlob] = None,
-        bucket_id: typing.Optional[int] = None,
-        file_name: typing.Optional[str] = None,
-        file_type: typing.Optional[DocumentType] = None,
-        metadata: typing.Optional[typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]] = None,
-        callback_data: typing.Optional[str] = None,
-        callback_url: typing.Optional[str] = None,
+        blob: DocumentLocalUploadRequestBlob,
+        metadata: DocumentLocalUploadRequestMetadata,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
         args = self._upload_local_mapped_args(
             blob=blob,
-            bucket_id=bucket_id,
-            file_name=file_name,
-            file_type=file_type,
             metadata=metadata,
-            callback_data=callback_data,
-            callback_url=callback_url,
         )
         return self._upload_local_oapg(
             body=args.body,

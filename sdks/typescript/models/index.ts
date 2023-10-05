@@ -12,6 +12,7 @@ export * from './bucket-update-request-bucket';
 export * from './document-delete-response';
 export * from './document-list-response';
 export * from './document-local-upload-request';
+export * from './document-local-upload-request-metadata';
 export * from './document-lookup-response';
 export * from './document-remote-upload-request';
 export * from './document-remote-upload-request-documents-inner';

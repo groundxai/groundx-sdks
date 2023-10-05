@@ -26,13 +26,13 @@ export interface DocumentRemoteUploadRequestDocumentsInner {
      * @type {number}
      * @memberof DocumentRemoteUploadRequestDocumentsInner
      */
-    'bucketId'?: number;
+    'bucketId': number;
     /**
      * 
      * @type {string}
      * @memberof DocumentRemoteUploadRequestDocumentsInner
      */
-    'sourceUrl'?: string;
+    'sourceUrl': string;
     /**
      * 
      * @type {string}

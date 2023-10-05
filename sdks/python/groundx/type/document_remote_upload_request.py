@@ -19,13 +19,11 @@ from groundx.type.document_remote_upload_request_documents import DocumentRemote
 from groundx.type.document_type import DocumentType
 
 class RequiredDocumentRemoteUploadRequest(TypedDict):
-    pass
-
-class OptionalDocumentRemoteUploadRequest(TypedDict, total=False):
     bucketId: int
 
     sourceUrl: str
 
+class OptionalDocumentRemoteUploadRequest(TypedDict, total=False):
     callbackData: str
 
     callbackUrl: str
