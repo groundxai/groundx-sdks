@@ -455,7 +455,7 @@ export const DocumentApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async uploadRemote(requestParameters: DocumentApiUploadRemoteRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IngestResponse>> {
+        async uploadRemote(requestParameters: DocumentApiUploadRemoteRequest = {}, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IngestResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.uploadRemote(requestParameters, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -535,7 +535,7 @@ export const DocumentApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadRemote(requestParameters: DocumentApiUploadRemoteRequest, options?: AxiosRequestConfig): AxiosPromise<IngestResponse> {
+        uploadRemote(requestParameters: DocumentApiUploadRemoteRequest = {}, options?: AxiosRequestConfig): AxiosPromise<IngestResponse> {
             return localVarFp.uploadRemote(requestParameters, options).then((request) => request(axios, basePath));
         },
     };
@@ -723,7 +723,7 @@ export class DocumentApiGenerated extends BaseAPI {
      * @throws {RequiredError}
      * @memberof DocumentApiGenerated
      */
-    public uploadRemote(requestParameters: DocumentApiUploadRemoteRequest, options?: AxiosRequestConfig) {
+    public uploadRemote(requestParameters: DocumentApiUploadRemoteRequest = {}, options?: AxiosRequestConfig) {
         return DocumentApiFp(this.configuration).uploadRemote(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 }

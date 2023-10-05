@@ -8,7 +8,7 @@ dict, frozendict.frozendict,  | frozendict.frozendict,  |  |
 ### Dictionary Keys
 Key | Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | ------------- | -------------
-**bucketId** | decimal.Decimal, int,  | decimal.Decimal,  |  | 
+**bucketId** | decimal.Decimal, int,  | decimal.Decimal,  |  | [optional] 
 **sourceUrl** | str,  | str,  |  | [optional] 
 **callbackData** | str,  | str,  |  | [optional] 
 **callbackUrl** | str,  | str,  |  | [optional] 

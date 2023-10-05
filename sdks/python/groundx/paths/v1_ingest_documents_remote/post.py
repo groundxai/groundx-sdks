@@ -126,7 +126,7 @@ class BaseApi(api_client.Api):
 
     def _upload_remote_mapped_args(
         self,
-        bucket_id: int,
+        bucket_id: typing.Optional[int] = None,
         source_url: typing.Optional[str] = None,
         callback_data: typing.Optional[str] = None,
         callback_url: typing.Optional[str] = None,
@@ -349,7 +349,7 @@ class UploadRemote(BaseApi):
 
     async def aupload_remote(
         self,
-        bucket_id: int,
+        bucket_id: typing.Optional[int] = None,
         source_url: typing.Optional[str] = None,
         callback_data: typing.Optional[str] = None,
         callback_url: typing.Optional[str] = None,
@@ -376,7 +376,7 @@ class UploadRemote(BaseApi):
     
     def upload_remote(
         self,
-        bucket_id: int,
+        bucket_id: typing.Optional[int] = None,
         source_url: typing.Optional[str] = None,
         callback_data: typing.Optional[str] = None,
         callback_url: typing.Optional[str] = None,
@@ -405,7 +405,7 @@ class ApiForpost(BaseApi):
 
     async def apost(
         self,
-        bucket_id: int,
+        bucket_id: typing.Optional[int] = None,
         source_url: typing.Optional[str] = None,
         callback_data: typing.Optional[str] = None,
         callback_url: typing.Optional[str] = None,
@@ -432,7 +432,7 @@ class ApiForpost(BaseApi):
     
     def post(
         self,
-        bucket_id: int,
+        bucket_id: typing.Optional[int] = None,
         source_url: typing.Optional[str] = None,
         callback_data: typing.Optional[str] = None,
         callback_url: typing.Optional[str] = None,

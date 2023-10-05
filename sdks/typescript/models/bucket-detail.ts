@@ -23,7 +23,7 @@ export interface BucketDetail {
      * @type {number}
      * @memberof BucketDetail
      */
-    'bucketId'?: number;
+    'bucketId': number;
     /**
      * 
      * @type {number}

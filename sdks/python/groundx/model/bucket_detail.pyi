@@ -33,6 +33,9 @@ class BucketDetail(
 
 
     class MetaOapg:
+        required = {
+            "bucketId",
+        }
         
         class properties:
             bucketId = schemas.IntSchema
@@ -45,6 +48,8 @@ class BucketDetail(
                 "fileSize": fileSize,
                 "name": name,
             }
+    
+    bucketId: MetaOapg.properties.bucketId
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["bucketId"]) -> MetaOapg.properties.bucketId: ...
@@ -67,7 +72,7 @@ class BucketDetail(
     
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["bucketId"]) -> typing.Union[MetaOapg.properties.bucketId, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["bucketId"]) -> MetaOapg.properties.bucketId: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["fileCount"]) -> typing.Union[MetaOapg.properties.fileCount, schemas.Unset]: ...
@@ -88,7 +93,7 @@ class BucketDetail(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        bucketId: typing.Union[MetaOapg.properties.bucketId, decimal.Decimal, int, schemas.Unset] = schemas.unset,
+        bucketId: typing.Union[MetaOapg.properties.bucketId, decimal.Decimal, int, ],
         fileCount: typing.Union[MetaOapg.properties.fileCount, decimal.Decimal, int, schemas.Unset] = schemas.unset,
         fileSize: typing.Union[MetaOapg.properties.fileSize, str, schemas.Unset] = schemas.unset,
         name: typing.Union[MetaOapg.properties.name, str, schemas.Unset] = schemas.unset,

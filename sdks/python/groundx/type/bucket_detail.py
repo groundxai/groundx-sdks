@@ -17,11 +17,9 @@ from typing_extensions import TypedDict, Literal
 
 
 class RequiredBucketDetail(TypedDict):
-    pass
-
-class OptionalBucketDetail(TypedDict, total=False):
     bucketId: int
 
+class OptionalBucketDetail(TypedDict, total=False):
     fileCount: int
 
     fileSize: str

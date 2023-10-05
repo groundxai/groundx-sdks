@@ -8,7 +8,7 @@ dict, frozendict.frozendict,  | frozendict.frozendict,  |  |
 ### Dictionary Keys
 Key | Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | ------------- | -------------
-**bucketId** | decimal.Decimal, int,  | decimal.Decimal,  |  | [optional] 
+**bucketId** | decimal.Decimal, int,  | decimal.Decimal,  |  | 
 **fileCount** | decimal.Decimal, int,  | decimal.Decimal,  |  | [optional] 
 **fileSize** | str,  | str,  |  | [optional] 
 **name** | str,  | str,  |  | [optional] 

@@ -29,7 +29,7 @@ export interface DocumentRemoteUploadRequest {
      * @type {number}
      * @memberof DocumentRemoteUploadRequest
      */
-    'bucketId': number;
+    'bucketId'?: number;
     /**
      * 
      * @type {string}

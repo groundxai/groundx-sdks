@@ -863,6 +863,8 @@ components:
           format: date-time
     BucketDetail:
       type: object
+      required:
+        - bucketId
       properties:
         bucketId:
           type: integer
@@ -942,8 +944,6 @@ components:
               type: string
     DocumentRemoteUploadRequest:
       type: object
-      required:
-        - bucketId
       properties:
         bucketId:
           type: integer

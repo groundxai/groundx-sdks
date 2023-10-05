@@ -33,9 +33,6 @@ class DocumentRemoteUploadRequest(
 
 
     class MetaOapg:
-        required = {
-            "bucketId",
-        }
         
         class properties:
             bucketId = schemas.IntSchema
@@ -60,8 +57,6 @@ class DocumentRemoteUploadRequest(
                 "type": type,
                 "documents": documents,
             }
-    
-    bucketId: MetaOapg.properties.bucketId
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["bucketId"]) -> MetaOapg.properties.bucketId: ...
@@ -93,7 +88,7 @@ class DocumentRemoteUploadRequest(
     
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["bucketId"]) -> MetaOapg.properties.bucketId: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["bucketId"]) -> typing.Union[MetaOapg.properties.bucketId, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["sourceUrl"]) -> typing.Union[MetaOapg.properties.sourceUrl, schemas.Unset]: ...
@@ -123,7 +118,7 @@ class DocumentRemoteUploadRequest(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        bucketId: typing.Union[MetaOapg.properties.bucketId, decimal.Decimal, int, ],
+        bucketId: typing.Union[MetaOapg.properties.bucketId, decimal.Decimal, int, schemas.Unset] = schemas.unset,
         sourceUrl: typing.Union[MetaOapg.properties.sourceUrl, str, schemas.Unset] = schemas.unset,
         callbackData: typing.Union[MetaOapg.properties.callbackData, str, schemas.Unset] = schemas.unset,
         callbackUrl: typing.Union[MetaOapg.properties.callbackUrl, str, schemas.Unset] = schemas.unset,
