@@ -22,13 +22,7 @@ from pprint import pprint
 from groundx import Groundx, ApiException
 
 groundx = Groundx(
-    # Defining the host is optional and defaults to https://api.groundx.ai/api
-    # See configuration.py for a list of all supported configuration parameters.
-    host="https://api.groundx.ai/api",
-    # Configure API key authorization: ApiKeyAuth
     api_key="YOUR_API_KEY",
-    # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-    # api_key_prefix = {'ApiKeyAuth': 'Bearer'},
 )
 
 try:
@@ -60,13 +54,7 @@ from pprint import pprint
 from groundx import Groundx, ApiException
 
 groundx = Groundx(
-    # Defining the host is optional and defaults to https://api.groundx.ai/api
-    # See configuration.py for a list of all supported configuration parameters.
-    host="https://api.groundx.ai/api",
-    # Configure API key authorization: ApiKeyAuth
     api_key="YOUR_API_KEY",
-    # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-    # api_key_prefix = {'ApiKeyAuth': 'Bearer'},
 )
 
 
@@ -125,72 +113,6 @@ Tag | Method | HTTP request | Description
 *Project* | [**list**](docs/apis/tags/ProjectApi.md#list) | **GET** /v1/project | Look up existing projects
 *Project* | [**update**](docs/apis/tags/ProjectApi.md#update) | **PUT** /v1/project/{projectId} | Update an existing project
 *Search* | [**content**](docs/apis/tags/SearchApi.md#content) | **POST** /v1/search/{projectId} | Perform a search query of your content
-
-## Documentation For Models
-
- - [ApiKeyManagementList405Response](docs/models/ApiKeyManagementList405Response.md)
- - [ApiKeyManagementListResponse](docs/models/ApiKeyManagementListResponse.md)
- - [ApiKeyManagementListResponseApiKeys](docs/models/ApiKeyManagementListResponseApiKeys.md)
- - [ApiKeyManagementListResponseApiKeysItem](docs/models/ApiKeyManagementListResponseApiKeysItem.md)
- - [BucketCreateRequest](docs/models/BucketCreateRequest.md)
- - [BucketCreateRequestBucket](docs/models/BucketCreateRequestBucket.md)
- - [BucketDeleteResponse](docs/models/BucketDeleteResponse.md)
- - [BucketDetail](docs/models/BucketDetail.md)
- - [BucketListResponse](docs/models/BucketListResponse.md)
- - [BucketResponse](docs/models/BucketResponse.md)
- - [BucketUpdateRequest](docs/models/BucketUpdateRequest.md)
- - [BucketUpdateRequestBucket](docs/models/BucketUpdateRequestBucket.md)
- - [DocumentDeleteResponse](docs/models/DocumentDeleteResponse.md)
- - [DocumentListResponse](docs/models/DocumentListResponse.md)
- - [DocumentLocalUploadRequest](docs/models/DocumentLocalUploadRequest.md)
- - [DocumentLocalUploadRequestBlob](docs/models/DocumentLocalUploadRequestBlob.md)
- - [DocumentLookupResponse](docs/models/DocumentLookupResponse.md)
- - [DocumentRemoteUploadRequest](docs/models/DocumentRemoteUploadRequest.md)
- - [DocumentRemoteUploadRequestDocuments](docs/models/DocumentRemoteUploadRequestDocuments.md)
- - [DocumentRemoteUploadRequestDocumentsItem](docs/models/DocumentRemoteUploadRequestDocumentsItem.md)
- - [DocumentResponse](docs/models/DocumentResponse.md)
- - [DocumentResponseDocument](docs/models/DocumentResponseDocument.md)
- - [DocumentType](docs/models/DocumentType.md)
- - [IngestResponse](docs/models/IngestResponse.md)
- - [IngestResponseIngest](docs/models/IngestResponseIngest.md)
- - [InventoryItem](docs/models/InventoryItem.md)
- - [InventorySearchResponse](docs/models/InventorySearchResponse.md)
- - [Manufacturer](docs/models/Manufacturer.md)
- - [PreprocessorDeleteRequest](docs/models/PreprocessorDeleteRequest.md)
- - [PreprocessorDeleteRequestPreprocessors](docs/models/PreprocessorDeleteRequestPreprocessors.md)
- - [PreprocessorResponse](docs/models/PreprocessorResponse.md)
- - [PreprocessorResponsePreprocess](docs/models/PreprocessorResponsePreprocess.md)
- - [PreprocessorResponsePreprocessPreprocessors](docs/models/PreprocessorResponsePreprocessPreprocessors.md)
- - [PreprocessorResponsePreprocessPreprocessorsItem](docs/models/PreprocessorResponsePreprocessPreprocessorsItem.md)
- - [PreprocessorResponsePreprocessPreprocessorsItemScript](docs/models/PreprocessorResponsePreprocessPreprocessorsItemScript.md)
- - [PreprocessorSetupRequest](docs/models/PreprocessorSetupRequest.md)
- - [PreprocessorSetupRequestScript](docs/models/PreprocessorSetupRequestScript.md)
- - [PreprocessorSetupResponse](docs/models/PreprocessorSetupResponse.md)
- - [PreprocessorSetupResponsePreprocess](docs/models/PreprocessorSetupResponsePreprocess.md)
- - [PreprocessorSetupResponsePreprocessPreprocessors](docs/models/PreprocessorSetupResponsePreprocessPreprocessors.md)
- - [PreprocessorSetupResponsePreprocessPreprocessorsItem](docs/models/PreprocessorSetupResponsePreprocessPreprocessorsItem.md)
- - [ProcessStatusResponse](docs/models/ProcessStatusResponse.md)
- - [ProcessStatusResponseIngest](docs/models/ProcessStatusResponseIngest.md)
- - [ProcessStatusResponseIngestProgress](docs/models/ProcessStatusResponseIngestProgress.md)
- - [ProcessStatusResponseIngestProgressComplete](docs/models/ProcessStatusResponseIngestProgressComplete.md)
- - [ProcessStatusResponseIngestProgressErrors](docs/models/ProcessStatusResponseIngestProgressErrors.md)
- - [ProcessStatusResponseIngestProgressProcessing](docs/models/ProcessStatusResponseIngestProgressProcessing.md)
- - [ProjectBindBucket400Response](docs/models/ProjectBindBucket400Response.md)
- - [ProjectBucketBinding](docs/models/ProjectBucketBinding.md)
- - [ProjectBucketBindingProject](docs/models/ProjectBucketBindingProject.md)
- - [ProjectCreateRequest](docs/models/ProjectCreateRequest.md)
- - [ProjectCreateRequestProject](docs/models/ProjectCreateRequestProject.md)
- - [ProjectDeleteResponse](docs/models/ProjectDeleteResponse.md)
- - [ProjectDetail](docs/models/ProjectDetail.md)
- - [ProjectListResponse](docs/models/ProjectListResponse.md)
- - [ProjectResponse](docs/models/ProjectResponse.md)
- - [ProjectUpdateRequest](docs/models/ProjectUpdateRequest.md)
- - [ProjectUpdateRequestProject](docs/models/ProjectUpdateRequestProject.md)
- - [SearchRequest](docs/models/SearchRequest.md)
- - [SearchRequestSearch](docs/models/SearchRequestSearch.md)
- - [SearchResponse](docs/models/SearchResponse.md)
- - [SearchResponseSearch](docs/models/SearchResponseSearch.md)
- - [SearchResultItem](docs/models/SearchResultItem.md)
 
 
 ## Author

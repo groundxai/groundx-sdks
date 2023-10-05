@@ -23,13 +23,7 @@ from pprint import pprint
 from groundx import Groundx, ApiException
 
 groundx = Groundx(
-    # Defining the host is optional and defaults to https://api.groundx.ai/api
-    # See configuration.py for a list of all supported configuration parameters.
-    host="https://api.groundx.ai/api",
-    # Configure API key authorization: ApiKeyAuth
     api_key="YOUR_API_KEY",
-    # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-    # api_key_prefix = {'ApiKeyAuth': 'Bearer'},
 )
 
 try:
@@ -64,13 +58,7 @@ from pprint import pprint
 from groundx import Groundx, ApiException
 
 groundx = Groundx(
-    # Defining the host is optional and defaults to https://api.groundx.ai/api
-    # See configuration.py for a list of all supported configuration parameters.
-    host="https://api.groundx.ai/api",
-    # Configure API key authorization: ApiKeyAuth
     api_key="YOUR_API_KEY",
-    # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-    # api_key_prefix = {'ApiKeyAuth': 'Bearer'},
 )
 
 try:
@@ -105,13 +93,7 @@ from pprint import pprint
 from groundx import Groundx, ApiException
 
 groundx = Groundx(
-    # Defining the host is optional and defaults to https://api.groundx.ai/api
-    # See configuration.py for a list of all supported configuration parameters.
-    host="https://api.groundx.ai/api",
-    # Configure API key authorization: ApiKeyAuth
     api_key="YOUR_API_KEY",
-    # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-    # api_key_prefix = {'ApiKeyAuth': 'Bearer'},
 )
 
 try:
@@ -151,13 +133,7 @@ from pprint import pprint
 from groundx import Groundx, ApiException
 
 groundx = Groundx(
-    # Defining the host is optional and defaults to https://api.groundx.ai/api
-    # See configuration.py for a list of all supported configuration parameters.
-    host="https://api.groundx.ai/api",
-    # Configure API key authorization: ApiKeyAuth
     api_key="YOUR_API_KEY",
-    # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-    # api_key_prefix = {'ApiKeyAuth': 'Bearer'},
 )
 
 try:
@@ -190,13 +166,7 @@ from pprint import pprint
 from groundx import Groundx, ApiException
 
 groundx = Groundx(
-    # Defining the host is optional and defaults to https://api.groundx.ai/api
-    # See configuration.py for a list of all supported configuration parameters.
-    host="https://api.groundx.ai/api",
-    # Configure API key authorization: ApiKeyAuth
     api_key="YOUR_API_KEY",
-    # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-    # api_key_prefix = {'ApiKeyAuth': 'Bearer'},
 )
 
 try:
@@ -231,13 +201,7 @@ from pprint import pprint
 from groundx import Groundx, ApiException
 
 groundx = Groundx(
-    # Defining the host is optional and defaults to https://api.groundx.ai/api
-    # See configuration.py for a list of all supported configuration parameters.
-    host="https://api.groundx.ai/api",
-    # Configure API key authorization: ApiKeyAuth
     api_key="YOUR_API_KEY",
-    # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-    # api_key_prefix = {'ApiKeyAuth': 'Bearer'},
 )
 
 try:
@@ -278,13 +242,7 @@ from pprint import pprint
 from groundx import Groundx, ApiException
 
 groundx = Groundx(
-    # Defining the host is optional and defaults to https://api.groundx.ai/api
-    # See configuration.py for a list of all supported configuration parameters.
-    host="https://api.groundx.ai/api",
-    # Configure API key authorization: ApiKeyAuth
     api_key="YOUR_API_KEY",
-    # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-    # api_key_prefix = {'ApiKeyAuth': 'Bearer'},
 )
 
 try:
