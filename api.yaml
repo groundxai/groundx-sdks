@@ -16,7 +16,6 @@ tags:
   - name: Project
   - name: Bucket
   - name: Preprocessor
-  - name: Inventory
   - name: Search
   - name: API Key Management
 paths:
@@ -44,81 +43,22 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiKeyManagementList405Response'
-  /v1/inventory:
-    get:
-      tags:
-        - Inventory
-      summary: searches inventory
-      operationId: Inventory_search
-      description: |
-        By passing in the appropriate options, you can search for
-        available inventory in the system
-      parameters:
-        - description: pass an optional search string for looking up inventory
-          in: query
-          name: searchString
-          required: false
-          schema:
-            type: string
-        - description: number of records to skip for pagination
-          in: query
-          name: skip
-          schema:
-            type: integer
-            format: int32
-            minimum: 0
-        - description: maximum number of records to return
-          in: query
-          name: limit
-          schema:
-            type: integer
-            format: int32
-            minimum: 0
-            maximum: 50
-      responses:
-        '200':
-          description: search results matching criteria
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InventorySearchResponse'
-        '400':
-          description: bad input parameter
-    post:
-      tags:
-        - Inventory
-      summary: adds an inventory item
-      operationId: Inventory_add
-      description: Adds an item to the system
-      requestBody:
-        description: Inventory item to add
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/InventoryItem'
-      responses:
-        '201':
-          description: item created
-        '400':
-          description: invalid input, object invalid
-        '409':
-          description: an existing item already exists
   /v1/project/{projectId}:
     post:
       tags:
         - Project
-      summary: Bound project and bucket
+      summary: Add an existing bucket to a project
       operationId: Project_bindBucket
-      description: Bind a specific bucket to a project.
+      description: Adds the specified bucket to a project.
       parameters:
-        - description: The ID of the project to bind the bucket to.
+        - description: The ID of the project to add the bucket to.
           name: projectId
           in: path
           required: true
           schema:
             type: integer
       requestBody:
-        description: The bucket ID to bind to the project.
+        description: The bucket ID to add to the project.
         required: true
         content:
           application/json:
@@ -126,7 +66,7 @@ paths:
               $ref: '#/components/schemas/ProjectBucketBinding'
       responses:
         '200':
-          description: Successful binding of project and bucket.
+          description: Bucket was successfully added to the project.
           content:
             application/json:
               schema:
@@ -482,7 +422,7 @@ paths:
           in: path
           required: true
           schema:
-            type: string
+            type: integer
       responses:
         '200':
           description: Look up success
@@ -589,17 +529,17 @@ paths:
           description: Invalid preprocessor_ids
         '401':
           description: Permission denied
-  /v1/search/{projectId}:
+  /v1/search/{id}:
     post:
       tags:
         - Search
       summary: Perform a search query of your content
       operationId: Search_content
-      description: Search and retrieve relevant content from a project with projectId.
+      description: Search and retrieve relevant content from a project, group, or bucket by id.
       parameters:
-        - description: The ID of the project to search within.
+        - description: The ID of the project, group, or bucket to search within.
           in: path
-          name: projectId
+          name: id
           required: true
           schema:
             type: integer
@@ -656,7 +596,7 @@ components:
             - bucketId
           properties:
             bucketId:
-              description: The ID of the bucket to bind to the project.
+              description: The ID of the bucket to add to the project.
               type: integer
     SearchRequest:
       type: object
@@ -806,42 +746,6 @@ components:
       properties:
         project:
           $ref: '#/components/schemas/ProjectDetail'
-    InventoryItem:
-      type: object
-      required:
-        - id
-        - name
-        - manufacturer
-        - releaseDate
-      properties:
-        id:
-          type: string
-          format: uuid
-          example: d290f1ee-6c54-4b01-90e6-d701748f0851
-        name:
-          type: string
-          example: Widget Adapter
-        releaseDate:
-          type: string
-          format: date-time
-          example: '2016-08-29T09:12:33.001Z'
-        manufacturer:
-          $ref: '#/components/schemas/Manufacturer'
-    Manufacturer:
-      required:
-        - name
-      properties:
-        name:
-          type: string
-          example: ACME Corporation
-        homePage:
-          type: string
-          format: url
-          example: https://www.acme-corp.com
-        phone:
-          type: string
-          example: 408-867-5309
-      type: object
     ProjectDetail:
       type: object
       required:
@@ -1105,10 +1009,6 @@ components:
         - processing
         - error
         - complete
-    InventorySearchResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/InventoryItem'
     ProjectDeleteResponse:
       type: object
       properties:
