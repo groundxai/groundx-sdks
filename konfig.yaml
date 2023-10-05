@@ -9,6 +9,13 @@ portal:
   favicon: favicon.png
   socials:
     website: https://www.groundx.ai/
+  documentation:
+    sidebar:
+      sections:
+        - label: Guides
+          links:
+            - id: quick-start
+              path: docs/quick-start.md
 generators:
   python:
     version: 1.2.0
