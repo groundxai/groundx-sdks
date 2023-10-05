@@ -13,7 +13,7 @@ Method | HTTP request | Description
 [**uploadRemote**](DocumentApi.md#uploadRemote) | **POST** /v1/ingest/documents/remote | Upload hosted documents to GroundX
 
 
-# **delete**
+# **Groundx.document.delete**
 
 
 ### Example
@@ -54,7 +54,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
-# **get**
+# **Groundx.document.get**
 
 
 ### Example
@@ -95,7 +95,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
-# **getProcessingStatusByProcessId**
+# **Groundx.document.getProcessingStatusByProcessId**
 
 
 ### Example
@@ -136,7 +136,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
-# **list**
+# **Groundx.document.list**
 
 
 ### Example
@@ -172,7 +172,7 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
-# **lookup**
+# **Groundx.document.lookup**
 
 
 ### Example
@@ -212,7 +212,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
-# **uploadLocal**
+# **Groundx.document.uploadLocal**
 
 
 ### Example
@@ -261,7 +261,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
-# **uploadRemote**
+# **Groundx.document.uploadRemote**
 
 
 ### Example

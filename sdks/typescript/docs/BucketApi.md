@@ -11,7 +11,7 @@ Method | HTTP request | Description
 [**update**](BucketApi.md#update) | **PUT** /v1/bucket/{bucketId} | Update an existing bucket
 
 
-# **create**
+# **Groundx.bucket.create**
 
 Create a new bucket for your content.
 
@@ -55,7 +55,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
-# **delete**
+# **Groundx.bucket.delete**
 
 Deletes a bucket by bucketId.
 
@@ -97,7 +97,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
-# **get**
+# **Groundx.bucket.get**
 
 Look up a bucket by its bucketId.
 
@@ -139,7 +139,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
-# **list**
+# **Groundx.bucket.list**
 
 Look up existing buckets associated with your account.
 
@@ -176,7 +176,7 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
-# **update**
+# **Groundx.bucket.update**
 
 Update the configurations of an existing bucket.
 

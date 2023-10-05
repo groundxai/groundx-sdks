@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**content**](SearchApi.md#content) | **POST** /v1/search/{projectId} | Perform a search query of your content
 
 
-# **content**
+# **Groundx.search.content**
 
 Search and retrieve relevant content from a project with projectId.
 

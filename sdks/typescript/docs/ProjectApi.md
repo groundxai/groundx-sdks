@@ -12,7 +12,7 @@ Method | HTTP request | Description
 [**update**](ProjectApi.md#update) | **PUT** /v1/project/{projectId} | Update an existing project
 
 
-# **bindBucket**
+# **Groundx.project.bindBucket**
 
 Bind a specific bucket to a project.
 
@@ -59,7 +59,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
-# **create**
+# **Groundx.project.create**
 
 This endpoint allows you to initialize a new project.
 
@@ -101,7 +101,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
-# **delete**
+# **Groundx.project.delete**
 
 This endpoint allows you to delete your existing projects.
 
@@ -141,7 +141,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
-# **get**
+# **Groundx.project.get**
 
 This endpoint allows you to retrieve a specific project by projectId.
 
@@ -181,7 +181,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
-# **list**
+# **Groundx.project.list**
 
 This endpoint allows you to retrieve your existing projects.
 
@@ -217,7 +217,7 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
-# **update**
+# **Groundx.project.update**
 
 This endpoint allows you to update an existing project.
 

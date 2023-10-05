@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**list**](ApiKeyManagementApi.md#list) | **GET** /v1/apikey | Get API keys
 
 
-# **list**
+# **Groundx.apiKeyManagement.list**
 
 Retrieve the API keys for the authenticated user.
 

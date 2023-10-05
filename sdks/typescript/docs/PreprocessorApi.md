@@ -9,7 +9,7 @@ Method | HTTP request | Description
 [**setup**](PreprocessorApi.md#setup) | **POST** /v1/preprocess | Setup Custom Pre-Processor
 
 
-# **delete**
+# **Groundx.preprocessor.delete**
 
 Deletes existing custom pre-processors that you own or manage.
 
@@ -49,7 +49,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
-# **list**
+# **Groundx.preprocessor.list**
 
 Look up existing pre-processors your account has access to, including those you have created yourself.
 
@@ -91,7 +91,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
-# **setup**
+# **Groundx.preprocessor.setup**
 
 Initializes a custom pre-processor that can be applied to your content and search queries.
 

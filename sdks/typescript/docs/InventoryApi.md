@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**search**](InventoryApi.md#search) | **GET** /v1/inventory | searches inventory
 
 
-# **add**
+# **Groundx.inventory.add**
 
 Adds an item to the system
 
@@ -57,7 +57,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
-# **search**
+# **Groundx.inventory.search**
 
 By passing in the appropriate options, you can search for
 available inventory in the system
