@@ -10,7 +10,7 @@ generators:
     outputDirectory: sdks/python
     clientName: Groundx
     git:
-      userId: konfigdev
+      userId: konfig-dev
       repoId: groundx-sdks/tree/main/sdks/python
   typescript:
     version: 1.0.0
