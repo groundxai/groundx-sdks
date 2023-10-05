@@ -17,12 +17,12 @@ from typing_extensions import TypedDict, Literal
 
 
 class RequiredIngestResponseIngest(TypedDict):
-    pass
-
-class OptionalIngestResponseIngest(TypedDict, total=False):
     processId: str
 
     status: str
+
+class OptionalIngestResponseIngest(TypedDict, total=False):
+    pass
 
 class IngestResponseIngest(RequiredIngestResponseIngest, OptionalIngestResponseIngest):
     pass

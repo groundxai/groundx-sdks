@@ -33,30 +33,67 @@ class ProcessStatusResponseIngest(
 
 
     class MetaOapg:
+        required = {
+            "processId",
+            "status",
+        }
         
         class properties:
             processId = schemas.StrSchema
+            
+            
+            class status(
+                schemas.EnumBase,
+                schemas.StrSchema
+            ):
+            
+            
+                class MetaOapg:
+                    enum_value_to_name = {
+                        "queued": "QUEUED",
+                        "processing": "PROCESSING",
+                        "error": "ERROR",
+                        "complete": "COMPLETE",
+                    }
+                
+                @schemas.classproperty
+                def QUEUED(cls):
+                    return cls("queued")
+                
+                @schemas.classproperty
+                def PROCESSING(cls):
+                    return cls("processing")
+                
+                @schemas.classproperty
+                def ERROR(cls):
+                    return cls("error")
+                
+                @schemas.classproperty
+                def COMPLETE(cls):
+                    return cls("complete")
         
             @staticmethod
             def progress() -> typing.Type['ProcessStatusResponseIngestProgress']:
                 return ProcessStatusResponseIngestProgress
-            status = schemas.StrSchema
             statusMessage = schemas.StrSchema
             __annotations__ = {
                 "processId": processId,
-                "progress": progress,
                 "status": status,
+                "progress": progress,
                 "statusMessage": statusMessage,
             }
+    
+    processId: MetaOapg.properties.processId
+    status: MetaOapg.properties.status
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["processId"]) -> MetaOapg.properties.processId: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["progress"]) -> 'ProcessStatusResponseIngestProgress': ...
+    def __getitem__(self, name: typing_extensions.Literal["status"]) -> MetaOapg.properties.status: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["status"]) -> MetaOapg.properties.status: ...
+    def __getitem__(self, name: typing_extensions.Literal["progress"]) -> 'ProcessStatusResponseIngestProgress': ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["statusMessage"]) -> MetaOapg.properties.statusMessage: ...
@@ -64,19 +101,19 @@ class ProcessStatusResponseIngest(
     @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["processId", "progress", "status", "statusMessage", ], str]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["processId", "status", "progress", "statusMessage", ], str]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["processId"]) -> typing.Union[MetaOapg.properties.processId, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["processId"]) -> MetaOapg.properties.processId: ...
+    
+    @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["status"]) -> MetaOapg.properties.status: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["progress"]) -> typing.Union['ProcessStatusResponseIngestProgress', schemas.Unset]: ...
-    
-    @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["status"]) -> typing.Union[MetaOapg.properties.status, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["statusMessage"]) -> typing.Union[MetaOapg.properties.statusMessage, schemas.Unset]: ...
@@ -84,16 +121,16 @@ class ProcessStatusResponseIngest(
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["processId", "progress", "status", "statusMessage", ], str]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["processId", "status", "progress", "statusMessage", ], str]):
         return super().get_item_oapg(name)
     
 
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        processId: typing.Union[MetaOapg.properties.processId, str, schemas.Unset] = schemas.unset,
+        processId: typing.Union[MetaOapg.properties.processId, str, ],
+        status: typing.Union[MetaOapg.properties.status, str, ],
         progress: typing.Union['ProcessStatusResponseIngestProgress', schemas.Unset] = schemas.unset,
-        status: typing.Union[MetaOapg.properties.status, str, schemas.Unset] = schemas.unset,
         statusMessage: typing.Union[MetaOapg.properties.statusMessage, str, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
@@ -102,8 +139,8 @@ class ProcessStatusResponseIngest(
             cls,
             *args,
             processId=processId,
-            progress=progress,
             status=status,
+            progress=progress,
             statusMessage=statusMessage,
             _configuration=_configuration,
             **kwargs,

@@ -18,10 +18,10 @@ from typing_extensions import TypedDict, Literal
 from groundx.type.ingest_response_ingest import IngestResponseIngest
 
 class RequiredIngestResponse(TypedDict):
-    pass
+    ingest: IngestResponseIngest
 
 class OptionalIngestResponse(TypedDict, total=False):
-    ingest: IngestResponseIngest
+    pass
 
 class IngestResponse(RequiredIngestResponse, OptionalIngestResponse):
     pass

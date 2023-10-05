@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**delete**](DocumentApi.md#delete) | **DELETE** /v1/ingest/document/{documentId} | Delete documents
 [**get**](DocumentApi.md#get) | **GET** /v1/ingest/document/{documentId} | Look up an existing document
-[**getProcessingStatusByProcessId**](DocumentApi.md#getProcessingStatusByProcessId) | **GET** /v1/ingest/{processId} | Look up document processing status by processId
+[**getProcessingStatusById**](DocumentApi.md#getProcessingStatusById) | **GET** /v1/ingest/{processId} | Look up document processing status by processId
 [**list**](DocumentApi.md#list) | **GET** /v1/ingest/documents | Look up all existing documents
 [**lookup**](DocumentApi.md#lookup) | **GET** /v1/ingest/documents/{id} | Look up existing documents by processId, bucketId, or projectId
 [**uploadLocal**](DocumentApi.md#uploadLocal) | **POST** /v1/ingest/documents/local | Upload local documents to GroundX
@@ -95,7 +95,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
-# **Groundx.document.getProcessingStatusByProcessId**
+# **Groundx.document.getProcessingStatusById**
 
 
 ### Example
@@ -109,12 +109,12 @@ const groundx = new Groundx({
   apiKey: "API_KEY",
 });
 
-const getProcessingStatusByProcessIdResponse =
-  await groundx.document.getProcessingStatusByProcessId({
+const getProcessingStatusByIdResponse =
+  await groundx.document.getProcessingStatusById({
     processId: "processId_example",
   });
 
-console.log(getProcessingStatusByProcessIdResponse);
+console.log(getProcessingStatusByIdResponse);
 ```
 
 ### Parameters

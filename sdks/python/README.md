@@ -96,7 +96,7 @@ Tag | Method | HTTP request | Description
 *Bucket* | [**update**](docs/apis/tags/BucketApi.md#update) | **PUT** /v1/bucket/{bucketId} | Update an existing bucket
 *Document* | [**delete**](docs/apis/tags/DocumentApi.md#delete) | **DELETE** /v1/ingest/document/{documentId} | Delete documents
 *Document* | [**get**](docs/apis/tags/DocumentApi.md#get) | **GET** /v1/ingest/document/{documentId} | Look up an existing document
-*Document* | [**get_processing_status_by_process_id**](docs/apis/tags/DocumentApi.md#get_processing_status_by_process_id) | **GET** /v1/ingest/{processId} | Look up document processing status by processId
+*Document* | [**get_processing_status_by_id**](docs/apis/tags/DocumentApi.md#get_processing_status_by_id) | **GET** /v1/ingest/{processId} | Look up document processing status by processId
 *Document* | [**list**](docs/apis/tags/DocumentApi.md#list) | **GET** /v1/ingest/documents | Look up all existing documents
 *Document* | [**lookup**](docs/apis/tags/DocumentApi.md#lookup) | **GET** /v1/ingest/documents/{id} | Look up existing documents by processId, bucketId, or projectId
 *Document* | [**upload_local**](docs/apis/tags/DocumentApi.md#upload_local) | **POST** /v1/ingest/documents/local | Upload local documents to GroundX

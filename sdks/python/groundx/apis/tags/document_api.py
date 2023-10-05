@@ -12,7 +12,7 @@
 
 from groundx.paths.v1_ingest_document_document_id.delete import Delete
 from groundx.paths.v1_ingest_document_document_id.get import Get
-from groundx.paths.v1_ingest_process_id.get import GetProcessingStatusByProcessId
+from groundx.paths.v1_ingest_process_id.get import GetProcessingStatusById
 from groundx.paths.v1_ingest_documents.get import List
 from groundx.paths.v1_ingest_documents_id.get import Lookup
 from groundx.paths.v1_ingest_documents_local.post import UploadLocal
@@ -22,7 +22,7 @@ from groundx.paths.v1_ingest_documents_remote.post import UploadRemote
 class DocumentApi(
     Delete,
     Get,
-    GetProcessingStatusByProcessId,
+    GetProcessingStatusById,
     List,
     Lookup,
     UploadLocal,

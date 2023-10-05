@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**delete**](#delete) | **delete** /v1/ingest/document/{documentId} | Delete documents
 [**get**](#get) | **get** /v1/ingest/document/{documentId} | Look up an existing document
-[**get_processing_status_by_process_id**](#get_processing_status_by_process_id) | **get** /v1/ingest/{processId} | Look up document processing status by processId
+[**get_processing_status_by_id**](#get_processing_status_by_id) | **get** /v1/ingest/{processId} | Look up document processing status by processId
 [**list**](#list) | **get** /v1/ingest/documents | Look up all existing documents
 [**lookup**](#lookup) | **get** /v1/ingest/documents/{id} | Look up existing documents by processId, bucketId, or projectId
 [**upload_local**](#upload_local) | **post** /v1/ingest/documents/local | Upload local documents to GroundX
@@ -82,7 +82,7 @@ except ApiException as e:
 
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
-# **get_processing_status_by_process_id**
+# **get_processing_status_by_id**
 
 Look up document processing status by processId
 
@@ -98,21 +98,16 @@ groundx = Groundx(
 
 try:
     # Look up document processing status by processId
-    get_processing_status_by_process_id_response = (
-        groundx.document.get_processing_status_by_process_id(
-            process_id="processId_example",  # required
-        )
+    get_processing_status_by_id_response = groundx.document.get_processing_status_by_id(
+        process_id="processId_example",  # required
     )
-    pprint(get_processing_status_by_process_id_response.body)
-    pprint(get_processing_status_by_process_id_response.body["ingest"])
-    pprint(get_processing_status_by_process_id_response.headers)
-    pprint(get_processing_status_by_process_id_response.status)
-    pprint(get_processing_status_by_process_id_response.round_trip_time)
+    pprint(get_processing_status_by_id_response.body)
+    pprint(get_processing_status_by_id_response.body["ingest"])
+    pprint(get_processing_status_by_id_response.headers)
+    pprint(get_processing_status_by_id_response.status)
+    pprint(get_processing_status_by_id_response.round_trip_time)
 except ApiException as e:
-    print(
-        "Exception when calling DocumentApi.get_processing_status_by_process_id: %s\n"
-        % e
-    )
+    print("Exception when calling DocumentApi.get_processing_status_by_id: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)

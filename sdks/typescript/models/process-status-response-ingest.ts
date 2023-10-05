@@ -35,7 +35,7 @@ export interface ProcessStatusResponseIngest {
      * @type {string}
      * @memberof ProcessStatusResponseIngest
      */
-    'processId'?: string;
+    'processId': string;
     /**
      * 
      * @type {ProcessStatusResponseIngestProgress}
@@ -47,7 +47,7 @@ export interface ProcessStatusResponseIngest {
      * @type {string}
      * @memberof ProcessStatusResponseIngest
      */
-    'status'?: string;
+    'status': ProcessStatusResponseIngestStatusEnum;
     /**
      * 
      * @type {string}
@@ -55,4 +55,7 @@ export interface ProcessStatusResponseIngest {
      */
     'statusMessage'?: string;
 }
+
+type ProcessStatusResponseIngestStatusEnum = 'queued' | 'processing' | 'error' | 'complete'
+
 

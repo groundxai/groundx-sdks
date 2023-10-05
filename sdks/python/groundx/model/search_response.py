@@ -33,6 +33,9 @@ class SearchResponse(
 
 
     class MetaOapg:
+        required = {
+            "search",
+        }
         
         class properties:
         
@@ -42,6 +45,8 @@ class SearchResponse(
             __annotations__ = {
                 "search": search,
             }
+    
+    search: 'SearchResponseSearch'
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["search"]) -> 'SearchResponseSearch': ...
@@ -55,7 +60,7 @@ class SearchResponse(
     
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["search"]) -> typing.Union['SearchResponseSearch', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["search"]) -> 'SearchResponseSearch': ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
@@ -67,7 +72,7 @@ class SearchResponse(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        search: typing.Union['SearchResponseSearch', schemas.Unset] = schemas.unset,
+        search: 'SearchResponseSearch',
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
     ) -> 'SearchResponse':

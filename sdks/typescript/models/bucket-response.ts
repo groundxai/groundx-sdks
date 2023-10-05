@@ -26,6 +26,6 @@ export interface BucketResponse {
      * @type {BucketDetail}
      * @memberof BucketResponse
      */
-    'bucket'?: BucketDetail;
+    'bucket': BucketDetail;
 }
 

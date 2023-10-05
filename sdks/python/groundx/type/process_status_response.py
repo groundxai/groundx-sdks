@@ -24,10 +24,10 @@ from groundx.type.process_status_response_ingest_progress_errors import ProcessS
 from groundx.type.process_status_response_ingest_progress_processing import ProcessStatusResponseIngestProgressProcessing
 
 class RequiredProcessStatusResponse(TypedDict):
-    pass
+    ingest: ProcessStatusResponseIngest
 
 class OptionalProcessStatusResponse(TypedDict, total=False):
-    ingest: ProcessStatusResponseIngest
+    pass
 
 class ProcessStatusResponse(RequiredProcessStatusResponse, OptionalProcessStatusResponse):
     pass

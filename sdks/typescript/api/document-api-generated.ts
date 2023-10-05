@@ -149,9 +149,9 @@ export const DocumentApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getProcessingStatusByProcessId: async (processId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getProcessingStatusById: async (processId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'processId' is not null or undefined
-            assertParamExists('getProcessingStatusByProcessId', 'processId', processId)
+            assertParamExists('getProcessingStatusById', 'processId', processId)
             const localVarPath = `/v1/ingest/{processId}`
                 .replace(`{${"processId"}}`, encodeURIComponent(String(processId !== undefined ? processId : `-processId-`)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -408,12 +408,12 @@ export const DocumentApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Look up document processing status by processId
-         * @param {DocumentApiGetProcessingStatusByProcessIdRequest} requestParameters Request parameters.
+         * @param {DocumentApiGetProcessingStatusByIdRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getProcessingStatusByProcessId(requestParameters: DocumentApiGetProcessingStatusByProcessIdRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProcessStatusResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getProcessingStatusByProcessId(requestParameters.processId, options);
+        async getProcessingStatusById(requestParameters: DocumentApiGetProcessingStatusByIdRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProcessStatusResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getProcessingStatusById(requestParameters.processId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -492,12 +492,12 @@ export const DocumentApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Look up document processing status by processId
-         * @param {DocumentApiGetProcessingStatusByProcessIdRequest} requestParameters Request parameters.
+         * @param {DocumentApiGetProcessingStatusByIdRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getProcessingStatusByProcessId(requestParameters: DocumentApiGetProcessingStatusByProcessIdRequest, options?: AxiosRequestConfig): AxiosPromise<ProcessStatusResponse> {
-            return localVarFp.getProcessingStatusByProcessId(requestParameters, options).then((request) => request(axios, basePath));
+        getProcessingStatusById(requestParameters: DocumentApiGetProcessingStatusByIdRequest, options?: AxiosRequestConfig): AxiosPromise<ProcessStatusResponse> {
+            return localVarFp.getProcessingStatusById(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -574,16 +574,16 @@ export type DocumentApiGetRequest = {
 }
 
 /**
- * Request parameters for getProcessingStatusByProcessId operation in DocumentApi.
+ * Request parameters for getProcessingStatusById operation in DocumentApi.
  * @export
- * @interface DocumentApiGetProcessingStatusByProcessIdRequest
+ * @interface DocumentApiGetProcessingStatusByIdRequest
  */
-export type DocumentApiGetProcessingStatusByProcessIdRequest = {
+export type DocumentApiGetProcessingStatusByIdRequest = {
     
     /**
     * 
     * @type {string}
-    * @memberof DocumentApiGetProcessingStatusByProcessId
+    * @memberof DocumentApiGetProcessingStatusById
     */
     readonly processId: string
     
@@ -671,13 +671,13 @@ export class DocumentApiGenerated extends BaseAPI {
     /**
      * 
      * @summary Look up document processing status by processId
-     * @param {DocumentApiGetProcessingStatusByProcessIdRequest} requestParameters Request parameters.
+     * @param {DocumentApiGetProcessingStatusByIdRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DocumentApiGenerated
      */
-    public getProcessingStatusByProcessId(requestParameters: DocumentApiGetProcessingStatusByProcessIdRequest, options?: AxiosRequestConfig) {
-        return DocumentApiFp(this.configuration).getProcessingStatusByProcessId(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    public getProcessingStatusById(requestParameters: DocumentApiGetProcessingStatusByIdRequest, options?: AxiosRequestConfig) {
+        return DocumentApiFp(this.configuration).getProcessingStatusById(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

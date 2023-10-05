@@ -497,7 +497,7 @@ paths:
       tags:
         - Document
       summary: Look up document processing status by processId
-      operationId: Document_getProcessingStatusByProcessId
+      operationId: Document_getProcessingStatusById
       parameters:
         - name: processId
           in: path
@@ -674,6 +674,8 @@ components:
               example: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
     SearchResponse:
       type: object
+      required:
+        - search
       properties:
         search:
           type: object
@@ -872,6 +874,8 @@ components:
           type: string
     BucketResponse:
       type: object
+      required:
+        - bucket
       properties:
         bucket:
           $ref: '#/components/schemas/BucketDetail'
@@ -1030,9 +1034,14 @@ components:
               example: https://my.callback.url.com
     IngestResponse:
       type: object
+      required:
+        - ingest
       properties:
         ingest:
           type: object
+          required:
+            - processId
+            - status
           properties:
             processId:
               type: string
@@ -1040,9 +1049,14 @@ components:
               type: string
     ProcessStatusResponse:
       type: object
+      required:
+        - ingest
       properties:
         ingest:
           type: object
+          required:
+            - processId
+            - status
           properties:
             processId:
               type: string
@@ -1078,6 +1092,11 @@ components:
                       type: integer
             status:
               type: string
+              enum:
+                - queued
+                - processing
+                - error
+                - complete
             statusMessage:
               type: string
     InventorySearchResponse:

@@ -23,12 +23,12 @@ export interface IngestResponseIngest {
      * @type {string}
      * @memberof IngestResponseIngest
      */
-    'processId'?: string;
+    'processId': string;
     /**
      * 
      * @type {string}
      * @memberof IngestResponseIngest
      */
-    'status'?: string;
+    'status': string;
 }
 

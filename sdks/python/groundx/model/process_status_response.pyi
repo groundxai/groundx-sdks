@@ -33,6 +33,9 @@ class ProcessStatusResponse(
 
 
     class MetaOapg:
+        required = {
+            "ingest",
+        }
         
         class properties:
         
@@ -42,6 +45,8 @@ class ProcessStatusResponse(
             __annotations__ = {
                 "ingest": ingest,
             }
+    
+    ingest: 'ProcessStatusResponseIngest'
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["ingest"]) -> 'ProcessStatusResponseIngest': ...
@@ -55,7 +60,7 @@ class ProcessStatusResponse(
     
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["ingest"]) -> typing.Union['ProcessStatusResponseIngest', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["ingest"]) -> 'ProcessStatusResponseIngest': ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
@@ -67,7 +72,7 @@ class ProcessStatusResponse(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        ingest: typing.Union['ProcessStatusResponseIngest', schemas.Unset] = schemas.unset,
+        ingest: 'ProcessStatusResponseIngest',
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
     ) -> 'ProcessStatusResponse':

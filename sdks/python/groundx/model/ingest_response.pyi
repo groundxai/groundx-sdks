@@ -33,6 +33,9 @@ class IngestResponse(
 
 
     class MetaOapg:
+        required = {
+            "ingest",
+        }
         
         class properties:
         
@@ -42,6 +45,8 @@ class IngestResponse(
             __annotations__ = {
                 "ingest": ingest,
             }
+    
+    ingest: 'IngestResponseIngest'
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["ingest"]) -> 'IngestResponseIngest': ...
@@ -55,7 +60,7 @@ class IngestResponse(
     
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["ingest"]) -> typing.Union['IngestResponseIngest', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["ingest"]) -> 'IngestResponseIngest': ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
@@ -67,7 +72,7 @@ class IngestResponse(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        ingest: typing.Union['IngestResponseIngest', schemas.Unset] = schemas.unset,
+        ingest: 'IngestResponseIngest',
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
     ) -> 'IngestResponse':

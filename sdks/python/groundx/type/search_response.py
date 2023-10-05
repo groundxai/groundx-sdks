@@ -19,10 +19,10 @@ from groundx.type.search_response_search import SearchResponseSearch
 from groundx.type.search_result_item import SearchResultItem
 
 class RequiredSearchResponse(TypedDict):
-    pass
+    search: SearchResponseSearch
 
 class OptionalSearchResponse(TypedDict, total=False):
-    search: SearchResponseSearch
+    pass
 
 class SearchResponse(RequiredSearchResponse, OptionalSearchResponse):
     pass

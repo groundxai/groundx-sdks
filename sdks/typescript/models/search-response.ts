@@ -29,6 +29,6 @@ export interface SearchResponse {
      * @type {SearchResponseSearch}
      * @memberof SearchResponse
      */
-    'search'?: SearchResponseSearch;
+    'search': SearchResponseSearch;
 }
 

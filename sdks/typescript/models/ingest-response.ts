@@ -26,6 +26,6 @@ export interface IngestResponse {
      * @type {IngestResponseIngest}
      * @memberof IngestResponse
      */
-    'ingest'?: IngestResponseIngest;
+    'ingest': IngestResponseIngest;
 }
 

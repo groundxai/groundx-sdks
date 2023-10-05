@@ -120,7 +120,7 @@ _all_accept_content_types = (
 
 class BaseApi(api_client.Api):
 
-    def _get_processing_status_by_process_id_mapped_args(
+    def _get_processing_status_by_id_mapped_args(
         self,
         process_id: str,
     ) -> api_client.MappedArgs:
@@ -131,7 +131,7 @@ class BaseApi(api_client.Api):
         args.path = _path_params
         return args
 
-    async def _aget_processing_status_by_process_id_oapg(
+    async def _aget_processing_status_by_id_oapg(
         self,
             path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
@@ -241,7 +241,7 @@ class BaseApi(api_client.Api):
         return api_response
 
 
-    def _get_processing_status_by_process_id_oapg(
+    def _get_processing_status_by_id_oapg(
         self,
             path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
@@ -320,10 +320,10 @@ class BaseApi(api_client.Api):
         return api_response
 
 
-class GetProcessingStatusByProcessId(BaseApi):
+class GetProcessingStatusById(BaseApi):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
-    async def aget_processing_status_by_process_id(
+    async def aget_processing_status_by_id(
         self,
         process_id: str,
     ) -> typing.Union[
@@ -331,24 +331,24 @@ class GetProcessingStatusByProcessId(BaseApi):
         api_client.ApiResponseWithoutDeserializationAsync,
         AsyncGeneratorResponse,
     ]:
-        args = self._get_processing_status_by_process_id_mapped_args(
+        args = self._get_processing_status_by_id_mapped_args(
             process_id=process_id,
         )
-        return await self._aget_processing_status_by_process_id_oapg(
+        return await self._aget_processing_status_by_id_oapg(
             path_params=args.path,
         )
     
-    def get_processing_status_by_process_id(
+    def get_processing_status_by_id(
         self,
         process_id: str,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        args = self._get_processing_status_by_process_id_mapped_args(
+        args = self._get_processing_status_by_id_mapped_args(
             process_id=process_id,
         )
-        return self._get_processing_status_by_process_id_oapg(
+        return self._get_processing_status_by_id_oapg(
             path_params=args.path,
         )
 
@@ -363,10 +363,10 @@ class ApiForget(BaseApi):
         api_client.ApiResponseWithoutDeserializationAsync,
         AsyncGeneratorResponse,
     ]:
-        args = self._get_processing_status_by_process_id_mapped_args(
+        args = self._get_processing_status_by_id_mapped_args(
             process_id=process_id,
         )
-        return await self._aget_processing_status_by_process_id_oapg(
+        return await self._aget_processing_status_by_id_oapg(
             path_params=args.path,
         )
     
@@ -377,10 +377,10 @@ class ApiForget(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        args = self._get_processing_status_by_process_id_mapped_args(
+        args = self._get_processing_status_by_id_mapped_args(
             process_id=process_id,
         )
-        return self._get_processing_status_by_process_id_oapg(
+        return self._get_processing_status_by_id_oapg(
             path_params=args.path,
         )
 

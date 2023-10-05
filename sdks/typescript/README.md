@@ -50,7 +50,7 @@ Tag | Method | HTTP request | Description
 *Bucket* | [**update**](docs/BucketApi.md#update) | **PUT** /v1/bucket/{bucketId} | Update an existing bucket
 *Document* | [**delete**](docs/DocumentApi.md#delete) | **DELETE** /v1/ingest/document/{documentId} | Delete documents
 *Document* | [**get**](docs/DocumentApi.md#get) | **GET** /v1/ingest/document/{documentId} | Look up an existing document
-*Document* | [**getProcessingStatusByProcessId**](docs/DocumentApi.md#getProcessingStatusByProcessId) | **GET** /v1/ingest/{processId} | Look up document processing status by processId
+*Document* | [**getProcessingStatusById**](docs/DocumentApi.md#getProcessingStatusById) | **GET** /v1/ingest/{processId} | Look up document processing status by processId
 *Document* | [**list**](docs/DocumentApi.md#list) | **GET** /v1/ingest/documents | Look up all existing documents
 *Document* | [**lookup**](docs/DocumentApi.md#lookup) | **GET** /v1/ingest/documents/{id} | Look up existing documents by processId, bucketId, or projectId
 *Document* | [**uploadLocal**](docs/DocumentApi.md#uploadLocal) | **POST** /v1/ingest/documents/local | Upload local documents to GroundX

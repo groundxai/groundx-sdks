@@ -38,6 +38,6 @@ export interface ProcessStatusResponse {
      * @type {ProcessStatusResponseIngest}
      * @memberof ProcessStatusResponse
      */
-    'ingest'?: ProcessStatusResponseIngest;
+    'ingest': ProcessStatusResponseIngest;
 }
 

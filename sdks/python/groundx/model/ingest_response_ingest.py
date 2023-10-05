@@ -33,6 +33,10 @@ class IngestResponseIngest(
 
 
     class MetaOapg:
+        required = {
+            "processId",
+            "status",
+        }
         
         class properties:
             processId = schemas.StrSchema
@@ -41,6 +45,9 @@ class IngestResponseIngest(
                 "processId": processId,
                 "status": status,
             }
+    
+    processId: MetaOapg.properties.processId
+    status: MetaOapg.properties.status
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["processId"]) -> MetaOapg.properties.processId: ...
@@ -57,10 +64,10 @@ class IngestResponseIngest(
     
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["processId"]) -> typing.Union[MetaOapg.properties.processId, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["processId"]) -> MetaOapg.properties.processId: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["status"]) -> typing.Union[MetaOapg.properties.status, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["status"]) -> MetaOapg.properties.status: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
@@ -72,8 +79,8 @@ class IngestResponseIngest(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        processId: typing.Union[MetaOapg.properties.processId, str, schemas.Unset] = schemas.unset,
-        status: typing.Union[MetaOapg.properties.status, str, schemas.Unset] = schemas.unset,
+        processId: typing.Union[MetaOapg.properties.processId, str, ],
+        status: typing.Union[MetaOapg.properties.status, str, ],
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
     ) -> 'IngestResponseIngest':
