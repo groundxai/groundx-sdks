@@ -1,4 +1,4 @@
-# DocumentApi
+# Groundx.document
 
 All URIs are relative to *https://api.groundx.ai/api*
 
@@ -15,11 +15,8 @@ Method | HTTP request | Description
 
 # **delete**
 
-#### **DELETE** /v1/ingest/document/{documentId}
-
 
 ### Example
-
 
 ```typescript
 import { Groundx } from "groundx-typescript-sdk";
@@ -36,7 +33,6 @@ const deleteResponse = await groundx.document.delete({
 
 console.log(deleteResponse);
 ```
-
 
 ### Parameters
 
@@ -60,11 +56,8 @@ Name | Type | Description  | Notes
 
 # **get**
 
-#### **GET** /v1/ingest/document/{documentId}
-
 
 ### Example
-
 
 ```typescript
 import { Groundx } from "groundx-typescript-sdk";
@@ -81,7 +74,6 @@ const getResponse = await groundx.document.get({
 
 console.log(getResponse);
 ```
-
 
 ### Parameters
 
@@ -105,11 +97,8 @@ Name | Type | Description  | Notes
 
 # **getProcessingStatusByProcessId**
 
-#### **GET** /v1/ingest/{processId}
-
 
 ### Example
-
 
 ```typescript
 import { Groundx } from "groundx-typescript-sdk";
@@ -127,7 +116,6 @@ const getProcessingStatusByProcessIdResponse =
 
 console.log(getProcessingStatusByProcessIdResponse);
 ```
-
 
 ### Parameters
 
@@ -150,11 +138,8 @@ Name | Type | Description  | Notes
 
 # **list**
 
-#### **GET** /v1/ingest/documents
-
 
 ### Example
-
 
 ```typescript
 import { Groundx } from "groundx-typescript-sdk";
@@ -169,7 +154,6 @@ const listResponse = await groundx.document.list();
 
 console.log(listResponse);
 ```
-
 
 ### Parameters
 
@@ -190,11 +174,8 @@ This endpoint does not need any parameter.
 
 # **lookup**
 
-#### **GET** /v1/ingest/documents/{id}
-
 
 ### Example
-
 
 ```typescript
 import { Groundx } from "groundx-typescript-sdk";
@@ -211,7 +192,6 @@ const lookupResponse = await groundx.document.lookup({
 
 console.log(lookupResponse);
 ```
-
 
 ### Parameters
 
@@ -234,11 +214,8 @@ Name | Type | Description  | Notes
 
 # **uploadLocal**
 
-#### **POST** /v1/ingest/documents/local
-
 
 ### Example
-
 
 ```typescript
 import { Groundx } from "groundx-typescript-sdk";
@@ -255,7 +232,6 @@ const uploadLocalResponse = await groundx.document.uploadLocal({
 
 console.log(uploadLocalResponse);
 ```
-
 
 ### Parameters
 
@@ -285,11 +261,8 @@ Name | Type | Description  | Notes
 
 # **uploadRemote**
 
-#### **POST** /v1/ingest/documents/remote
-
 
 ### Example
-
 
 ```typescript
 import { Groundx } from "groundx-typescript-sdk";
@@ -306,7 +279,6 @@ const uploadRemoteResponse = await groundx.document.uploadRemote({
 
 console.log(uploadRemoteResponse);
 ```
-
 
 ### Parameters
 

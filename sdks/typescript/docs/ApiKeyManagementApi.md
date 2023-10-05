@@ -1,4 +1,4 @@
-# ApiKeyManagementApi
+# Groundx.apiKeyManagement
 
 All URIs are relative to *https://api.groundx.ai/api*
 
@@ -9,13 +9,9 @@ Method | HTTP request | Description
 
 # **list**
 
-#### **GET** /v1/apikey
-
-### Description
 Retrieve the API keys for the authenticated user.
 
 ### Example
-
 
 ```typescript
 import { Groundx } from "groundx-typescript-sdk";
@@ -30,7 +26,6 @@ const listResponse = await groundx.apiKeyManagement.list();
 
 console.log(listResponse);
 ```
-
 
 ### Parameters
 

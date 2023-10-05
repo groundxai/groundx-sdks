@@ -1,4 +1,4 @@
-# PreprocessorApi
+# Groundx.preprocessor
 
 All URIs are relative to *https://api.groundx.ai/api*
 
@@ -11,13 +11,9 @@ Method | HTTP request | Description
 
 # **delete**
 
-#### **DELETE** /v1/preprocess
-
-### Description
 Deletes existing custom pre-processors that you own or manage.
 
 ### Example
-
 
 ```typescript
 import { Groundx } from "groundx-typescript-sdk";
@@ -32,7 +28,6 @@ const deleteResponse = await groundx.preprocessor.delete({});
 
 console.log(deleteResponse);
 ```
-
 
 ### Parameters
 
@@ -56,13 +51,9 @@ void (empty response body)
 
 # **list**
 
-#### **GET** /v1/preprocess
-
-### Description
 Look up existing pre-processors your account has access to, including those you have created yourself.
 
 ### Example
-
 
 ```typescript
 import { Groundx } from "groundx-typescript-sdk";
@@ -79,7 +70,6 @@ const listResponse = await groundx.preprocessor.list({
 
 console.log(listResponse);
 ```
-
 
 ### Parameters
 
@@ -103,13 +93,9 @@ Name | Type | Description  | Notes
 
 # **setup**
 
-#### **POST** /v1/preprocess
-
-### Description
 Initializes a custom pre-processor that can be applied to your content and search queries.
 
 ### Example
-
 
 ```typescript
 import { Groundx } from "groundx-typescript-sdk";
@@ -124,7 +110,6 @@ const setupResponse = await groundx.preprocessor.setup({});
 
 console.log(setupResponse);
 ```
-
 
 ### Parameters
 

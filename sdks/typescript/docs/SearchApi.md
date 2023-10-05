@@ -1,4 +1,4 @@
-# SearchApi
+# Groundx.search
 
 All URIs are relative to *https://api.groundx.ai/api*
 
@@ -9,13 +9,9 @@ Method | HTTP request | Description
 
 # **content**
 
-#### **POST** /v1/search/{projectId}
-
-### Description
 Search and retrieve relevant content from a project with projectId.
 
 ### Example
-
 
 ```typescript
 import { Groundx } from "groundx-typescript-sdk";
@@ -33,7 +29,6 @@ const contentResponse = await groundx.search.content({
 
 console.log(contentResponse);
 ```
-
 
 ### Parameters
 

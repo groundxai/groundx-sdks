@@ -1,4 +1,4 @@
-# InventoryApi
+# Groundx.inventory
 
 All URIs are relative to *https://api.groundx.ai/api*
 
@@ -10,13 +10,9 @@ Method | HTTP request | Description
 
 # **add**
 
-#### **POST** /v1/inventory
-
-### Description
 Adds an item to the system
 
 ### Example
-
 
 ```typescript
 import { Groundx } from "groundx-typescript-sdk";
@@ -41,7 +37,6 @@ const addResponse = await groundx.inventory.add({
 console.log(addResponse);
 ```
 
-
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -64,15 +59,11 @@ void (empty response body)
 
 # **search**
 
-#### **GET** /v1/inventory
-
-### Description
 By passing in the appropriate options, you can search for
 available inventory in the system
 
 
 ### Example
-
 
 ```typescript
 import { Groundx } from "groundx-typescript-sdk";
@@ -87,7 +78,6 @@ const searchResponse = await groundx.inventory.search({});
 
 console.log(searchResponse);
 ```
-
 
 ### Parameters
 

@@ -1,4 +1,4 @@
-# BucketApi
+# Groundx.bucket
 
 All URIs are relative to *https://api.groundx.ai/api*
 
@@ -13,13 +13,9 @@ Method | HTTP request | Description
 
 # **create**
 
-#### **POST** /v1/bucket
-
-### Description
 Create a new bucket for your content.
 
 ### Example
-
 
 ```typescript
 import { Groundx } from "groundx-typescript-sdk";
@@ -34,7 +30,6 @@ const createResponse = await groundx.bucket.create({});
 
 console.log(createResponse);
 ```
-
 
 ### Parameters
 
@@ -58,13 +53,9 @@ Name | Type | Description  | Notes
 
 # **delete**
 
-#### **DELETE** /v1/bucket/{bucketId}
-
-### Description
 Deletes a bucket by bucketId.
 
 ### Example
-
 
 ```typescript
 import { Groundx } from "groundx-typescript-sdk";
@@ -81,7 +72,6 @@ const deleteResponse = await groundx.bucket.delete({
 
 console.log(deleteResponse);
 ```
-
 
 ### Parameters
 
@@ -105,13 +95,9 @@ Name | Type | Description  | Notes
 
 # **get**
 
-#### **GET** /v1/bucket/{bucketId}
-
-### Description
 Look up a bucket by its bucketId.
 
 ### Example
-
 
 ```typescript
 import { Groundx } from "groundx-typescript-sdk";
@@ -128,7 +114,6 @@ const getResponse = await groundx.bucket.get({
 
 console.log(getResponse);
 ```
-
 
 ### Parameters
 
@@ -152,13 +137,9 @@ Name | Type | Description  | Notes
 
 # **list**
 
-#### **GET** /v1/bucket
-
-### Description
 Look up existing buckets associated with your account.
 
 ### Example
-
 
 ```typescript
 import { Groundx } from "groundx-typescript-sdk";
@@ -173,7 +154,6 @@ const listResponse = await groundx.bucket.list();
 
 console.log(listResponse);
 ```
-
 
 ### Parameters
 
@@ -194,13 +174,9 @@ This endpoint does not need any parameter.
 
 # **update**
 
-#### **PUT** /v1/bucket/{bucketId}
-
-### Description
 Update the configurations of an existing bucket.
 
 ### Example
-
 
 ```typescript
 import { Groundx } from "groundx-typescript-sdk";
@@ -217,7 +193,6 @@ const updateResponse = await groundx.bucket.update({
 
 console.log(updateResponse);
 ```
-
 
 ### Parameters
 

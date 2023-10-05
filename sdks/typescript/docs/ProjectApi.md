@@ -1,4 +1,4 @@
-# ProjectApi
+# Groundx.project
 
 All URIs are relative to *https://api.groundx.ai/api*
 
@@ -14,13 +14,9 @@ Method | HTTP request | Description
 
 # **bindBucket**
 
-#### **POST** /v1/project/{projectId}
-
-### Description
 Bind a specific bucket to a project.
 
 ### Example
-
 
 ```typescript
 import { Groundx } from "groundx-typescript-sdk";
@@ -40,7 +36,6 @@ const bindBucketResponse = await groundx.project.bindBucket({
 
 console.log(bindBucketResponse);
 ```
-
 
 ### Parameters
 
@@ -66,13 +61,9 @@ Name | Type | Description  | Notes
 
 # **create**
 
-#### **POST** /v1/project
-
-### Description
 This endpoint allows you to initialize a new project.
 
 ### Example
-
 
 ```typescript
 import { Groundx } from "groundx-typescript-sdk";
@@ -87,7 +78,6 @@ const createResponse = await groundx.project.create({});
 
 console.log(createResponse);
 ```
-
 
 ### Parameters
 
@@ -109,13 +99,9 @@ Name | Type | Description  | Notes
 
 # **delete**
 
-#### **DELETE** /v1/project/{projectId}
-
-### Description
 This endpoint allows you to delete your existing projects.
 
 ### Example
-
 
 ```typescript
 import { Groundx } from "groundx-typescript-sdk";
@@ -132,7 +118,6 @@ const deleteResponse = await groundx.project.delete({
 
 console.log(deleteResponse);
 ```
-
 
 ### Parameters
 
@@ -154,13 +139,9 @@ Name | Type | Description  | Notes
 
 # **get**
 
-#### **GET** /v1/project/{projectId}
-
-### Description
 This endpoint allows you to retrieve a specific project by projectId.
 
 ### Example
-
 
 ```typescript
 import { Groundx } from "groundx-typescript-sdk";
@@ -177,7 +158,6 @@ const getResponse = await groundx.project.get({
 
 console.log(getResponse);
 ```
-
 
 ### Parameters
 
@@ -199,13 +179,9 @@ Name | Type | Description  | Notes
 
 # **list**
 
-#### **GET** /v1/project
-
-### Description
 This endpoint allows you to retrieve your existing projects.
 
 ### Example
-
 
 ```typescript
 import { Groundx } from "groundx-typescript-sdk";
@@ -220,7 +196,6 @@ const listResponse = await groundx.project.list();
 
 console.log(listResponse);
 ```
-
 
 ### Parameters
 
@@ -240,13 +215,9 @@ This endpoint does not need any parameter.
 
 # **update**
 
-#### **PUT** /v1/project/{projectId}
-
-### Description
 This endpoint allows you to update an existing project.
 
 ### Example
-
 
 ```typescript
 import { Groundx } from "groundx-typescript-sdk";
@@ -263,7 +234,6 @@ const updateResponse = await groundx.project.update({
 
 console.log(updateResponse);
 ```
-
 
 ### Parameters
 
