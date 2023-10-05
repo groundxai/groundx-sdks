@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestV1ProjectProjectId(ApiTestMixin, unittest.TestCase):
     """
     V1ProjectProjectId unit test stubs
-        Look up an existing project
+        Look up an existing project by its ID
     """
 
     def setUp(self):

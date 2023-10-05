@@ -33,6 +33,9 @@ class SearchRequestSearch(
 
 
     class MetaOapg:
+        required = {
+            "query",
+        }
         
         class properties:
             query = schemas.StrSchema
@@ -41,6 +44,8 @@ class SearchRequestSearch(
                 "query": query,
                 "nextToken": nextToken,
             }
+    
+    query: MetaOapg.properties.query
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["query"]) -> MetaOapg.properties.query: ...
@@ -57,7 +62,7 @@ class SearchRequestSearch(
     
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["query"]) -> typing.Union[MetaOapg.properties.query, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["query"]) -> MetaOapg.properties.query: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["nextToken"]) -> typing.Union[MetaOapg.properties.nextToken, schemas.Unset]: ...
@@ -72,7 +77,7 @@ class SearchRequestSearch(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        query: typing.Union[MetaOapg.properties.query, str, schemas.Unset] = schemas.unset,
+        query: typing.Union[MetaOapg.properties.query, str, ],
         nextToken: typing.Union[MetaOapg.properties.nextToken, str, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],

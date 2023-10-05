@@ -12,20 +12,19 @@ servers:
   - description: GroundX Base URL
     url: https://api.groundx.ai/api
 tags:
-  - name: Document
-  - name: Project
-  - name: Bucket
-  - name: Preprocessor
+  - name: Documents
+  - name: Projects
+  - name: Buckets
   - name: Search
-  - name: API Key Management
+  - name: API Keys
 paths:
   /v1/apikey:
     get:
       tags:
-        - API Key Management
+        - API Keys
       summary: Get API keys
       operationId: ApiKeyManagement_list
-      description: Retrieve the API keys for the authenticated user.
+      description: Retrieve the API keys for your account.
       responses:
         '200':
           description: Successful retrieval of API keys
@@ -44,56 +43,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiKeyManagementList405Response'
   /v1/project/{projectId}:
-    post:
-      tags:
-        - Project
-      summary: Add an existing bucket to a project
-      operationId: Project_bindBucket
-      description: Adds the specified bucket to a project.
-      parameters:
-        - description: The ID of the project to add the bucket to.
-          name: projectId
-          in: path
-          required: true
-          schema:
-            type: integer
-      requestBody:
-        description: The bucket ID to add to the project.
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ProjectBucketBinding'
-      responses:
-        '200':
-          description: Bucket was successfully added to the project.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProjectBindBucketResponse'
-        '400':
-          description: Invalid request data.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProjectBindBucket400Response'
-              examples:
-                example-0:
-                  summary: Negative_Bound non-existent bucket
-                  value:
-                    message: You do not have access to a bucket with this bucketId
-                example-1:
-                  summary: Negative_Bound to projectID of another user
-                  value:
-                    message: You do not have access to a project with this projectID
-        '401':
-          description: Unauthorized.
-        '403':
-          description: Forbidden.
     get:
       tags:
-        - Project
-      summary: Look up an existing project
+        - Projects
+      summary: Look up an existing project by its ID
       operationId: Project_get
       description: This endpoint allows you to retrieve a specific project by projectId.
       parameters:
@@ -112,7 +65,7 @@ paths:
                 $ref: '#/components/schemas/ProjectResponse'
     put:
       tags:
-        - Project
+        - Projects
       summary: Update an existing project
       operationId: Project_update
       description: This endpoint allows you to update an existing project.
@@ -136,30 +89,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProjectResponse'
-    delete:
-      tags:
-        - Project
-      summary: Delete an existing project
-      operationId: Project_delete
-      description: This endpoint allows you to delete your existing projects.
-      parameters:
-        - description: The ID of the project to delete.
-          in: path
-          name: projectId
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful deletion of project
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProjectDeleteResponse'
   /v1/project:
     get:
       tags:
-        - Project
+        - Projects
       summary: Look up existing projects
       operationId: Project_list
       description: This endpoint allows you to retrieve your existing projects.
@@ -170,30 +103,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProjectListResponse'
-    post:
-      tags:
-        - Project
-      summary: Create a project
-      operationId: Project_create
-      description: This endpoint allows you to initialize a new project.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ProjectCreateRequest'
-      responses:
-        '200':
-          description: Successful creation of project
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProjectResponse'
   /v1/bucket/{bucketId}:
     get:
       tags:
-        - Bucket
-      summary: Look up an existing bucket
+        - Buckets
+      summary: Look up an existing bucket by its ID
       operationId: Bucket_get
       description: Look up a bucket by its bucketId.
       parameters:
@@ -216,7 +130,7 @@ paths:
           description: Permission denied
     put:
       tags:
-        - Bucket
+        - Buckets
       summary: Update an existing bucket
       operationId: Bucket_update
       description: Update the configurations of an existing bucket.
@@ -244,34 +158,10 @@ paths:
           description: Invalid body parameter
         '401':
           description: Permission denied
-    delete:
-      tags:
-        - Bucket
-      summary: Delete an existing bucket
-      operationId: Bucket_delete
-      description: Deletes a bucket by bucketId.
-      parameters:
-        - description: The ID of the bucket to delete.
-          in: path
-          name: bucketId
-          required: true
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Bucket successfully deleted
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BucketDeleteResponse'
-        '400':
-          description: Invalid bucket ID
-        '401':
-          description: Permission denied
   /v1/bucket:
     get:
       tags:
-        - Bucket
+        - Buckets
       summary: Look up existing buckets
       operationId: Bucket_list
       description: Look up existing buckets associated with your account.
@@ -284,34 +174,11 @@ paths:
                 $ref: '#/components/schemas/BucketListResponse'
         '401':
           description: Permission denied
-    post:
-      tags:
-        - Bucket
-      summary: Create a bucket
-      operationId: Bucket_create
-      description: Create a new bucket for your content.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/BucketCreateRequest'
-      responses:
-        '200':
-          description: Bucket successfully created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BucketResponse'
-        '400':
-          description: Invalid body parameter
-        '401':
-          description: Permission denied
   /v1/ingest/document/{documentId}:
     get:
       tags:
-        - Document
-      summary: Look up an existing document
+        - Documents
+      summary: Look up an existing document by its ID
       operationId: Document_get
       parameters:
         - name: documentId
@@ -332,8 +199,8 @@ paths:
           description: Permission denied
     delete:
       tags:
-        - Document
-      summary: Delete documents
+        - Documents
+      summary: Delete a document
       operationId: Document_delete
       parameters:
         - name: documentId
@@ -343,7 +210,7 @@ paths:
             type: string
       responses:
         '200':
-          description: Documents successfully deleted
+          description: Document successfully deleted
           content:
             application/json:
               schema:
@@ -355,7 +222,7 @@ paths:
   /v1/ingest/documents/remote:
     post:
       tags:
-        - Document
+        - Documents
       summary: Upload hosted documents to GroundX
       operationId: Document_uploadRemote
       requestBody:
@@ -377,7 +244,7 @@ paths:
   /v1/ingest/documents/local:
     post:
       tags:
-        - Document
+        - Documents
       summary: Upload local documents to GroundX
       operationId: Document_uploadLocal
       requestBody:
@@ -399,7 +266,7 @@ paths:
   /v1/ingest/documents:
     get:
       tags:
-        - Document
+        - Documents
       summary: Look up all existing documents
       operationId: Document_list
       responses:
@@ -414,7 +281,7 @@ paths:
   /v1/ingest/documents/{id}:
     get:
       tags:
-        - Document
+        - Documents
       summary: Look up existing documents by processId, bucketId, or projectId
       operationId: Document_lookup
       parameters:
@@ -435,8 +302,8 @@ paths:
   /v1/ingest/{processId}:
     get:
       tags:
-        - Document
-      summary: Look up document processing status by processId
+        - Documents
+      summary: Look up the processing status of documents for a given processId
       operationId: Document_getProcessingStatusById
       parameters:
         - name: processId
@@ -451,82 +318,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProcessStatusResponse'
-        '401':
-          description: Permission denied
-  /v1/preprocess:
-    post:
-      tags:
-        - Preprocessor
-      summary: Setup Custom Pre-Processor
-      operationId: Preprocessor_setup
-      description: >-
-        Initializes a custom pre-processor that can be applied to your content
-        and search queries.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PreprocessorSetupRequest'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/PreprocessorSetupRequest'
-      responses:
-        '200':
-          description: Pre-processor successfully setup
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PreprocessorSetupResponse'
-        '400':
-          description: Invalid script
-        '401':
-          description: Permission denied
-    delete:
-      tags:
-        - Preprocessor
-      summary: Delete Custom Pre-Processor
-      operationId: Preprocessor_delete
-      description: Deletes existing custom pre-processors that you own or manage.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PreprocessorDeleteRequest'
-      responses:
-        '200':
-          description: Pre-processor successfully deleted
-        '400':
-          description: Invalid script
-        '401':
-          description: Permission denied
-    get:
-      tags:
-        - Preprocessor
-      summary: Query pre-processors
-      operationId: Preprocessor_list
-      description: >-
-        Look up existing pre-processors your account has access to, including
-        those you have created yourself.
-      parameters:
-        - description: An array of preprocessor IDs
-          in: query
-          name: preprocess
-          required: true
-          schema:
-            type: array
-            items:
-              type: string
-      responses:
-        '200':
-          description: Look up success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PreprocessorResponse'
-        '400':
-          description: Invalid preprocessor_ids
         '401':
           description: Permission denied
   /v1/search/{id}:
@@ -609,6 +400,8 @@ components:
       properties:
         search:
           type: object
+          required:
+            - query
           properties:
             query:
               description: The search query
@@ -666,85 +459,6 @@ components:
         text:
           description: Text from result
           type: string
-    PreprocessorSetupRequest:
-      type: object
-      properties:
-        description:
-          description: A human readable description for your pre-processor
-          type: string
-        name:
-          description: A human readable name for your pre-processor
-          type: string
-        script:
-          description: An array of GroundedScript commands
-          type: array
-          items:
-            type: string
-    PreprocessorSetupResponse:
-      type: object
-      properties:
-        preprocess:
-          type: object
-          properties:
-            preprocessors:
-              type: array
-              items:
-                type: object
-                properties:
-                  id:
-                    description: preprocessor ID
-                    type: string
-    PreprocessorDeleteRequest:
-      type: object
-      properties:
-        preprocessors:
-          description: An array of preprocessor IDs
-          type: array
-          items:
-            type: string
-    PreprocessorResponse:
-      type: object
-      properties:
-        preprocess:
-          type: object
-          properties:
-            preprocessors:
-              type: array
-              items:
-                type: object
-                properties:
-                  id:
-                    description: preprocessor ID
-                    type: string
-                  status:
-                    type: string
-                    enum:
-                      - ok
-                      - error
-                      - warning
-                  status_message:
-                    description: human readable status description
-                    type: string
-                  type:
-                    type: string
-                    enum:
-                      - custom
-                      - standard
-                  script:
-                    type: array
-                    items:
-                      type: string
-    ProjectCreateRequest:
-      type: object
-      required:
-        - project
-      properties:
-        project:
-          type: object
-          properties:
-            name:
-              type: string
-              example: your_project_name
     ProjectResponse:
       type: object
       required:
@@ -795,17 +509,6 @@ components:
       properties:
         bucket:
           $ref: '#/components/schemas/BucketDetail'
-    BucketCreateRequest:
-      type: object
-      required:
-        - bucket
-      properties:
-        bucket:
-          type: object
-          properties:
-            name:
-              type: string
-              example: your_bucket_name
     BucketUpdateRequest:
       type: object
       required:
@@ -859,22 +562,6 @@ components:
     DocumentRemoteUploadRequest:
       type: object
       properties:
-        bucketId:
-          type: integer
-          example: 1234
-        sourceUrl:
-          type: string
-          example: https://my.source.url.com/file.txt
-        callbackData:
-          type: string
-          example: my_callback_data
-        callbackUrl:
-          type: string
-          example: https://my.callback.url.com
-        metadata:
-          type: object
-          example:
-            key: value
         type:
           $ref: '#/components/schemas/DocumentType'
         documents:
@@ -1015,11 +702,6 @@ components:
         - processing
         - error
         - complete
-    ProjectDeleteResponse:
-      type: object
-      properties:
-        message:
-          type: string
     ProjectListResponse:
       type: object
       properties:
@@ -1027,11 +709,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ProjectDetail'
-    BucketDeleteResponse:
-      type: object
-      properties:
-        message:
-          type: string
     BucketListResponse:
       type: object
       properties:

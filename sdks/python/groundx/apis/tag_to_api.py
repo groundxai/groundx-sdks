@@ -1,32 +1,29 @@
 import typing_extensions
 
 from groundx.apis.tags import TagValues
-from groundx.apis.tags.document_api import DocumentApi
-from groundx.apis.tags.project_api import ProjectApi
-from groundx.apis.tags.bucket_api import BucketApi
-from groundx.apis.tags.preprocessor_api import PreprocessorApi
+from groundx.apis.tags.documents_api import DocumentsApi
+from groundx.apis.tags.projects_api import ProjectsApi
+from groundx.apis.tags.buckets_api import BucketsApi
 from groundx.apis.tags.search_api import SearchApi
-from groundx.apis.tags.api_key_management_api import APIKeyManagementApi
+from groundx.apis.tags.api_keys_api import APIKeysApi
 
 TagToApi = typing_extensions.TypedDict(
     'TagToApi',
     {
-        TagValues.DOCUMENT: DocumentApi,
-        TagValues.PROJECT: ProjectApi,
-        TagValues.BUCKET: BucketApi,
-        TagValues.PREPROCESSOR: PreprocessorApi,
+        TagValues.DOCUMENTS: DocumentsApi,
+        TagValues.PROJECTS: ProjectsApi,
+        TagValues.BUCKETS: BucketsApi,
         TagValues.SEARCH: SearchApi,
-        TagValues.API_KEY_MANAGEMENT: APIKeyManagementApi,
+        TagValues.API_KEYS: APIKeysApi,
     }
 )
 
 tag_to_api = TagToApi(
     {
-        TagValues.DOCUMENT: DocumentApi,
-        TagValues.PROJECT: ProjectApi,
-        TagValues.BUCKET: BucketApi,
-        TagValues.PREPROCESSOR: PreprocessorApi,
+        TagValues.DOCUMENTS: DocumentsApi,
+        TagValues.PROJECTS: ProjectsApi,
+        TagValues.BUCKETS: BucketsApi,
         TagValues.SEARCH: SearchApi,
-        TagValues.API_KEY_MANAGEMENT: APIKeyManagementApi,
+        TagValues.API_KEYS: APIKeysApi,
     }
 )

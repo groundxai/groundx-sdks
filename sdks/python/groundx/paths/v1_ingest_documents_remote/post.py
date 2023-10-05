@@ -128,26 +128,11 @@ class BaseApi(api_client.Api):
 
     def _upload_remote_mapped_args(
         self,
-        bucket_id: typing.Optional[int] = None,
-        source_url: typing.Optional[str] = None,
-        callback_data: typing.Optional[str] = None,
-        callback_url: typing.Optional[str] = None,
-        metadata: typing.Optional[typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]] = None,
         type: typing.Optional[DocumentType] = None,
         documents: typing.Optional[DocumentRemoteUploadRequestDocuments] = None,
     ) -> api_client.MappedArgs:
         args: api_client.MappedArgs = api_client.MappedArgs()
         _body = {}
-        if bucket_id is not None:
-            _body["bucketId"] = bucket_id
-        if source_url is not None:
-            _body["sourceUrl"] = source_url
-        if callback_data is not None:
-            _body["callbackData"] = callback_data
-        if callback_url is not None:
-            _body["callbackUrl"] = callback_url
-        if metadata is not None:
-            _body["metadata"] = metadata
         if type is not None:
             _body["type"] = type
         if documents is not None:
@@ -351,11 +336,6 @@ class UploadRemote(BaseApi):
 
     async def aupload_remote(
         self,
-        bucket_id: typing.Optional[int] = None,
-        source_url: typing.Optional[str] = None,
-        callback_data: typing.Optional[str] = None,
-        callback_url: typing.Optional[str] = None,
-        metadata: typing.Optional[typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]] = None,
         type: typing.Optional[DocumentType] = None,
         documents: typing.Optional[DocumentRemoteUploadRequestDocuments] = None,
     ) -> typing.Union[
@@ -364,11 +344,6 @@ class UploadRemote(BaseApi):
         AsyncGeneratorResponse,
     ]:
         args = self._upload_remote_mapped_args(
-            bucket_id=bucket_id,
-            source_url=source_url,
-            callback_data=callback_data,
-            callback_url=callback_url,
-            metadata=metadata,
             type=type,
             documents=documents,
         )
@@ -378,11 +353,6 @@ class UploadRemote(BaseApi):
     
     def upload_remote(
         self,
-        bucket_id: typing.Optional[int] = None,
-        source_url: typing.Optional[str] = None,
-        callback_data: typing.Optional[str] = None,
-        callback_url: typing.Optional[str] = None,
-        metadata: typing.Optional[typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]] = None,
         type: typing.Optional[DocumentType] = None,
         documents: typing.Optional[DocumentRemoteUploadRequestDocuments] = None,
     ) -> typing.Union[
@@ -390,11 +360,6 @@ class UploadRemote(BaseApi):
         api_client.ApiResponseWithoutDeserialization,
     ]:
         args = self._upload_remote_mapped_args(
-            bucket_id=bucket_id,
-            source_url=source_url,
-            callback_data=callback_data,
-            callback_url=callback_url,
-            metadata=metadata,
             type=type,
             documents=documents,
         )
@@ -407,11 +372,6 @@ class ApiForpost(BaseApi):
 
     async def apost(
         self,
-        bucket_id: typing.Optional[int] = None,
-        source_url: typing.Optional[str] = None,
-        callback_data: typing.Optional[str] = None,
-        callback_url: typing.Optional[str] = None,
-        metadata: typing.Optional[typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]] = None,
         type: typing.Optional[DocumentType] = None,
         documents: typing.Optional[DocumentRemoteUploadRequestDocuments] = None,
     ) -> typing.Union[
@@ -420,11 +380,6 @@ class ApiForpost(BaseApi):
         AsyncGeneratorResponse,
     ]:
         args = self._upload_remote_mapped_args(
-            bucket_id=bucket_id,
-            source_url=source_url,
-            callback_data=callback_data,
-            callback_url=callback_url,
-            metadata=metadata,
             type=type,
             documents=documents,
         )
@@ -434,11 +389,6 @@ class ApiForpost(BaseApi):
     
     def post(
         self,
-        bucket_id: typing.Optional[int] = None,
-        source_url: typing.Optional[str] = None,
-        callback_data: typing.Optional[str] = None,
-        callback_url: typing.Optional[str] = None,
-        metadata: typing.Optional[typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]] = None,
         type: typing.Optional[DocumentType] = None,
         documents: typing.Optional[DocumentRemoteUploadRequestDocuments] = None,
     ) -> typing.Union[
@@ -446,11 +396,6 @@ class ApiForpost(BaseApi):
         api_client.ApiResponseWithoutDeserialization,
     ]:
         args = self._upload_remote_mapped_args(
-            bucket_id=bucket_id,
-            source_url=source_url,
-            callback_data=callback_data,
-            callback_url=callback_url,
-            metadata=metadata,
             type=type,
             documents=documents,
         )

@@ -12,10 +12,9 @@
  */
 
 
-export * from './api/api-key-management-api';
-export * from './api/bucket-api';
-export * from './api/document-api';
-export * from './api/preprocessor-api';
-export * from './api/project-api';
+export * from './api/api-keys-api';
+export * from './api/buckets-api';
+export * from './api/documents-api';
+export * from './api/projects-api';
 export * from './api/search-api';
 

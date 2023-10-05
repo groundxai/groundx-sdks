@@ -16,11 +16,10 @@ from groundx.client_custom import ClientCustom
 from groundx.configuration import Configuration
 from groundx.api_client import ApiClient
 from groundx.type_util import copy_signature
-from groundx.apis.tags.api_key_management_api import APIKeyManagementApi
-from groundx.apis.tags.bucket_api import BucketApi
-from groundx.apis.tags.document_api import DocumentApi
-from groundx.apis.tags.preprocessor_api import PreprocessorApi
-from groundx.apis.tags.project_api import ProjectApi
+from groundx.apis.tags.api_keys_api import APIKeysApi
+from groundx.apis.tags.buckets_api import BucketsApi
+from groundx.apis.tags.documents_api import DocumentsApi
+from groundx.apis.tags.projects_api import ProjectsApi
 from groundx.apis.tags.search_api import SearchApi
 
 
@@ -34,9 +33,8 @@ class Groundx(ClientCustom):
         if (configuration is None):
             raise Exception("configuration is required")
         api_client = ApiClient(configuration)
-        self.api_key_management: APIKeyManagementApi = APIKeyManagementApi(api_client)
-        self.bucket: BucketApi = BucketApi(api_client)
-        self.document: DocumentApi = DocumentApi(api_client)
-        self.preprocessor: PreprocessorApi = PreprocessorApi(api_client)
-        self.project: ProjectApi = ProjectApi(api_client)
+        self.api_keys: APIKeysApi = APIKeysApi(api_client)
+        self.buckets: BucketsApi = BucketsApi(api_client)
+        self.documents: DocumentsApi = DocumentsApi(api_client)
+        self.projects: ProjectsApi = ProjectsApi(api_client)
         self.search: SearchApi = SearchApi(api_client)
