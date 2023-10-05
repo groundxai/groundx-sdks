@@ -1,6 +1,6 @@
-# groundx-pthon-sdk
+# groundx-python-sdk
 
-[![PyPI](https://img.shields.io/badge/PyPI-v1.0.0-blue)](https://pypi.org/project/groundx-pthon-sdk/1.0.0)
+[![PyPI](https://img.shields.io/badge/PyPI-v1.0.0-blue)](https://pypi.org/project/groundx-python-sdk/1.0.0)
 
 Ground Your RAG Apps in Fact not Fiction
 
@@ -12,7 +12,7 @@ Python >=3.7
 ## Installing
 
 ```sh
-pip install groundx-pthon-sdk==1.0.0
+pip install groundx-python-sdk==1.0.0
 ```
 
 ## Getting Started

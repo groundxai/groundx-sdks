@@ -1,4 +1,3 @@
-<a name="__pageTop"></a>
 # groundx.apis.tags.document_api.DocumentApi
 
 All URIs are relative to *https://api.groundx.ai/api*

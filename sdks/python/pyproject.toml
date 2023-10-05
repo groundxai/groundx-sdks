@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "groundx-pthon-sdk"
+name = "groundx-python-sdk"
 version = "1.0.0"
 description = "Client for GroundX API"
 authors = ["Konfig <support@groundx.ai>"]

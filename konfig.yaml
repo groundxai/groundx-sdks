@@ -6,7 +6,7 @@ generators:
   python:
     version: 1.0.0
     packageName: groundx
-    projectName: groundx-pthon-sdk
+    projectName: groundx-python-sdk
     outputDirectory: sdks/python
     clientName: Groundx
     git:

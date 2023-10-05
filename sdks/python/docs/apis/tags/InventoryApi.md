@@ -1,4 +1,3 @@
-<a name="__pageTop"></a>
 # groundx.apis.tags.inventory_api.InventoryApi
 
 All URIs are relative to *https://api.groundx.ai/api*
