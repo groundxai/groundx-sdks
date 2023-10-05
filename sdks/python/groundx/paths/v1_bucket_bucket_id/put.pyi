@@ -141,8 +141,8 @@ class BaseApi(api_client.Api):
 
     def _update_mapped_args(
         self,
+        bucket: BucketUpdateRequestBucket,
         bucket_id: int,
-        bucket: typing.Optional[BucketUpdateRequestBucket] = None,
     ) -> api_client.MappedArgs:
         args: api_client.MappedArgs = api_client.MappedArgs()
         _path_params = {}
@@ -385,16 +385,16 @@ class Update(BaseApi):
 
     async def aupdate(
         self,
+        bucket: BucketUpdateRequestBucket,
         bucket_id: int,
-        bucket: typing.Optional[BucketUpdateRequestBucket] = None,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
         AsyncGeneratorResponse,
     ]:
         args = self._update_mapped_args(
-            bucket_id=bucket_id,
             bucket=bucket,
+            bucket_id=bucket_id,
         )
         return await self._aupdate_oapg(
             body=args.body,
@@ -403,15 +403,15 @@ class Update(BaseApi):
     
     def update(
         self,
+        bucket: BucketUpdateRequestBucket,
         bucket_id: int,
-        bucket: typing.Optional[BucketUpdateRequestBucket] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
         args = self._update_mapped_args(
-            bucket_id=bucket_id,
             bucket=bucket,
+            bucket_id=bucket_id,
         )
         return self._update_oapg(
             body=args.body,
@@ -423,16 +423,16 @@ class ApiForput(BaseApi):
 
     async def aput(
         self,
+        bucket: BucketUpdateRequestBucket,
         bucket_id: int,
-        bucket: typing.Optional[BucketUpdateRequestBucket] = None,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
         AsyncGeneratorResponse,
     ]:
         args = self._update_mapped_args(
-            bucket_id=bucket_id,
             bucket=bucket,
+            bucket_id=bucket_id,
         )
         return await self._aupdate_oapg(
             body=args.body,
@@ -441,15 +441,15 @@ class ApiForput(BaseApi):
     
     def put(
         self,
+        bucket: BucketUpdateRequestBucket,
         bucket_id: int,
-        bucket: typing.Optional[BucketUpdateRequestBucket] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
         args = self._update_mapped_args(
-            bucket_id=bucket_id,
             bucket=bucket,
+            bucket_id=bucket_id,
         )
         return self._update_oapg(
             body=args.body,

@@ -33,6 +33,9 @@ class BucketCreateRequest(
 
 
     class MetaOapg:
+        required = {
+            "bucket",
+        }
         
         class properties:
         
@@ -42,6 +45,8 @@ class BucketCreateRequest(
             __annotations__ = {
                 "bucket": bucket,
             }
+    
+    bucket: 'BucketCreateRequestBucket'
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["bucket"]) -> 'BucketCreateRequestBucket': ...
@@ -55,7 +60,7 @@ class BucketCreateRequest(
     
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["bucket"]) -> typing.Union['BucketCreateRequestBucket', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["bucket"]) -> 'BucketCreateRequestBucket': ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
@@ -67,7 +72,7 @@ class BucketCreateRequest(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        bucket: typing.Union['BucketCreateRequestBucket', schemas.Unset] = schemas.unset,
+        bucket: 'BucketCreateRequestBucket',
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
     ) -> 'BucketCreateRequest':

@@ -93,7 +93,7 @@ class BaseApi(api_client.Api):
 
     def _create_mapped_args(
         self,
-        project: typing.Optional[ProjectCreateRequestProject] = None,
+        project: ProjectCreateRequestProject,
     ) -> api_client.MappedArgs:
         args: api_client.MappedArgs = api_client.MappedArgs()
         _body = {}
@@ -302,7 +302,7 @@ class Create(BaseApi):
 
     async def acreate(
         self,
-        project: typing.Optional[ProjectCreateRequestProject] = None,
+        project: ProjectCreateRequestProject,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -317,7 +317,7 @@ class Create(BaseApi):
     
     def create(
         self,
-        project: typing.Optional[ProjectCreateRequestProject] = None,
+        project: ProjectCreateRequestProject,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -334,7 +334,7 @@ class ApiForpost(BaseApi):
 
     async def apost(
         self,
-        project: typing.Optional[ProjectCreateRequestProject] = None,
+        project: ProjectCreateRequestProject,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -349,7 +349,7 @@ class ApiForpost(BaseApi):
     
     def post(
         self,
-        project: typing.Optional[ProjectCreateRequestProject] = None,
+        project: ProjectCreateRequestProject,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,

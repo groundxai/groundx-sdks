@@ -26,6 +26,6 @@ export interface BucketUpdateRequest {
      * @type {BucketUpdateRequestBucket}
      * @memberof BucketUpdateRequest
      */
-    'bucket'?: BucketUpdateRequestBucket;
+    'bucket': BucketUpdateRequestBucket;
 }
 

@@ -33,6 +33,9 @@ class BucketUpdateRequest(
 
 
     class MetaOapg:
+        required = {
+            "bucket",
+        }
         
         class properties:
         
@@ -42,6 +45,8 @@ class BucketUpdateRequest(
             __annotations__ = {
                 "bucket": bucket,
             }
+    
+    bucket: 'BucketUpdateRequestBucket'
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["bucket"]) -> 'BucketUpdateRequestBucket': ...
@@ -55,7 +60,7 @@ class BucketUpdateRequest(
     
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["bucket"]) -> typing.Union['BucketUpdateRequestBucket', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["bucket"]) -> 'BucketUpdateRequestBucket': ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
@@ -67,7 +72,7 @@ class BucketUpdateRequest(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        bucket: typing.Union['BucketUpdateRequestBucket', schemas.Unset] = schemas.unset,
+        bucket: 'BucketUpdateRequestBucket',
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
     ) -> 'BucketUpdateRequest':

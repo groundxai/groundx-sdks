@@ -74,7 +74,11 @@ const groundx = new Groundx({
   apiKey: "API_KEY",
 });
 
-const createResponse = await groundx.project.create({});
+const createResponse = await groundx.project.create({
+  project: {
+    name: "your_project_name",
+  },
+});
 
 console.log(createResponse);
 ```
@@ -230,6 +234,9 @@ const groundx = new Groundx({
 
 const updateResponse = await groundx.project.update({
   projectId: "projectId_example",
+  project: {
+    name: "your_project_name",
+  },
 });
 
 console.log(updateResponse);

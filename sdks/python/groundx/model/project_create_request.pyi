@@ -33,6 +33,9 @@ class ProjectCreateRequest(
 
 
     class MetaOapg:
+        required = {
+            "project",
+        }
         
         class properties:
         
@@ -42,6 +45,8 @@ class ProjectCreateRequest(
             __annotations__ = {
                 "project": project,
             }
+    
+    project: 'ProjectCreateRequestProject'
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["project"]) -> 'ProjectCreateRequestProject': ...
@@ -55,7 +60,7 @@ class ProjectCreateRequest(
     
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["project"]) -> typing.Union['ProjectCreateRequestProject', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["project"]) -> 'ProjectCreateRequestProject': ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
@@ -67,7 +72,7 @@ class ProjectCreateRequest(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        project: typing.Union['ProjectCreateRequestProject', schemas.Unset] = schemas.unset,
+        project: 'ProjectCreateRequestProject',
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
     ) -> 'ProjectCreateRequest':

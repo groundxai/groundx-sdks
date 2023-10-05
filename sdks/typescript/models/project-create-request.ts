@@ -26,6 +26,6 @@ export interface ProjectCreateRequest {
      * @type {ProjectCreateRequestProject}
      * @memberof ProjectCreateRequest
      */
-    'project'?: ProjectCreateRequestProject;
+    'project': ProjectCreateRequestProject;
 }
 

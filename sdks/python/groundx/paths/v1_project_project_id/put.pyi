@@ -111,8 +111,8 @@ class BaseApi(api_client.Api):
 
     def _update_mapped_args(
         self,
+        project: ProjectUpdateRequestProject,
         project_id: str,
-        project: typing.Optional[ProjectUpdateRequestProject] = None,
     ) -> api_client.MappedArgs:
         args: api_client.MappedArgs = api_client.MappedArgs()
         _path_params = {}
@@ -355,16 +355,16 @@ class Update(BaseApi):
 
     async def aupdate(
         self,
+        project: ProjectUpdateRequestProject,
         project_id: str,
-        project: typing.Optional[ProjectUpdateRequestProject] = None,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
         AsyncGeneratorResponse,
     ]:
         args = self._update_mapped_args(
-            project_id=project_id,
             project=project,
+            project_id=project_id,
         )
         return await self._aupdate_oapg(
             body=args.body,
@@ -373,15 +373,15 @@ class Update(BaseApi):
     
     def update(
         self,
+        project: ProjectUpdateRequestProject,
         project_id: str,
-        project: typing.Optional[ProjectUpdateRequestProject] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
         args = self._update_mapped_args(
-            project_id=project_id,
             project=project,
+            project_id=project_id,
         )
         return self._update_oapg(
             body=args.body,
@@ -393,16 +393,16 @@ class ApiForput(BaseApi):
 
     async def aput(
         self,
+        project: ProjectUpdateRequestProject,
         project_id: str,
-        project: typing.Optional[ProjectUpdateRequestProject] = None,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
         AsyncGeneratorResponse,
     ]:
         args = self._update_mapped_args(
-            project_id=project_id,
             project=project,
+            project_id=project_id,
         )
         return await self._aupdate_oapg(
             body=args.body,
@@ -411,15 +411,15 @@ class ApiForput(BaseApi):
     
     def put(
         self,
+        project: ProjectUpdateRequestProject,
         project_id: str,
-        project: typing.Optional[ProjectUpdateRequestProject] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
         args = self._update_mapped_args(
-            project_id=project_id,
             project=project,
+            project_id=project_id,
         )
         return self._update_oapg(
             body=args.body,

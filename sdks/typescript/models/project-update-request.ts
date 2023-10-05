@@ -26,6 +26,6 @@ export interface ProjectUpdateRequest {
      * @type {ProjectUpdateRequestProject}
      * @memberof ProjectUpdateRequest
      */
-    'project'?: ProjectUpdateRequestProject;
+    'project': ProjectUpdateRequestProject;
 }
 

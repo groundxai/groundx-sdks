@@ -788,6 +788,8 @@ components:
                       type: string
     ProjectCreateRequest:
       type: object
+      required:
+        - project
       properties:
         project:
           type: object
@@ -875,6 +877,8 @@ components:
           $ref: '#/components/schemas/BucketDetail'
     BucketCreateRequest:
       type: object
+      required:
+        - bucket
       properties:
         bucket:
           type: object
@@ -884,6 +888,8 @@ components:
               example: your_bucket_name
     BucketUpdateRequest:
       type: object
+      required:
+        - bucket
       properties:
         bucket:
           type: object
@@ -893,6 +899,8 @@ components:
               example: your_bucket_name
     ProjectUpdateRequest:
       type: object
+      required:
+       - project
       properties:
         project:
           type: object

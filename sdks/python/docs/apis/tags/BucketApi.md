@@ -29,7 +29,7 @@ try:
     create_response = groundx.bucket.create(
         bucket={
             "name": "your_bucket_name",
-        },  # optional
+        },  # required
     )
     pprint(create_response.body)
     pprint(create_response.body["bucket"])
@@ -167,10 +167,10 @@ groundx = Groundx(
 try:
     # Update an existing bucket
     update_response = groundx.bucket.update(
-        bucket_id=1,  # required
         bucket={
             "name": "your_bucket_name",
-        },  # optional
+        },  # required
+        bucket_id=1,  # required
     )
     pprint(update_response.body)
     pprint(update_response.body["bucket"])

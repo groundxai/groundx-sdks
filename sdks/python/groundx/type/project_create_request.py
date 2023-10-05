@@ -18,10 +18,10 @@ from typing_extensions import TypedDict, Literal
 from groundx.type.project_create_request_project import ProjectCreateRequestProject
 
 class RequiredProjectCreateRequest(TypedDict):
-    pass
+    project: ProjectCreateRequestProject
 
 class OptionalProjectCreateRequest(TypedDict, total=False):
-    project: ProjectCreateRequestProject
+    pass
 
 class ProjectCreateRequest(RequiredProjectCreateRequest, OptionalProjectCreateRequest):
     pass

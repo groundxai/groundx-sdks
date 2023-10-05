@@ -26,6 +26,6 @@ export interface BucketCreateRequest {
      * @type {BucketCreateRequestBucket}
      * @memberof BucketCreateRequest
      */
-    'bucket'?: BucketCreateRequestBucket;
+    'bucket': BucketCreateRequestBucket;
 }
 

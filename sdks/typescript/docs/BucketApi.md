@@ -26,7 +26,11 @@ const groundx = new Groundx({
   apiKey: "API_KEY",
 });
 
-const createResponse = await groundx.bucket.create({});
+const createResponse = await groundx.bucket.create({
+  bucket: {
+    name: "your_bucket_name",
+  },
+});
 
 console.log(createResponse);
 ```
@@ -189,6 +193,9 @@ const groundx = new Groundx({
 
 const updateResponse = await groundx.bucket.update({
   bucketId: 1,
+  bucket: {
+    name: "your_bucket_name",
+  },
 });
 
 console.log(updateResponse);

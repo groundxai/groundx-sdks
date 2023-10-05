@@ -18,10 +18,10 @@ from typing_extensions import TypedDict, Literal
 from groundx.type.bucket_create_request_bucket import BucketCreateRequestBucket
 
 class RequiredBucketCreateRequest(TypedDict):
-    pass
+    bucket: BucketCreateRequestBucket
 
 class OptionalBucketCreateRequest(TypedDict, total=False):
-    bucket: BucketCreateRequestBucket
+    pass
 
 class BucketCreateRequest(RequiredBucketCreateRequest, OptionalBucketCreateRequest):
     pass

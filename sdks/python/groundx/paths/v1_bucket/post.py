@@ -125,7 +125,7 @@ class BaseApi(api_client.Api):
 
     def _create_mapped_args(
         self,
-        bucket: typing.Optional[BucketCreateRequestBucket] = None,
+        bucket: BucketCreateRequestBucket,
     ) -> api_client.MappedArgs:
         args: api_client.MappedArgs = api_client.MappedArgs()
         _body = {}
@@ -334,7 +334,7 @@ class Create(BaseApi):
 
     async def acreate(
         self,
-        bucket: typing.Optional[BucketCreateRequestBucket] = None,
+        bucket: BucketCreateRequestBucket,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -349,7 +349,7 @@ class Create(BaseApi):
     
     def create(
         self,
-        bucket: typing.Optional[BucketCreateRequestBucket] = None,
+        bucket: BucketCreateRequestBucket,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -366,7 +366,7 @@ class ApiForpost(BaseApi):
 
     async def apost(
         self,
-        bucket: typing.Optional[BucketCreateRequestBucket] = None,
+        bucket: BucketCreateRequestBucket,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -381,7 +381,7 @@ class ApiForpost(BaseApi):
     
     def post(
         self,
-        bucket: typing.Optional[BucketCreateRequestBucket] = None,
+        bucket: BucketCreateRequestBucket,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
