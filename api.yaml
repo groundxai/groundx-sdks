@@ -361,42 +361,10 @@ paths:
           description: Permission denied
 components:
   schemas:
-    ProjectBindBucketResponse:
-      type: object
-      required:
-        - message
-      properties:
-        message:
-          type: string
-          example: OK
-      example:
-        message: OK
-    ProjectBindBucket400Response:
-      type: object
-      properties:
-        message:
-          type: string
-          example: You do not have access to a bucket with this bucketId
-      example:
-        message: You do not have access to a bucket with this bucketId
-    ProjectBucketBinding:
-      type: object
-      example:
-        project:
-          bucketId: 6122
-      required:
-        - project
-      properties:
-        project:
-          type: object
-          required:
-            - bucketId
-          properties:
-            bucketId:
-              description: The ID of the bucket to add to the project.
-              type: integer
     SearchRequest:
       type: object
+      required:
+        - search
       properties:
         search:
           type: object
@@ -516,6 +484,8 @@ components:
       properties:
         bucket:
           type: object
+          required:
+            - name
           properties:
             name:
               type: string
@@ -527,6 +497,8 @@ components:
       properties:
         project:
           type: object
+          required:
+            - name
           properties:
             name:
               type: string
@@ -561,9 +533,9 @@ components:
               type: string
     DocumentRemoteUploadRequest:
       type: object
+      required:
+        - documents
       properties:
-        type:
-          $ref: '#/components/schemas/DocumentType'
         documents:
           type: array
           items:
@@ -603,36 +575,45 @@ components:
     DocumentLocalUploadRequest:
       type: object
       required:
-        - blob
-        - metadata
+        - documents
       properties:
-        blob:
+        documents:
           type: array
           items:
-            description: The actual file being uploaded.
-            type: string
-            format: binary
-        metadata:
-          type: object
-          properties:
-            bucketId:
-              type: integer
-              example: 1234
-            fileName:
-              type: string
-              example: my_file.txt
-            fileType:
-              $ref: '#/components/schemas/DocumentType'
-            metadata:
-              type: object
-              example:
-                key: value
-            callbackData:
-              type: string
-              example: my_callback_data
-            callbackUrl:
-              type: string
-              example: https://my.callback.url.com
+            type: object
+            required:
+              - blob
+              - metadata
+            properties:
+              blob:
+                description: The actual file being uploaded.
+                type: string
+                format: binary
+              metadata:
+                type: object
+                required:
+                  - bucketId
+                  - fileName
+                  - fileType
+                properties:
+                  bucketId:
+                    type: integer
+                    example: 1234
+                  fileName:
+                    type: string
+                    example: my_file.txt
+                  fileType:
+                    $ref: '#/components/schemas/DocumentType'
+                  metadata:
+                    type: object
+                    example:
+                      key: value
+                  callbackData:
+                    type: string
+                    example: my_callback_data
+                  callbackUrl:
+                    type: string
+                    example: https://my.callback.url.com
     IngestResponse:
       type: object
       required:
