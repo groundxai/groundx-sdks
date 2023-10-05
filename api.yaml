@@ -572,8 +572,14 @@ components:
   schemas:
     ProjectBindBucketResponse:
       type: object
-      properties: {}
-      example: {}
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          example: OK
+      example:
+        message: OK
     ProjectBindBucket400Response:
       type: object
       properties:
