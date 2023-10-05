@@ -11,21 +11,18 @@
  * Do not edit the class manually.
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import { BucketCreateRequestBucket } from './bucket-create-request-bucket';
 
 /**
  * 
  * @export
- * @interface BucketCreateRequest
+ * @interface BucketUpdateRequestBucket
  */
-export interface BucketCreateRequest {
+export interface BucketUpdateRequestBucket {
     /**
      * 
-     * @type {BucketCreateRequestBucket}
-     * @memberof BucketCreateRequest
+     * @type {string}
+     * @memberof BucketUpdateRequestBucket
      */
-    'bucket'?: BucketCreateRequestBucket;
+    'name'?: string;
 }
 

@@ -667,9 +667,11 @@ components:
             query:
               description: The search query
               type: string
+              example: 'my search query'
             nextToken:
               description: Token to retrieve the next set of paginated results
               type: string
+              example: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
     SearchResponse:
       type: object
       properties:
@@ -792,6 +794,7 @@ components:
           properties:
             name:
               type: string
+              example: your_project_name
     ProjectResponse:
       type: object
       properties:
@@ -878,6 +881,7 @@ components:
           properties:
             name:
               type: string
+              example: your_bucket_name
     BucketUpdateRequest:
       type: object
       properties:
@@ -886,6 +890,7 @@ components:
           properties:
             name:
               type: string
+              example: your_bucket_name
     ProjectUpdateRequest:
       type: object
       properties:
@@ -894,6 +899,7 @@ components:
           properties:
             name:
               type: string
+              example: your_project_name
     DocumentResponse:
       type: object
       properties:
@@ -927,14 +933,20 @@ components:
       properties:
         bucketId:
           type: integer
+          example: 1234
         sourceUrl:
           type: string
+          example: https://my.source.url.com
         callbackData:
           type: string
+          example: my_callback_data
         callbackUrl:
           type: string
+          example: https://my.callback.url.com
         metadata:
           type: object
+          example:
+            key: value
         type:
           $ref: '#/components/schemas/DocumentType'
         documents:
@@ -944,14 +956,20 @@ components:
             properties:
               bucketId:
                 type: integer
+                example: 1234
               sourceUrl:
                 type: string
+                example: https://my.source.url.com
               callbackData:
                 type: string
+                example: my_callback_data
               callbackUrl:
                 type: string
+                example: https://my.callback.url.com
               metadata:
                 type: object
+                example:
+                  key: value
               type:
                 $ref: '#/components/schemas/DocumentType'
     DocumentType:
@@ -975,16 +993,22 @@ components:
             format: binary
         bucketId:
           type: integer
+          example: 1234
         fileName:
           type: string
+          example: my_file.txt
         fileType:
           $ref: '#/components/schemas/DocumentType'
         metadata:
           type: object
+          example:
+            key: value
         callbackData:
           type: string
+          example: my_callback_data
         callbackUrl:
           type: string
+          example: https://my.callback.url.com
     IngestResponse:
       type: object
       properties:

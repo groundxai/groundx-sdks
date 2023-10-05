@@ -13,7 +13,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { ProjectCreateRequestProject } from './project-create-request-project';
+import { ProjectUpdateRequestProject } from './project-update-request-project';
 
 /**
  * 
@@ -23,9 +23,9 @@ import { ProjectCreateRequestProject } from './project-create-request-project';
 export interface ProjectUpdateRequest {
     /**
      * 
-     * @type {ProjectCreateRequestProject}
+     * @type {ProjectUpdateRequestProject}
      * @memberof ProjectUpdateRequest
      */
-    'project'?: ProjectCreateRequestProject;
+    'project'?: ProjectUpdateRequestProject;
 }
 

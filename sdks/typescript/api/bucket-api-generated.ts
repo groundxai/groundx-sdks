@@ -23,6 +23,8 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 // @ts-ignore
 import { BucketCreateRequest } from '../models';
 // @ts-ignore
+import { BucketCreateRequestBucket } from '../models';
+// @ts-ignore
 import { BucketDeleteResponse } from '../models';
 // @ts-ignore
 import { BucketDetail } from '../models';
@@ -33,7 +35,7 @@ import { BucketResponse } from '../models';
 // @ts-ignore
 import { BucketUpdateRequest } from '../models';
 // @ts-ignore
-import { ProjectCreateRequestProject } from '../models';
+import { BucketUpdateRequestBucket } from '../models';
 import { paginate } from "../pagination/paginate";
 import { requestBeforeHook } from '../requestBeforeHook';
 /**

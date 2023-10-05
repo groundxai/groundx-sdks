@@ -129,7 +129,7 @@ class BaseApi(api_client.Api):
         blob: typing.Optional[DocumentLocalUploadRequestBlob] = None,
         bucket_id: typing.Optional[int] = None,
         file_name: typing.Optional[str] = None,
-        _file_type: typing.Optional[DocumentType] = None,
+        file_type: typing.Optional[DocumentType] = None,
         metadata: typing.Optional[typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]] = None,
         callback_data: typing.Optional[str] = None,
         callback_url: typing.Optional[str] = None,
@@ -142,8 +142,8 @@ class BaseApi(api_client.Api):
             _body["bucketId"] = bucket_id
         if file_name is not None:
             _body["fileName"] = file_name
-        if _file_type is not None:
-            _body["fileType"] = _file_type
+        if file_type is not None:
+            _body["fileType"] = file_type
         if metadata is not None:
             _body["metadata"] = metadata
         if callback_data is not None:
@@ -352,7 +352,7 @@ class UploadLocal(BaseApi):
         blob: typing.Optional[DocumentLocalUploadRequestBlob] = None,
         bucket_id: typing.Optional[int] = None,
         file_name: typing.Optional[str] = None,
-        _file_type: typing.Optional[DocumentType] = None,
+        file_type: typing.Optional[DocumentType] = None,
         metadata: typing.Optional[typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]] = None,
         callback_data: typing.Optional[str] = None,
         callback_url: typing.Optional[str] = None,
@@ -365,7 +365,7 @@ class UploadLocal(BaseApi):
             blob=blob,
             bucket_id=bucket_id,
             file_name=file_name,
-            _file_type=_file_type,
+            file_type=file_type,
             metadata=metadata,
             callback_data=callback_data,
             callback_url=callback_url,
@@ -379,7 +379,7 @@ class UploadLocal(BaseApi):
         blob: typing.Optional[DocumentLocalUploadRequestBlob] = None,
         bucket_id: typing.Optional[int] = None,
         file_name: typing.Optional[str] = None,
-        _file_type: typing.Optional[DocumentType] = None,
+        file_type: typing.Optional[DocumentType] = None,
         metadata: typing.Optional[typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]] = None,
         callback_data: typing.Optional[str] = None,
         callback_url: typing.Optional[str] = None,
@@ -391,7 +391,7 @@ class UploadLocal(BaseApi):
             blob=blob,
             bucket_id=bucket_id,
             file_name=file_name,
-            _file_type=_file_type,
+            file_type=file_type,
             metadata=metadata,
             callback_data=callback_data,
             callback_url=callback_url,
@@ -408,7 +408,7 @@ class ApiForpost(BaseApi):
         blob: typing.Optional[DocumentLocalUploadRequestBlob] = None,
         bucket_id: typing.Optional[int] = None,
         file_name: typing.Optional[str] = None,
-        _file_type: typing.Optional[DocumentType] = None,
+        file_type: typing.Optional[DocumentType] = None,
         metadata: typing.Optional[typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]] = None,
         callback_data: typing.Optional[str] = None,
         callback_url: typing.Optional[str] = None,
@@ -421,7 +421,7 @@ class ApiForpost(BaseApi):
             blob=blob,
             bucket_id=bucket_id,
             file_name=file_name,
-            _file_type=_file_type,
+            file_type=file_type,
             metadata=metadata,
             callback_data=callback_data,
             callback_url=callback_url,
@@ -435,7 +435,7 @@ class ApiForpost(BaseApi):
         blob: typing.Optional[DocumentLocalUploadRequestBlob] = None,
         bucket_id: typing.Optional[int] = None,
         file_name: typing.Optional[str] = None,
-        _file_type: typing.Optional[DocumentType] = None,
+        file_type: typing.Optional[DocumentType] = None,
         metadata: typing.Optional[typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]] = None,
         callback_data: typing.Optional[str] = None,
         callback_url: typing.Optional[str] = None,
@@ -447,7 +447,7 @@ class ApiForpost(BaseApi):
             blob=blob,
             bucket_id=bucket_id,
             file_name=file_name,
-            _file_type=_file_type,
+            file_type=file_type,
             metadata=metadata,
             callback_data=callback_data,
             callback_url=callback_url,

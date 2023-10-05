@@ -24,7 +24,10 @@ try:
     # Perform a search query of your content
     content_response = groundx.search.content(
         project_id="projectId_example",  # required
-        search={},  # optional
+        search={
+            "query": "my search query",
+            "next_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9",
+        },  # optional
         n=20,  # optional
     )
     pprint(content_response.body)

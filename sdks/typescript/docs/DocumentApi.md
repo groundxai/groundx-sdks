@@ -227,7 +227,11 @@ const groundx = new Groundx({
 });
 
 const uploadLocalResponse = await groundx.document.uploadLocal({
+  bucketId: 1234,
+  fileName: "my_file.txt",
   fileType: "txt",
+  callbackData: "my_callback_data",
+  callbackUrl: "https://my.callback.url.com",
 });
 
 console.log(uploadLocalResponse);
@@ -274,6 +278,10 @@ const groundx = new Groundx({
 });
 
 const uploadRemoteResponse = await groundx.document.uploadRemote({
+  bucketId: 1234,
+  sourceUrl: "https://my.source.url.com",
+  callbackData: "my_callback_data",
+  callbackUrl: "https://my.callback.url.com",
   type: "txt",
 });
 

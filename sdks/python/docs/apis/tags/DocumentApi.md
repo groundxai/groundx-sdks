@@ -208,12 +208,14 @@ try:
     # Upload local documents to GroundX
     upload_local_response = groundx.document.upload_local(
         blob=[open("/path/to/file", "rb")],  # optional
-        bucket_id=1,  # optional
-        file_name="string_example",  # optional
-        _file_type="txt",  # optional
-        metadata={},  # optional
-        callback_data="string_example",  # optional
-        callback_url="string_example",  # optional
+        bucket_id=1234,  # optional
+        file_name="my_file.txt",  # optional
+        file_type="txt",  # optional
+        metadata={
+            "key": "value",
+        },  # optional
+        callback_data="my_callback_data",  # optional
+        callback_url="https://my.callback.url.com",  # optional
     )
     pprint(upload_local_response.body)
     pprint(upload_local_response.body["ingest"])
@@ -248,14 +250,20 @@ groundx = Groundx(
 try:
     # Upload hosted documents to GroundX
     upload_remote_response = groundx.document.upload_remote(
-        bucket_id=1,  # optional
-        source_url="string_example",  # optional
-        callback_data="string_example",  # optional
-        callback_url="string_example",  # optional
-        metadata={},  # optional
+        bucket_id=1234,  # optional
+        source_url="https://my.source.url.com",  # optional
+        callback_data="my_callback_data",  # optional
+        callback_url="https://my.callback.url.com",  # optional
+        metadata={
+            "key": "value",
+        },  # optional
         type="txt",  # optional
         documents=[
             {
+                "bucket_id": 1234,
+                "source_url": "https://my.source.url.com",
+                "callback_data": "my_callback_data",
+                "callback_url": "https://my.callback.url.com",
                 "type": "txt",
             }
         ],  # optional

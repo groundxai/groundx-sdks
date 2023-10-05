@@ -66,7 +66,9 @@ groundx = Groundx(
 try:
     # Create a project
     create_response = groundx.project.create(
-        project={},  # optional
+        project={
+            "name": "your_project_name",
+        },  # optional
     )
     pprint(create_response.body)
     pprint(create_response.body["project"])
@@ -205,7 +207,9 @@ try:
     # Update an existing project
     update_response = groundx.project.update(
         project_id="projectId_example",  # required
-        project={},  # optional
+        project={
+            "name": "your_project_name",
+        },  # optional
     )
     pprint(update_response.body)
     pprint(update_response.body["project"])

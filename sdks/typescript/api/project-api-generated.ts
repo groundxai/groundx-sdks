@@ -42,6 +42,8 @@ import { ProjectListResponse } from '../models';
 import { ProjectResponse } from '../models';
 // @ts-ignore
 import { ProjectUpdateRequest } from '../models';
+// @ts-ignore
+import { ProjectUpdateRequestProject } from '../models';
 import { paginate } from "../pagination/paginate";
 import { requestBeforeHook } from '../requestBeforeHook';
 /**
