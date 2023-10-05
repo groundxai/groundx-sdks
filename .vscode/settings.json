@@ -4,7 +4,7 @@
     ".konfigignore": "ignore"
   },
   "python.testing.pytestArgs": [
-    "python",
+    "sdks/python",
     "-o",
     "cache_dir=python/.pytest_cache"
   ],
@@ -23,7 +23,7 @@
   "python.testing.unittestArgs": [
     "-v",
     "-s",
-    "./python",
+    "./sdks/python",
     "-p",
     "test_*.py"
   ],
