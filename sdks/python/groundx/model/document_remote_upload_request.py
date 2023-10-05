@@ -34,7 +34,6 @@ class DocumentRemoteUploadRequest(
 
     class MetaOapg:
         required = {
-            "sourceUrl",
             "bucketId",
         }
         
@@ -62,7 +61,6 @@ class DocumentRemoteUploadRequest(
                 "documents": documents,
             }
     
-    sourceUrl: MetaOapg.properties.sourceUrl
     bucketId: MetaOapg.properties.bucketId
     
     @typing.overload
@@ -98,7 +96,7 @@ class DocumentRemoteUploadRequest(
     def get_item_oapg(self, name: typing_extensions.Literal["bucketId"]) -> MetaOapg.properties.bucketId: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["sourceUrl"]) -> MetaOapg.properties.sourceUrl: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["sourceUrl"]) -> typing.Union[MetaOapg.properties.sourceUrl, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["callbackData"]) -> typing.Union[MetaOapg.properties.callbackData, schemas.Unset]: ...
@@ -125,8 +123,8 @@ class DocumentRemoteUploadRequest(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        sourceUrl: typing.Union[MetaOapg.properties.sourceUrl, str, ],
         bucketId: typing.Union[MetaOapg.properties.bucketId, decimal.Decimal, int, ],
+        sourceUrl: typing.Union[MetaOapg.properties.sourceUrl, str, schemas.Unset] = schemas.unset,
         callbackData: typing.Union[MetaOapg.properties.callbackData, str, schemas.Unset] = schemas.unset,
         callbackUrl: typing.Union[MetaOapg.properties.callbackUrl, str, schemas.Unset] = schemas.unset,
         metadata: typing.Union[MetaOapg.properties.metadata, dict, frozendict.frozendict, schemas.Unset] = schemas.unset,
@@ -138,8 +136,8 @@ class DocumentRemoteUploadRequest(
         return super().__new__(
             cls,
             *args,
-            sourceUrl=sourceUrl,
             bucketId=bucketId,
+            sourceUrl=sourceUrl,
             callbackData=callbackData,
             callbackUrl=callbackUrl,
             metadata=metadata,

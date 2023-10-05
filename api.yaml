@@ -940,7 +940,6 @@ components:
       type: object
       required:
         - bucketId
-        - sourceUrl
       properties:
         bucketId:
           type: integer

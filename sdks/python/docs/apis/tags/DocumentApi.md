@@ -250,7 +250,7 @@ try:
     # Upload hosted documents to GroundX
     upload_remote_response = groundx.document.upload_remote(
         bucket_id=1234,  # required
-        source_url="https://my.source.url.com/file.txt",  # required
+        source_url="https://my.source.url.com/file.txt",  # optional
         callback_data="my_callback_data",  # optional
         callback_url="https://my.callback.url.com",  # optional
         metadata={

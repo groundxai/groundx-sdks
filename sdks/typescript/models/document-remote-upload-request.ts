@@ -35,7 +35,7 @@ export interface DocumentRemoteUploadRequest {
      * @type {string}
      * @memberof DocumentRemoteUploadRequest
      */
-    'sourceUrl': string;
+    'sourceUrl'?: string;
     /**
      * 
      * @type {string}
