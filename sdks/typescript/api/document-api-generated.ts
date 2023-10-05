@@ -50,6 +50,8 @@ import { ProcessStatusResponseIngest } from '../models';
 import { ProcessStatusResponseIngestProgress } from '../models';
 // @ts-ignore
 import { ProcessStatusResponseIngestProgressComplete } from '../models';
+// @ts-ignore
+import { ProcessingStatus } from '../models';
 import { paginate } from "../pagination/paginate";
 import { requestBeforeHook } from '../requestBeforeHook';
 /**

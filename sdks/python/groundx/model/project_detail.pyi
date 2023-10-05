@@ -33,8 +33,12 @@ class ProjectDetail(
 
 
     class MetaOapg:
+        required = {
+            "projectId",
+        }
         
         class properties:
+            projectId = schemas.IntSchema
             
             
             class buckets(
@@ -64,18 +68,22 @@ class ProjectDetail(
             created = schemas.DateTimeSchema
             fileCount = schemas.IntSchema
             fileSize = schemas.StrSchema
-            projectId = schemas.StrSchema
             name = schemas.StrSchema
             updated = schemas.DateTimeSchema
             __annotations__ = {
+                "projectId": projectId,
                 "buckets": buckets,
                 "created": created,
                 "fileCount": fileCount,
                 "fileSize": fileSize,
-                "projectId": projectId,
                 "name": name,
                 "updated": updated,
             }
+    
+    projectId: MetaOapg.properties.projectId
+    
+    @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["projectId"]) -> MetaOapg.properties.projectId: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["buckets"]) -> MetaOapg.properties.buckets: ...
@@ -90,9 +98,6 @@ class ProjectDetail(
     def __getitem__(self, name: typing_extensions.Literal["fileSize"]) -> MetaOapg.properties.fileSize: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["projectId"]) -> MetaOapg.properties.projectId: ...
-    
-    @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["name"]) -> MetaOapg.properties.name: ...
     
     @typing.overload
@@ -101,10 +106,13 @@ class ProjectDetail(
     @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["buckets", "created", "fileCount", "fileSize", "projectId", "name", "updated", ], str]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["projectId", "buckets", "created", "fileCount", "fileSize", "name", "updated", ], str]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
+    
+    @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["projectId"]) -> MetaOapg.properties.projectId: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["buckets"]) -> typing.Union[MetaOapg.properties.buckets, schemas.Unset]: ...
@@ -119,9 +127,6 @@ class ProjectDetail(
     def get_item_oapg(self, name: typing_extensions.Literal["fileSize"]) -> typing.Union[MetaOapg.properties.fileSize, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["projectId"]) -> typing.Union[MetaOapg.properties.projectId, schemas.Unset]: ...
-    
-    @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["name"]) -> typing.Union[MetaOapg.properties.name, schemas.Unset]: ...
     
     @typing.overload
@@ -130,18 +135,18 @@ class ProjectDetail(
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["buckets", "created", "fileCount", "fileSize", "projectId", "name", "updated", ], str]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["projectId", "buckets", "created", "fileCount", "fileSize", "name", "updated", ], str]):
         return super().get_item_oapg(name)
     
 
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
+        projectId: typing.Union[MetaOapg.properties.projectId, decimal.Decimal, int, ],
         buckets: typing.Union[MetaOapg.properties.buckets, list, tuple, schemas.Unset] = schemas.unset,
         created: typing.Union[MetaOapg.properties.created, str, datetime, schemas.Unset] = schemas.unset,
         fileCount: typing.Union[MetaOapg.properties.fileCount, decimal.Decimal, int, schemas.Unset] = schemas.unset,
         fileSize: typing.Union[MetaOapg.properties.fileSize, str, schemas.Unset] = schemas.unset,
-        projectId: typing.Union[MetaOapg.properties.projectId, str, schemas.Unset] = schemas.unset,
         name: typing.Union[MetaOapg.properties.name, str, schemas.Unset] = schemas.unset,
         updated: typing.Union[MetaOapg.properties.updated, str, datetime, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
@@ -150,11 +155,11 @@ class ProjectDetail(
         return super().__new__(
             cls,
             *args,
+            projectId=projectId,
             buckets=buckets,
             created=created,
             fileCount=fileCount,
             fileSize=fileSize,
-            projectId=projectId,
             name=name,
             updated=updated,
             _configuration=_configuration,

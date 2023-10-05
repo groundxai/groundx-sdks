@@ -40,37 +40,10 @@ class ProcessStatusResponseIngest(
         
         class properties:
             processId = schemas.StrSchema
-            
-            
-            class status(
-                schemas.EnumBase,
-                schemas.StrSchema
-            ):
-            
-            
-                class MetaOapg:
-                    enum_value_to_name = {
-                        "queued": "QUEUED",
-                        "processing": "PROCESSING",
-                        "error": "ERROR",
-                        "complete": "COMPLETE",
-                    }
-                
-                @schemas.classproperty
-                def QUEUED(cls):
-                    return cls("queued")
-                
-                @schemas.classproperty
-                def PROCESSING(cls):
-                    return cls("processing")
-                
-                @schemas.classproperty
-                def ERROR(cls):
-                    return cls("error")
-                
-                @schemas.classproperty
-                def COMPLETE(cls):
-                    return cls("complete")
+        
+            @staticmethod
+            def status() -> typing.Type['ProcessingStatus']:
+                return ProcessingStatus
         
             @staticmethod
             def progress() -> typing.Type['ProcessStatusResponseIngestProgress']:
@@ -84,13 +57,13 @@ class ProcessStatusResponseIngest(
             }
     
     processId: MetaOapg.properties.processId
-    status: MetaOapg.properties.status
+    status: 'ProcessingStatus'
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["processId"]) -> MetaOapg.properties.processId: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["status"]) -> MetaOapg.properties.status: ...
+    def __getitem__(self, name: typing_extensions.Literal["status"]) -> 'ProcessingStatus': ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["progress"]) -> 'ProcessStatusResponseIngestProgress': ...
@@ -110,7 +83,7 @@ class ProcessStatusResponseIngest(
     def get_item_oapg(self, name: typing_extensions.Literal["processId"]) -> MetaOapg.properties.processId: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["status"]) -> MetaOapg.properties.status: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["status"]) -> 'ProcessingStatus': ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["progress"]) -> typing.Union['ProcessStatusResponseIngestProgress', schemas.Unset]: ...
@@ -129,7 +102,7 @@ class ProcessStatusResponseIngest(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
         processId: typing.Union[MetaOapg.properties.processId, str, ],
-        status: typing.Union[MetaOapg.properties.status, str, ],
+        status: 'ProcessingStatus',
         progress: typing.Union['ProcessStatusResponseIngestProgress', schemas.Unset] = schemas.unset,
         statusMessage: typing.Union[MetaOapg.properties.statusMessage, str, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
@@ -152,3 +125,4 @@ from groundx.model.process_status_response_ingest_progress import ProcessStatusR
 from groundx.model.process_status_response_ingest_progress_complete import ProcessStatusResponseIngestProgressComplete
 from groundx.model.process_status_response_ingest_progress_errors import ProcessStatusResponseIngestProgressErrors
 from groundx.model.process_status_response_ingest_progress_processing import ProcessStatusResponseIngestProgressProcessing
+from groundx.model.processing_status import ProcessingStatus

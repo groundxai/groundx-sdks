@@ -41,13 +41,13 @@ export const SearchApiAxiosParamCreator = function (configuration?: Configuratio
         /**
          * Search and retrieve relevant content from a project with projectId.
          * @summary Perform a search query of your content
-         * @param {string} projectId The ID of the project to search within.
+         * @param {number} projectId The ID of the project to search within.
          * @param {number} [n] Number of results
          * @param {SearchRequest} [searchRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        content: async (projectId: string, n?: number, searchRequest?: SearchRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        content: async (projectId: number, n?: number, searchRequest?: SearchRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'projectId' is not null or undefined
             assertParamExists('content', 'projectId', projectId)
             const localVarPath = `/v1/search/{projectId}`
@@ -143,10 +143,10 @@ export type SearchApiContentRequest = {
     
     /**
     * The ID of the project to search within.
-    * @type {string}
+    * @type {number}
     * @memberof SearchApiContent
     */
-    readonly projectId: string
+    readonly projectId: number
     
     /**
     * Number of results

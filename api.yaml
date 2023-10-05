@@ -602,7 +602,7 @@ paths:
           name: projectId
           required: true
           schema:
-            type: string
+            type: integer
         - description: Number of results
           in: query
           name: 'n'
@@ -801,6 +801,8 @@ components:
               example: your_project_name
     ProjectResponse:
       type: object
+      required:
+        - project
       properties:
         project:
           $ref: '#/components/schemas/ProjectDetail'
@@ -842,6 +844,8 @@ components:
       type: object
     ProjectDetail:
       type: object
+      required:
+        - projectId
       properties:
         buckets:
           type: array
@@ -855,7 +859,7 @@ components:
         fileSize:
           type: string
         projectId:
-          type: string
+          type: integer
         name:
           type: string
         updated:
@@ -1046,7 +1050,7 @@ components:
             processId:
               type: string
             status:
-              type: string
+              $ref: "#/components/schemas/ProcessingStatus"
     ProcessStatusResponse:
       type: object
       required:
@@ -1091,14 +1095,16 @@ components:
                     total:
                       type: integer
             status:
-              type: string
-              enum:
-                - queued
-                - processing
-                - error
-                - complete
+              $ref: "#/components/schemas/ProcessingStatus"
             statusMessage:
               type: string
+    ProcessingStatus:
+      type: string
+      enum:
+        - queued
+        - processing
+        - error
+        - complete
     InventorySearchResponse:
       type: array
       items:

@@ -26,6 +26,9 @@ import { ProcessStatusResponseIngestProgress } from './process-status-response-i
 // May contain unused imports in some cases
 // @ts-ignore
 import { ProcessStatusResponseIngestProgressComplete } from './process-status-response-ingest-progress-complete';
+// May contain unused imports in some cases
+// @ts-ignore
+import { ProcessingStatus } from './processing-status';
 
 /**
  * 

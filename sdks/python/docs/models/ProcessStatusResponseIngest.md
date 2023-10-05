@@ -9,7 +9,7 @@ dict, frozendict.frozendict,  | frozendict.frozendict,  |  |
 Key | Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | ------------- | -------------
 **processId** | str,  | str,  |  | 
-**status** | str,  | str,  |  | must be one of ["queued", "processing", "error", "complete", ] 
+**status** | [**ProcessingStatus**](ProcessingStatus.md) | [**ProcessingStatus**](ProcessingStatus.md) |  | 
 **progress** | [**ProcessStatusResponseIngestProgress**](ProcessStatusResponseIngestProgress.md) | [**ProcessStatusResponseIngestProgress**](ProcessStatusResponseIngestProgress.md) |  | [optional] 
 **statusMessage** | str,  | str,  |  | [optional] 
 **any_string_name** | dict, frozendict.frozendict, str, date, datetime, int, float, bool, decimal.Decimal, None, list, tuple, bytes, io.FileIO, io.BufferedReader | frozendict.frozendict, str, BoolClass, decimal.Decimal, NoneClass, tuple, bytes, FileIO | any string name can be used but the value must be the correct type | [optional]

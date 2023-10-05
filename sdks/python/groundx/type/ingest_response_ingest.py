@@ -15,11 +15,12 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal
 
+from groundx.type.processing_status import ProcessingStatus
 
 class RequiredIngestResponseIngest(TypedDict):
     processId: str
 
-    status: str
+    status: ProcessingStatus
 
 class OptionalIngestResponseIngest(TypedDict, total=False):
     pass

@@ -15,14 +15,5 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal
 
-from groundx.type.bucket_detail import BucketDetail
-from groundx.type.project_detail import ProjectDetail
 
-class RequiredProjectResponse(TypedDict):
-    project: ProjectDetail
-
-class OptionalProjectResponse(TypedDict, total=False):
-    pass
-
-class ProjectResponse(RequiredProjectResponse, OptionalProjectResponse):
-    pass
+ProcessingStatus = Literal["queued", "processing", "error", "complete"]

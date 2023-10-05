@@ -16,6 +16,7 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal
 
 from groundx.type.ingest_response_ingest import IngestResponseIngest
+from groundx.type.processing_status import ProcessingStatus
 
 class RequiredIngestResponse(TypedDict):
     ingest: IngestResponseIngest

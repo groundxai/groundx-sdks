@@ -40,20 +40,23 @@ class IngestResponseIngest(
         
         class properties:
             processId = schemas.StrSchema
-            status = schemas.StrSchema
+        
+            @staticmethod
+            def status() -> typing.Type['ProcessingStatus']:
+                return ProcessingStatus
             __annotations__ = {
                 "processId": processId,
                 "status": status,
             }
     
     processId: MetaOapg.properties.processId
-    status: MetaOapg.properties.status
+    status: 'ProcessingStatus'
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["processId"]) -> MetaOapg.properties.processId: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["status"]) -> MetaOapg.properties.status: ...
+    def __getitem__(self, name: typing_extensions.Literal["status"]) -> 'ProcessingStatus': ...
     
     @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
@@ -67,7 +70,7 @@ class IngestResponseIngest(
     def get_item_oapg(self, name: typing_extensions.Literal["processId"]) -> MetaOapg.properties.processId: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["status"]) -> MetaOapg.properties.status: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["status"]) -> 'ProcessingStatus': ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
@@ -80,7 +83,7 @@ class IngestResponseIngest(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
         processId: typing.Union[MetaOapg.properties.processId, str, ],
-        status: typing.Union[MetaOapg.properties.status, str, ],
+        status: 'ProcessingStatus',
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
     ) -> 'IngestResponseIngest':
@@ -92,3 +95,5 @@ class IngestResponseIngest(
             _configuration=_configuration,
             **kwargs,
         )
+
+from groundx.model.processing_status import ProcessingStatus

@@ -37,8 +37,10 @@ from groundx.model.ingest_response_ingest import IngestResponseIngest as IngestR
 from groundx.model.document_local_upload_request import DocumentLocalUploadRequest as DocumentLocalUploadRequestSchema
 from groundx.model.ingest_response import IngestResponse as IngestResponseSchema
 from groundx.model.document_type import DocumentType as DocumentTypeSchema
+from groundx.model.processing_status import ProcessingStatus as ProcessingStatusSchema
 from groundx.model.document_local_upload_request_blob import DocumentLocalUploadRequestBlob as DocumentLocalUploadRequestBlobSchema
 
+from groundx.type.processing_status import ProcessingStatus
 from groundx.type.document_type import DocumentType
 from groundx.type.document_local_upload_request_blob import DocumentLocalUploadRequestBlob
 from groundx.type.document_local_upload_request import DocumentLocalUploadRequest

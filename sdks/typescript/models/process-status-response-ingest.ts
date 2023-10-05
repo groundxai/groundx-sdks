@@ -23,6 +23,9 @@ import { ProcessStatusResponseIngestProgress } from './process-status-response-i
 // May contain unused imports in some cases
 // @ts-ignore
 import { ProcessStatusResponseIngestProgressComplete } from './process-status-response-ingest-progress-complete';
+// May contain unused imports in some cases
+// @ts-ignore
+import { ProcessingStatus } from './processing-status';
 
 /**
  * 
@@ -44,10 +47,10 @@ export interface ProcessStatusResponseIngest {
     'progress'?: ProcessStatusResponseIngestProgress;
     /**
      * 
-     * @type {string}
+     * @type {ProcessingStatus}
      * @memberof ProcessStatusResponseIngest
      */
-    'status': ProcessStatusResponseIngestStatusEnum;
+    'status': ProcessingStatus;
     /**
      * 
      * @type {string}
@@ -55,7 +58,4 @@ export interface ProcessStatusResponseIngest {
      */
     'statusMessage'?: string;
 }
-
-type ProcessStatusResponseIngestStatusEnum = 'queued' | 'processing' | 'error' | 'complete'
-
 

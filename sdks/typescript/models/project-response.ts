@@ -29,6 +29,6 @@ export interface ProjectResponse {
      * @type {ProjectDetail}
      * @memberof ProjectResponse
      */
-    'project'?: ProjectDetail;
+    'project': ProjectDetail;
 }
 

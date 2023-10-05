@@ -21,11 +21,12 @@ from groundx.type.process_status_response_ingest_progress import ProcessStatusRe
 from groundx.type.process_status_response_ingest_progress_complete import ProcessStatusResponseIngestProgressComplete
 from groundx.type.process_status_response_ingest_progress_errors import ProcessStatusResponseIngestProgressErrors
 from groundx.type.process_status_response_ingest_progress_processing import ProcessStatusResponseIngestProgressProcessing
+from groundx.type.processing_status import ProcessingStatus
 
 class RequiredProcessStatusResponseIngest(TypedDict):
     processId: str
 
-    status: str
+    status: ProcessingStatus
 
 class OptionalProcessStatusResponseIngest(TypedDict, total=False):
     progress: ProcessStatusResponseIngestProgress

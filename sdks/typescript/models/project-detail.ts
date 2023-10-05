@@ -47,10 +47,10 @@ export interface ProjectDetail {
     'fileSize'?: string;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof ProjectDetail
      */
-    'projectId'?: string;
+    'projectId': number;
     /**
      * 
      * @type {string}

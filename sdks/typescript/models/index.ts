@@ -35,6 +35,7 @@ export * from './process-status-response';
 export * from './process-status-response-ingest';
 export * from './process-status-response-ingest-progress';
 export * from './process-status-response-ingest-progress-complete';
+export * from './processing-status';
 export * from './project-bind-bucket400-response';
 export * from './project-bucket-binding';
 export * from './project-bucket-binding-project';

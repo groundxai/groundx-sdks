@@ -14,6 +14,9 @@
 // May contain unused imports in some cases
 // @ts-ignore
 import { IngestResponseIngest } from './ingest-response-ingest';
+// May contain unused imports in some cases
+// @ts-ignore
+import { ProcessingStatus } from './processing-status';
 
 /**
  * 

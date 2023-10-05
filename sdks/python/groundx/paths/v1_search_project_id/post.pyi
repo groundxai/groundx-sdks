@@ -76,11 +76,11 @@ request_query_n = api_client.QueryParameter(
     explode=True,
 )
 # Path params
-ProjectIdSchema = schemas.StrSchema
+ProjectIdSchema = schemas.IntSchema
 RequestRequiredPathParams = typing_extensions.TypedDict(
     'RequestRequiredPathParams',
     {
-        'projectId': typing.Union[ProjectIdSchema, str, ],
+        'projectId': typing.Union[ProjectIdSchema, decimal.Decimal, int, ],
     }
 )
 RequestOptionalPathParams = typing_extensions.TypedDict(
@@ -173,7 +173,7 @@ class BaseApi(api_client.Api):
 
     def _content_mapped_args(
         self,
-        project_id: str,
+        project_id: int,
         search: typing.Optional[SearchRequestSearch] = None,
         n: typing.Optional[int] = None,
     ) -> api_client.MappedArgs:
@@ -450,7 +450,7 @@ class Content(BaseApi):
 
     async def acontent(
         self,
-        project_id: str,
+        project_id: int,
         search: typing.Optional[SearchRequestSearch] = None,
         n: typing.Optional[int] = None,
     ) -> typing.Union[
@@ -471,7 +471,7 @@ class Content(BaseApi):
     
     def content(
         self,
-        project_id: str,
+        project_id: int,
         search: typing.Optional[SearchRequestSearch] = None,
         n: typing.Optional[int] = None,
     ) -> typing.Union[
@@ -494,7 +494,7 @@ class ApiForpost(BaseApi):
 
     async def apost(
         self,
-        project_id: str,
+        project_id: int,
         search: typing.Optional[SearchRequestSearch] = None,
         n: typing.Optional[int] = None,
     ) -> typing.Union[
@@ -515,7 +515,7 @@ class ApiForpost(BaseApi):
     
     def post(
         self,
-        project_id: str,
+        project_id: int,
         search: typing.Optional[SearchRequestSearch] = None,
         n: typing.Optional[int] = None,
     ) -> typing.Union[

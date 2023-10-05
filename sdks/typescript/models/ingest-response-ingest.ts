@@ -11,6 +11,9 @@
  * Do not edit the class manually.
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import { ProcessingStatus } from './processing-status';
 
 /**
  * 
@@ -26,9 +29,9 @@ export interface IngestResponseIngest {
     'processId': string;
     /**
      * 
-     * @type {string}
+     * @type {ProcessingStatus}
      * @memberof IngestResponseIngest
      */
-    'status': string;
+    'status': ProcessingStatus;
 }
 

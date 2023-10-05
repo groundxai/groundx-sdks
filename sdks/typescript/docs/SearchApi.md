@@ -23,7 +23,7 @@ const groundx = new Groundx({
 });
 
 const contentResponse = await groundx.search.content({
-  projectId: "projectId_example",
+  projectId: 1,
   n: 20,
 });
 
@@ -35,7 +35,7 @@ console.log(contentResponse);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **searchRequest** | **SearchRequest**|  |
-**projectId** | **string** | The ID of the project to search within. | (required)
+**projectId** | **number** | The ID of the project to search within. | (required)
 **n** | **number** | Number of results | (optional)
 
 ### Return type

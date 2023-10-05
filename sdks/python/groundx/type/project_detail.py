@@ -18,7 +18,7 @@ from typing_extensions import TypedDict, Literal
 from groundx.type.bucket_detail import BucketDetail
 
 class RequiredProjectDetail(TypedDict):
-    pass
+    projectId: int
 
 class OptionalProjectDetail(TypedDict, total=False):
     buckets: typing.List[BucketDetail]
@@ -28,8 +28,6 @@ class OptionalProjectDetail(TypedDict, total=False):
     fileCount: int
 
     fileSize: str
-
-    projectId: str
 
     name: str
 
