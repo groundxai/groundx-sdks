@@ -2,7 +2,7 @@ name: konfig-revalidate-portal
 on:
   push:
     branches:
-      - master
+      - main
 jobs:
   konfig-revalidate-portal:
     runs-on: ubuntu-latest
