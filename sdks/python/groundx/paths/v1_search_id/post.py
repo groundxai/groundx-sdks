@@ -33,9 +33,13 @@ import frozendict  # noqa: F401
 from groundx import schemas  # noqa: F401
 
 from groundx.model.search_request import SearchRequest as SearchRequestSchema
+from groundx.model.search_result_item import SearchResultItem as SearchResultItemSchema
 from groundx.model.search_request_search import SearchRequestSearch as SearchRequestSearchSchema
+from groundx.model.search_response_search import SearchResponseSearch as SearchResponseSearchSchema
 from groundx.model.search_response import SearchResponse as SearchResponseSchema
 
+from groundx.type.search_response_search import SearchResponseSearch
+from groundx.type.search_result_item import SearchResultItem
 from groundx.type.search_response import SearchResponse
 from groundx.type.search_request import SearchRequest
 from groundx.type.search_request_search import SearchRequestSearch

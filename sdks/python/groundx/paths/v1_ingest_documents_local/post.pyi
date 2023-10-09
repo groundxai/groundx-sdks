@@ -32,10 +32,14 @@ import frozendict  # noqa: F401
 
 from groundx import schemas  # noqa: F401
 
+from groundx.model.ingest_response_ingest import IngestResponseIngest as IngestResponseIngestSchema
 from groundx.model.document_local_upload_request import DocumentLocalUploadRequest as DocumentLocalUploadRequestSchema
 from groundx.model.ingest_response import IngestResponse as IngestResponseSchema
+from groundx.model.processing_status import ProcessingStatus as ProcessingStatusSchema
 
+from groundx.type.processing_status import ProcessingStatus
 from groundx.type.document_local_upload_request import DocumentLocalUploadRequest
+from groundx.type.ingest_response_ingest import IngestResponseIngest
 from groundx.type.ingest_response import IngestResponse
 
 # body param

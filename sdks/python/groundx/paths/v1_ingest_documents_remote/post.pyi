@@ -32,12 +32,16 @@ import frozendict  # noqa: F401
 
 from groundx import schemas  # noqa: F401
 
+from groundx.model.ingest_response_ingest import IngestResponseIngest as IngestResponseIngestSchema
 from groundx.model.ingest_response import IngestResponse as IngestResponseSchema
 from groundx.model.document_remote_upload_request import DocumentRemoteUploadRequest as DocumentRemoteUploadRequestSchema
+from groundx.model.processing_status import ProcessingStatus as ProcessingStatusSchema
 from groundx.model.document_remote_upload_request_documents import DocumentRemoteUploadRequestDocuments as DocumentRemoteUploadRequestDocumentsSchema
 
+from groundx.type.processing_status import ProcessingStatus
 from groundx.type.document_remote_upload_request import DocumentRemoteUploadRequest
 from groundx.type.document_remote_upload_request_documents import DocumentRemoteUploadRequestDocuments
+from groundx.type.ingest_response_ingest import IngestResponseIngest
 from groundx.type.ingest_response import IngestResponse
 
 # body param

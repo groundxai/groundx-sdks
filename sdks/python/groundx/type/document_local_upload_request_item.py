@@ -16,6 +16,7 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal
 
 from groundx.type.document_local_upload_request_item_metadata import DocumentLocalUploadRequestItemMetadata
+from groundx.type.document_type import DocumentType
 
 class RequiredDocumentLocalUploadRequestItem(TypedDict):
     # The actual file being uploaded.

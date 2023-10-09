@@ -33,8 +33,10 @@ import frozendict  # noqa: F401
 from groundx import schemas  # noqa: F401
 
 from groundx.model.bucket_list_response import BucketListResponse as BucketListResponseSchema
+from groundx.model.bucket_detail import BucketDetail as BucketDetailSchema
 
 from groundx.type.bucket_list_response import BucketListResponse
+from groundx.type.bucket_detail import BucketDetail
 
 from . import path
 

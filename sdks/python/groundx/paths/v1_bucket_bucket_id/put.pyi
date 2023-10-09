@@ -32,6 +32,7 @@ import frozendict  # noqa: F401
 
 from groundx import schemas  # noqa: F401
 
+from groundx.model.bucket_detail import BucketDetail as BucketDetailSchema
 from groundx.model.bucket_update_request_bucket import BucketUpdateRequestBucket as BucketUpdateRequestBucketSchema
 from groundx.model.bucket_update_request import BucketUpdateRequest as BucketUpdateRequestSchema
 from groundx.model.bucket_response import BucketResponse as BucketResponseSchema
@@ -39,6 +40,7 @@ from groundx.model.bucket_response import BucketResponse as BucketResponseSchema
 from groundx.type.bucket_update_request import BucketUpdateRequest
 from groundx.type.bucket_response import BucketResponse
 from groundx.type.bucket_update_request_bucket import BucketUpdateRequestBucket
+from groundx.type.bucket_detail import BucketDetail
 
 # Path params
 BucketIdSchema = schemas.IntSchema

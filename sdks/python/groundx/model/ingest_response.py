@@ -85,3 +85,4 @@ class IngestResponse(
         )
 
 from groundx.model.ingest_response_ingest import IngestResponseIngest
+from groundx.model.processing_status import ProcessingStatus

@@ -203,7 +203,20 @@ groundx = Groundx(
 
 try:
     # Upload local documents to GroundX
-    upload_local_response = groundx.documents.upload_local()
+    upload_local_response = groundx.documents.upload_local(
+        body=[
+            {
+                "blob": open("/path/to/file", "rb"),
+                "metadata": {
+                    "bucket_id": 1234,
+                    "file_name": "my_file.txt",
+                    "file_type": "txt",
+                    "callback_data": "my_callback_data",
+                    "callback_url": "https://my.callback.url.com",
+                },
+            }
+        ],  # optional
+    )
     pprint(upload_local_response.body)
     pprint(upload_local_response.body["ingest"])
     pprint(upload_local_response.headers)

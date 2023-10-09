@@ -112,3 +112,4 @@ class ProcessStatusResponseIngestProgressProcessing(
         )
 
 from groundx.model.document_response import DocumentResponse
+from groundx.model.document_response_document import DocumentResponseDocument

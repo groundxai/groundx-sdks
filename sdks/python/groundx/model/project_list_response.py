@@ -101,4 +101,5 @@ class ProjectListResponse(
             **kwargs,
         )
 
+from groundx.model.bucket_detail import BucketDetail
 from groundx.model.project_detail import ProjectDetail

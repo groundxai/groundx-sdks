@@ -15,6 +15,7 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal
 
+from groundx.type.bucket_detail import BucketDetail
 from groundx.type.project_detail import ProjectDetail
 
 class RequiredProjectResponse(TypedDict):

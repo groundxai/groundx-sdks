@@ -53,3 +53,4 @@ class DocumentRemoteUploadRequestDocuments(
         return super().__getitem__(i)
 
 from groundx.model.document_remote_upload_request_documents_item import DocumentRemoteUploadRequestDocumentsItem
+from groundx.model.document_type import DocumentType

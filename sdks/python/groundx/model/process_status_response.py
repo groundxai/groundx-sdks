@@ -84,4 +84,11 @@ class ProcessStatusResponse(
             **kwargs,
         )
 
+from groundx.model.document_response import DocumentResponse
+from groundx.model.document_response_document import DocumentResponseDocument
 from groundx.model.process_status_response_ingest import ProcessStatusResponseIngest
+from groundx.model.process_status_response_ingest_progress import ProcessStatusResponseIngestProgress
+from groundx.model.process_status_response_ingest_progress_complete import ProcessStatusResponseIngestProgressComplete
+from groundx.model.process_status_response_ingest_progress_errors import ProcessStatusResponseIngestProgressErrors
+from groundx.model.process_status_response_ingest_progress_processing import ProcessStatusResponseIngestProgressProcessing
+from groundx.model.processing_status import ProcessingStatus

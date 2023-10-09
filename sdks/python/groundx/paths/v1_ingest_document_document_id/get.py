@@ -32,8 +32,10 @@ import frozendict  # noqa: F401
 
 from groundx import schemas  # noqa: F401
 
+from groundx.model.document_response_document import DocumentResponseDocument as DocumentResponseDocumentSchema
 from groundx.model.document_response import DocumentResponse as DocumentResponseSchema
 
+from groundx.type.document_response_document import DocumentResponseDocument
 from groundx.type.document_response import DocumentResponse
 
 from . import path

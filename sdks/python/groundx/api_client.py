@@ -1808,6 +1808,7 @@ class RequestBody(StyleFormSerializer, JSONDetector):
         # This is necessary to fill the "Content-Disposition" header needed for naming fields in multipart
         for field in fields:
             field.make_multipart(content_type=field.headers["Content-Type"])
+
         return dict(fields=tuple(fields))
 
     def __serialize_application_octet_stream(self, in_data: BinarySchema) -> typing.Dict[str, bytes]:

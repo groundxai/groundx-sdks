@@ -16,5 +16,7 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal
 
 from groundx.type.document_local_upload_request_item import DocumentLocalUploadRequestItem
+from groundx.type.document_local_upload_request_item_metadata import DocumentLocalUploadRequestItemMetadata
+from groundx.type.document_type import DocumentType
 
 DocumentLocalUploadRequest = typing.List[DocumentLocalUploadRequestItem]

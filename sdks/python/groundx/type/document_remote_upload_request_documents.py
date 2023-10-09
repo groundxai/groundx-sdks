@@ -16,5 +16,6 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal
 
 from groundx.type.document_remote_upload_request_documents_item import DocumentRemoteUploadRequestDocumentsItem
+from groundx.type.document_type import DocumentType
 
 DocumentRemoteUploadRequestDocuments = typing.List[DocumentRemoteUploadRequestDocumentsItem]

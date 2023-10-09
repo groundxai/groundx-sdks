@@ -15,7 +15,14 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal
 
+from groundx.type.document_response import DocumentResponse
+from groundx.type.document_response_document import DocumentResponseDocument
 from groundx.type.process_status_response_ingest import ProcessStatusResponseIngest
+from groundx.type.process_status_response_ingest_progress import ProcessStatusResponseIngestProgress
+from groundx.type.process_status_response_ingest_progress_complete import ProcessStatusResponseIngestProgressComplete
+from groundx.type.process_status_response_ingest_progress_errors import ProcessStatusResponseIngestProgressErrors
+from groundx.type.process_status_response_ingest_progress_processing import ProcessStatusResponseIngestProgressProcessing
+from groundx.type.processing_status import ProcessingStatus
 
 class RequiredProcessStatusResponse(TypedDict):
     ingest: ProcessStatusResponseIngest

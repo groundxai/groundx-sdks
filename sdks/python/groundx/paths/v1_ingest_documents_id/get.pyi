@@ -32,9 +32,13 @@ import frozendict  # noqa: F401
 
 from groundx import schemas  # noqa: F401
 
+from groundx.model.document_response_document import DocumentResponseDocument as DocumentResponseDocumentSchema
+from groundx.model.document_response import DocumentResponse as DocumentResponseSchema
 from groundx.model.document_lookup_response import DocumentLookupResponse as DocumentLookupResponseSchema
 
 from groundx.type.document_lookup_response import DocumentLookupResponse
+from groundx.type.document_response_document import DocumentResponseDocument
+from groundx.type.document_response import DocumentResponse
 
 # Path params
 IdSchema = schemas.IntSchema

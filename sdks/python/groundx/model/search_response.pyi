@@ -85,3 +85,4 @@ class SearchResponse(
         )
 
 from groundx.model.search_response_search import SearchResponseSearch
+from groundx.model.search_result_item import SearchResultItem
