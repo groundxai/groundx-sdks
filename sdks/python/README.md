@@ -1,6 +1,6 @@
 <div align="center">
 
-[![Visit Groundx](./header.png)](https://www.groundx.ai)
+[![Visit Groundx](https://raw.githubusercontent.com/groundxai/groundx-sdks/HEAD/sdks/python/header.png)](https://www.groundx.ai)
 
 # Groundx
 
