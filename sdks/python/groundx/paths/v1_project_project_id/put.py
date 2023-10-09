@@ -33,16 +33,12 @@ import frozendict  # noqa: F401
 from groundx import schemas  # noqa: F401
 
 from groundx.model.project_update_request import ProjectUpdateRequest as ProjectUpdateRequestSchema
-from groundx.model.bucket_detail import BucketDetail as BucketDetailSchema
 from groundx.model.project_response import ProjectResponse as ProjectResponseSchema
 from groundx.model.project_update_request_project import ProjectUpdateRequestProject as ProjectUpdateRequestProjectSchema
-from groundx.model.project_detail import ProjectDetail as ProjectDetailSchema
 
 from groundx.type.project_response import ProjectResponse
 from groundx.type.project_update_request_project import ProjectUpdateRequestProject
 from groundx.type.project_update_request import ProjectUpdateRequest
-from groundx.type.bucket_detail import BucketDetail
-from groundx.type.project_detail import ProjectDetail
 
 from . import path
 

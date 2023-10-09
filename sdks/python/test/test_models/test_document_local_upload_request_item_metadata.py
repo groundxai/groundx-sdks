@@ -13,12 +13,12 @@
 import unittest
 
 import groundx
-from groundx.model.project_bucket_binding_project import ProjectBucketBindingProject
+from groundx.model.document_local_upload_request_item_metadata import DocumentLocalUploadRequestItemMetadata
 from groundx import configuration
 
 
-class TestProjectBucketBindingProject(unittest.TestCase):
-    """ProjectBucketBindingProject unit test stubs"""
+class TestDocumentLocalUploadRequestItemMetadata(unittest.TestCase):
+    """DocumentLocalUploadRequestItemMetadata unit test stubs"""
     pass
 
 

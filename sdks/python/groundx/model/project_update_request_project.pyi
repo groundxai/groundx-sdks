@@ -33,12 +33,17 @@ class ProjectUpdateRequestProject(
 
 
     class MetaOapg:
+        required = {
+            "name",
+        }
         
         class properties:
             name = schemas.StrSchema
             __annotations__ = {
                 "name": name,
             }
+    
+    name: MetaOapg.properties.name
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["name"]) -> MetaOapg.properties.name: ...
@@ -52,7 +57,7 @@ class ProjectUpdateRequestProject(
     
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["name"]) -> typing.Union[MetaOapg.properties.name, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["name"]) -> MetaOapg.properties.name: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
@@ -64,7 +69,7 @@ class ProjectUpdateRequestProject(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        name: typing.Union[MetaOapg.properties.name, str, schemas.Unset] = schemas.unset,
+        name: typing.Union[MetaOapg.properties.name, str, ],
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
     ) -> 'ProjectUpdateRequestProject':

@@ -16,15 +16,12 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal
 
 from groundx.type.document_remote_upload_request_documents import DocumentRemoteUploadRequestDocuments
-from groundx.type.document_type import DocumentType
 
 class RequiredDocumentRemoteUploadRequest(TypedDict):
-    pass
+    documents: DocumentRemoteUploadRequestDocuments
 
 class OptionalDocumentRemoteUploadRequest(TypedDict, total=False):
-    type: DocumentType
-
-    documents: DocumentRemoteUploadRequestDocuments
+    pass
 
 class DocumentRemoteUploadRequest(RequiredDocumentRemoteUploadRequest, OptionalDocumentRemoteUploadRequest):
     pass

@@ -16,7 +16,6 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal
 
 from groundx.type.document_response import DocumentResponse
-from groundx.type.document_response_document import DocumentResponseDocument
 
 class RequiredDocumentListResponse(TypedDict):
     pass

@@ -17,10 +17,10 @@ from typing_extensions import TypedDict, Literal
 
 
 class RequiredProjectUpdateRequestProject(TypedDict):
-    pass
+    name: str
 
 class OptionalProjectUpdateRequestProject(TypedDict, total=False):
-    name: str
+    pass
 
 class ProjectUpdateRequestProject(RequiredProjectUpdateRequestProject, OptionalProjectUpdateRequestProject):
     pass

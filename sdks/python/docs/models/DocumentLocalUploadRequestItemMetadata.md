@@ -1,4 +1,4 @@
-# groundx.model.document_local_upload_request_metadata.DocumentLocalUploadRequestMetadata
+# groundx.model.document_local_upload_request_item_metadata.DocumentLocalUploadRequestItemMetadata
 
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
@@ -8,9 +8,9 @@ dict, frozendict.frozendict,  | frozendict.frozendict,  |  |
 ### Dictionary Keys
 Key | Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | ------------- | -------------
-**bucketId** | decimal.Decimal, int,  | decimal.Decimal,  |  | [optional] 
-**fileName** | str,  | str,  |  | [optional] 
-**fileType** | [**DocumentType**](DocumentType.md) | [**DocumentType**](DocumentType.md) |  | [optional] 
+**fileName** | str,  | str,  |  | 
+**bucketId** | decimal.Decimal, int,  | decimal.Decimal,  |  | 
+**fileType** | [**DocumentType**](DocumentType.md) | [**DocumentType**](DocumentType.md) |  | 
 **[metadata](#metadata)** | dict, frozendict.frozendict,  | frozendict.frozendict,  |  | [optional] 
 **callbackData** | str,  | str,  |  | [optional] 
 **callbackUrl** | str,  | str,  |  | [optional] 

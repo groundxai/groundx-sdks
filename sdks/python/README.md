@@ -4,7 +4,6 @@
 
 Ground Your RAG Apps in Fact not Fiction
 
-
 ## Requirements
 
 Python >=3.7

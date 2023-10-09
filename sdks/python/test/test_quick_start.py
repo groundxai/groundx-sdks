@@ -6,6 +6,7 @@ import os
 from pprint import pprint
 from groundx import Groundx
 
+
 class TestSimple(unittest.TestCase):
     def setUp(self):
         pass
@@ -56,29 +57,61 @@ class TestSimple(unittest.TestCase):
         # pprint(search.body)
 
     def test_quick_start_local(self):
-        pass
-        # groundx = Groundx(
-        #     api_key = os.environ['GROUNDX_API_KEY'],
-        # )
+        groundx = Groundx(
+            api_key=os.environ["GROUNDX_API_KEY"],
+        )
 
-        # project = groundx.project.create(project={"name": "test-project"}).body
-        # bucket = groundx.bucket.create(bucket={"name": "test-bucket"}).body["bucket"]
-        # # create file instance with open() for ../../../document.txt. Use path relative to this file
-        # file = open(os.path.join(os.path.dirname(__file__), "../../../document.txt"), "rb")
-        # ingest = groundx.document.upload_local(blob=[file], metadata={"bucketId": bucket["bucketId"], "fileName": "document.txt", "fileType": "txt"}).body
+        projects = groundx.projects.list().body
+        project = projects["projects"][0] if "projects" in projects else None
+        buckets = groundx.buckets.list().body
+        bucket = buckets["buckets"][0] if "buckets" in buckets else None
+        if project is None or bucket is None:
+            raise Exception("No project or bucket found")
+        # create file instance with open() for ../../../document.txt. Use path relative to this file
+        file_1 = open(
+            os.path.join(os.path.dirname(__file__), "../../../document.txt"), "rb"
+        )
+        file_2 = open(
+            os.path.join(os.path.dirname(__file__), "../../../document.txt"), "rb"
+        )
 
-        # # poll the status of upload until it is complete
-        # while ingest["ingest"]["status"] != "complete":
-        #     ingest = groundx.document.get_processing_status_by_id(ingest["ingest"]["processId"]).body
+        ingest = groundx.documents.upload_local(
+            [
+                {
+                    "blob": file_1,
+                    "metadata": {
+                        "bucketId": bucket["bucketId"],
+                        "fileName": "document-1.txt",
+                        "fileType": "txt",
+                    },
+                },
+                {
+                    "blob": file_2,
+                    "metadata": {
+                        "bucketId": bucket["bucketId"],
+                        "fileName": "document-2.txt",
+                        "fileType": "txt",
+                    },
+                }
+            ]
+        ).body
 
-        #     # sleep for 3 seconds
-        #     import time
-        #     time.sleep(3)
+        # poll the status of upload until it is complete
+        while ingest["ingest"]["status"] != "complete":
+            ingest = groundx.documents.get_processing_status_by_id(
+                ingest["ingest"]["processId"]
+            ).body
 
-        # # search
-        # search = groundx.search.content(id=project["project"]["projectId"], search={"query": "Documents"})
-        # pprint(search.body)
+            # sleep for 3 seconds
+            import time
 
+            time.sleep(3)
+
+        # search
+        search = groundx.search.content(
+            id=project["projectId"], search={"query": "Documents"}
+        )
+        pprint(search.body)
 
     def tearDown(self):
         pass

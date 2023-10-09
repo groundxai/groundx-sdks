@@ -16,7 +16,6 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal
 
 from groundx.type.search_response_search import SearchResponseSearch
-from groundx.type.search_result_item import SearchResultItem
 
 class RequiredSearchResponse(TypedDict):
     search: SearchResponseSearch

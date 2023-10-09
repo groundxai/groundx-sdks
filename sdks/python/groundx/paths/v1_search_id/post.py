@@ -33,13 +33,9 @@ import frozendict  # noqa: F401
 from groundx import schemas  # noqa: F401
 
 from groundx.model.search_request import SearchRequest as SearchRequestSchema
-from groundx.model.search_result_item import SearchResultItem as SearchResultItemSchema
 from groundx.model.search_request_search import SearchRequestSearch as SearchRequestSearchSchema
-from groundx.model.search_response_search import SearchResponseSearch as SearchResponseSearchSchema
 from groundx.model.search_response import SearchResponse as SearchResponseSchema
 
-from groundx.type.search_response_search import SearchResponseSearch
-from groundx.type.search_result_item import SearchResultItem
 from groundx.type.search_response import SearchResponse
 from groundx.type.search_request import SearchRequest
 from groundx.type.search_request_search import SearchRequestSearch
@@ -187,8 +183,8 @@ class BaseApi(api_client.Api):
 
     def _content_mapped_args(
         self,
+        search: SearchRequestSearch,
         id: int,
-        search: typing.Optional[SearchRequestSearch] = None,
         n: typing.Optional[int] = None,
     ) -> api_client.MappedArgs:
         args: api_client.MappedArgs = api_client.MappedArgs()
@@ -464,8 +460,8 @@ class Content(BaseApi):
 
     async def acontent(
         self,
+        search: SearchRequestSearch,
         id: int,
-        search: typing.Optional[SearchRequestSearch] = None,
         n: typing.Optional[int] = None,
     ) -> typing.Union[
         ApiResponseFor200Async,
@@ -473,8 +469,8 @@ class Content(BaseApi):
         AsyncGeneratorResponse,
     ]:
         args = self._content_mapped_args(
-            id=id,
             search=search,
+            id=id,
             n=n,
         )
         return await self._acontent_oapg(
@@ -485,16 +481,16 @@ class Content(BaseApi):
     
     def content(
         self,
+        search: SearchRequestSearch,
         id: int,
-        search: typing.Optional[SearchRequestSearch] = None,
         n: typing.Optional[int] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
         args = self._content_mapped_args(
-            id=id,
             search=search,
+            id=id,
             n=n,
         )
         return self._content_oapg(
@@ -508,8 +504,8 @@ class ApiForpost(BaseApi):
 
     async def apost(
         self,
+        search: SearchRequestSearch,
         id: int,
-        search: typing.Optional[SearchRequestSearch] = None,
         n: typing.Optional[int] = None,
     ) -> typing.Union[
         ApiResponseFor200Async,
@@ -517,8 +513,8 @@ class ApiForpost(BaseApi):
         AsyncGeneratorResponse,
     ]:
         args = self._content_mapped_args(
-            id=id,
             search=search,
+            id=id,
             n=n,
         )
         return await self._acontent_oapg(
@@ -529,16 +525,16 @@ class ApiForpost(BaseApi):
     
     def post(
         self,
+        search: SearchRequestSearch,
         id: int,
-        search: typing.Optional[SearchRequestSearch] = None,
         n: typing.Optional[int] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
         args = self._content_mapped_args(
-            id=id,
             search=search,
+            id=id,
             n=n,
         )
         return self._content_oapg(

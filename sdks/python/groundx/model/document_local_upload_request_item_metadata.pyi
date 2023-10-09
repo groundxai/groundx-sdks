@@ -24,7 +24,7 @@ import frozendict  # noqa: F401
 from groundx import schemas  # noqa: F401
 
 
-class DocumentLocalUploadRequestMetadata(
+class DocumentLocalUploadRequestItemMetadata(
     schemas.DictSchema
 ):
     """
@@ -33,6 +33,11 @@ class DocumentLocalUploadRequestMetadata(
 
 
     class MetaOapg:
+        required = {
+            "fileName",
+            "bucketId",
+            "fileType",
+        }
         
         class properties:
             bucketId = schemas.IntSchema
@@ -52,6 +57,10 @@ class DocumentLocalUploadRequestMetadata(
                 "callbackData": callbackData,
                 "callbackUrl": callbackUrl,
             }
+    
+    fileName: MetaOapg.properties.fileName
+    bucketId: MetaOapg.properties.bucketId
+    fileType: 'DocumentType'
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["bucketId"]) -> MetaOapg.properties.bucketId: ...
@@ -80,13 +89,13 @@ class DocumentLocalUploadRequestMetadata(
     
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["bucketId"]) -> typing.Union[MetaOapg.properties.bucketId, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["bucketId"]) -> MetaOapg.properties.bucketId: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["fileName"]) -> typing.Union[MetaOapg.properties.fileName, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["fileName"]) -> MetaOapg.properties.fileName: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["fileType"]) -> typing.Union['DocumentType', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["fileType"]) -> 'DocumentType': ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["metadata"]) -> typing.Union[MetaOapg.properties.metadata, schemas.Unset]: ...
@@ -107,20 +116,20 @@ class DocumentLocalUploadRequestMetadata(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        bucketId: typing.Union[MetaOapg.properties.bucketId, decimal.Decimal, int, schemas.Unset] = schemas.unset,
-        fileName: typing.Union[MetaOapg.properties.fileName, str, schemas.Unset] = schemas.unset,
-        fileType: typing.Union['DocumentType', schemas.Unset] = schemas.unset,
+        fileName: typing.Union[MetaOapg.properties.fileName, str, ],
+        bucketId: typing.Union[MetaOapg.properties.bucketId, decimal.Decimal, int, ],
+        fileType: 'DocumentType',
         metadata: typing.Union[MetaOapg.properties.metadata, dict, frozendict.frozendict, schemas.Unset] = schemas.unset,
         callbackData: typing.Union[MetaOapg.properties.callbackData, str, schemas.Unset] = schemas.unset,
         callbackUrl: typing.Union[MetaOapg.properties.callbackUrl, str, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
-    ) -> 'DocumentLocalUploadRequestMetadata':
+    ) -> 'DocumentLocalUploadRequestItemMetadata':
         return super().__new__(
             cls,
             *args,
-            bucketId=bucketId,
             fileName=fileName,
+            bucketId=bucketId,
             fileType=fileType,
             metadata=metadata,
             callbackData=callbackData,

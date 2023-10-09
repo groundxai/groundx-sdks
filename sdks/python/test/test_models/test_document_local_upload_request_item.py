@@ -13,12 +13,12 @@
 import unittest
 
 import groundx
-from groundx.model.document_local_upload_request_blob import DocumentLocalUploadRequestBlob
+from groundx.model.document_local_upload_request_item import DocumentLocalUploadRequestItem
 from groundx import configuration
 
 
-class TestDocumentLocalUploadRequestBlob(unittest.TestCase):
-    """DocumentLocalUploadRequestBlob unit test stubs"""
+class TestDocumentLocalUploadRequestItem(unittest.TestCase):
+    """DocumentLocalUploadRequestItem unit test stubs"""
     pass
 
 

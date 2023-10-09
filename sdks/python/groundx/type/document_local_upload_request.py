@@ -15,17 +15,6 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal
 
-from groundx.type.document_local_upload_request_blob import DocumentLocalUploadRequestBlob
-from groundx.type.document_local_upload_request_metadata import DocumentLocalUploadRequestMetadata
-from groundx.type.document_type import DocumentType
+from groundx.type.document_local_upload_request_item import DocumentLocalUploadRequestItem
 
-class RequiredDocumentLocalUploadRequest(TypedDict):
-    blob: DocumentLocalUploadRequestBlob
-
-    metadata: DocumentLocalUploadRequestMetadata
-
-class OptionalDocumentLocalUploadRequest(TypedDict, total=False):
-    pass
-
-class DocumentLocalUploadRequest(RequiredDocumentLocalUploadRequest, OptionalDocumentLocalUploadRequest):
-    pass
+DocumentLocalUploadRequest = typing.List[DocumentLocalUploadRequestItem]

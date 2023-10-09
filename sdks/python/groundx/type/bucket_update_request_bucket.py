@@ -17,10 +17,10 @@ from typing_extensions import TypedDict, Literal
 
 
 class RequiredBucketUpdateRequestBucket(TypedDict):
-    pass
+    name: str
 
 class OptionalBucketUpdateRequestBucket(TypedDict, total=False):
-    name: str
+    pass
 
 class BucketUpdateRequestBucket(RequiredBucketUpdateRequestBucket, OptionalBucketUpdateRequestBucket):
     pass

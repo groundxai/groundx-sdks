@@ -18,10 +18,10 @@ from typing_extensions import TypedDict, Literal
 from groundx.type.search_request_search import SearchRequestSearch
 
 class RequiredSearchRequest(TypedDict):
-    pass
+    search: SearchRequestSearch
 
 class OptionalSearchRequest(TypedDict, total=False):
-    search: SearchRequestSearch
+    pass
 
 class SearchRequest(RequiredSearchRequest, OptionalSearchRequest):
     pass
