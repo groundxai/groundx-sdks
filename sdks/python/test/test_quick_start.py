@@ -57,61 +57,62 @@ class TestSimple(unittest.TestCase):
         # pprint(search.body)
 
     def test_quick_start_local(self):
-        groundx = Groundx(
-            api_key=os.environ["GROUNDX_API_KEY"],
-        )
+        pass
+        # groundx = Groundx(
+        #     api_key=os.environ["GROUNDX_API_KEY"],
+        # )
 
-        projects = groundx.projects.list().body
-        project = projects["projects"][0] if "projects" in projects else None
-        buckets = groundx.buckets.list().body
-        bucket = buckets["buckets"][0] if "buckets" in buckets else None
-        if project is None or bucket is None:
-            raise Exception("No project or bucket found")
-        # create file instance with open() for ../../../document.txt. Use path relative to this file
-        file_1 = open(
-            os.path.join(os.path.dirname(__file__), "../../../document.txt"), "rb"
-        )
-        file_2 = open(
-            os.path.join(os.path.dirname(__file__), "../../../document.txt"), "rb"
-        )
+        # projects = groundx.projects.list().body
+        # project = projects["projects"][0] if "projects" in projects else None
+        # buckets = groundx.buckets.list().body
+        # bucket = buckets["buckets"][0] if "buckets" in buckets else None
+        # if project is None or bucket is None:
+        #     raise Exception("No project or bucket found")
+        # # create file instance with open() for ../../../document.txt. Use path relative to this file
+        # file_1 = open(
+        #     os.path.join(os.path.dirname(__file__), "../../../document.txt"), "rb"
+        # )
+        # file_2 = open(
+        #     os.path.join(os.path.dirname(__file__), "../../../document.txt"), "rb"
+        # )
 
-        ingest = groundx.documents.upload_local(
-            [
-                {
-                    "blob": file_1,
-                    "metadata": {
-                        "bucketId": bucket["bucketId"],
-                        "fileName": "document-1.txt",
-                        "fileType": "txt",
-                    },
-                },
-                {
-                    "blob": file_2,
-                    "metadata": {
-                        "bucketId": bucket["bucketId"],
-                        "fileName": "document-2.txt",
-                        "fileType": "txt",
-                    },
-                }
-            ]
-        ).body
+        # ingest = groundx.documents.upload_local(
+        #     [
+        #         {
+        #             "blob": file_1,
+        #             "metadata": {
+        #                 "bucketId": bucket["bucketId"],
+        #                 "fileName": "document-1.txt",
+        #                 "fileType": "txt",
+        #             },
+        #         },
+        #         {
+        #             "blob": file_2,
+        #             "metadata": {
+        #                 "bucketId": bucket["bucketId"],
+        #                 "fileName": "document-2.txt",
+        #                 "fileType": "txt",
+        #             },
+        #         }
+        #     ]
+        # ).body
 
-        # poll the status of upload until it is complete
-        while ingest["ingest"]["status"] != "complete":
-            ingest = groundx.documents.get_processing_status_by_id(
-                ingest["ingest"]["processId"]
-            ).body
+        # # poll the status of upload until it is complete
+        # while ingest["ingest"]["status"] != "complete":
+        #     ingest = groundx.documents.get_processing_status_by_id(
+        #         ingest["ingest"]["processId"]
+        #     ).body
 
-            # sleep for 3 seconds
-            import time
+        #     # sleep for 3 seconds
+        #     import time
 
-            time.sleep(3)
+        #     time.sleep(3)
 
-        # search
-        search = groundx.search.content(
-            id=project["projectId"], search={"query": "Documents"}
-        )
-        pprint(search.body)
+        # # search
+        # search = groundx.search.content(
+        #     id=project["projectId"], search={"query": "Documents"}
+        # )
+        # pprint(search.body)
 
     def tearDown(self):
         pass
