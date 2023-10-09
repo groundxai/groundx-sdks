@@ -23,11 +23,11 @@ groundx = Groundx(
 try:
     # Perform a search query of your content
     content_response = groundx.search.content(
-        id=1,  # required
         search={
             "query": "my search query",
             "next_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9",
-        },  # optional
+        },  # required
+        id=1,  # required
         n=20,  # optional
     )
     pprint(content_response.body)
