@@ -1,8 +1,16 @@
-# groundx-python-sdk
+<div align="center">
 
-[![PyPI](https://img.shields.io/badge/PyPI-v1.2.0-blue)](https://pypi.org/project/groundx-python-sdk/1.2.0)
+[![Visit Groundx](./header.png)](https://www.groundx.ai)
+
+# Groundx
 
 Ground Your RAG Apps in Fact not Fiction
+
+
+[![PyPI](https://img.shields.io/badge/PyPI-v1.2.0-blue)](https://pypi.org/project/groundx-python-sdk/1.2.0)
+[![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://www.groundx.ai/)
+
+</div>
 
 ## Requirements
 

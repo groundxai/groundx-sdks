@@ -16,6 +16,12 @@ portal:
           links:
             - id: quick-start
               path: docs/quick-start.md
+infoContactUrl:
+  https://www.groundx.ai/
+readmeHeader:
+  image: header.png
+  title: Groundx
+  url: https://www.groundx.ai
 generators:
   python:
     version: 1.2.0

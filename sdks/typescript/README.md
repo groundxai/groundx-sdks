@@ -1,8 +1,15 @@
-# groundx-typescript-sdk
+<div align="center">
+
+[![Visit Groundx](./header.png)](https://www.groundx.ai)
+
+# [Groundx](https://www.groundx.ai)
 
 Ground Your RAG Apps in Fact not Fiction
 
 [![npm](https://img.shields.io/badge/npm-v1.2.0-blue)](https://www.npmjs.com/package/groundx-typescript-sdk/v/1.2.0)
+[![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://www.groundx.ai/)
+
+</div>
 
 ## Table of Contents
 
