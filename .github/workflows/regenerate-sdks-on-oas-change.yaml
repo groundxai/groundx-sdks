@@ -1,0 +1,16 @@
+name: Regenerate SDKs on OAS Change
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+    branches:
+      - main
+
+jobs:
+  regenerate-sdks-on-oas-change:
+    uses: konfig-dev/automation/.github/workflows/regenerate-sdks-on-oas-change.yaml@main
+    secrets:
+      TEST_ENV: ${{ secrets.TEST_ENV }}
+      KONFIG_API_KEY: ${{ secrets.KONFIG_API_KEY }}

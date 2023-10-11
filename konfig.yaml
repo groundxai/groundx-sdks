@@ -31,6 +31,7 @@ generators:
     git:
       userId: groundxai
       repoId: groundx-sdks/tree/main/sdks/python
+    pypiApiTokenEnvironmentVariable: PYPI_TOKEN_1
   typescript:
     version: 1.3.0
     npmName: groundx-typescript-sdk
