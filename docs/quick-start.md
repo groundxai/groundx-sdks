@@ -39,25 +39,25 @@ If you're using one of our SDKs, you will use your API key to initialize your cl
 :::code
 
 ```python
-import asyncio
 from groundx import Groundx, ApiException
 
 groundx = Groundx(
-  api_key="<your_api_key>",
+  api_key=groundxKey,
 )
 ```
 
 ```typescript
+import fs from 'fs';
 import { Groundx } from "groundx-typescript-sdk";
 
 const groundx = new Groundx({
-  apiKey: "<your_api_key>",
+  apiKey: groundxKey,
 });
 ```
 
 :::
 
-Replace `<your_api_key>` with your actual API key.
+Replace `groundxKey` with your GroundX API key.
 
 ## Step 4: Make Your First Request
 
@@ -72,17 +72,15 @@ curl https://api.groundx.ai/api/v1/bucket \
 
 ```python
 try:
-  bucket_response = groundx.bucket.list()
+  bucket_response = groundx.buckets.list()
 
-  print(bucket_response.body["buckets"])
-except ApiException as e:
-  print("Exception when calling BucketApi.list: %s\n" % e)
+  bucketId = bucket_response.body["buckets"][0]["bucketId"]
 ```
 
 ```typescript
-const bucketResponse = await groundx.bucket.list();
+const bucketResponse = await groundx.buckets.list();
 
-console.log(bucketResponse);
+bucketId = bucketResponse.data.buckets[0].bucketId;
 ```
 
 :::
@@ -119,10 +117,8 @@ curl https://api.groundx.ai/api/v1/ingest/documents \
      -d '{
            "documents": [
              {
-               "bucketId":  <your_bucket_id>,
-               "metadata": {
-                 "<your_key>": "<your_value>"
-               },
+               "bucketId":  bucketId,
+               "fileType": fileType,
                "sourceUrl": "<path_to_your_file>"
              }
            ]
@@ -132,73 +128,73 @@ curl https://api.groundx.ai/api/v1/ingest/documents \
 ```python
 # Upload local documents to GroundX
 
-try:
-  upload_local_response = groundx.document.upload_local(
-    blob=[open("/path/to/your/file", "rb")],
-    metadata={
-      "bucket_id": <your_bucket_id>,
-      "file_name": "my_file.pdf",
-      "file_type": "pdf"
+ingest = groundx.documents.upload_local(
+  body=[
+    {
+      "blob": open(uploadLocal, "rb"),
+      "metadata": {
+        "bucketId": bucketId,
+        "fileName": fileName,
+        "fileType": fileType,
+      },
     },
-  )
-  print(upload_remote_response.body["ingest"])
-except ApiException as e:
-  print("Exception when calling DocumentApi.upload_local: %s\n" % e)
+  ]
+)
 
 
 # Upload hosted documents to GroundX
 
-try:
-  upload_remote_response = groundx.document.upload_remote(
-    documents=[
-      {
-        "bucket_id": <your_bucket_id>,
-        "source_url": "https://path.to.your/file.docx",
-        "type": "docx"
-      }
-    ],
-  )
-  print(upload_remote_response.body["ingest"])
-except ApiException as e:
-  print("Exception when calling DocumentApi.upload_remote: %s\n" % e)
+ingest = groundx.documents.upload_remote(
+  documents=[
+    {
+      "bucketId": bucketId,
+      "sourceUrl": uploadHosted,
+      "fileType": fileType,
+    }
+  ],
+)
 ```
 
 ```typescript
 // Upload local documents to GroundX
 
-const uploadLocalResponse = await groundx.document.uploadLocal({
-  blob: [open("/path/to/your/file", "rb")],
-  metadata: {
-    bucketId: <your_bucket_id>,
-    fileName: "my_file.pdf",
-    fileType: "pdf"
-  },
-});
-console.log(uploadLocalResponse);
+let ingest = await groundx.documents.uploadLocal([
+  {
+    blob: fs.readFileSync(uploadLocal),
+    metadata: {
+      bucketId: bucketId,
+      fileName: fileName,
+      fileType: fileType,
+    },
+  }
+]);
 
 
 // Upload hosted documents to GroundX
 
-const uploadRemoteResponse = await groundx.document.uploadRemote({
-  bucketId: <your_bucket_id>,
-  sourceUrl: "https://path.to.your/file.docx",
-  type: "docx"
+let ingest = await groundx.documents.uploadRemote({
+  documents: [
+    {
+      bucketId: bucketId,
+      fileType: fileType,
+      sourceUrl: uploadHosted,
+    }
+  ]
 });
-console.log(uploadRemoteResponse);
 ```
 
 :::
 
-Replace `<path_to_your_file>` with the path to your file and `<your_bucket_id>` with the content bucket you would like to add the document to. Also, you can add `metadata`.
+Replace `uploadLocal` with the path to your local file, `uploadHosted` to the URL of your hosted file, `fileType` with one of the enumerated file types (e.g. txt, pdf), `fileName` with a name for your file, and `bucketId` with the content bucket you would like to add the document to.
 
 If your request is successful, will receive a response that looks something like this:
 
 ```json
 {
-    "ingest": {
-        "processId": "<unique_system_generated_id",
-        "status": "<enumerated_status>"
-    }
+  "ingest": {
+    "processId": "<unique_system_generated_id",
+    "status": "<enumerated_status>"
+  }
 }
 ```
 
@@ -211,59 +207,52 @@ Make the following request to query the status of your document upload as it is 
 :::code
 
 ```bash
-curl https://api.groundx.ai/api/v1/ingest/<processId> \
+curl https://api.groundx.ai/api/v1/ingest/:processId \
      -H "X-API-KEY: <your_api_key>" \
      -H "Content-Type: application/json"
 ```
 
 ```python
-try:
-  get_processing_status_by_id_response = groundx.document.get_processing_status_by_id(
-    process_id="<processId>",  # required
-  )
-  print(get_processing_status_by_id_response.body["ingest"])
-except ApiException as e:
-  print("Exception when calling DocumentApi.get_processing_status_by_id: %s\n" % e)
+ingest = groundx.documents.get_processing_status_by_id(
+  process_id=processId
+)
 ```
 
 ```typescript
-const getProcessingStatusByIdResponse =
-  await groundx.document.getProcessingStatusById({
-    processId: "<processId>",
-  });
-
-console.log(getProcessingStatusByIdResponse);
+ingest = await groundx.documents.getProcessingStatusById({
+  processId: processId,
+});
 ```
 
 :::
 
-Replace `<processId>` the processId from the previous step.
+Replace `processId` the processId from the previous step.
 
 If your request is successful, will receive a response that looks something like this:
 
 ```json
 {
-    "ingest": {
-        "processId": "<unique_system_generated_id>",
-        "progress": {
-            "complete": {
-                "documents": [
-                    {
-                        "documentId": "<unique_system_generated_id>",
-                        "fileName": "<given_file_name>",
-                        "fileSize": "<files_size_total>",
-                        "fileType": "<file_type>",
-                        "bucketId": <your_bucket_id>,
-                        "processId": "<unique_system_generated_id>",
-                        "sourceUrl": "<document_url>",
-                        "status": "<enumerated_status>"
-                    }
-                ],
-                "total": 1
-            }
-        },
-        "status": "<enumerated_status>"
-    }
+  "ingest": {
+    "processId": "<unique_system_generated_id>",
+    "progress": {
+      "complete": {
+        "documents": [
+          {
+            "documentId": "<unique_system_generated_id>",
+            "fileName": "<given_file_name>",
+            "fileSize": "<files_size_total>",
+            "fileType": "<file_type>",
+            "bucketId": <your_bucket_id>,
+            "processId": "<unique_system_generated_id>",
+            "sourceUrl": "<document_url>",
+            "status": "<enumerated_status>"
+          }
+        ],
+        "total": 1
+      }
+    },
+    "status": "<enumerated_status>"
+  }
 }
 ```
 
@@ -276,7 +265,7 @@ Make the following request to search your ingested content:
 :::code
 
 ```bash
-curl https://api.groundx.ai/api/v1/search/<id> \
+curl https://api.groundx.ai/api/v1/search/:id \
      -X POST \
      -H "X-API-KEY: <your_api_key>" \
      -H "Content-Type: application/json" \
@@ -284,55 +273,44 @@ curl https://api.groundx.ai/api/v1/search/<id> \
 ```
 
 ```python
-try:
-  content_response = groundx.search.content(
-    id=<id>,  # required
-    search={
-      "query": "<your_query>"
-    }
-  )
-  print(content_response.body["search"])
-except ApiException as e:
-  print("Exception when calling SearchApi.content: %s\n" % e)
+content_response = groundx.search.content(id=id, search={"query": query})
 ```
 
 ```typescript
-const contentResponse = await groundx.search.content({
-  id: <id>,
+const searchResponse = await groundx.search.content({
+  id: id,
   search: {
-    query: "<your_query>"
+    query: query
   },
 });
-
-console.log(contentResponse);
 ```
 
 :::
 
-Replace `<id>` with your `projectId`, `groupId`, or `bucketId` and `<your_query>` with the query you want to use to search your content.
+Replace `id` with your `projectId`, `groupId`, or `bucketId` and `query` with the query you want to use to search your content.
 
 If your request is successful, will receive a response that looks something like this:
 
 ```json
 {
-    "search": {
-        "count": <int_number_of_results>,
-        "query": "<your_query>"
-        "score": <float_highest_relevance_score_in_results>,
-        "text": "<combined_text_of_search_results>",
-        "nextToken": "<token_for_next_set_of_results>",
-        "results":[
-            {
-                "documentId": "<unique_system_generated_id>",
-                "metadata": {
-                    <document_metadata>
-                },
-                "score": <float_relevance_score_of_result>,
-                "sourceUrl": "<source_document_url>",
-                "text":  "<text_of_result>"
-            }
-        ]
-    }
+  "search": {
+    "count": <int_number_of_results>,
+    "query": "<your_query>"
+    "score": <float_highest_relevance_score_in_results>,
+    "text": "<combined_text_of_search_results>",
+    "nextToken": "<token_for_next_set_of_results>",
+    "results":[
+      {
+        "documentId": "<unique_system_generated_id>",
+        "metadata": {
+            <document_metadata>
+        },
+        "score": <float_relevance_score_of_result>,
+        "sourceUrl": "<source_document_url>",
+        "text":  "<text_of_result>"
+      }
+    ]
+  }
 }
 ```
 
@@ -348,17 +326,15 @@ curl https://api.groundx.ai/api/v1/project \
 ```
 
 ```python
-try:
-  project_response = groundx.project.list()
-  print(project_response.body["projects"])
-except ApiException as e:
-  print("Exception when calling ProjectApi.list: %s\n" % e)
+project_response = groundx.project.list()
+
+projectId = project_response.body["projects"][0]["projectId"]
 ```
 
 ```typescript
 const projectResponse = await groundx.project.list();
 
-console.log(projectResponse);
+projectId = projResponse.data.projects[0].projectId;
 ```
 
 :::
@@ -367,30 +343,30 @@ If your request is successful, will receive a response that looks something like
 
 ```json
 {
-    "projects": [
+  "projects": [
+    {
+      "buckets": [
         {
-            "buckets": [
-                {
-                    "bucketId": <unique_system_generated_id>,
-                    "fileCount": <number_of_documents_in_bucket>,
-                    "fileSize": "<files_size_total>",
-                    "name": "<your_bucket_name>"
-                }
-            ],
-            "created": "<project_created_date_time>",
-            "fileCount": <number_of_documents_in_project>,
-            "fileSize": "<files_size_total>",
-            "fileCount": <number_of_documents_in_project>,
-            "name": "<your_project_name>",
-            "projectId": <unique_system_generated_id>,
-            "updated": "<project_updated_date_time>"
+          "bucketId": <unique_system_generated_id>,
+          "fileCount": <number_of_documents_in_bucket>,
+          "fileSize": "<files_size_total>",
+          "name": "<your_bucket_name>"
         }
-    ]
+      ],
+      "created": "<project_created_date_time>",
+      "fileCount": <number_of_documents_in_project>,
+      "fileSize": "<files_size_total>",
+      "fileCount": <number_of_documents_in_project>,
+      "name": "<your_project_name>",
+      "projectId": <unique_system_generated_id>,
+      "updated": "<project_updated_date_time>"
+    }
+  ]
 }
 ```
 
 ## Next Steps
 
-Now that you've successfully used the GroundX APIs to upload and search content, you can dive into our [tutorials](/docs/tutorials) and [documentation](/reference)!
+Now that you've successfully used the GroundX APIs to upload and search content, you can dive into our [tutorials](/docs/chatgpt) and [documentation](/reference)!
 
 Remember, our APIs are still in closed beta, so we appreciate your patience and feedback as we continue to improve our service.
