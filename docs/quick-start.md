@@ -26,13 +26,11 @@ Before you can use our APIs, you will need to [create an account](https://dashbo
 
 Log into the [GroundX Dashboard](https://dashboard.groundx.ai) and navigate to API Keys.
 
-<p style="text-align: center;">![Navigate to API Keys](./imgs/gs1.webp "Navigate to API Keys")</p>
-<p style="text-align: center;">Navigate to <b>API Keys</b></p>
+![Navigate to API Keys](./imgs/gs1.webp "Navigate to API Keys")
 
 Copy your API Key and save it somewhere for use later in this tutorial.
 
-<p style="text-align: center;">![Copy Your API Key](./imgs/gs2.webp "Copy Your API Key")</p>
-<p style="text-align: center;">Copy Your API Key</p>
+![Copy Your API Key](./imgs/gs2.webp "Copy Your API Key")
 
 ## Step 3: Initialize Your SDK (optional)
 
