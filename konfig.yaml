@@ -4,7 +4,7 @@ outputDirectory: /tmp/groundx-sdks-out
 specPath: api.yaml
 portal:
   primaryColor: '#6b37d9'
-  title: Groundx
+  title: GroundX
   logo: portal-logo.png
   favicon: favicon.png
   socials:
@@ -12,10 +12,24 @@ portal:
   documentation:
     sidebar:
       sections:
-        - label: Guides
+        - label: Welcome
+          links:
+            - id: welcome
+              path: docs/welcome.md
+        - label: Quick Start
           links:
             - id: quick-start
               path: docs/quick-start.md
+        - label: Tutorials
+          links:
+            - id: tutorials
+              path: docs/tutorials.md
+            - id: chatgpt
+              path: docs/chatgpt.md
+        - label: Concepts
+          links:
+            - id: Concepts
+              path: docs/concepts.md
 infoContactUrl: https://www.groundx.ai/
 readmeHeader:
   image: header.png
