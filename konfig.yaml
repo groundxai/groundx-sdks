@@ -16,12 +16,12 @@ portal:
           links:
             - id: welcome
               path: docs/welcome.md
-            - id: quick-start
-              path: docs/quick-start.md
             - id: concepts
               path: docs/concepts.md
         - label: Tutorials
           links:
+            - id: quick-start
+              path: docs/quick-start.md
             - id: chatgpt
               path: docs/chatgpt.md
 infoContactUrl: https://www.groundx.ai/
