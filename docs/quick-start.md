@@ -117,9 +117,9 @@ curl https://api.groundx.ai/api/v1/ingest/documents \
      -d '{
            "documents": [
              {
-               "bucketId":  bucketId,
+               "bucketId": bucketId,
                "fileType": fileType,
-               "sourceUrl": "<path_to_your_file>"
+               "sourceUrl": uploadHosted
              }
            ]
          }'
@@ -269,7 +269,7 @@ curl https://api.groundx.ai/api/v1/search/:id \
      -X POST \
      -H "X-API-KEY: <your_api_key>" \
      -H "Content-Type: application/json" \
-     -d '{"search":{"query":"<your_query>"}}'
+     -d '{"search":{"query":query}}'
 ```
 
 ```python

@@ -40,7 +40,7 @@ Initialize both OpenAI and GroundX clients with the appropriate API keys:
 
 ```python
 groundx = Groundx(
-    api_key=groundxKey,
+  api_key=groundxKey,
 )
 
 openai.api_key = openaiKey
@@ -48,11 +48,11 @@ openai.api_key = openaiKey
 
 ```typescript
 const groundx = new Groundx({
-    apiKey: groundxKey,
+  apiKey: groundxKey,
 });
 
 const openai = new OpenAI({
-    apiKey: openaiKey,
+  apiKey: openaiKey,
 });
 ```
 
@@ -67,24 +67,18 @@ Next, you will submit a query to the GroundX Search API.  A request will look so
 :::code
 
 ```python
-try:
-    content_response = groundx.search.content(id=groundxId, search={"query": query})
-    results = content_response.body["search"]
-except ApiException as e:
-    print("Exception when calling SearchApi.content: %s\n" % e)
+content_response = groundx.search.content(id=groundxId, search={"query": query})
+
+results = content_response.body["search"]
 ```
 
 ```typescript
 const result = await groundx.search.content({
-    id: groundxId,
-    search: {
-      query: query
-    },
+  id: groundxId,
+  search: {
+    query: query
+  },
 });
-if (!result || !result.status || result.status != 200 || !result.data || !result.data.search) {
-    console.error(result);
-    throw Error("GroundX request failed");
-}
 ```
 
 :::
@@ -95,21 +89,21 @@ Your search results should look something like this:
 
 ```json
 {
-    "search": {
-        "count": <int_number_of_results>,
-        "query": "<your_query>"
-        "score": <float_highest_relevance_score_in_results>,
-        "text": "<combined_text_of_search_results>",
-        "nextToken": "<token_for_next_set_of_results>",
-        "results":[
-            {
-                "documentId": "<unique_system_generated_id>",
-                "score": <float_relevance_score_of_result>,
-                "sourceUrl": "<source_document_url>",
-                "text":  "<text_of_result>"
-            }
-        ]
-    }
+  "search": {
+    "count": <int_number_of_results>,
+    "query": "<your_query>"
+    "score": <float_highest_relevance_score_in_results>,
+    "text": "<combined_text_of_search_results>",
+    "nextToken": "<token_for_next_set_of_results>",
+    "results":[
+      {
+        "documentId": "<unique_system_generated_id>",
+        "score": <float_relevance_score_of_result>,
+        "sourceUrl": "<source_document_url>",
+        "text":  "<text_of_result>"
+      }
+    ]
+  }
 }
 ```
 
@@ -124,25 +118,25 @@ Here is an example of what that could look like:
 ```python
 llmText = ""
 for r in results["results"]:
-    if "text" in r and len(r["text"]) > 0:
-        if len(llmText) + len(r["text"]) > maxInstructCharacters:
-            break
-        elif len(llmText) > 0:
-            llmText += "\n"
-        llmText += r["text"]
+  if "text" in r and len(r["text"]) > 0:
+    if len(llmText) + len(r["text"]) > maxInstructCharacters:
+      break
+    elif len(llmText) > 0:
+      llmText += "\n"
+    llmText += r["text"]
 ```
 
 ```typescript
 let llmText = "";
 result.data.search.results.forEach((r) => {
-    if (r["text"] && r["text"].length > 0) {
-        if (llmText.length + r["text"].length > maxInstructCharacters) {
-            return;
-        } else if (llmText.length > 0) {
-            llmText += "\n";
-        }
-        llmText += r["text"];
+  if (r["text"] && r["text"].length > 0) {
+    if (llmText.length + r["text"].length > maxInstructCharacters) {
+      return;
+    } else if (llmText.length > 0) {
+      llmText += "\n";
     }
+    llmText += r["text"];
+  }
 });
 ```
 
@@ -169,36 +163,36 @@ Combine your completion instructions with your curated GroundX search results:
 
 ```python
 completion = openai.ChatCompletion.create(
-    model=openaiModel,
-    messages=[
-        {
-            "role": "system",
-            "content": """%s
+  model=openaiModel,
+  messages=[
+    {
+      "role": "system",
+      "content": """%s
 ===
 %s
 ===
 """
-            % (instruction, llmText),
-        },
-        {"role": "user", "content": query},
-    ],
+      % (instruction, llmText),
+    },
+    {"role": "user", "content": query},
+  ],
 )
 ```
 
 ```typescript
 const completion = await openai.chat.completions.create({
-    model: openaiModel,
-    messages: [
-        {
-            "role": "system",
-            "content": `${instruction}
+  model: openaiModel,
+  messages: [
+    {
+      "role": "system",
+      "content": `${instruction}
 ===
 ${llmText}
 ===
 `
-        },
-        {"role": "user", "content": query},
-    ],
+    },
+    {"role": "user", "content": query},
+  ],
 });
 ```
 
