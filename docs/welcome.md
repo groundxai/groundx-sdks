@@ -1,7 +1,5 @@
 # Welcome
 
-## Introduction
-
 GroundX is an API framework that helps you rapidly build LLM-powered applications with private data where your answers are grounded in fact not fiction.
 
 We’ve been building the GroundX platform alongside LLM providers like OpenAI, Google and Meta for more than three years and have worked hard to build a framework that will save you many hours of pain.
