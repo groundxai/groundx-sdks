@@ -80,13 +80,14 @@ const listResponse = await groundx.apiKeys.list();
 ```
 
 #### 🔄 Return
+
 [ApiKeyManagementListResponse](./models/api-key-management-list-response.ts)
 
 #### 🌐 Endpoint
 
 `/v1/apikey` `GET`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -110,13 +111,14 @@ const getResponse = await groundx.buckets.get({
 The ID of the bucket to retrieve.
 
 #### 🔄 Return
+
 [BucketResponse](./models/bucket-response.ts)
 
 #### 🌐 Endpoint
 
 `/v1/bucket/{bucketId}` `GET`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -132,13 +134,14 @@ const listResponse = await groundx.buckets.list();
 ```
 
 #### 🔄 Return
+
 [BucketListResponse](./models/bucket-list-response.ts)
 
 #### 🌐 Endpoint
 
 `/v1/bucket` `GET`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -167,13 +170,14 @@ const updateResponse = await groundx.buckets.update({
 The ID of the bucket to update.
 
 #### 🔄 Return
+
 [BucketResponse](./models/bucket-response.ts)
 
 #### 🌐 Endpoint
 
 `/v1/bucket/{bucketId}` `PUT`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -195,13 +199,14 @@ const deleteResponse = await groundx.documents.delete({
 ##### documentId: `string`
 
 #### 🔄 Return
+
 [DocumentDeleteResponse](./models/document-delete-response.ts)
 
 #### 🌐 Endpoint
 
 `/v1/ingest/document/{documentId}` `DELETE`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -223,13 +228,14 @@ const getResponse = await groundx.documents.get({
 ##### documentId: `string`
 
 #### 🔄 Return
+
 [DocumentResponse](./models/document-response.ts)
 
 #### 🌐 Endpoint
 
 `/v1/ingest/document/{documentId}` `GET`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -252,13 +258,14 @@ const getProcessingStatusByIdResponse =
 ##### processId: `string`
 
 #### 🔄 Return
+
 [ProcessStatusResponse](./models/process-status-response.ts)
 
 #### 🌐 Endpoint
 
 `/v1/ingest/{processId}` `GET`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -274,13 +281,14 @@ const listResponse = await groundx.documents.list();
 ```
 
 #### 🔄 Return
+
 [DocumentListResponse](./models/document-list-response.ts)
 
 #### 🌐 Endpoint
 
 `/v1/ingest/documents` `GET`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -302,13 +310,14 @@ const lookupResponse = await groundx.documents.lookup({
 ##### id: `number`
 
 #### 🔄 Return
+
 [DocumentLookupResponse](./models/document-lookup-response.ts)
 
 #### 🌐 Endpoint
 
 `/v1/ingest/documents/{id}` `GET`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -322,7 +331,7 @@ Upload local documents to GroundX
 ```typescript
 const uploadLocalResponse = await groundx.documents.uploadLocal([
   {
-    blob: open("/path/to/file", "rb"),
+    blob: fs.readFileSync("/path/to/file"),
     metadata: {
       bucketId: 1234,
       fileName: "my_file.txt",
@@ -334,18 +343,19 @@ const uploadLocalResponse = await groundx.documents.uploadLocal([
 ]);
 ```
 
-#### ⚙️ Parameter
+#### ⚙️ Request Body
 
 [`DocumentLocalUploadRequestInner`](./models/document-local-upload-request-inner.ts)[]
 
 #### 🔄 Return
+
 [IngestResponse](./models/ingest-response.ts)
 
 #### 🌐 Endpoint
 
 `/v1/ingest/documents/local` `POST`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -375,13 +385,14 @@ const uploadRemoteResponse = await groundx.documents.uploadRemote({
 ##### documents: [`DocumentRemoteUploadRequestDocumentsInner`](./models/document-remote-upload-request-documents-inner.ts)[]
 
 #### 🔄 Return
+
 [IngestResponse](./models/ingest-response.ts)
 
 #### 🌐 Endpoint
 
 `/v1/ingest/documents/remote` `POST`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -405,13 +416,14 @@ const getResponse = await groundx.projects.get({
 The ID of the project to retrieve.
 
 #### 🔄 Return
+
 [ProjectResponse](./models/project-response.ts)
 
 #### 🌐 Endpoint
 
 `/v1/project/{projectId}` `GET`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -427,13 +439,14 @@ const listResponse = await groundx.projects.list();
 ```
 
 #### 🔄 Return
+
 [ProjectListResponse](./models/project-list-response.ts)
 
 #### 🌐 Endpoint
 
 `/v1/project` `GET`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -462,13 +475,14 @@ const updateResponse = await groundx.projects.update({
 The ID of the project to update.
 
 #### 🔄 Return
+
 [ProjectResponse](./models/project-response.ts)
 
 #### 🌐 Endpoint
 
 `/v1/project/{projectId}` `PUT`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -503,13 +517,14 @@ The ID of the project, group, or bucket to search within.
 Number of results
 
 #### 🔄 Return
+
 [SearchResponse](./models/search-response.ts)
 
 #### 🌐 Endpoint
 
 `/v1/search/{id}` `POST`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 

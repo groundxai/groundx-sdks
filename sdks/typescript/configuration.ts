@@ -19,7 +19,12 @@ type ApiKey =
   | { [apiKeyName: string]: string | undefined };
 
 export interface ConfigurationParameters {
-    apiKey?: ApiKey;
+    /**
+     * parameter for apiKey security
+     * @param name security name
+     * @memberof Configuration
+     */
+    apiKey: ApiKey;
     username?: string;
     password?: string;
     accessToken?: string | Promise<string> | ((name?: string, scopes?: string[]) => string) | ((name?: string, scopes?: string[]) => Promise<string>);
@@ -35,7 +40,7 @@ export class Configuration {
      * @param name security name
      * @memberof Configuration
      */
-    apiKey?: ApiKey;
+    apiKey: ApiKey;
     /**
      * parameter for basic security
      *
@@ -84,7 +89,7 @@ export class Configuration {
      */
     userAgent: string;
 
-    constructor(param: ConfigurationParameters = {}) {
+    constructor(param: ConfigurationParameters) {
         this.apiKey = param.apiKey
         if (this.apiKey === undefined) {
             this.apiKey = {}

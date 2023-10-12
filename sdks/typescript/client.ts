@@ -27,7 +27,7 @@ export class Groundx extends GroundxCustom {
   readonly projects: ProjectsApi;
   readonly search: SearchApi;
 
-  constructor(configurationParameters: ConfigurationParameters = {}) {
+  constructor(configurationParameters: ConfigurationParameters) {
     super(configurationParameters);
     const configuration = new Configuration(configurationParameters);
     this.apiKeys = new ApiKeysApi(configuration);
