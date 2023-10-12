@@ -12,24 +12,18 @@ portal:
   documentation:
     sidebar:
       sections:
-        - label: Welcome
+        - label: Guides
           links:
             - id: welcome
               path: docs/welcome.md
-        - label: Quick Start
-          links:
             - id: quick-start
               path: docs/quick-start.md
+            - id: concepts
+              path: docs/concepts.md
         - label: Tutorials
           links:
-            - id: tutorials
-              path: docs/tutorials.md
             - id: chatgpt
               path: docs/chatgpt.md
-        - label: Concepts
-          links:
-            - id: Concepts
-              path: docs/concepts.md
 infoContactUrl: https://www.groundx.ai/
 readmeHeader:
   image: header.png
