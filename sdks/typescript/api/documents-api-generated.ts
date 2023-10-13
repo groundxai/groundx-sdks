@@ -324,7 +324,7 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
                         localVarFormParams.append(name, data as any);
                     } else {
                         if (isBrowser()) {
-                            localVarFormParams.append(name, JSON.stringify(data));
+                            localVarFormParams.append(name, new Blob([JSON.stringify(data)]), { type: "application/json" });
                         } else {
                             localVarFormParams.append(name, JSON.stringify(data), { type: "application/json", filename: "data.json" });
                         }
