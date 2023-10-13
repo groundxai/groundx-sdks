@@ -153,7 +153,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BucketResponse'
+                $ref: '#/components/schemas/BucketUpdateResponse'
         '400':
           description: Invalid body parameter
         '401':
@@ -269,6 +269,17 @@ paths:
         - Documents
       summary: Look up all existing documents
       operationId: Document_list
+      parameters:
+        - name: n
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: nextToken
+          in: query
+          required: false
+          schema:
+            type: string
       responses:
         '200':
           description: Look up success
@@ -290,6 +301,16 @@ paths:
           required: true
           schema:
             type: integer
+        - name: n
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: nextToken
+          in: query
+          required: false
+          schema:
+            type: string
       responses:
         '200':
           description: Look up success
@@ -450,6 +471,8 @@ components:
           type: integer
         fileSize:
           type: string
+        groupId:
+          type: integer
         projectId:
           type: integer
         name:
@@ -464,10 +487,23 @@ components:
       properties:
         bucketId:
           type: integer
+        created:
+          type: string
         fileCount:
           type: integer
         fileSize:
           type: string
+        name:
+          type: string
+        updated:
+          type: string
+    BucketUpdateDetail:
+      type: object
+      required:
+        - bucketId
+      properties:
+        bucketId:
+          type: integer
         name:
           type: string
     BucketResponse:
@@ -477,6 +513,13 @@ components:
       properties:
         bucket:
           $ref: '#/components/schemas/BucketDetail'
+    BucketUpdateResponse:
+      type: object
+      required:
+        - bucket
+      properties:
+        bucket:
+          $ref: '#/components/schemas/BucketUpdateDetail'
     BucketUpdateRequest:
       type: object
       required:
