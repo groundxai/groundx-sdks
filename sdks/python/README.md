@@ -1,6 +1,6 @@
 <div align="center">
 
-[![Visit Groundx](https://raw.githubusercontent.com/groundxai/groundx-sdks/HEAD/header.png)](https://www.groundx.ai)
+[![Visit Groundx](https://raw.githubusercontent.com/groundxai/groundx-sdks/HEAD/sdks/python/header.png)](https://www.groundx.ai)
 
 # Groundx
 
@@ -8,7 +8,6 @@ Ground Your RAG Apps in Fact not Fiction
 
 
 [![PyPI](https://img.shields.io/badge/PyPI-v1.3.1-blue)](https://pypi.org/project/groundx-python-sdk/1.3.1)
-[![GitHub last commit](https://img.shields.io/github/last-commit/groundxai/groundx-sdks.svg)](https://github.com/groundxai/groundx-sdks/commits)
 [![README.md](https://img.shields.io/badge/README-Click%20Here-green)](https://github.com/groundxai/groundx-sdks/tree/main/sdks/python#readme)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://www.groundx.ai/)
 
