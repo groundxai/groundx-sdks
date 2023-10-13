@@ -15,20 +15,13 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal
 
+from groundx.type.bucket_update_detail import BucketUpdateDetail
 
-class RequiredBucketDetail(TypedDict):
-    bucketId: int
+class RequiredBucketUpdateResponse(TypedDict):
+    bucket: BucketUpdateDetail
 
-class OptionalBucketDetail(TypedDict, total=False):
-    created: str
+class OptionalBucketUpdateResponse(TypedDict, total=False):
+    pass
 
-    fileCount: int
-
-    fileSize: str
-
-    name: str
-
-    updated: str
-
-class BucketDetail(RequiredBucketDetail, OptionalBucketDetail):
+class BucketUpdateResponse(RequiredBucketUpdateResponse, OptionalBucketUpdateResponse):
     pass

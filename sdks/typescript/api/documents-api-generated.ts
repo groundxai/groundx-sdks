@@ -191,10 +191,12 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
         /**
          * 
          * @summary Look up all existing documents
+         * @param {number} [n] 
+         * @param {string} [nextToken] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        list: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        list: async (n?: number, nextToken?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/v1/ingest/documents`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -209,6 +211,14 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
 
             // authentication ApiKeyAuth required
             await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "X-API-Key", configuration })
+            if (n !== undefined) {
+                localVarQueryParameter['n'] = n;
+            }
+
+            if (nextToken !== undefined) {
+                localVarQueryParameter['nextToken'] = nextToken;
+            }
+
 
     
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -230,10 +240,12 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
          * 
          * @summary Look up existing documents by processId, bucketId, or projectId
          * @param {number} id 
+         * @param {number} [n] 
+         * @param {string} [nextToken] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        lookup: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        lookup: async (id: number, n?: number, nextToken?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('lookup', 'id', id)
             const localVarPath = `/v1/ingest/documents/{id}`
@@ -251,6 +263,14 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
 
             // authentication ApiKeyAuth required
             await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "X-API-Key", configuration })
+            if (n !== undefined) {
+                localVarQueryParameter['n'] = n;
+            }
+
+            if (nextToken !== undefined) {
+                localVarQueryParameter['nextToken'] = nextToken;
+            }
+
 
     
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -429,11 +449,12 @@ export const DocumentsApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Look up all existing documents
+         * @param {DocumentsApiListRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async list(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DocumentListResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.list(options);
+        async list(requestParameters: DocumentsApiListRequest = {}, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DocumentListResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.list(requestParameters.n, requestParameters.nextToken, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -444,7 +465,7 @@ export const DocumentsApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async lookup(requestParameters: DocumentsApiLookupRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DocumentLookupResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.lookup(requestParameters.id, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.lookup(requestParameters.id, requestParameters.n, requestParameters.nextToken, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -512,11 +533,12 @@ export const DocumentsApiFactory = function (configuration?: Configuration, base
         /**
          * 
          * @summary Look up all existing documents
+         * @param {DocumentsApiListRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        list(options?: AxiosRequestConfig): AxiosPromise<DocumentListResponse> {
-            return localVarFp.list(options).then((request) => request(axios, basePath));
+        list(requestParameters: DocumentsApiListRequest = {}, options?: AxiosRequestConfig): AxiosPromise<DocumentListResponse> {
+            return localVarFp.list(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -600,6 +622,29 @@ export type DocumentsApiGetProcessingStatusByIdRequest = {
 }
 
 /**
+ * Request parameters for list operation in DocumentsApi.
+ * @export
+ * @interface DocumentsApiListRequest
+ */
+export type DocumentsApiListRequest = {
+    
+    /**
+    * 
+    * @type {number}
+    * @memberof DocumentsApiList
+    */
+    readonly n?: number
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof DocumentsApiList
+    */
+    readonly nextToken?: string
+    
+}
+
+/**
  * Request parameters for lookup operation in DocumentsApi.
  * @export
  * @interface DocumentsApiLookupRequest
@@ -612,6 +657,20 @@ export type DocumentsApiLookupRequest = {
     * @memberof DocumentsApiLookup
     */
     readonly id: number
+    
+    /**
+    * 
+    * @type {number}
+    * @memberof DocumentsApiLookup
+    */
+    readonly n?: number
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof DocumentsApiLookup
+    */
+    readonly nextToken?: string
     
 }
 
@@ -677,12 +736,13 @@ export class DocumentsApiGenerated extends BaseAPI {
     /**
      * 
      * @summary Look up all existing documents
+     * @param {DocumentsApiListRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DocumentsApiGenerated
      */
-    public list(options?: AxiosRequestConfig) {
-        return DocumentsApiFp(this.configuration).list(options).then((request) => request(this.axios, this.basePath));
+    public list(requestParameters: DocumentsApiListRequest = {}, options?: AxiosRequestConfig) {
+        return DocumentsApiFp(this.configuration).list(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

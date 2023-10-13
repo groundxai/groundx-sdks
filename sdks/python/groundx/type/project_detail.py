@@ -29,6 +29,8 @@ class OptionalProjectDetail(TypedDict, total=False):
 
     fileSize: str
 
+    groupId: int
+
     name: str
 
     updated: datetime

@@ -7,7 +7,7 @@ import enum
 
 class TagValues(str, enum.Enum):
     DOCUMENTS = "Documents"
+    SEARCH = "Search"
     PROJECTS = "Projects"
     BUCKETS = "Buckets"
-    SEARCH = "Search"
     API_KEYS = "API Keys"

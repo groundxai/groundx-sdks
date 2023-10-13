@@ -27,9 +27,13 @@ import { BucketListResponse } from '../models';
 // @ts-ignore
 import { BucketResponse } from '../models';
 // @ts-ignore
+import { BucketUpdateDetail } from '../models';
+// @ts-ignore
 import { BucketUpdateRequest } from '../models';
 // @ts-ignore
 import { BucketUpdateRequestBucket } from '../models';
+// @ts-ignore
+import { BucketUpdateResponse } from '../models';
 import { paginate } from "../pagination/paginate";
 import { requestBeforeHook } from '../requestBeforeHook';
 /**
@@ -206,7 +210,7 @@ export const BucketsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async update(requestParameters: BucketsApiUpdateRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BucketResponse>> {
+        async update(requestParameters: BucketsApiUpdateRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BucketUpdateResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.update(requestParameters.bucketId, requestParameters, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -246,7 +250,7 @@ export const BucketsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        update(requestParameters: BucketsApiUpdateRequest, options?: AxiosRequestConfig): AxiosPromise<BucketResponse> {
+        update(requestParameters: BucketsApiUpdateRequest, options?: AxiosRequestConfig): AxiosPromise<BucketUpdateResponse> {
             return localVarFp.update(requestParameters, options).then((request) => request(axios, basePath));
         },
     };

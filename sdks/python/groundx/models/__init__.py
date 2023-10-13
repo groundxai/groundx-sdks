@@ -18,8 +18,10 @@ from groundx.model.api_key_management_list_response_api_keys_item import ApiKeyM
 from groundx.model.bucket_detail import BucketDetail
 from groundx.model.bucket_list_response import BucketListResponse
 from groundx.model.bucket_response import BucketResponse
+from groundx.model.bucket_update_detail import BucketUpdateDetail
 from groundx.model.bucket_update_request import BucketUpdateRequest
 from groundx.model.bucket_update_request_bucket import BucketUpdateRequestBucket
+from groundx.model.bucket_update_response import BucketUpdateResponse
 from groundx.model.document_delete_response import DocumentDeleteResponse
 from groundx.model.document_list_response import DocumentListResponse
 from groundx.model.document_local_upload_request import DocumentLocalUploadRequest
