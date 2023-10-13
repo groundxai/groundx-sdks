@@ -24,7 +24,7 @@ export interface ConfigurationParameters {
      * @param name security name
      * @memberof Configuration
      */
-    apiKey: ApiKey;
+    apiKey?: ApiKey;
     username?: string;
     password?: string;
     accessToken?: string | Promise<string> | ((name?: string, scopes?: string[]) => string) | ((name?: string, scopes?: string[]) => Promise<string>);
@@ -40,7 +40,7 @@ export class Configuration {
      * @param name security name
      * @memberof Configuration
      */
-    apiKey: ApiKey;
+    apiKey?: ApiKey;
     /**
      * parameter for basic security
      *
@@ -99,7 +99,7 @@ export class Configuration {
         this.accessToken = param.accessToken;
         this.basePath = param.basePath;
         this.baseOptions = param.baseOptions ?? {};
-        this.userAgent = param.userAgent === undefined ? "Konfig/1.3.0/typescript" : param.userAgent;
+        this.userAgent = param.userAgent === undefined ? "Konfig/1.3.1/typescript" : param.userAgent;
         this.formDataCtor = param.formDataCtor;
     }
 
