@@ -2,6 +2,8 @@ import { Groundx } from "./index";
 
 describe("groundx-typescript-sdk", () => {
     it("initialize client", async () => {
-        const groundx = new Groundx();
+        const groundx = new Groundx({
+            apiKey: "API_KEY",
+        });
     });
 });
