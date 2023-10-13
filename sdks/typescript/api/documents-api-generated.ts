@@ -323,7 +323,11 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
                     if (isPrimitiveType) {
                         localVarFormParams.append(name, data as any);
                     } else {
-                        localVarFormParams.append(name, JSON.stringify(data), { type: "application/json", filename: "data.json" });
+                        if (isBrowser()) {
+                            localVarFormParams.append(name, JSON.stringify(data));
+                        } else {
+                            localVarFormParams.append(name, JSON.stringify(data), { type: "application/json", filename: "data.json" });
+                        }
                     }
                 }
             }
