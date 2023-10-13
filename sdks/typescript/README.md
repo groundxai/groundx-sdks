@@ -7,6 +7,7 @@
 Ground Your RAG Apps in Fact not Fiction
 
 [![npm](https://img.shields.io/badge/npm-v1.3.0-blue)](https://www.npmjs.com/package/groundx-typescript-sdk/v/1.3.0)
+[![GitHub last commit](https://img.shields.io/github/last-commit/groundxai/groundx-sdks/tree/main/sdks/typescript.svg)](https://github.com/groundxai/groundx-sdks/tree/main/sdks/typescript/commits)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://www.groundx.ai/)
 
 </div>
@@ -171,7 +172,7 @@ The ID of the bucket to update.
 
 #### 🔄 Return
 
-[BucketResponse](./models/bucket-response.ts)
+[BucketUpdateResponse](./models/bucket-update-response.ts)
 
 #### 🌐 Endpoint
 
@@ -277,8 +278,14 @@ Look up all existing documents
 #### 🛠️ Usage
 
 ```typescript
-const listResponse = await groundx.documents.list();
+const listResponse = await groundx.documents.list({});
 ```
+
+#### ⚙️ Parameters
+
+##### n: `number`
+
+##### nextToken: `string`
 
 #### 🔄 Return
 
@@ -308,6 +315,10 @@ const lookupResponse = await groundx.documents.lookup({
 #### ⚙️ Parameters
 
 ##### id: `number`
+
+##### n: `number`
+
+##### nextToken: `string`
 
 #### 🔄 Return
 

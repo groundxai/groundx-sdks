@@ -42,6 +42,40 @@ from groundx.type.document_response import DocumentResponse
 
 from . import path
 
+# Query params
+NSchema = schemas.IntSchema
+NextTokenSchema = schemas.StrSchema
+RequestRequiredQueryParams = typing_extensions.TypedDict(
+    'RequestRequiredQueryParams',
+    {
+    }
+)
+RequestOptionalQueryParams = typing_extensions.TypedDict(
+    'RequestOptionalQueryParams',
+    {
+        'n': typing.Union[NSchema, decimal.Decimal, int, ],
+        'nextToken': typing.Union[NextTokenSchema, str, ],
+    },
+    total=False
+)
+
+
+class RequestQueryParams(RequestRequiredQueryParams, RequestOptionalQueryParams):
+    pass
+
+
+request_query_n = api_client.QueryParameter(
+    name="n",
+    style=api_client.ParameterStyle.FORM,
+    schema=NSchema,
+    explode=True,
+)
+request_query_next_token = api_client.QueryParameter(
+    name="nextToken",
+    style=api_client.ParameterStyle.FORM,
+    schema=NextTokenSchema,
+    explode=True,
+)
 # Path params
 IdSchema = schemas.IntSchema
 RequestRequiredPathParams = typing_extensions.TypedDict(
@@ -122,16 +156,25 @@ class BaseApi(api_client.Api):
     def _lookup_mapped_args(
         self,
         id: int,
+        n: typing.Optional[int] = None,
+        next_token: typing.Optional[str] = None,
     ) -> api_client.MappedArgs:
         args: api_client.MappedArgs = api_client.MappedArgs()
+        _query_params = {}
         _path_params = {}
+        if n is not None:
+            _query_params["n"] = n
+        if next_token is not None:
+            _query_params["nextToken"] = next_token
         if id is not None:
             _path_params["id"] = id
+        args.query = _query_params
         args.path = _path_params
         return args
 
     async def _alookup_oapg(
         self,
+            query_params: typing.Optional[dict] = {},
             path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
         timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
@@ -148,6 +191,7 @@ class BaseApi(api_client.Api):
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
         """
+        self._verify_typed_dict_inputs_oapg(RequestQueryParams, query_params)
         self._verify_typed_dict_inputs_oapg(RequestPathParams, path_params)
         used_path = path.value
     
@@ -163,6 +207,20 @@ class BaseApi(api_client.Api):
     
         for k, v in _path_params.items():
             used_path = used_path.replace('{%s}' % k, v)
+    
+        prefix_separator_iterator = None
+        for parameter in (
+            request_query_n,
+            request_query_next_token,
+        ):
+            parameter_data = query_params.get(parameter.name, schemas.unset)
+            if parameter_data is schemas.unset:
+                continue
+            if prefix_separator_iterator is None:
+                prefix_separator_iterator = parameter.get_prefix_separator_iterator()
+            serialized_data = parameter.serialize(parameter_data, prefix_separator_iterator)
+            for serialized_value in serialized_data.values():
+                used_path += serialized_value
     
         _headers = HTTPHeaderDict()
         # TODO add cookie handling
@@ -183,6 +241,7 @@ class BaseApi(api_client.Api):
             method=method,
             headers=_headers,
             auth_settings=_auth,
+            prefix_separator_iterator=prefix_separator_iterator,
             timeout=timeout,
         )
     
@@ -242,6 +301,7 @@ class BaseApi(api_client.Api):
 
     def _lookup_oapg(
         self,
+            query_params: typing.Optional[dict] = {},
             path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
         timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
@@ -257,6 +317,7 @@ class BaseApi(api_client.Api):
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
         """
+        self._verify_typed_dict_inputs_oapg(RequestQueryParams, query_params)
         self._verify_typed_dict_inputs_oapg(RequestPathParams, path_params)
         used_path = path.value
     
@@ -272,6 +333,20 @@ class BaseApi(api_client.Api):
     
         for k, v in _path_params.items():
             used_path = used_path.replace('{%s}' % k, v)
+    
+        prefix_separator_iterator = None
+        for parameter in (
+            request_query_n,
+            request_query_next_token,
+        ):
+            parameter_data = query_params.get(parameter.name, schemas.unset)
+            if parameter_data is schemas.unset:
+                continue
+            if prefix_separator_iterator is None:
+                prefix_separator_iterator = parameter.get_prefix_separator_iterator()
+            serialized_data = parameter.serialize(parameter_data, prefix_separator_iterator)
+            for serialized_value in serialized_data.values():
+                used_path += serialized_value
     
         _headers = HTTPHeaderDict()
         # TODO add cookie handling
@@ -292,6 +367,7 @@ class BaseApi(api_client.Api):
             method=method,
             headers=_headers,
             auth_settings=_auth,
+            prefix_separator_iterator=prefix_separator_iterator,
             timeout=timeout,
         )
     
@@ -325,6 +401,8 @@ class Lookup(BaseApi):
     async def alookup(
         self,
         id: int,
+        n: typing.Optional[int] = None,
+        next_token: typing.Optional[str] = None,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -332,22 +410,30 @@ class Lookup(BaseApi):
     ]:
         args = self._lookup_mapped_args(
             id=id,
+            n=n,
+            next_token=next_token,
         )
         return await self._alookup_oapg(
+            query_params=args.query,
             path_params=args.path,
         )
     
     def lookup(
         self,
         id: int,
+        n: typing.Optional[int] = None,
+        next_token: typing.Optional[str] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
         args = self._lookup_mapped_args(
             id=id,
+            n=n,
+            next_token=next_token,
         )
         return self._lookup_oapg(
+            query_params=args.query,
             path_params=args.path,
         )
 
@@ -357,6 +443,8 @@ class ApiForget(BaseApi):
     async def aget(
         self,
         id: int,
+        n: typing.Optional[int] = None,
+        next_token: typing.Optional[str] = None,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -364,22 +452,30 @@ class ApiForget(BaseApi):
     ]:
         args = self._lookup_mapped_args(
             id=id,
+            n=n,
+            next_token=next_token,
         )
         return await self._alookup_oapg(
+            query_params=args.query,
             path_params=args.path,
         )
     
     def get(
         self,
         id: int,
+        n: typing.Optional[int] = None,
+        next_token: typing.Optional[str] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
         args = self._lookup_mapped_args(
             id=id,
+            n=n,
+            next_token=next_token,
         )
         return self._lookup_oapg(
+            query_params=args.query,
             path_params=args.path,
         )
 

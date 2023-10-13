@@ -24,6 +24,12 @@ export interface BucketDetail {
     'bucketId': number;
     /**
      * 
+     * @type {string}
+     * @memberof BucketDetail
+     */
+    'created'?: string;
+    /**
+     * 
      * @type {number}
      * @memberof BucketDetail
      */
@@ -40,5 +46,11 @@ export interface BucketDetail {
      * @memberof BucketDetail
      */
     'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BucketDetail
+     */
+    'updated'?: string;
 }
 

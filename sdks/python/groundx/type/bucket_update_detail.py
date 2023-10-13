@@ -16,19 +16,11 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal
 
 
-class RequiredBucketDetail(TypedDict):
+class RequiredBucketUpdateDetail(TypedDict):
     bucketId: int
 
-class OptionalBucketDetail(TypedDict, total=False):
-    created: str
-
-    fileCount: int
-
-    fileSize: str
-
+class OptionalBucketUpdateDetail(TypedDict, total=False):
     name: str
 
-    updated: str
-
-class BucketDetail(RequiredBucketDetail, OptionalBucketDetail):
+class BucketUpdateDetail(RequiredBucketUpdateDetail, OptionalBucketUpdateDetail):
     pass

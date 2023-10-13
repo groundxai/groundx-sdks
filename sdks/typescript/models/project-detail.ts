@@ -46,6 +46,12 @@ export interface ProjectDetail {
      * @type {number}
      * @memberof ProjectDetail
      */
+    'groupId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProjectDetail
+     */
     'projectId': number;
     /**
      * 
