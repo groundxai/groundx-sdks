@@ -1,16 +1,16 @@
-# Upload Documents from a Remote Location to GroundX
+# Upload Local Documents to GroundX
 
-This tutorial will show you how to use GroundX's Typescript and Python SDK libraries to upload online content to your GroundX database.
+This tutorial will show you how to use GroundX's Typescript and Python SDK libraries to upload local files to your GroundX database.
 
-The upload process is an API request sent to the GroundX server that ingests the content from a URL to the GroundX database. Content ingestion includes uploading the content to the GroundX server, extracting the content, and indexing the content with vector embeddings and metadata. The content is then ready to be searched through.
+The upload process is an API request sent to the GroundX server that ingests your local documents to the GroundX database. Content ingestion includes uploading the content to the GroundX server, extracting the content, and indexing the content with vector embeddings and metadata. The content is then ready to be searched through.
 
 
 ## Prerequisites
 - Node.js installed (for Javascript or Typescript projects)
 - Python 3.7 or higher installed (for Python projects)
 
-:::info{title="Code samples"}
-You can download the code for this tutorial from the GroundX code sample repository in [Typescript](https://github.com/groundxai/code-samples/tree/master/typescript/upload-remote) (for Javascript and Node.js projects) or [Python](https://github.com/groundxai/code-samples/tree/master/python/upload-remote).
+:::note
+You can download the code for this tutorial from the GroundX code sample repository in [Typescript](https://github.com/groundxai/code-samples/blob/master/typescript/upload-local/demo.js) (for Javascript and Node.js projects) or [Python](https://github.com/groundxai/code-samples/blob/master/python/upload-local/demo.py).
 :::
 
 ## Step 1: Set up your environment
@@ -71,7 +71,7 @@ It is recommended that you store your API key in an environment variable and acc
 :::
 
 ## Step 4: Set up content ingestion parameters
-Set up the parameters for the content ingestion request. For more information on the parameters for uploading hosted documents to GroundX, go to the :api[Document_uploadRemote] reference guide.
+Set up the parameters for the content ingestion request. For more information on the parameters for uploading hosted documents to GroundX, go to the :api[Document_uploadLocal] reference guide.
 
 1. Indicate the ID of the [bucket](https://documentation.groundx.ai/docs/concepts#concepts-buckets) you want to ingest the content into by setting the `bucket` parameter.
 
@@ -114,16 +114,16 @@ const fileType = "<FILE_TYPE>";
 
 :::
 
-3. Set a variable to indicate the URL of the content you want to ingest. For example:
+3. Set a variable to indicate the relative path of the local content you want to ingest. For example:
 
 :::code
 
 ```python
-uploadHosted = '<URL>'
+uploadHosted = '<RELATIVE_LOCAL_PATH>'
 ```
 
 ```typescript
-const uploadHosted = "<URL>";
+const uploadHosted = "<RELATIVE_LOCAL_PATH>";
 ```
 
 :::
@@ -165,27 +165,34 @@ Optional: Set up parameter validation to check if all the required parameters ar
 :::code
 
 ```python
-if groundxKey == "":
+if groundxKey == "YOUR_GROUNDX_KEY":
     raise Exception("set your GroundX key")
 
-if uploadHosted == "":
-    raise Exception("set the hosted file URL")
+if uploadLocal == "":
+    raise Exception("set the local file path")
 
 if fileType == "":
     raise Exception("set the file type to a supported enumerated type (e.g. txt, pdf)")
+
+if fileName == "":
+    raise Exception("set a name for the file")
 ```
 
 ```typescript
 if (groundxKey === "YOUR_GROUNDX_KEY") {
-    throw Error("set your GroundX key");
+  throw Error("set your GroundX key");
 }
 
-if (uploadHosted === "") {
-    throw Error("set the hosted file URL");
+if (uploadLocal === "") {
+  throw Error("set the local file path")
 }
 
 if (fileType === "") {
-    throw Error("set the file type to a supported enumerated type (e.g. txt, pdf)");
+  throw Error("set the file type to a supported enumerated type (e.g. txt, pdf)")
+}
+
+if (fileName === "") {
+  throw Error("set a name for the file")
 }
 ```
 
@@ -218,7 +225,7 @@ Before uploading the content, we'll set the default bucket ID. Since we set the 
 
 ```python
 if bucketId == 0:
-    # list buckets request
+    # list buckets
     try:
         bucket_response = groundx.buckets.list()
 
@@ -235,7 +242,7 @@ if bucketId == 0:
 // Note: Insert this code within a function.
 
 if (bucketId === 0) {
-      // List buckets request
+      // list buckets
       const bucketResponse = await groundx.buckets.list();
       if (!bucketResponse || !bucketResponse.status || bucketResponse.status != 200 ||
           !bucketResponse.data || !bucketResponse.data.buckets) {
@@ -248,7 +255,7 @@ if (bucketId === 0) {
         console.log(bucketResponse.data.buckets);
         throw Error("no results from GroundX bucket query");
       }
-      console.log(bucketResponse.data);
+    
       bucketId = bucketResponse.data.buckets[0].bucketId;
     }
 ```
@@ -256,44 +263,52 @@ if (bucketId === 0) {
 :::
 
 ## Step 8: Upload the content
-Upload the content by calling the :api[Document_uploadRemote] endpoint with the parameters you set in [Step 4](#step-4-set-up-content-ingestion-parameters) as arguments. For example:
+Upload the content by calling the :api[Document_uploadLocal] endpoint with the parameters you set in [Step 4](#step-4-set-up-content-ingestion-parameters) as arguments. For example:
 
 :::code
 
 ```python
-# Upload hosted documents to GroundX request
+# upload local documents to GroundX
 try:
-    ingest = groundx.documents.upload_remote(
-        documents=[
+    ingest = groundx.documents.upload_local(
+        body=[
             {
-                "bucketId": bucketId,
-                "metadata": contentMetadata,
-                "sourceUrl": uploadHosted,
-                "fileType": fileType,
-            }
-        ],
+                "blob": open(uploadLocal, "rb"),
+                "metadata": {
+                    "bucketId": bucketId,
+                    "fileName": fileName,
+                    "fileType": fileType,
+                    # optional metadata field
+                    # content is added to document chunks
+                    # fields are search during search requests
+                    # and returned in search results
+                    "metadata": contentMetadata,
+                },
+            },
+        ]
     )
 ```
 
 ```typescript
 // Note: Insert this code within a function.
 
-// Upload hosted documents to GroundX
-    let ingest = await groundx.documents.uploadRemote({
-      documents: [
-        {
+// upload local documents to GroundX
+    let ingest = await groundx.documents.uploadLocal([
+      {
+        blob: fs.readFileSync(uploadLocal),
+        metadata: {
           bucketId: bucketId,
-          type: fileType,
+          fileName: fileName,
+          fileType: fileType,
           metadata: contentMetadata,
-          sourceUrl: uploadHosted,
-        }
-      ]
-    });
+        },
+      }
+    ]);
 ```
 
 :::
 
-The :api[Document_uploadRemote] endpoint returns a response object indicating the status of the ingestion process. 
+The :api[Document_uploadLocal] endpoint returns a response object indicating the status of the ingestion process. 
 
 For example:
 
@@ -315,7 +330,7 @@ To check the status of the ingestion process, we'll use the request response and
 
 ```python
 # Insert this code after the Try block in Step 8.
-while (
+ while (
         ingest.body["ingest"]["status"] != "complete"
         and ingest.body["ingest"]["status"] != "error"
     ):
@@ -323,13 +338,13 @@ while (
             process_id=ingest.body["ingest"]["processId"]
         )
 except ApiException as e:
-    print("Exception when calling DocumentApi.upload_remote: %s\n" % e)
+    print("Exception when calling DocumentApi.upload_local: %s\n" % e)
 ```
 
 ```typescript
 // Note: Insert this code within a function.
 
-if (!ingest || !ingest.status || ingest.status != 200 ||
+    if (!ingest || !ingest.status || ingest.status != 200 ||
       !ingest.data || !ingest.data.ingest) {
       console.error(ingest);
       throw Error("GroundX upload request failed");
@@ -358,4 +373,4 @@ if (!ingest || !ingest.status || ingest.status != 200 ||
 3. Check if the content you uploaded is listed in the response.
 
 **And that's it!**  
-_You've successfully ingested a hosted document to GroundX, complete with vector and semantic data, that you can now search through using GroundX's [search API](https://documentation.groundx.ai/reference/Search/Search_content)._
+_You've successfully ingested a local document to GroundX, complete with vector and semantic data, that you can now search through using GroundX's [search API](https://documentation.groundx.ai/reference/Search/Search_content)._

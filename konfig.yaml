@@ -26,6 +26,8 @@ portal:
               path: docs/chatgpt.md
             - id: upload-remote
               path: docs/upload-remote.md
+            - id: upload-local
+              path: docs/upload-local.md
 infoContactUrl: https://www.groundx.ai/
 readmeHeader:
   image: header.png
