@@ -1,8 +1,8 @@
 # Upload Local Documents to GroundX
 
-This tutorial will show you how to use GroundX's Typescript and Python SDK libraries to upload local files to your GroundX database.
+This tutorial will show you how to use GroundX's Typescript and Python SDK libraries to [upload local documents](https://documentation.groundx.ai/reference/Documents/Document_uploadLocal) to your GroundX [buckets](https://documentation.groundx.ai/docs/concepts#concepts-buckets).
 
-The upload process is an API request sent to the GroundX server that ingests your local documents to the GroundX database. Content ingestion includes uploading the content to the GroundX server, extracting the content, and indexing the content with vector embeddings and metadata. The content is then ready to be searched through.
+Through a simple API request you can [effortlessly upload your content to GroundX](https://documentation.groundx.ai/docs/welcome#welcome-effortless-content-upload) and [automatically pre-process](https://documentation.groundx.ai/docs/welcome#welcome-sophisticated-automated-pre-processing) your data to get it ready to be [searched](https://documentation.groundx.ai/docs/welcome#welcome-superior-search-capabilities) through. 
 
 
 ## Prerequisites
@@ -71,7 +71,7 @@ It is recommended that you store your API key in an environment variable and acc
 :::
 
 ## Step 4: Set up content ingestion parameters
-Set up the parameters for the content ingestion request. For more information on the parameters for uploading hosted documents to GroundX, go to the :api[Document_uploadLocal] reference guide.
+Set up the parameters for the content ingestion request. For more information on the parameters for uploading local documents to GroundX, go to the :api[Document_uploadLocal] reference guide.
 
 1. Indicate the ID of the [bucket](https://documentation.groundx.ai/docs/concepts#concepts-buckets) you want to ingest the content into by setting the `bucket` parameter.
 
@@ -369,8 +369,8 @@ except ApiException as e:
 
 ## Step 10: Test your code
 1. After you have adjustmented the code accordingly, run your code to upload the content to GroundX.
-2. Call the :api[Document_list] endpoint to from GroundX's interactive API Reference guide to get a list of all the documents in your GroundX database.
+2. Call the :api[Document_list] endpoint to from GroundX's interactive [API Reference guide](https://documentation.groundx.ai/reference/Documents/Document_list) to get a list of all the documents in your GroundX buckets.
 3. Check if the content you uploaded is listed in the response.
 
 **And that's it!**  
-_You've successfully ingested a local document to GroundX, complete with vector and semantic data, that you can now search through using GroundX's [search API](https://documentation.groundx.ai/reference/Search/Search_content)._
+_You've successfully ingested a local document to GroundX that you can now search through using GroundX's [search API](https://documentation.groundx.ai/reference/Search/Search_content)._
