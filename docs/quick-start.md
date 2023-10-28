@@ -326,13 +326,13 @@ curl https://api.groundx.ai/api/v1/project \
 ```
 
 ```python
-project_response = groundx.project.list()
+project_response = groundx.projects.list()
 
 projectId = project_response.body["projects"][0]["projectId"]
 ```
 
 ```typescript
-const projectResponse = await groundx.project.list();
+const projectResponse = await groundx.projects.list();
 
 projectId = projResponse.data.projects[0].projectId;
 ```
