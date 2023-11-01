@@ -34,7 +34,7 @@ generators:
     version: 1.3.2
     packageName: groundx
     projectName: groundx-python-sdk
-    responseTypeVersion: 1
+    responseTypeVersion: '1'
     outputDirectory: sdks/python
     clientName: Groundx
     git:
