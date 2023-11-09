@@ -31,6 +31,7 @@ import { SearchResponseSearch } from '../models';
 // @ts-ignore
 import { SearchResultItem } from '../models';
 import { paginate } from "../pagination/paginate";
+import type * as buffer from "buffer"
 import { requestBeforeHook } from '../requestBeforeHook';
 /**
  * SearchApi - axios parameter creator

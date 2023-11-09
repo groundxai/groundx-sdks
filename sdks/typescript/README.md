@@ -2,7 +2,7 @@
 
 [![Visit Groundx](./header.png)](https://www.groundx.ai)
 
-# [Groundx](https://www.groundx.ai)
+# [Groundx](https://www.groundx.ai)<a id="groundx"></a>
 
 Ground Your RAG Apps in Fact not Fiction
 
@@ -11,13 +11,11 @@ Ground Your RAG Apps in Fact not Fiction
 
 </div>
 
-## Table of Contents
+## Table of Contents<a id="table-of-contents"></a>
 
 <!-- toc -->
 
-- [Installing](#installing)
-  * [npm](#npm)
-  * [yarn](#yarn)
+- [Installation](#installation)
 - [Getting Started](#getting-started)
 - [Reference](#reference)
   * [`groundx.apiKeys.list`](#groundxapikeyslist)
@@ -38,19 +36,40 @@ Ground Your RAG Apps in Fact not Fiction
 
 <!-- tocstop -->
 
-## Installing
+## Installation<a id="installation"></a>
 
-### npm
-```
-npm install groundx-typescript-sdk --save
+<table>
+<tr>
+<th width="292px"><code>npm</code></th>
+<th width="293px"><code>pnpm</code></th>
+<th width="292px"><code>yarn</code></th>
+</tr>
+<tr>
+<td>
+
+```bash
+npm i groundx-typescript-sdk
 ```
 
-### yarn
+</td>
+<td>
+
+```bash
+pnpm i groundx-typescript-sdk
 ```
+
+</td>
+<td>
+
+```bash
 yarn add groundx-typescript-sdk
 ```
 
-## Getting Started
+</td>
+</tr>
+</table>
+
+## Getting Started<a id="getting-started"></a>
 
 ```typescript
 import { Groundx } from "groundx-typescript-sdk";
@@ -66,24 +85,24 @@ const listResponse = await groundx.apiKeys.list();
 console.log(listResponse);
 ```
 
-## Reference
+## Reference<a id="reference"></a>
 
 
-### `groundx.apiKeys.list`
+### `groundx.apiKeys.list`<a id="groundxapikeyslist"></a>
 
 Retrieve the API keys for your account.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const listResponse = await groundx.apiKeys.list();
 ```
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [ApiKeyManagementListResponse](./models/api-key-management-list-response.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/v1/apikey` `GET`
 
@@ -92,11 +111,11 @@ const listResponse = await groundx.apiKeys.list();
 ---
 
 
-### `groundx.buckets.get`
+### `groundx.buckets.get`<a id="groundxbucketsget"></a>
 
 Look up a bucket by its bucketId.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const getResponse = await groundx.buckets.get({
@@ -104,17 +123,17 @@ const getResponse = await groundx.buckets.get({
 });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### bucketId: `number`
+##### bucketId: `number`<a id="bucketid-number"></a>
 
 The ID of the bucket to retrieve.
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [BucketResponse](./models/bucket-response.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/v1/bucket/{bucketId}` `GET`
 
@@ -123,21 +142,21 @@ The ID of the bucket to retrieve.
 ---
 
 
-### `groundx.buckets.list`
+### `groundx.buckets.list`<a id="groundxbucketslist"></a>
 
 Look up existing buckets associated with your account.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const listResponse = await groundx.buckets.list();
 ```
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [BucketListResponse](./models/bucket-list-response.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/v1/bucket` `GET`
 
@@ -146,11 +165,11 @@ const listResponse = await groundx.buckets.list();
 ---
 
 
-### `groundx.buckets.update`
+### `groundx.buckets.update`<a id="groundxbucketsupdate"></a>
 
 Update the configurations of an existing bucket.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const updateResponse = await groundx.buckets.update({
@@ -161,19 +180,19 @@ const updateResponse = await groundx.buckets.update({
 });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### bucket: [`BucketUpdateRequestBucket`](./models/bucket-update-request-bucket.ts)
+##### bucket: [`BucketUpdateRequestBucket`](./models/bucket-update-request-bucket.ts)<a id="bucket-bucketupdaterequestbucketmodelsbucket-update-request-bucketts"></a>
 
-##### bucketId: `number`
+##### bucketId: `number`<a id="bucketid-number"></a>
 
 The ID of the bucket to update.
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [BucketUpdateResponse](./models/bucket-update-response.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/v1/bucket/{bucketId}` `PUT`
 
@@ -182,11 +201,11 @@ The ID of the bucket to update.
 ---
 
 
-### `groundx.documents.delete`
+### `groundx.documents.delete`<a id="groundxdocumentsdelete"></a>
 
 Delete a document
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const deleteResponse = await groundx.documents.delete({
@@ -194,15 +213,15 @@ const deleteResponse = await groundx.documents.delete({
 });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### documentId: `string`
+##### documentId: `string`<a id="documentid-string"></a>
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [DocumentDeleteResponse](./models/document-delete-response.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/v1/ingest/document/{documentId}` `DELETE`
 
@@ -211,11 +230,11 @@ const deleteResponse = await groundx.documents.delete({
 ---
 
 
-### `groundx.documents.get`
+### `groundx.documents.get`<a id="groundxdocumentsget"></a>
 
 Look up an existing document by its ID
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const getResponse = await groundx.documents.get({
@@ -223,15 +242,15 @@ const getResponse = await groundx.documents.get({
 });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### documentId: `string`
+##### documentId: `string`<a id="documentid-string"></a>
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [DocumentResponse](./models/document-response.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/v1/ingest/document/{documentId}` `GET`
 
@@ -240,11 +259,11 @@ const getResponse = await groundx.documents.get({
 ---
 
 
-### `groundx.documents.getProcessingStatusById`
+### `groundx.documents.getProcessingStatusById`<a id="groundxdocumentsgetprocessingstatusbyid"></a>
 
 Look up the processing status of documents for a given processId
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const getProcessingStatusByIdResponse =
@@ -253,15 +272,15 @@ const getProcessingStatusByIdResponse =
   });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### processId: `string`
+##### processId: `string`<a id="processid-string"></a>
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [ProcessStatusResponse](./models/process-status-response.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/v1/ingest/{processId}` `GET`
 
@@ -270,27 +289,27 @@ const getProcessingStatusByIdResponse =
 ---
 
 
-### `groundx.documents.list`
+### `groundx.documents.list`<a id="groundxdocumentslist"></a>
 
 Look up all existing documents
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const listResponse = await groundx.documents.list({});
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### n: `number`
+##### n: `number`<a id="n-number"></a>
 
-##### nextToken: `string`
+##### nextToken: `string`<a id="nexttoken-string"></a>
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [DocumentListResponse](./models/document-list-response.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/v1/ingest/documents` `GET`
 
@@ -299,11 +318,11 @@ const listResponse = await groundx.documents.list({});
 ---
 
 
-### `groundx.documents.lookup`
+### `groundx.documents.lookup`<a id="groundxdocumentslookup"></a>
 
 Look up existing documents by processId, bucketId, or projectId
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const lookupResponse = await groundx.documents.lookup({
@@ -311,19 +330,19 @@ const lookupResponse = await groundx.documents.lookup({
 });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### id: `number`
+##### id: `number`<a id="id-number"></a>
 
-##### n: `number`
+##### n: `number`<a id="n-number"></a>
 
-##### nextToken: `string`
+##### nextToken: `string`<a id="nexttoken-string"></a>
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [DocumentLookupResponse](./models/document-lookup-response.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/v1/ingest/documents/{id}` `GET`
 
@@ -332,11 +351,11 @@ const lookupResponse = await groundx.documents.lookup({
 ---
 
 
-### `groundx.documents.uploadLocal`
+### `groundx.documents.uploadLocal`<a id="groundxdocumentsuploadlocal"></a>
 
 Upload local documents to GroundX
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const uploadLocalResponse = await groundx.documents.uploadLocal([
@@ -353,15 +372,15 @@ const uploadLocalResponse = await groundx.documents.uploadLocal([
 ]);
 ```
 
-#### ⚙️ Request Body
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
 
 [`DocumentLocalUploadRequestInner`](./models/document-local-upload-request-inner.ts)[]
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [IngestResponse](./models/ingest-response.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/v1/ingest/documents/local` `POST`
 
@@ -370,11 +389,11 @@ const uploadLocalResponse = await groundx.documents.uploadLocal([
 ---
 
 
-### `groundx.documents.uploadRemote`
+### `groundx.documents.uploadRemote`<a id="groundxdocumentsuploadremote"></a>
 
 Upload hosted documents to GroundX
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const uploadRemoteResponse = await groundx.documents.uploadRemote({
@@ -390,15 +409,15 @@ const uploadRemoteResponse = await groundx.documents.uploadRemote({
 });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### documents: [`DocumentRemoteUploadRequestDocumentsInner`](./models/document-remote-upload-request-documents-inner.ts)[]
+##### documents: [`DocumentRemoteUploadRequestDocumentsInner`](./models/document-remote-upload-request-documents-inner.ts)[]<a id="documents-documentremoteuploadrequestdocumentsinnermodelsdocument-remote-upload-request-documents-innerts"></a>
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [IngestResponse](./models/ingest-response.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/v1/ingest/documents/remote` `POST`
 
@@ -407,11 +426,11 @@ const uploadRemoteResponse = await groundx.documents.uploadRemote({
 ---
 
 
-### `groundx.projects.get`
+### `groundx.projects.get`<a id="groundxprojectsget"></a>
 
 This endpoint allows you to retrieve a specific project by projectId.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const getResponse = await groundx.projects.get({
@@ -419,17 +438,17 @@ const getResponse = await groundx.projects.get({
 });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### projectId: `string`
+##### projectId: `string`<a id="projectid-string"></a>
 
 The ID of the project to retrieve.
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [ProjectResponse](./models/project-response.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/v1/project/{projectId}` `GET`
 
@@ -438,21 +457,21 @@ The ID of the project to retrieve.
 ---
 
 
-### `groundx.projects.list`
+### `groundx.projects.list`<a id="groundxprojectslist"></a>
 
 This endpoint allows you to retrieve your existing projects.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const listResponse = await groundx.projects.list();
 ```
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [ProjectListResponse](./models/project-list-response.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/v1/project` `GET`
 
@@ -461,11 +480,11 @@ const listResponse = await groundx.projects.list();
 ---
 
 
-### `groundx.projects.update`
+### `groundx.projects.update`<a id="groundxprojectsupdate"></a>
 
 This endpoint allows you to update an existing project.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const updateResponse = await groundx.projects.update({
@@ -476,19 +495,19 @@ const updateResponse = await groundx.projects.update({
 });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### project: [`ProjectUpdateRequestProject`](./models/project-update-request-project.ts)
+##### project: [`ProjectUpdateRequestProject`](./models/project-update-request-project.ts)<a id="project-projectupdaterequestprojectmodelsproject-update-request-projectts"></a>
 
-##### projectId: `string`
+##### projectId: `string`<a id="projectid-string"></a>
 
 The ID of the project to update.
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [ProjectResponse](./models/project-response.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/v1/project/{projectId}` `PUT`
 
@@ -497,11 +516,11 @@ The ID of the project to update.
 ---
 
 
-### `groundx.search.content`
+### `groundx.search.content`<a id="groundxsearchcontent"></a>
 
 Search and retrieve relevant content from a project, group, or bucket by id.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const contentResponse = await groundx.search.content({
@@ -514,23 +533,23 @@ const contentResponse = await groundx.search.content({
 });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### search: [`SearchRequestSearch`](./models/search-request-search.ts)
+##### search: [`SearchRequestSearch`](./models/search-request-search.ts)<a id="search-searchrequestsearchmodelssearch-request-searchts"></a>
 
-##### id: `number`
+##### id: `number`<a id="id-number"></a>
 
 The ID of the project, group, or bucket to search within.
 
-##### n: `number`
+##### n: `number`<a id="n-number"></a>
 
 Number of results
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [SearchResponse](./models/search-response.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/v1/search/{id}` `POST`
 
@@ -539,5 +558,5 @@ Number of results
 ---
 
 
-## Author
+## Author<a id="author"></a>
 This TypeScript package is automatically generated by [Konfig](https://konfigthis.com)

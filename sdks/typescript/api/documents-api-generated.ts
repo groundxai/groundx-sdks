@@ -55,6 +55,7 @@ import { ProcessStatusResponseIngestProgressComplete } from '../models';
 // @ts-ignore
 import { ProcessingStatus } from '../models';
 import { paginate } from "../pagination/paginate";
+import type * as buffer from "buffer"
 import { requestBeforeHook } from '../requestBeforeHook';
 /**
  * DocumentsApi - axios parameter creator
@@ -311,13 +312,25 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
             const addFormParam = async (name: string, data: any, isBinary: boolean, isPrimitiveType: boolean) => {
                 if (isBinary) {
                     if (data instanceof Uint8Array) {
-                        // Node.js
+                        // Handle Buffer data
                         const filetype = await fromBuffer(data)
                         const filename = filetype === undefined ? name : `${name}.${filetype.ext}`
                         localVarFormParams.append(name, data as any, filename);
                     } else if ("name" in data) {
-                        // Browser
-                        localVarFormParams.append(name, data as any, data.name);
+                        // File instances in browsers and Node.js have the
+                        // "name" property "Duck typing" files to handle browser
+                        // File class or Node.js File class
+                        // Web: https://developer.mozilla.org/en-US/docs/Web/API/File
+                        // Node.js: https://nodejs.org/api/buffer.html#new-bufferfilesources-filename-options
+                        if (isBrowser()) {
+                            // FormData in browser can accept File/Blob directly
+                            localVarFormParams.append(name, data, data.name);
+                        } else {
+                            // FormData in Node.js can only accept raw Buffer so convert before passing
+                            const bytes = await data.arrayBuffer()
+                            const buffer = Buffer.from(bytes)
+                            localVarFormParams.append(name, buffer, data.name);
+                        }
                     }
                 } else {
                     if (isPrimitiveType) {

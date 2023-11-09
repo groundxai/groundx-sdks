@@ -27,6 +27,7 @@ import { ApiKeyManagementListResponse } from '../models';
 // @ts-ignore
 import { ApiKeyManagementListResponseApiKeysInner } from '../models';
 import { paginate } from "../pagination/paginate";
+import type * as buffer from "buffer"
 import { requestBeforeHook } from '../requestBeforeHook';
 /**
  * ApiKeysApi - axios parameter creator

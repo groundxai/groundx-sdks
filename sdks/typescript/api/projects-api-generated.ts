@@ -33,6 +33,7 @@ import { ProjectUpdateRequest } from '../models';
 // @ts-ignore
 import { ProjectUpdateRequestProject } from '../models';
 import { paginate } from "../pagination/paginate";
+import type * as buffer from "buffer"
 import { requestBeforeHook } from '../requestBeforeHook';
 /**
  * ProjectsApi - axios parameter creator

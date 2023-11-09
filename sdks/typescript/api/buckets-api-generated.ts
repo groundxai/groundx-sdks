@@ -35,6 +35,7 @@ import { BucketUpdateRequestBucket } from '../models';
 // @ts-ignore
 import { BucketUpdateResponse } from '../models';
 import { paginate } from "../pagination/paginate";
+import type * as buffer from "buffer"
 import { requestBeforeHook } from '../requestBeforeHook';
 /**
  * BucketsApi - axios parameter creator
