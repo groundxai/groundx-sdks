@@ -238,13 +238,13 @@ Crawl and ingest a website into GroundX
 
 ```python
 crawl_website_response = groundx.documents.crawl_website(
-    project=None,
+    website=None,
 )
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### project: [`WebsiteRequest`](./groundx/type/website_request.py)<a id="project-websiterequestgroundxtypewebsite_requestpy"></a>
+##### website: [`WebsiteRequest`](./groundx/type/website_request.py)<a id="website-websiterequestgroundxtypewebsite_requestpy"></a>
 
 
 #### ⚙️ Request Body<a id="⚙️-request-body"></a>

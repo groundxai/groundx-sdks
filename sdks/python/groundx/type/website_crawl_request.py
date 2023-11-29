@@ -18,10 +18,10 @@ from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 from groundx.type.website_request import WebsiteRequest
 
 class RequiredWebsiteCrawlRequest(TypedDict):
-    pass
+    website: WebsiteRequest
 
 class OptionalWebsiteCrawlRequest(TypedDict, total=False):
-    project: WebsiteRequest
+    pass
 
 class WebsiteCrawlRequest(RequiredWebsiteCrawlRequest, OptionalWebsiteCrawlRequest):
     pass
