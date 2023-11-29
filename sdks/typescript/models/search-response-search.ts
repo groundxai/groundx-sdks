@@ -25,25 +25,31 @@ export interface SearchResponseSearch {
      */
     'count'?: number;
     /**
-     * 
+     * Search results
      * @type {Array<SearchResultItem>}
      * @memberof SearchResponseSearch
      */
     'results'?: Array<SearchResultItem>;
     /**
-     * The search query
+     * The original search request query
      * @type {string}
      * @memberof SearchResponseSearch
      */
     'query'?: string;
     /**
-     * Top result relevance score
+     * Confidence score in the search results
      * @type {number}
      * @memberof SearchResponseSearch
      */
     'score'?: number;
     /**
-     * Combined text from results
+     * The actual search query, if the search request query was re-written
+     * @type {string}
+     * @memberof SearchResponseSearch
+     */
+    'searchQuery'?: string;
+    /**
+     * Suggested context for LLM completion
      * @type {string}
      * @memberof SearchResponseSearch
      */

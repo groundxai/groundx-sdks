@@ -18,11 +18,11 @@ import type * as buffer from "buffer"
  */
 export interface SearchResultItem {
     /**
-     * Unique system generated ID for the chunk
-     * @type {string}
+     * Content bucket the search result belongs to
+     * @type {number}
      * @memberof SearchResultItem
      */
-    'chunkId'?: string;
+    'bucketId'?: number;
     /**
      * Unique system generated ID for the document
      * @type {string}
@@ -30,25 +30,31 @@ export interface SearchResultItem {
      */
     'documentId'?: string;
     /**
-     * Document and chunk level metadata
+     * Document, section, and chunk metadata, both custom and system-generated
      * @type {object}
      * @memberof SearchResultItem
      */
     'metadata'?: object;
     /**
-     * Result relevance score
+     * Confidence score in the search result
      * @type {number}
      * @memberof SearchResultItem
      */
     'score'?: number;
     /**
-     * Document source URL
+     * Source document URL
      * @type {string}
      * @memberof SearchResultItem
      */
     'sourceUrl'?: string;
     /**
-     * Text from result
+     * System-generated text, re-written for LLM completions
+     * @type {string}
+     * @memberof SearchResultItem
+     */
+    'suggestedText'?: string;
+    /**
+     * Original text from the source document
      * @type {string}
      * @memberof SearchResultItem
      */

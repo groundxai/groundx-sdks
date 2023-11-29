@@ -13,12 +13,12 @@
 import unittest
 
 import groundx
-from groundx.model.api_key_management_list405_response import ApiKeyManagementList405Response
+from groundx.model.documents_delete_request import DocumentsDeleteRequest
 from groundx import configuration
 
 
-class TestApiKeyManagementList405Response(unittest.TestCase):
-    """ApiKeyManagementList405Response unit test stubs"""
+class TestDocumentsDeleteRequest(unittest.TestCase):
+    """DocumentsDeleteRequest unit test stubs"""
     pass
 
 

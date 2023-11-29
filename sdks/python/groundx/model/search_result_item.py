@@ -35,23 +35,25 @@ class SearchResultItem(
     class MetaOapg:
         
         class properties:
-            chunkId = schemas.StrSchema
-            documentId = schemas.StrSchema
+            bucketId = schemas.IntSchema
+            documentId = schemas.UUIDSchema
             metadata = schemas.DictSchema
             score = schemas.NumberSchema
             sourceUrl = schemas.StrSchema
+            suggestedText = schemas.StrSchema
             text = schemas.StrSchema
             __annotations__ = {
-                "chunkId": chunkId,
+                "bucketId": bucketId,
                 "documentId": documentId,
                 "metadata": metadata,
                 "score": score,
                 "sourceUrl": sourceUrl,
+                "suggestedText": suggestedText,
                 "text": text,
             }
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["chunkId"]) -> MetaOapg.properties.chunkId: ...
+    def __getitem__(self, name: typing_extensions.Literal["bucketId"]) -> MetaOapg.properties.bucketId: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["documentId"]) -> MetaOapg.properties.documentId: ...
@@ -66,18 +68,21 @@ class SearchResultItem(
     def __getitem__(self, name: typing_extensions.Literal["sourceUrl"]) -> MetaOapg.properties.sourceUrl: ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["suggestedText"]) -> MetaOapg.properties.suggestedText: ...
+    
+    @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["text"]) -> MetaOapg.properties.text: ...
     
     @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["chunkId", "documentId", "metadata", "score", "sourceUrl", "text", ], str]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["bucketId", "documentId", "metadata", "score", "sourceUrl", "suggestedText", "text", ], str]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["chunkId"]) -> typing.Union[MetaOapg.properties.chunkId, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["bucketId"]) -> typing.Union[MetaOapg.properties.bucketId, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["documentId"]) -> typing.Union[MetaOapg.properties.documentId, schemas.Unset]: ...
@@ -92,23 +97,27 @@ class SearchResultItem(
     def get_item_oapg(self, name: typing_extensions.Literal["sourceUrl"]) -> typing.Union[MetaOapg.properties.sourceUrl, schemas.Unset]: ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["suggestedText"]) -> typing.Union[MetaOapg.properties.suggestedText, schemas.Unset]: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["text"]) -> typing.Union[MetaOapg.properties.text, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["chunkId", "documentId", "metadata", "score", "sourceUrl", "text", ], str]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["bucketId", "documentId", "metadata", "score", "sourceUrl", "suggestedText", "text", ], str]):
         return super().get_item_oapg(name)
     
 
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        chunkId: typing.Union[MetaOapg.properties.chunkId, str, schemas.Unset] = schemas.unset,
-        documentId: typing.Union[MetaOapg.properties.documentId, str, schemas.Unset] = schemas.unset,
+        bucketId: typing.Union[MetaOapg.properties.bucketId, decimal.Decimal, int, schemas.Unset] = schemas.unset,
+        documentId: typing.Union[MetaOapg.properties.documentId, str, uuid.UUID, schemas.Unset] = schemas.unset,
         metadata: typing.Union[MetaOapg.properties.metadata, dict, frozendict.frozendict, schemas.Unset] = schemas.unset,
         score: typing.Union[MetaOapg.properties.score, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         sourceUrl: typing.Union[MetaOapg.properties.sourceUrl, str, schemas.Unset] = schemas.unset,
+        suggestedText: typing.Union[MetaOapg.properties.suggestedText, str, schemas.Unset] = schemas.unset,
         text: typing.Union[MetaOapg.properties.text, str, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
@@ -116,11 +125,12 @@ class SearchResultItem(
         return super().__new__(
             cls,
             *args,
-            chunkId=chunkId,
+            bucketId=bucketId,
             documentId=documentId,
             metadata=metadata,
             score=score,
             sourceUrl=sourceUrl,
+            suggestedText=suggestedText,
             text=text,
             _configuration=_configuration,
             **kwargs,

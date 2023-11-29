@@ -64,6 +64,7 @@ class SearchResponseSearch(
                     return super().__getitem__(i)
             query = schemas.StrSchema
             score = schemas.NumberSchema
+            searchQuery = schemas.StrSchema
             text = schemas.StrSchema
             nextToken = schemas.StrSchema
             __annotations__ = {
@@ -71,6 +72,7 @@ class SearchResponseSearch(
                 "results": results,
                 "query": query,
                 "score": score,
+                "searchQuery": searchQuery,
                 "text": text,
                 "nextToken": nextToken,
             }
@@ -88,6 +90,9 @@ class SearchResponseSearch(
     def __getitem__(self, name: typing_extensions.Literal["score"]) -> MetaOapg.properties.score: ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["searchQuery"]) -> MetaOapg.properties.searchQuery: ...
+    
+    @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["text"]) -> MetaOapg.properties.text: ...
     
     @typing.overload
@@ -96,7 +101,7 @@ class SearchResponseSearch(
     @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["count", "results", "query", "score", "text", "nextToken", ], str]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["count", "results", "query", "score", "searchQuery", "text", "nextToken", ], str]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -114,6 +119,9 @@ class SearchResponseSearch(
     def get_item_oapg(self, name: typing_extensions.Literal["score"]) -> typing.Union[MetaOapg.properties.score, schemas.Unset]: ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["searchQuery"]) -> typing.Union[MetaOapg.properties.searchQuery, schemas.Unset]: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["text"]) -> typing.Union[MetaOapg.properties.text, schemas.Unset]: ...
     
     @typing.overload
@@ -122,7 +130,7 @@ class SearchResponseSearch(
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["count", "results", "query", "score", "text", "nextToken", ], str]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["count", "results", "query", "score", "searchQuery", "text", "nextToken", ], str]):
         return super().get_item_oapg(name)
     
 
@@ -133,6 +141,7 @@ class SearchResponseSearch(
         results: typing.Union[MetaOapg.properties.results, list, tuple, schemas.Unset] = schemas.unset,
         query: typing.Union[MetaOapg.properties.query, str, schemas.Unset] = schemas.unset,
         score: typing.Union[MetaOapg.properties.score, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
+        searchQuery: typing.Union[MetaOapg.properties.searchQuery, str, schemas.Unset] = schemas.unset,
         text: typing.Union[MetaOapg.properties.text, str, schemas.Unset] = schemas.unset,
         nextToken: typing.Union[MetaOapg.properties.nextToken, str, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
@@ -145,6 +154,7 @@ class SearchResponseSearch(
             results=results,
             query=query,
             score=score,
+            searchQuery=searchQuery,
             text=text,
             nextToken=nextToken,
             _configuration=_configuration,

@@ -32,34 +32,18 @@ import frozendict  # noqa: F401
 
 from groundx import schemas  # noqa: F401
 
-from groundx.model.process_status_response_ingest_progress import ProcessStatusResponseIngestProgress as ProcessStatusResponseIngestProgressSchema
-from groundx.model.processing_status import ProcessingStatus as ProcessingStatusSchema
-from groundx.model.process_status_response_ingest_progress_processing import ProcessStatusResponseIngestProgressProcessing as ProcessStatusResponseIngestProgressProcessingSchema
-from groundx.model.document_response_document import DocumentResponseDocument as DocumentResponseDocumentSchema
 from groundx.model.process_status_response import ProcessStatusResponse as ProcessStatusResponseSchema
-from groundx.model.document_response import DocumentResponse as DocumentResponseSchema
-from groundx.model.process_status_response_ingest_progress_complete import ProcessStatusResponseIngestProgressComplete as ProcessStatusResponseIngestProgressCompleteSchema
-from groundx.model.process_status_response_ingest_progress_errors import ProcessStatusResponseIngestProgressErrors as ProcessStatusResponseIngestProgressErrorsSchema
-from groundx.model.process_status_response_ingest import ProcessStatusResponseIngest as ProcessStatusResponseIngestSchema
 
-from groundx.type.processing_status import ProcessingStatus
-from groundx.type.process_status_response_ingest_progress import ProcessStatusResponseIngestProgress
-from groundx.type.process_status_response_ingest_progress_processing import ProcessStatusResponseIngestProgressProcessing
-from groundx.type.document_response_document import DocumentResponseDocument
-from groundx.type.process_status_response_ingest_progress_errors import ProcessStatusResponseIngestProgressErrors
-from groundx.type.process_status_response_ingest_progress_complete import ProcessStatusResponseIngestProgressComplete
 from groundx.type.process_status_response import ProcessStatusResponse
-from groundx.type.document_response import DocumentResponse
-from groundx.type.process_status_response_ingest import ProcessStatusResponseIngest
 
 from . import path
 
 # Path params
-ProcessIdSchema = schemas.StrSchema
+ProcessIdSchema = schemas.UUIDSchema
 RequestRequiredPathParams = typing_extensions.TypedDict(
     'RequestRequiredPathParams',
     {
-        'processId': typing.Union[ProcessIdSchema, str, ],
+        'processId': typing.Union[ProcessIdSchema, str, uuid.UUID, ],
     }
 )
 RequestOptionalPathParams = typing_extensions.TypedDict(
@@ -107,6 +91,22 @@ _response_for_200 = api_client.OpenApiResponse(
 
 
 @dataclass
+class ApiResponseFor400(api_client.ApiResponse):
+    body: schemas.Unset = schemas.unset
+
+
+@dataclass
+class ApiResponseFor400Async(api_client.AsyncApiResponse):
+    body: schemas.Unset = schemas.unset
+
+
+_response_for_400 = api_client.OpenApiResponse(
+    response_cls=ApiResponseFor400,
+    response_cls_async=ApiResponseFor400Async,
+)
+
+
+@dataclass
 class ApiResponseFor401(api_client.ApiResponse):
     body: schemas.Unset = schemas.unset
 
@@ -122,6 +122,7 @@ _response_for_401 = api_client.OpenApiResponse(
 )
 _status_code_to_response = {
     '200': _response_for_200,
+    '400': _response_for_400,
     '401': _response_for_401,
 }
 _all_accept_content_types = (
@@ -146,9 +147,10 @@ class BaseApi(api_client.Api):
         self,
             path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -196,6 +198,7 @@ class BaseApi(api_client.Api):
             headers=_headers,
             auth_settings=_auth,
             timeout=timeout,
+            **kwargs
         )
     
         if stream:
@@ -256,7 +259,7 @@ class BaseApi(api_client.Api):
         self,
             path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
     ) -> typing.Union[
@@ -337,6 +340,7 @@ class GetProcessingStatusById(BaseApi):
     async def aget_processing_status_by_id(
         self,
         process_id: str,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -347,6 +351,7 @@ class GetProcessingStatusById(BaseApi):
         )
         return await self._aget_processing_status_by_id_oapg(
             path_params=args.path,
+            **kwargs,
         )
     
     def get_processing_status_by_id(
@@ -369,6 +374,7 @@ class ApiForget(BaseApi):
     async def aget(
         self,
         process_id: str,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -379,6 +385,7 @@ class ApiForget(BaseApi):
         )
         return await self._aget_processing_status_by_id_oapg(
             path_params=args.path,
+            **kwargs,
         )
     
     def get(

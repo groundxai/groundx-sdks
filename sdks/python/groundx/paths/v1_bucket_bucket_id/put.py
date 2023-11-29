@@ -33,11 +33,9 @@ import frozendict  # noqa: F401
 from groundx import schemas  # noqa: F401
 
 from groundx.model.bucket_update_response import BucketUpdateResponse as BucketUpdateResponseSchema
-from groundx.model.bucket_update_detail import BucketUpdateDetail as BucketUpdateDetailSchema
 from groundx.model.bucket_update_request_bucket import BucketUpdateRequestBucket as BucketUpdateRequestBucketSchema
 from groundx.model.bucket_update_request import BucketUpdateRequest as BucketUpdateRequestSchema
 
-from groundx.type.bucket_update_detail import BucketUpdateDetail
 from groundx.type.bucket_update_request import BucketUpdateRequest
 from groundx.type.bucket_update_response import BucketUpdateResponse
 from groundx.type.bucket_update_request_bucket import BucketUpdateRequestBucket
@@ -170,10 +168,11 @@ class BaseApi(api_client.Api):
         body: typing.Any = None,
             path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         content_type: str = 'application/json',
         stream: bool = False,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -237,6 +236,7 @@ class BaseApi(api_client.Api):
             body=body,
             auth_settings=_auth,
             timeout=timeout,
+            **kwargs
         )
     
         if stream:
@@ -298,7 +298,7 @@ class BaseApi(api_client.Api):
         body: typing.Any = None,
             path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         content_type: str = 'application/json',
         stream: bool = False,
@@ -397,6 +397,7 @@ class Update(BaseApi):
         self,
         bucket: BucketUpdateRequestBucket,
         bucket_id: int,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -409,6 +410,7 @@ class Update(BaseApi):
         return await self._aupdate_oapg(
             body=args.body,
             path_params=args.path,
+            **kwargs,
         )
     
     def update(
@@ -435,6 +437,7 @@ class ApiForput(BaseApi):
         self,
         bucket: BucketUpdateRequestBucket,
         bucket_id: int,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -447,6 +450,7 @@ class ApiForput(BaseApi):
         return await self._aupdate_oapg(
             body=args.body,
             path_params=args.path,
+            **kwargs,
         )
     
     def put(

@@ -33,16 +33,12 @@ import frozendict  # noqa: F401
 from groundx import schemas  # noqa: F401
 
 from groundx.model.project_update_request import ProjectUpdateRequest as ProjectUpdateRequestSchema
-from groundx.model.bucket_detail import BucketDetail as BucketDetailSchema
 from groundx.model.project_response import ProjectResponse as ProjectResponseSchema
 from groundx.model.project_update_request_project import ProjectUpdateRequestProject as ProjectUpdateRequestProjectSchema
-from groundx.model.project_detail import ProjectDetail as ProjectDetailSchema
 
 from groundx.type.project_response import ProjectResponse
 from groundx.type.project_update_request_project import ProjectUpdateRequestProject
 from groundx.type.project_update_request import ProjectUpdateRequest
-from groundx.type.bucket_detail import BucketDetail
-from groundx.type.project_detail import ProjectDetail
 
 from . import path
 
@@ -107,8 +103,42 @@ _response_for_200 = api_client.OpenApiResponse(
             schema=SchemaFor200ResponseBodyApplicationJson),
     },
 )
+
+
+@dataclass
+class ApiResponseFor400(api_client.ApiResponse):
+    body: schemas.Unset = schemas.unset
+
+
+@dataclass
+class ApiResponseFor400Async(api_client.AsyncApiResponse):
+    body: schemas.Unset = schemas.unset
+
+
+_response_for_400 = api_client.OpenApiResponse(
+    response_cls=ApiResponseFor400,
+    response_cls_async=ApiResponseFor400Async,
+)
+
+
+@dataclass
+class ApiResponseFor401(api_client.ApiResponse):
+    body: schemas.Unset = schemas.unset
+
+
+@dataclass
+class ApiResponseFor401Async(api_client.AsyncApiResponse):
+    body: schemas.Unset = schemas.unset
+
+
+_response_for_401 = api_client.OpenApiResponse(
+    response_cls=ApiResponseFor401,
+    response_cls_async=ApiResponseFor401Async,
+)
 _status_code_to_response = {
     '200': _response_for_200,
+    '400': _response_for_400,
+    '401': _response_for_401,
 }
 _all_accept_content_types = (
     'application/json',
@@ -138,10 +168,11 @@ class BaseApi(api_client.Api):
         body: typing.Any = None,
             path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         content_type: str = 'application/json',
         stream: bool = False,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -205,6 +236,7 @@ class BaseApi(api_client.Api):
             body=body,
             auth_settings=_auth,
             timeout=timeout,
+            **kwargs
         )
     
         if stream:
@@ -266,7 +298,7 @@ class BaseApi(api_client.Api):
         body: typing.Any = None,
             path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         content_type: str = 'application/json',
         stream: bool = False,
@@ -365,6 +397,7 @@ class Update(BaseApi):
         self,
         project: ProjectUpdateRequestProject,
         project_id: str,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -377,6 +410,7 @@ class Update(BaseApi):
         return await self._aupdate_oapg(
             body=args.body,
             path_params=args.path,
+            **kwargs,
         )
     
     def update(
@@ -403,6 +437,7 @@ class ApiForput(BaseApi):
         self,
         project: ProjectUpdateRequestProject,
         project_id: str,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -415,6 +450,7 @@ class ApiForput(BaseApi):
         return await self._aupdate_oapg(
             body=args.body,
             path_params=args.path,
+            **kwargs,
         )
     
     def put(

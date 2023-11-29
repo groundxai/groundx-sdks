@@ -13,10 +13,9 @@
 from datetime import datetime, date
 import typing
 from enum import Enum
-from typing_extensions import TypedDict, Literal
+from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
-from groundx.type.document_response import DocumentResponse
-from groundx.type.document_response_document import DocumentResponseDocument
+from groundx.type.process_status_response_ingest_progress_cancelled import ProcessStatusResponseIngestProgressCancelled
 from groundx.type.process_status_response_ingest_progress_complete import ProcessStatusResponseIngestProgressComplete
 from groundx.type.process_status_response_ingest_progress_errors import ProcessStatusResponseIngestProgressErrors
 from groundx.type.process_status_response_ingest_progress_processing import ProcessStatusResponseIngestProgressProcessing
@@ -25,6 +24,8 @@ class RequiredProcessStatusResponseIngestProgress(TypedDict):
     pass
 
 class OptionalProcessStatusResponseIngestProgress(TypedDict, total=False):
+    cancelled: ProcessStatusResponseIngestProgressCancelled
+
     complete: ProcessStatusResponseIngestProgressComplete
 
     errors: ProcessStatusResponseIngestProgressErrors

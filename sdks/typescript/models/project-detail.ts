@@ -19,35 +19,29 @@ import { BucketDetail } from './bucket-detail';
  */
 export interface ProjectDetail {
     /**
-     * 
+     * The content buckets associated with the project
      * @type {Array<BucketDetail>}
      * @memberof ProjectDetail
      */
     'buckets'?: Array<BucketDetail>;
     /**
-     * 
+     * The data time when the project was created, in RFC3339 format
      * @type {string}
      * @memberof ProjectDetail
      */
     'created'?: string;
     /**
-     * 
+     * The number of files contained in the content buckets associated with the project
      * @type {number}
      * @memberof ProjectDetail
      */
     'fileCount'?: number;
     /**
-     * 
+     * The total file size of files contained in the content buckets associated with the project
      * @type {string}
      * @memberof ProjectDetail
      */
     'fileSize'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof ProjectDetail
-     */
-    'groupId'?: number;
     /**
      * 
      * @type {number}
@@ -61,7 +55,7 @@ export interface ProjectDetail {
      */
     'name'?: string;
     /**
-     * 
+     * The data time when the project was last updated, in RFC3339 format
      * @type {string}
      * @memberof ProjectDetail
      */

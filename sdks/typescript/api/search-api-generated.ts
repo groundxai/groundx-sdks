@@ -26,10 +26,6 @@ import { SearchRequest } from '../models';
 import { SearchRequestSearch } from '../models';
 // @ts-ignore
 import { SearchResponse } from '../models';
-// @ts-ignore
-import { SearchResponseSearch } from '../models';
-// @ts-ignore
-import { SearchResultItem } from '../models';
 import { paginate } from "../pagination/paginate";
 import type * as buffer from "buffer"
 import { requestBeforeHook } from '../requestBeforeHook';
@@ -40,9 +36,9 @@ import { requestBeforeHook } from '../requestBeforeHook';
 export const SearchApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Search and retrieve relevant content from a project, group, or bucket by id.
+         * Search and retrieve relevant content from a project or bucket by id.
          * @summary Perform a search query of your content
-         * @param {number} id The ID of the project, group, or bucket to search within.
+         * @param {number} id The ID of the project or bucket to search within.
          * @param {number} [n] Number of results
          * @param {SearchRequest} [searchRequest] 
          * @param {*} [options] Override http request option.
@@ -103,7 +99,7 @@ export const SearchApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = SearchApiAxiosParamCreator(configuration)
     return {
         /**
-         * Search and retrieve relevant content from a project, group, or bucket by id.
+         * Search and retrieve relevant content from a project or bucket by id.
          * @summary Perform a search query of your content
          * @param {SearchApiContentRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -124,7 +120,7 @@ export const SearchApiFactory = function (configuration?: Configuration, basePat
     const localVarFp = SearchApiFp(configuration)
     return {
         /**
-         * Search and retrieve relevant content from a project, group, or bucket by id.
+         * Search and retrieve relevant content from a project or bucket by id.
          * @summary Perform a search query of your content
          * @param {SearchApiContentRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -144,7 +140,7 @@ export const SearchApiFactory = function (configuration?: Configuration, basePat
 export type SearchApiContentRequest = {
     
     /**
-    * The ID of the project, group, or bucket to search within.
+    * The ID of the project or bucket to search within.
     * @type {number}
     * @memberof SearchApiContent
     */
@@ -167,7 +163,7 @@ export type SearchApiContentRequest = {
  */
 export class SearchApiGenerated extends BaseAPI {
     /**
-     * Search and retrieve relevant content from a project, group, or bucket by id.
+     * Search and retrieve relevant content from a project or bucket by id.
      * @summary Perform a search query of your content
      * @param {SearchApiContentRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

@@ -39,11 +39,11 @@ class BucketDetail(
         
         class properties:
             bucketId = schemas.IntSchema
-            created = schemas.StrSchema
+            created = schemas.DateTimeSchema
             fileCount = schemas.IntSchema
             fileSize = schemas.StrSchema
             name = schemas.StrSchema
-            updated = schemas.StrSchema
+            updated = schemas.DateTimeSchema
             __annotations__ = {
                 "bucketId": bucketId,
                 "created": created,
@@ -110,11 +110,11 @@ class BucketDetail(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
         bucketId: typing.Union[MetaOapg.properties.bucketId, decimal.Decimal, int, ],
-        created: typing.Union[MetaOapg.properties.created, str, schemas.Unset] = schemas.unset,
+        created: typing.Union[MetaOapg.properties.created, str, datetime, schemas.Unset] = schemas.unset,
         fileCount: typing.Union[MetaOapg.properties.fileCount, decimal.Decimal, int, schemas.Unset] = schemas.unset,
         fileSize: typing.Union[MetaOapg.properties.fileSize, str, schemas.Unset] = schemas.unset,
         name: typing.Union[MetaOapg.properties.name, str, schemas.Unset] = schemas.unset,
-        updated: typing.Union[MetaOapg.properties.updated, str, schemas.Unset] = schemas.unset,
+        updated: typing.Union[MetaOapg.properties.updated, str, datetime, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
     ) -> 'BucketDetail':

@@ -32,13 +32,9 @@ import frozendict  # noqa: F401
 
 from groundx import schemas  # noqa: F401
 
-from groundx.model.api_key_management_list405_response import ApiKeyManagementList405Response as ApiKeyManagementList405ResponseSchema
-from groundx.model.api_key_management_list_response_api_keys import ApiKeyManagementListResponseApiKeys as ApiKeyManagementListResponseApiKeysSchema
 from groundx.model.api_key_management_list_response import ApiKeyManagementListResponse as ApiKeyManagementListResponseSchema
 
-from groundx.type.api_key_management_list_response_api_keys import ApiKeyManagementListResponseApiKeys
 from groundx.type.api_key_management_list_response import ApiKeyManagementListResponse
-from groundx.type.api_key_management_list405_response import ApiKeyManagementList405Response
 
 from . import path
 
@@ -66,64 +62,8 @@ _response_for_200 = api_client.OpenApiResponse(
             schema=SchemaFor200ResponseBodyApplicationJson),
     },
 )
-
-
-@dataclass
-class ApiResponseFor401(api_client.ApiResponse):
-    body: schemas.Unset = schemas.unset
-
-
-@dataclass
-class ApiResponseFor401Async(api_client.AsyncApiResponse):
-    body: schemas.Unset = schemas.unset
-
-
-_response_for_401 = api_client.OpenApiResponse(
-    response_cls=ApiResponseFor401,
-    response_cls_async=ApiResponseFor401Async,
-)
-
-
-@dataclass
-class ApiResponseFor403(api_client.ApiResponse):
-    body: schemas.Unset = schemas.unset
-
-
-@dataclass
-class ApiResponseFor403Async(api_client.AsyncApiResponse):
-    body: schemas.Unset = schemas.unset
-
-
-_response_for_403 = api_client.OpenApiResponse(
-    response_cls=ApiResponseFor403,
-    response_cls_async=ApiResponseFor403Async,
-)
-SchemaFor405ResponseBodyApplicationJson = ApiKeyManagementList405ResponseSchema
-
-
-@dataclass
-class ApiResponseFor405(api_client.ApiResponse):
-    body: ApiKeyManagementList405Response
-
-
-@dataclass
-class ApiResponseFor405Async(api_client.AsyncApiResponse):
-    body: ApiKeyManagementList405Response
-
-
-_response_for_405 = api_client.OpenApiResponse(
-    response_cls=ApiResponseFor405,
-    response_cls_async=ApiResponseFor405Async,
-    content={
-        'application/json': api_client.MediaType(
-            schema=SchemaFor405ResponseBodyApplicationJson),
-    },
-)
 _status_code_to_response = {
     '200': _response_for_200,
-    '401': _response_for_401,
-    '403': _response_for_403,
-    '405': _response_for_405,
 }
 _all_accept_content_types = (
     'application/json',
@@ -141,16 +81,17 @@ class BaseApi(api_client.Api):
     async def _alist_oapg(
         self,
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
         AsyncGeneratorResponse,
     ]:
         """
-        Get API keys
+        Look up existing API Keys
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
@@ -177,6 +118,7 @@ class BaseApi(api_client.Api):
             headers=_headers,
             auth_settings=_auth,
             timeout=timeout,
+            **kwargs
         )
     
         if stream:
@@ -236,7 +178,7 @@ class BaseApi(api_client.Api):
     def _list_oapg(
         self,
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
     ) -> typing.Union[
@@ -244,7 +186,7 @@ class BaseApi(api_client.Api):
         api_client.ApiResponseWithoutDeserialization,
     ]:
         """
-        Get API keys
+        Look up existing API Keys
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
@@ -302,6 +244,7 @@ class List(BaseApi):
 
     async def alist(
         self,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -310,6 +253,7 @@ class List(BaseApi):
         args = self._list_mapped_args(
         )
         return await self._alist_oapg(
+            **kwargs,
         )
     
     def list(
@@ -328,6 +272,7 @@ class ApiForget(BaseApi):
 
     async def aget(
         self,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -336,6 +281,7 @@ class ApiForget(BaseApi):
         args = self._list_mapped_args(
         )
         return await self._alist_oapg(
+            **kwargs,
         )
     
     def get(

@@ -13,29 +13,32 @@
 from datetime import datetime, date
 import typing
 from enum import Enum
-from typing_extensions import TypedDict, Literal
+from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 
 class RequiredSearchResultItem(TypedDict):
     pass
 
 class OptionalSearchResultItem(TypedDict, total=False):
-    # Unique system generated ID for the chunk
-    chunkId: str
+    # Content bucket the search result belongs to
+    bucketId: int
 
     # Unique system generated ID for the document
     documentId: str
 
-    # Document and chunk level metadata
+    # Document, section, and chunk metadata, both custom and system-generated
     metadata: typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]
 
-    # Result relevance score
+    # Confidence score in the search result
     score: typing.Union[int, float]
 
-    # Document source URL
+    # Source document URL
     sourceUrl: str
 
-    # Text from result
+    # System-generated text, re-written for LLM completions
+    suggestedText: str
+
+    # Original text from the source document
     text: str
 
 class SearchResultItem(RequiredSearchResultItem, OptionalSearchResultItem):

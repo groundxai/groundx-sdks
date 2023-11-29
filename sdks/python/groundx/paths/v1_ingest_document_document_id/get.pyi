@@ -32,18 +32,16 @@ import frozendict  # noqa: F401
 
 from groundx import schemas  # noqa: F401
 
-from groundx.model.document_response_document import DocumentResponseDocument as DocumentResponseDocumentSchema
 from groundx.model.document_response import DocumentResponse as DocumentResponseSchema
 
-from groundx.type.document_response_document import DocumentResponseDocument
 from groundx.type.document_response import DocumentResponse
 
 # Path params
-DocumentIdSchema = schemas.StrSchema
+DocumentIdSchema = schemas.UUIDSchema
 RequestRequiredPathParams = typing_extensions.TypedDict(
     'RequestRequiredPathParams',
     {
-        'documentId': typing.Union[DocumentIdSchema, str, ],
+        'documentId': typing.Union[DocumentIdSchema, str, uuid.UUID, ],
     }
 )
 RequestOptionalPathParams = typing_extensions.TypedDict(
@@ -139,9 +137,10 @@ class BaseApi(api_client.Api):
         self,
             path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -189,6 +188,7 @@ class BaseApi(api_client.Api):
             headers=_headers,
             auth_settings=_auth,
             timeout=timeout,
+            **kwargs
         )
     
         if stream:
@@ -249,7 +249,7 @@ class BaseApi(api_client.Api):
         self,
             path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
     ) -> typing.Union[
@@ -330,6 +330,7 @@ class Get(BaseApi):
     async def aget(
         self,
         document_id: str,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -340,6 +341,7 @@ class Get(BaseApi):
         )
         return await self._aget_oapg(
             path_params=args.path,
+            **kwargs,
         )
     
     def get(
@@ -362,6 +364,7 @@ class ApiForget(BaseApi):
     async def aget(
         self,
         document_id: str,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -372,6 +375,7 @@ class ApiForget(BaseApi):
         )
         return await self._aget_oapg(
             path_params=args.path,
+            **kwargs,
         )
     
     def get(

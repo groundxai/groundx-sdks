@@ -13,12 +13,12 @@
 import unittest
 
 import groundx
-from groundx.model.document_delete_response import DocumentDeleteResponse
+from groundx.model.website_crawl_request import WebsiteCrawlRequest
 from groundx import configuration
 
 
-class TestDocumentDeleteResponse(unittest.TestCase):
-    """DocumentDeleteResponse unit test stubs"""
+class TestWebsiteCrawlRequest(unittest.TestCase):
+    """WebsiteCrawlRequest unit test stubs"""
     pass
 
 

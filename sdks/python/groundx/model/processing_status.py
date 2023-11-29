@@ -39,6 +39,7 @@ class ProcessingStatus(
             "processing": "PROCESSING",
             "error": "ERROR",
             "complete": "COMPLETE",
+            "cancelled": "CANCELLED",
         }
     
     @schemas.classproperty
@@ -56,3 +57,7 @@ class ProcessingStatus(
     @schemas.classproperty
     def COMPLETE(cls):
         return cls("complete")
+    
+    @schemas.classproperty
+    def CANCELLED(cls):
+        return cls("cancelled")

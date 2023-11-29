@@ -13,16 +13,17 @@
 from datetime import datetime, date
 import typing
 from enum import Enum
-from typing_extensions import TypedDict, Literal
+from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 from groundx.type.document_response import DocumentResponse
-from groundx.type.document_response_document import DocumentResponseDocument
 
 class RequiredDocumentListResponse(TypedDict):
     pass
 
 class OptionalDocumentListResponse(TypedDict, total=False):
     documents: typing.List[DocumentResponse]
+
+    nextToken: str
 
 class DocumentListResponse(RequiredDocumentListResponse, OptionalDocumentListResponse):
     pass

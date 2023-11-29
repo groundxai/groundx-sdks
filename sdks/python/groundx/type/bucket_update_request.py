@@ -13,7 +13,7 @@
 from datetime import datetime, date
 import typing
 from enum import Enum
-from typing_extensions import TypedDict, Literal
+from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 from groundx.type.bucket_update_request_bucket import BucketUpdateRequestBucket
 

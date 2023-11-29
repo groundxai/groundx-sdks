@@ -11,7 +11,6 @@
 # import sys
 # sys.setrecursionlimit(n)
 
-from groundx.model.api_key_management_list405_response import ApiKeyManagementList405Response
 from groundx.model.api_key_management_list_response import ApiKeyManagementListResponse
 from groundx.model.api_key_management_list_response_api_keys import ApiKeyManagementListResponseApiKeys
 from groundx.model.api_key_management_list_response_api_keys_item import ApiKeyManagementListResponseApiKeysItem
@@ -22,7 +21,6 @@ from groundx.model.bucket_update_detail import BucketUpdateDetail
 from groundx.model.bucket_update_request import BucketUpdateRequest
 from groundx.model.bucket_update_request_bucket import BucketUpdateRequestBucket
 from groundx.model.bucket_update_response import BucketUpdateResponse
-from groundx.model.document_delete_response import DocumentDeleteResponse
 from groundx.model.document_list_response import DocumentListResponse
 from groundx.model.document_local_upload_request import DocumentLocalUploadRequest
 from groundx.model.document_local_upload_request_item import DocumentLocalUploadRequestItem
@@ -34,11 +32,15 @@ from groundx.model.document_remote_upload_request_documents_item import Document
 from groundx.model.document_response import DocumentResponse
 from groundx.model.document_response_document import DocumentResponseDocument
 from groundx.model.document_type import DocumentType
+from groundx.model.documents_delete_request import DocumentsDeleteRequest
+from groundx.model.documents_delete_request_documents import DocumentsDeleteRequestDocuments
+from groundx.model.documents_delete_request_documents_item import DocumentsDeleteRequestDocumentsItem
 from groundx.model.ingest_response import IngestResponse
 from groundx.model.ingest_response_ingest import IngestResponseIngest
 from groundx.model.process_status_response import ProcessStatusResponse
 from groundx.model.process_status_response_ingest import ProcessStatusResponseIngest
 from groundx.model.process_status_response_ingest_progress import ProcessStatusResponseIngestProgress
+from groundx.model.process_status_response_ingest_progress_cancelled import ProcessStatusResponseIngestProgressCancelled
 from groundx.model.process_status_response_ingest_progress_complete import ProcessStatusResponseIngestProgressComplete
 from groundx.model.process_status_response_ingest_progress_errors import ProcessStatusResponseIngestProgressErrors
 from groundx.model.process_status_response_ingest_progress_processing import ProcessStatusResponseIngestProgressProcessing
@@ -53,3 +55,5 @@ from groundx.model.search_request_search import SearchRequestSearch
 from groundx.model.search_response import SearchResponse
 from groundx.model.search_response_search import SearchResponseSearch
 from groundx.model.search_result_item import SearchResultItem
+from groundx.model.website_crawl_request import WebsiteCrawlRequest
+from groundx.model.website_request import WebsiteRequest

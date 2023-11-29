@@ -13,7 +13,7 @@
 from datetime import datetime, date
 import typing
 from enum import Enum
-from typing_extensions import TypedDict, Literal
+from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 from groundx.type.document_type import DocumentType
 
@@ -25,11 +25,13 @@ class RequiredDocumentLocalUploadRequestItemMetadata(TypedDict):
     fileType: DocumentType
 
 class OptionalDocumentLocalUploadRequestItemMetadata(TypedDict, total=False):
-    metadata: typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]
-
+    # Data that is passed through on callback
     callbackData: str
 
+    # URL where GroundX will post status changes to the ingest request
     callbackUrl: str
+
+    metadata: typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]
 
 class DocumentLocalUploadRequestItemMetadata(RequiredDocumentLocalUploadRequestItemMetadata, OptionalDocumentLocalUploadRequestItemMetadata):
     pass

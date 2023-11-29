@@ -32,18 +32,18 @@ import frozendict  # noqa: F401
 
 from groundx import schemas  # noqa: F401
 
-from groundx.model.document_delete_response import DocumentDeleteResponse as DocumentDeleteResponseSchema
+from groundx.model.ingest_response import IngestResponse as IngestResponseSchema
 
-from groundx.type.document_delete_response import DocumentDeleteResponse
+from groundx.type.ingest_response import IngestResponse
 
 from . import path
 
 # Path params
-DocumentIdSchema = schemas.StrSchema
+DocumentIdSchema = schemas.UUIDSchema
 RequestRequiredPathParams = typing_extensions.TypedDict(
     'RequestRequiredPathParams',
     {
-        'documentId': typing.Union[DocumentIdSchema, str, ],
+        'documentId': typing.Union[DocumentIdSchema, str, uuid.UUID, ],
     }
 )
 RequestOptionalPathParams = typing_extensions.TypedDict(
@@ -67,17 +67,17 @@ request_path_document_id = api_client.PathParameter(
 _auth = [
     'ApiKeyAuth',
 ]
-SchemaFor200ResponseBodyApplicationJson = DocumentDeleteResponseSchema
+SchemaFor200ResponseBodyApplicationJson = IngestResponseSchema
 
 
 @dataclass
 class ApiResponseFor200(api_client.ApiResponse):
-    body: DocumentDeleteResponse
+    body: IngestResponse
 
 
 @dataclass
 class ApiResponseFor200Async(api_client.AsyncApiResponse):
-    body: DocumentDeleteResponse
+    body: IngestResponse
 
 
 _response_for_200 = api_client.OpenApiResponse(
@@ -132,7 +132,7 @@ _all_accept_content_types = (
 
 class BaseApi(api_client.Api):
 
-    def _delete_mapped_args(
+    def _delete_0_mapped_args(
         self,
         document_id: str,
     ) -> api_client.MappedArgs:
@@ -143,13 +143,14 @@ class BaseApi(api_client.Api):
         args.path = _path_params
         return args
 
-    async def _adelete_oapg(
+    async def _adelete_0_oapg(
         self,
             path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -197,6 +198,7 @@ class BaseApi(api_client.Api):
             headers=_headers,
             auth_settings=_auth,
             timeout=timeout,
+            **kwargs
         )
     
         if stream:
@@ -253,11 +255,11 @@ class BaseApi(api_client.Api):
         return api_response
 
 
-    def _delete_oapg(
+    def _delete_0_oapg(
         self,
             path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
     ) -> typing.Union[
@@ -332,35 +334,37 @@ class BaseApi(api_client.Api):
         return api_response
 
 
-class Delete(BaseApi):
+class Delete0(BaseApi):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
-    async def adelete(
+    async def adelete_0(
         self,
         document_id: str,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
         AsyncGeneratorResponse,
     ]:
-        args = self._delete_mapped_args(
+        args = self._delete_0_mapped_args(
             document_id=document_id,
         )
-        return await self._adelete_oapg(
+        return await self._adelete_0_oapg(
             path_params=args.path,
+            **kwargs,
         )
     
-    def delete(
+    def delete_0(
         self,
         document_id: str,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        args = self._delete_mapped_args(
+        args = self._delete_0_mapped_args(
             document_id=document_id,
         )
-        return self._delete_oapg(
+        return self._delete_0_oapg(
             path_params=args.path,
         )
 
@@ -370,16 +374,18 @@ class ApiFordelete(BaseApi):
     async def adelete(
         self,
         document_id: str,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
         AsyncGeneratorResponse,
     ]:
-        args = self._delete_mapped_args(
+        args = self._delete_0_mapped_args(
             document_id=document_id,
         )
-        return await self._adelete_oapg(
+        return await self._adelete_0_oapg(
             path_params=args.path,
+            **kwargs,
         )
     
     def delete(
@@ -389,10 +395,10 @@ class ApiFordelete(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        args = self._delete_mapped_args(
+        args = self._delete_0_mapped_args(
             document_id=document_id,
         )
-        return self._delete_oapg(
+        return self._delete_0_oapg(
             path_params=args.path,
         )
 
