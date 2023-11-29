@@ -41,22 +41,18 @@ class DocumentRemoteUploadRequestDocumentsItem(
         class properties:
             bucketId = schemas.IntSchema
             sourceUrl = schemas.StrSchema
-            callbackData = schemas.StrSchema
-            callbackUrl = schemas.StrSchema
             fileName = schemas.StrSchema
         
             @staticmethod
             def fileType() -> typing.Type['DocumentType']:
                 return DocumentType
-            metadata = schemas.DictSchema
+            searchData = schemas.DictSchema
             __annotations__ = {
                 "bucketId": bucketId,
                 "sourceUrl": sourceUrl,
-                "callbackData": callbackData,
-                "callbackUrl": callbackUrl,
                 "fileName": fileName,
                 "fileType": fileType,
-                "metadata": metadata,
+                "searchData": searchData,
             }
     
     sourceUrl: MetaOapg.properties.sourceUrl
@@ -69,24 +65,18 @@ class DocumentRemoteUploadRequestDocumentsItem(
     def __getitem__(self, name: typing_extensions.Literal["sourceUrl"]) -> MetaOapg.properties.sourceUrl: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["callbackData"]) -> MetaOapg.properties.callbackData: ...
-    
-    @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["callbackUrl"]) -> MetaOapg.properties.callbackUrl: ...
-    
-    @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["fileName"]) -> MetaOapg.properties.fileName: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["fileType"]) -> 'DocumentType': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["metadata"]) -> MetaOapg.properties.metadata: ...
+    def __getitem__(self, name: typing_extensions.Literal["searchData"]) -> MetaOapg.properties.searchData: ...
     
     @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["bucketId", "sourceUrl", "callbackData", "callbackUrl", "fileName", "fileType", "metadata", ], str]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["bucketId", "sourceUrl", "fileName", "fileType", "searchData", ], str]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -98,24 +88,18 @@ class DocumentRemoteUploadRequestDocumentsItem(
     def get_item_oapg(self, name: typing_extensions.Literal["sourceUrl"]) -> MetaOapg.properties.sourceUrl: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["callbackData"]) -> typing.Union[MetaOapg.properties.callbackData, schemas.Unset]: ...
-    
-    @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["callbackUrl"]) -> typing.Union[MetaOapg.properties.callbackUrl, schemas.Unset]: ...
-    
-    @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["fileName"]) -> typing.Union[MetaOapg.properties.fileName, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["fileType"]) -> typing.Union['DocumentType', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["metadata"]) -> typing.Union[MetaOapg.properties.metadata, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["searchData"]) -> typing.Union[MetaOapg.properties.searchData, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["bucketId", "sourceUrl", "callbackData", "callbackUrl", "fileName", "fileType", "metadata", ], str]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["bucketId", "sourceUrl", "fileName", "fileType", "searchData", ], str]):
         return super().get_item_oapg(name)
     
 
@@ -124,11 +108,9 @@ class DocumentRemoteUploadRequestDocumentsItem(
         *args: typing.Union[dict, frozendict.frozendict, ],
         sourceUrl: typing.Union[MetaOapg.properties.sourceUrl, str, ],
         bucketId: typing.Union[MetaOapg.properties.bucketId, decimal.Decimal, int, ],
-        callbackData: typing.Union[MetaOapg.properties.callbackData, str, schemas.Unset] = schemas.unset,
-        callbackUrl: typing.Union[MetaOapg.properties.callbackUrl, str, schemas.Unset] = schemas.unset,
         fileName: typing.Union[MetaOapg.properties.fileName, str, schemas.Unset] = schemas.unset,
         fileType: typing.Union['DocumentType', schemas.Unset] = schemas.unset,
-        metadata: typing.Union[MetaOapg.properties.metadata, dict, frozendict.frozendict, schemas.Unset] = schemas.unset,
+        searchData: typing.Union[MetaOapg.properties.searchData, dict, frozendict.frozendict, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
     ) -> 'DocumentRemoteUploadRequestDocumentsItem':
@@ -137,11 +119,9 @@ class DocumentRemoteUploadRequestDocumentsItem(
             *args,
             sourceUrl=sourceUrl,
             bucketId=bucketId,
-            callbackData=callbackData,
-            callbackUrl=callbackUrl,
             fileName=fileName,
             fileType=fileType,
-            metadata=metadata,
+            searchData=searchData,
             _configuration=_configuration,
             **kwargs,
         )

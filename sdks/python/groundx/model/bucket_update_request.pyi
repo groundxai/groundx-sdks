@@ -34,54 +34,49 @@ class BucketUpdateRequest(
 
     class MetaOapg:
         required = {
-            "bucket",
+            "newName",
         }
         
         class properties:
-        
-            @staticmethod
-            def bucket() -> typing.Type['BucketUpdateRequestBucket']:
-                return BucketUpdateRequestBucket
+            newName = schemas.StrSchema
             __annotations__ = {
-                "bucket": bucket,
+                "newName": newName,
             }
     
-    bucket: 'BucketUpdateRequestBucket'
+    newName: MetaOapg.properties.newName
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["bucket"]) -> 'BucketUpdateRequestBucket': ...
+    def __getitem__(self, name: typing_extensions.Literal["newName"]) -> MetaOapg.properties.newName: ...
     
     @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["bucket", ], str]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["newName", ], str]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["bucket"]) -> 'BucketUpdateRequestBucket': ...
+    def get_item_oapg(self, name: typing_extensions.Literal["newName"]) -> MetaOapg.properties.newName: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["bucket", ], str]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["newName", ], str]):
         return super().get_item_oapg(name)
     
 
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        bucket: 'BucketUpdateRequestBucket',
+        newName: typing.Union[MetaOapg.properties.newName, str, ],
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
     ) -> 'BucketUpdateRequest':
         return super().__new__(
             cls,
             *args,
-            bucket=bucket,
+            newName=newName,
             _configuration=_configuration,
             **kwargs,
         )
-
-from groundx.model.bucket_update_request_bucket import BucketUpdateRequestBucket

@@ -15,10 +15,10 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
-from groundx.type.website_request import WebsiteRequest
+from groundx.type.website_crawl_request_websites import WebsiteCrawlRequestWebsites
 
 class RequiredWebsiteCrawlRequest(TypedDict):
-    website: WebsiteRequest
+    websites: WebsiteCrawlRequestWebsites
 
 class OptionalWebsiteCrawlRequest(TypedDict, total=False):
     pass

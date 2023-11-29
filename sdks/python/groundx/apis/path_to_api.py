@@ -11,9 +11,9 @@ from groundx.apis.paths.v1_ingest_document_document_id import V1IngestDocumentDo
 from groundx.apis.paths.v1_search_id import V1SearchId
 from groundx.apis.paths.v1_project import V1Project
 from groundx.apis.paths.v1_project_project_id import V1ProjectProjectId
+from groundx.apis.paths.v1_project_project_id_bucket_bucket_id import V1ProjectProjectIdBucketBucketId
 from groundx.apis.paths.v1_bucket import V1Bucket
 from groundx.apis.paths.v1_bucket_bucket_id import V1BucketBucketId
-from groundx.apis.paths.v1_apikey import V1Apikey
 
 PathToApi = typing_extensions.TypedDict(
     'PathToApi',
@@ -28,9 +28,9 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.V1_SEARCH_ID: V1SearchId,
         PathValues.V1_PROJECT: V1Project,
         PathValues.V1_PROJECT_PROJECT_ID: V1ProjectProjectId,
+        PathValues.V1_PROJECT_PROJECT_ID_BUCKET_BUCKET_ID: V1ProjectProjectIdBucketBucketId,
         PathValues.V1_BUCKET: V1Bucket,
         PathValues.V1_BUCKET_BUCKET_ID: V1BucketBucketId,
-        PathValues.V1_APIKEY: V1Apikey,
     }
 )
 
@@ -46,8 +46,8 @@ path_to_api = PathToApi(
         PathValues.V1_SEARCH_ID: V1SearchId,
         PathValues.V1_PROJECT: V1Project,
         PathValues.V1_PROJECT_PROJECT_ID: V1ProjectProjectId,
+        PathValues.V1_PROJECT_PROJECT_ID_BUCKET_BUCKET_ID: V1ProjectProjectIdBucketBucketId,
         PathValues.V1_BUCKET: V1Bucket,
         PathValues.V1_BUCKET_BUCKET_ID: V1BucketBucketId,
-        PathValues.V1_APIKEY: V1Apikey,
     }
 )

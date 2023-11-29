@@ -10,4 +10,3 @@ class TagValues(str, enum.Enum):
     SEARCH = "Search"
     PROJECTS = "Projects"
     BUCKETS = "Buckets"
-    API_KEYS = "API Keys"

@@ -15,10 +15,9 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
-from groundx.type.project_update_request_project import ProjectUpdateRequestProject
 
 class RequiredProjectUpdateRequest(TypedDict):
-    project: ProjectUpdateRequestProject
+    newName: str
 
 class OptionalProjectUpdateRequest(TypedDict, total=False):
     pass

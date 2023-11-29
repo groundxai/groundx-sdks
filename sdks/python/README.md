@@ -23,7 +23,8 @@ Ground Your RAG Apps in Fact not Fiction
 - [Getting Started](#getting-started)
 - [Async](#async)
 - [Reference](#reference)
-  * [`groundx.api_keys.list`](#groundxapi_keyslist)
+  * [`groundx.buckets.create`](#groundxbucketscreate)
+  * [`groundx.buckets.delete`](#groundxbucketsdelete)
   * [`groundx.buckets.get`](#groundxbucketsget)
   * [`groundx.buckets.list`](#groundxbucketslist)
   * [`groundx.buckets.update`](#groundxbucketsupdate)
@@ -36,8 +37,12 @@ Ground Your RAG Apps in Fact not Fiction
   * [`groundx.documents.lookup`](#groundxdocumentslookup)
   * [`groundx.documents.upload_local`](#groundxdocumentsupload_local)
   * [`groundx.documents.upload_remote`](#groundxdocumentsupload_remote)
+  * [`groundx.projects.add_bucket`](#groundxprojectsadd_bucket)
+  * [`groundx.projects.create`](#groundxprojectscreate)
+  * [`groundx.projects.delete`](#groundxprojectsdelete)
   * [`groundx.projects.get`](#groundxprojectsget)
   * [`groundx.projects.list`](#groundxprojectslist)
+  * [`groundx.projects.remove_bucket`](#groundxprojectsremove_bucket)
   * [`groundx.projects.update`](#groundxprojectsupdate)
   * [`groundx.search.content`](#groundxsearchcontent)
 
@@ -64,15 +69,17 @@ groundx = Groundx(
 )
 
 try:
-    # Look up existing API Keys
-    list_response = groundx.api_keys.list()
-    pprint(list_response.body)
-    pprint(list_response.body["api_keys"])
-    pprint(list_response.headers)
-    pprint(list_response.status)
-    pprint(list_response.round_trip_time)
+    # Create a new bucket
+    create_response = groundx.buckets.create(
+        name="your_bucket_name",
+    )
+    pprint(create_response.body)
+    pprint(create_response.body["bucket"])
+    pprint(create_response.headers)
+    pprint(create_response.status)
+    pprint(create_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling APIKeysApi.list: %s\n" % e)
+    print("Exception when calling BucketsApi.create: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -96,15 +103,17 @@ groundx = Groundx(
 
 async def main():
     try:
-        # Look up existing API Keys
-        list_response = await groundx.api_keys.alist()
-        pprint(list_response.body)
-        pprint(list_response.body["api_keys"])
-        pprint(list_response.headers)
-        pprint(list_response.status)
-        pprint(list_response.round_trip_time)
+        # Create a new bucket
+        create_response = await groundx.buckets.acreate(
+            name="your_bucket_name",
+        )
+        pprint(create_response.body)
+        pprint(create_response.body["bucket"])
+        pprint(create_response.headers)
+        pprint(create_response.status)
+        pprint(create_response.round_trip_time)
     except ApiException as e:
-        print("Exception when calling APIKeysApi.list: %s\n" % e)
+        print("Exception when calling BucketsApi.create: %s\n" % e)
         pprint(e.body)
         pprint(e.headers)
         pprint(e.status)
@@ -117,23 +126,60 @@ asyncio.run(main())
 
 
 ## Reference<a id="reference"></a>
-### `groundx.api_keys.list`<a id="groundxapi_keyslist"></a>
+### `groundx.buckets.create`<a id="groundxbucketscreate"></a>
 
-Retrieve the API keys for your account.
+This endpoint allows you to create a new bucket.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
-list_response = groundx.api_keys.list()
+create_response = groundx.buckets.create(
+    name="your_bucket_name",
+)
 ```
 
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### name: `str`<a id="name-str"></a>
+
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
+
+[`BucketCreateRequest`](./groundx/type/bucket_create_request.py)
 #### 🔄 Return<a id="🔄-return"></a>
 
-[`ApiKeyManagementListResponse`](./groundx/type/api_key_management_list_response.py)
+[`BucketResponse`](./groundx/type/bucket_response.py)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
-`/v1/apikey` `get`
+`/v1/bucket` `post`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `groundx.buckets.delete`<a id="groundxbucketsdelete"></a>
+
+Delete a bucket
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+delete_response = groundx.buckets.delete(
+    bucket_id=1,
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### bucket_id: `int`<a id="bucket_id-int"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`MessageResponse`](./groundx/type/message_response.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/v1/bucket/{bucketId}` `delete`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -176,8 +222,17 @@ Look up existing buckets associated with your account.
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
-list_response = groundx.buckets.list()
+list_response = groundx.buckets.list(
+    n=1,
+    next_token="string_example",
+)
 ```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### n: `int`<a id="n-int"></a>
+
+##### next_token: `str`<a id="next_token-str"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -199,17 +254,14 @@ Update the configurations of an existing bucket.
 
 ```python
 update_response = groundx.buckets.update(
-    bucket={
-        "name": "your_bucket_name",
-    },
+    new_name="your_bucket_name",
     bucket_id=1,
 )
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### bucket: [`BucketUpdateRequestBucket`](./groundx/type/bucket_update_request_bucket.py)<a id="bucket-bucketupdaterequestbucketgroundxtypebucket_update_request_bucketpy"></a>
-
+##### new_name: `str`<a id="new_name-str"></a>
 
 ##### bucket_id: `int`<a id="bucket_id-int"></a>
 
@@ -238,14 +290,20 @@ Crawl and ingest a website into GroundX
 
 ```python
 crawl_website_response = groundx.documents.crawl_website(
-    website=None,
+    websites=[
+        {
+            "bucket_id": 123,
+            "cap": 100,
+            "depth": 3,
+            "source_url": "https://my.website.com",
+        }
+    ],
 )
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### website: [`WebsiteRequest`](./groundx/type/website_request.py)<a id="website-websiterequestgroundxtypewebsite_requestpy"></a>
-
+##### websites: [`WebsiteCrawlRequestWebsites`](./groundx/type/website_crawl_request_websites.py)<a id="websites-websitecrawlrequestwebsitesgroundxtypewebsite_crawl_request_websitespy"></a>
 
 #### ⚙️ Request Body<a id="⚙️-request-body"></a>
 
@@ -270,21 +328,16 @@ Delete one or more documents from GroundX
 
 ```python
 delete_response = groundx.documents.delete(
-    documents=[
-        {
-            "document_id": "document_id_example",
-        }
-    ],
+    document_ids=["documentIds_example"],
 )
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### documents: [`DocumentsDeleteRequestDocuments`](./groundx/type/documents_delete_request_documents.py)<a id="documents-documentsdeleterequestdocumentsgroundxtypedocuments_delete_request_documentspy"></a>
+##### document_ids: List[`str`]<a id="document_ids-liststr"></a>
 
-#### ⚙️ Request Body<a id="⚙️-request-body"></a>
+A comma delimited list of document IDs
 
-[`DocumentsDeleteRequest`](./groundx/type/documents_delete_request.py)
 #### 🔄 Return<a id="🔄-return"></a>
 
 [`IngestResponse`](./groundx/type/ingest_response.py)
@@ -459,8 +512,6 @@ upload_local_response = groundx.documents.upload_local(
             "blob": open("/path/to/file", "rb"),
             "metadata": {
                 "bucket_id": 1234,
-                "callback_data": "my_callback_data",
-                "callback_url": "https://my.callback.url.com",
                 "file_name": "my_file.txt",
                 "file_type": "txt",
             },
@@ -495,8 +546,6 @@ upload_remote_response = groundx.documents.upload_remote(
     documents=[
         {
             "bucket_id": 1234,
-            "callback_data": "my_callback_data",
-            "callback_url": "https://my.callback.url.com",
             "file_name": "my_file.txt",
             "file_type": "txt",
             "source_url": "https://my.source.url.com/file.txt",
@@ -524,6 +573,105 @@ upload_remote_response = groundx.documents.upload_remote(
 
 ---
 
+### `groundx.projects.add_bucket`<a id="groundxprojectsadd_bucket"></a>
+
+This endpoint allows you to add a bucket to a project.
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+add_bucket_response = groundx.projects.add_bucket(
+    project_id=1,
+    bucket_id=1,
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### project_id: `int`<a id="project_id-int"></a>
+
+The ID of the project to update.
+
+##### bucket_id: `int`<a id="bucket_id-int"></a>
+
+The ID of the bucket to update.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`MessageResponse`](./groundx/type/message_response.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/v1/project/{projectId}/bucket/{bucketId}` `post`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `groundx.projects.create`<a id="groundxprojectscreate"></a>
+
+This endpoint allows you to create a new project.
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+create_response = groundx.projects.create(
+    name="your_project_name",
+    bucket_name="your_new_bucket_name",
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### name: `str`<a id="name-str"></a>
+
+##### bucket_name: `str`<a id="bucket_name-str"></a>
+
+Include a bucket name to automatically create a bucket and add it to this project
+
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
+
+[`ProjectCreateRequest`](./groundx/type/project_create_request.py)
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`ProjectResponse`](./groundx/type/project_response.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/v1/project` `post`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `groundx.projects.delete`<a id="groundxprojectsdelete"></a>
+
+Delete a project
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+delete_response = groundx.projects.delete(
+    project_id=1,
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### project_id: `int`<a id="project_id-int"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`MessageResponse`](./groundx/type/message_response.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/v1/project/{projectId}` `delete`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
 ### `groundx.projects.get`<a id="groundxprojectsget"></a>
 
 This endpoint allows you to retrieve a specific project by projectId.
@@ -532,13 +680,13 @@ This endpoint allows you to retrieve a specific project by projectId.
 
 ```python
 get_response = groundx.projects.get(
-    project_id="projectId_example",
+    project_id=1,
 )
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### project_id: `str`<a id="project_id-str"></a>
+##### project_id: `int`<a id="project_id-int"></a>
 
 The ID of the project to retrieve.
 
@@ -561,8 +709,17 @@ This endpoint allows you to retrieve your existing projects.
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
-list_response = groundx.projects.list()
+list_response = groundx.projects.list(
+    n=1,
+    next_token="string_example",
+)
 ```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### n: `int`<a id="n-int"></a>
+
+##### next_token: `str`<a id="next_token-str"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -576,6 +733,41 @@ list_response = groundx.projects.list()
 
 ---
 
+### `groundx.projects.remove_bucket`<a id="groundxprojectsremove_bucket"></a>
+
+This endpoint allows you to remove a bucket from a project.
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+remove_bucket_response = groundx.projects.remove_bucket(
+    project_id=1,
+    bucket_id=1,
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### project_id: `int`<a id="project_id-int"></a>
+
+The ID of the project to update.
+
+##### bucket_id: `int`<a id="bucket_id-int"></a>
+
+The ID of the bucket to update.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`MessageResponse`](./groundx/type/message_response.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/v1/project/{projectId}/bucket/{bucketId}` `delete`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
 ### `groundx.projects.update`<a id="groundxprojectsupdate"></a>
 
 This endpoint allows you to update an existing project.
@@ -584,19 +776,16 @@ This endpoint allows you to update an existing project.
 
 ```python
 update_response = groundx.projects.update(
-    project={
-        "name": "your_project_name",
-    },
-    project_id="projectId_example",
+    new_name="your_project_name",
+    project_id=1,
 )
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### project: [`ProjectUpdateRequestProject`](./groundx/type/project_update_request_project.py)<a id="project-projectupdaterequestprojectgroundxtypeproject_update_request_projectpy"></a>
+##### new_name: `str`<a id="new_name-str"></a>
 
-
-##### project_id: `str`<a id="project_id-str"></a>
+##### project_id: `int`<a id="project_id-int"></a>
 
 The ID of the project to update.
 

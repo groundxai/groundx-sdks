@@ -21,13 +21,15 @@ const FormData = require("form-data")
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
+import { MessageResponse } from '../models';
+// @ts-ignore
+import { ProjectCreateRequest } from '../models';
+// @ts-ignore
 import { ProjectListResponse } from '../models';
 // @ts-ignore
 import { ProjectResponse } from '../models';
 // @ts-ignore
 import { ProjectUpdateRequest } from '../models';
-// @ts-ignore
-import { ProjectUpdateRequestProject } from '../models';
 import { paginate } from "../pagination/paginate";
 import type * as buffer from "buffer"
 import { requestBeforeHook } from '../requestBeforeHook';
@@ -38,13 +40,147 @@ import { requestBeforeHook } from '../requestBeforeHook';
 export const ProjectsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * This endpoint allows you to retrieve a specific project by projectId.
-         * @summary Look up an existing project by its ID
-         * @param {string} projectId The ID of the project to retrieve.
+         * This endpoint allows you to add a bucket to a project.
+         * @summary Add a bucket to a project
+         * @param {number} projectId The ID of the project to update.
+         * @param {number} bucketId The ID of the bucket to update.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        get: async (projectId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        addBucket: async (projectId: number, bucketId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'projectId' is not null or undefined
+            assertParamExists('addBucket', 'projectId', projectId)
+            // verify required parameter 'bucketId' is not null or undefined
+            assertParamExists('addBucket', 'bucketId', bucketId)
+            const localVarPath = `/v1/project/{projectId}/bucket/{bucketId}`
+                .replace(`{${"projectId"}}`, encodeURIComponent(String(projectId !== undefined ? projectId : `-projectId-`)))
+                .replace(`{${"bucketId"}}`, encodeURIComponent(String(bucketId !== undefined ? bucketId : `-bucketId-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication ApiKeyAuth required
+            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "X-API-Key", configuration })
+
+    
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This endpoint allows you to create a new project.
+         * @summary Create a new project
+         * @param {ProjectCreateRequest} projectCreateRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        create: async (projectCreateRequest: ProjectCreateRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'projectCreateRequest' is not null or undefined
+            assertParamExists('create', 'projectCreateRequest', projectCreateRequest)
+            const localVarPath = `/v1/project`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication ApiKeyAuth required
+            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "X-API-Key", configuration })
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                requestBody: projectCreateRequest,
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration
+            });
+            localVarRequestOptions.data = serializeDataIfNeeded(projectCreateRequest, localVarRequestOptions, configuration)
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Delete a project
+         * @param {number} projectId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        delete: async (projectId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'projectId' is not null or undefined
+            assertParamExists('delete', 'projectId', projectId)
+            const localVarPath = `/v1/project/{projectId}`
+                .replace(`{${"projectId"}}`, encodeURIComponent(String(projectId !== undefined ? projectId : `-projectId-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication ApiKeyAuth required
+            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "X-API-Key", configuration })
+
+    
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This endpoint allows you to retrieve a specific project by projectId.
+         * @summary Look up an existing project by its ID
+         * @param {number} projectId The ID of the project to retrieve.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        get: async (projectId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'projectId' is not null or undefined
             assertParamExists('get', 'projectId', projectId)
             const localVarPath = `/v1/project/{projectId}`
@@ -82,10 +218,12 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * This endpoint allows you to retrieve your existing projects.
          * @summary Look up existing projects
+         * @param {number} [n] 
+         * @param {string} [nextToken] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        list: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        list: async (n?: number, nextToken?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/v1/project`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -95,6 +233,60 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
             }
 
             const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication ApiKeyAuth required
+            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "X-API-Key", configuration })
+            if (n !== undefined) {
+                localVarQueryParameter['n'] = n;
+            }
+
+            if (nextToken !== undefined) {
+                localVarQueryParameter['nextToken'] = nextToken;
+            }
+
+
+    
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This endpoint allows you to remove a bucket from a project.
+         * @summary Remove a bucket from a project
+         * @param {number} projectId The ID of the project to update.
+         * @param {number} bucketId The ID of the bucket to update.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        removeBucket: async (projectId: number, bucketId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'projectId' is not null or undefined
+            assertParamExists('removeBucket', 'projectId', projectId)
+            // verify required parameter 'bucketId' is not null or undefined
+            assertParamExists('removeBucket', 'bucketId', bucketId)
+            const localVarPath = `/v1/project/{projectId}/bucket/{bucketId}`
+                .replace(`{${"projectId"}}`, encodeURIComponent(String(projectId !== undefined ? projectId : `-projectId-`)))
+                .replace(`{${"bucketId"}}`, encodeURIComponent(String(bucketId !== undefined ? bucketId : `-bucketId-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'DELETE', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -120,12 +312,12 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * This endpoint allows you to update an existing project.
          * @summary Update an existing project
-         * @param {string} projectId The ID of the project to update.
+         * @param {number} projectId The ID of the project to update.
          * @param {ProjectUpdateRequest} projectUpdateRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        update: async (projectId: string, projectUpdateRequest: ProjectUpdateRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        update: async (projectId: number, projectUpdateRequest: ProjectUpdateRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'projectId' is not null or undefined
             assertParamExists('update', 'projectId', projectId)
             // verify required parameter 'projectUpdateRequest' is not null or undefined
@@ -178,6 +370,39 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ProjectsApiAxiosParamCreator(configuration)
     return {
         /**
+         * This endpoint allows you to add a bucket to a project.
+         * @summary Add a bucket to a project
+         * @param {ProjectsApiAddBucketRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async addBucket(requestParameters: ProjectsApiAddBucketRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MessageResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.addBucket(requestParameters.projectId, requestParameters.bucketId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * This endpoint allows you to create a new project.
+         * @summary Create a new project
+         * @param {ProjectsApiCreateRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async create(requestParameters: ProjectsApiCreateRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.create(requestParameters, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Delete a project
+         * @param {ProjectsApiDeleteRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async delete(requestParameters: ProjectsApiDeleteRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MessageResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.delete(requestParameters.projectId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * This endpoint allows you to retrieve a specific project by projectId.
          * @summary Look up an existing project by its ID
          * @param {ProjectsApiGetRequest} requestParameters Request parameters.
@@ -191,11 +416,23 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
         /**
          * This endpoint allows you to retrieve your existing projects.
          * @summary Look up existing projects
+         * @param {ProjectsApiListRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async list(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectListResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.list(options);
+        async list(requestParameters: ProjectsApiListRequest = {}, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectListResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.list(requestParameters.n, requestParameters.nextToken, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * This endpoint allows you to remove a bucket from a project.
+         * @summary Remove a bucket from a project
+         * @param {ProjectsApiRemoveBucketRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async removeBucket(requestParameters: ProjectsApiRemoveBucketRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MessageResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.removeBucket(requestParameters.projectId, requestParameters.bucketId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -220,6 +457,36 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
     const localVarFp = ProjectsApiFp(configuration)
     return {
         /**
+         * This endpoint allows you to add a bucket to a project.
+         * @summary Add a bucket to a project
+         * @param {ProjectsApiAddBucketRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        addBucket(requestParameters: ProjectsApiAddBucketRequest, options?: AxiosRequestConfig): AxiosPromise<MessageResponse> {
+            return localVarFp.addBucket(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This endpoint allows you to create a new project.
+         * @summary Create a new project
+         * @param {ProjectsApiCreateRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        create(requestParameters: ProjectsApiCreateRequest, options?: AxiosRequestConfig): AxiosPromise<ProjectResponse> {
+            return localVarFp.create(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Delete a project
+         * @param {ProjectsApiDeleteRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        delete(requestParameters: ProjectsApiDeleteRequest, options?: AxiosRequestConfig): AxiosPromise<MessageResponse> {
+            return localVarFp.delete(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
          * This endpoint allows you to retrieve a specific project by projectId.
          * @summary Look up an existing project by its ID
          * @param {ProjectsApiGetRequest} requestParameters Request parameters.
@@ -232,11 +499,22 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
         /**
          * This endpoint allows you to retrieve your existing projects.
          * @summary Look up existing projects
+         * @param {ProjectsApiListRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        list(options?: AxiosRequestConfig): AxiosPromise<ProjectListResponse> {
-            return localVarFp.list(options).then((request) => request(axios, basePath));
+        list(requestParameters: ProjectsApiListRequest = {}, options?: AxiosRequestConfig): AxiosPromise<ProjectListResponse> {
+            return localVarFp.list(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This endpoint allows you to remove a bucket from a project.
+         * @summary Remove a bucket from a project
+         * @param {ProjectsApiRemoveBucketRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        removeBucket(requestParameters: ProjectsApiRemoveBucketRequest, options?: AxiosRequestConfig): AxiosPromise<MessageResponse> {
+            return localVarFp.removeBucket(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
          * This endpoint allows you to update an existing project.
@@ -252,6 +530,54 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
 };
 
 /**
+ * Request parameters for addBucket operation in ProjectsApi.
+ * @export
+ * @interface ProjectsApiAddBucketRequest
+ */
+export type ProjectsApiAddBucketRequest = {
+    
+    /**
+    * The ID of the project to update.
+    * @type {number}
+    * @memberof ProjectsApiAddBucket
+    */
+    readonly projectId: number
+    
+    /**
+    * The ID of the bucket to update.
+    * @type {number}
+    * @memberof ProjectsApiAddBucket
+    */
+    readonly bucketId: number
+    
+}
+
+/**
+ * Request parameters for create operation in ProjectsApi.
+ * @export
+ * @interface ProjectsApiCreateRequest
+ */
+export type ProjectsApiCreateRequest = {
+    
+} & ProjectCreateRequest
+
+/**
+ * Request parameters for delete operation in ProjectsApi.
+ * @export
+ * @interface ProjectsApiDeleteRequest
+ */
+export type ProjectsApiDeleteRequest = {
+    
+    /**
+    * 
+    * @type {number}
+    * @memberof ProjectsApiDelete
+    */
+    readonly projectId: number
+    
+}
+
+/**
  * Request parameters for get operation in ProjectsApi.
  * @export
  * @interface ProjectsApiGetRequest
@@ -260,10 +586,56 @@ export type ProjectsApiGetRequest = {
     
     /**
     * The ID of the project to retrieve.
-    * @type {string}
+    * @type {number}
     * @memberof ProjectsApiGet
     */
-    readonly projectId: string
+    readonly projectId: number
+    
+}
+
+/**
+ * Request parameters for list operation in ProjectsApi.
+ * @export
+ * @interface ProjectsApiListRequest
+ */
+export type ProjectsApiListRequest = {
+    
+    /**
+    * 
+    * @type {number}
+    * @memberof ProjectsApiList
+    */
+    readonly n?: number
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof ProjectsApiList
+    */
+    readonly nextToken?: string
+    
+}
+
+/**
+ * Request parameters for removeBucket operation in ProjectsApi.
+ * @export
+ * @interface ProjectsApiRemoveBucketRequest
+ */
+export type ProjectsApiRemoveBucketRequest = {
+    
+    /**
+    * The ID of the project to update.
+    * @type {number}
+    * @memberof ProjectsApiRemoveBucket
+    */
+    readonly projectId: number
+    
+    /**
+    * The ID of the bucket to update.
+    * @type {number}
+    * @memberof ProjectsApiRemoveBucket
+    */
+    readonly bucketId: number
     
 }
 
@@ -276,10 +648,10 @@ export type ProjectsApiUpdateRequest = {
     
     /**
     * The ID of the project to update.
-    * @type {string}
+    * @type {number}
     * @memberof ProjectsApiUpdate
     */
-    readonly projectId: string
+    readonly projectId: number
     
 } & ProjectUpdateRequest
 
@@ -290,6 +662,42 @@ export type ProjectsApiUpdateRequest = {
  * @extends {BaseAPI}
  */
 export class ProjectsApiGenerated extends BaseAPI {
+    /**
+     * This endpoint allows you to add a bucket to a project.
+     * @summary Add a bucket to a project
+     * @param {ProjectsApiAddBucketRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProjectsApiGenerated
+     */
+    public addBucket(requestParameters: ProjectsApiAddBucketRequest, options?: AxiosRequestConfig) {
+        return ProjectsApiFp(this.configuration).addBucket(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * This endpoint allows you to create a new project.
+     * @summary Create a new project
+     * @param {ProjectsApiCreateRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProjectsApiGenerated
+     */
+    public create(requestParameters: ProjectsApiCreateRequest, options?: AxiosRequestConfig) {
+        return ProjectsApiFp(this.configuration).create(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Delete a project
+     * @param {ProjectsApiDeleteRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProjectsApiGenerated
+     */
+    public delete(requestParameters: ProjectsApiDeleteRequest, options?: AxiosRequestConfig) {
+        return ProjectsApiFp(this.configuration).delete(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * This endpoint allows you to retrieve a specific project by projectId.
      * @summary Look up an existing project by its ID
@@ -305,12 +713,25 @@ export class ProjectsApiGenerated extends BaseAPI {
     /**
      * This endpoint allows you to retrieve your existing projects.
      * @summary Look up existing projects
+     * @param {ProjectsApiListRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProjectsApiGenerated
      */
-    public list(options?: AxiosRequestConfig) {
-        return ProjectsApiFp(this.configuration).list(options).then((request) => request(this.axios, this.basePath));
+    public list(requestParameters: ProjectsApiListRequest = {}, options?: AxiosRequestConfig) {
+        return ProjectsApiFp(this.configuration).list(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * This endpoint allows you to remove a bucket from a project.
+     * @summary Remove a bucket from a project
+     * @param {ProjectsApiRemoveBucketRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProjectsApiGenerated
+     */
+    public removeBucket(requestParameters: ProjectsApiRemoveBucketRequest, options?: AxiosRequestConfig) {
+        return ProjectsApiFp(this.configuration).removeBucket(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

@@ -33,12 +33,10 @@ import frozendict  # noqa: F401
 from groundx import schemas  # noqa: F401
 
 from groundx.model.bucket_update_response import BucketUpdateResponse as BucketUpdateResponseSchema
-from groundx.model.bucket_update_request_bucket import BucketUpdateRequestBucket as BucketUpdateRequestBucketSchema
 from groundx.model.bucket_update_request import BucketUpdateRequest as BucketUpdateRequestSchema
 
 from groundx.type.bucket_update_request import BucketUpdateRequest
 from groundx.type.bucket_update_response import BucketUpdateResponse
-from groundx.type.bucket_update_request_bucket import BucketUpdateRequestBucket
 
 # Path params
 BucketIdSchema = schemas.IntSchema
@@ -139,14 +137,14 @@ class BaseApi(api_client.Api):
 
     def _update_mapped_args(
         self,
-        bucket: BucketUpdateRequestBucket,
+        new_name: str,
         bucket_id: int,
     ) -> api_client.MappedArgs:
         args: api_client.MappedArgs = api_client.MappedArgs()
         _path_params = {}
         _body = {}
-        if bucket is not None:
-            _body["bucket"] = bucket
+        if new_name is not None:
+            _body["newName"] = new_name
         args.body = _body
         if bucket_id is not None:
             _path_params["bucketId"] = bucket_id
@@ -385,7 +383,7 @@ class Update(BaseApi):
 
     async def aupdate(
         self,
-        bucket: BucketUpdateRequestBucket,
+        new_name: str,
         bucket_id: int,
         **kwargs,
     ) -> typing.Union[
@@ -394,7 +392,7 @@ class Update(BaseApi):
         AsyncGeneratorResponse,
     ]:
         args = self._update_mapped_args(
-            bucket=bucket,
+            new_name=new_name,
             bucket_id=bucket_id,
         )
         return await self._aupdate_oapg(
@@ -405,14 +403,14 @@ class Update(BaseApi):
     
     def update(
         self,
-        bucket: BucketUpdateRequestBucket,
+        new_name: str,
         bucket_id: int,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
         args = self._update_mapped_args(
-            bucket=bucket,
+            new_name=new_name,
             bucket_id=bucket_id,
         )
         return self._update_oapg(
@@ -425,7 +423,7 @@ class ApiForput(BaseApi):
 
     async def aput(
         self,
-        bucket: BucketUpdateRequestBucket,
+        new_name: str,
         bucket_id: int,
         **kwargs,
     ) -> typing.Union[
@@ -434,7 +432,7 @@ class ApiForput(BaseApi):
         AsyncGeneratorResponse,
     ]:
         args = self._update_mapped_args(
-            bucket=bucket,
+            new_name=new_name,
             bucket_id=bucket_id,
         )
         return await self._aupdate_oapg(
@@ -445,14 +443,14 @@ class ApiForput(BaseApi):
     
     def put(
         self,
-        bucket: BucketUpdateRequestBucket,
+        new_name: str,
         bucket_id: int,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
         args = self._update_mapped_args(
-            bucket=bucket,
+            new_name=new_name,
             bucket_id=bucket_id,
         )
         return self._update_oapg(

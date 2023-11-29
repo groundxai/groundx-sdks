@@ -19,7 +19,8 @@ Ground Your RAG Apps in Fact not Fiction
 - [Installation](#installation)
 - [Getting Started](#getting-started)
 - [Reference](#reference)
-  * [`groundx.apiKeys.list`](#groundxapikeyslist)
+  * [`groundx.buckets.create`](#groundxbucketscreate)
+  * [`groundx.buckets.delete`](#groundxbucketsdelete)
   * [`groundx.buckets.get`](#groundxbucketsget)
   * [`groundx.buckets.list`](#groundxbucketslist)
   * [`groundx.buckets.update`](#groundxbucketsupdate)
@@ -32,8 +33,12 @@ Ground Your RAG Apps in Fact not Fiction
   * [`groundx.documents.lookup`](#groundxdocumentslookup)
   * [`groundx.documents.uploadLocal`](#groundxdocumentsuploadlocal)
   * [`groundx.documents.uploadRemote`](#groundxdocumentsuploadremote)
+  * [`groundx.projects.addBucket`](#groundxprojectsaddbucket)
+  * [`groundx.projects.create`](#groundxprojectscreate)
+  * [`groundx.projects.delete`](#groundxprojectsdelete)
   * [`groundx.projects.get`](#groundxprojectsget)
   * [`groundx.projects.list`](#groundxprojectslist)
+  * [`groundx.projects.removeBucket`](#groundxprojectsremovebucket)
   * [`groundx.projects.update`](#groundxprojectsupdate)
   * [`groundx.search.content`](#groundxsearchcontent)
 
@@ -83,31 +88,68 @@ const groundx = new Groundx({
   apiKey: "API_KEY",
 });
 
-const listResponse = await groundx.apiKeys.list();
+const createResponse = await groundx.buckets.create({
+  name: "your_bucket_name",
+});
 
-console.log(listResponse);
+console.log(createResponse);
 ```
 
 ## Reference<a id="reference"></a>
 
 
-### `groundx.apiKeys.list`<a id="groundxapikeyslist"></a>
+### `groundx.buckets.create`<a id="groundxbucketscreate"></a>
 
-Retrieve the API keys for your account.
+This endpoint allows you to create a new bucket.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
-const listResponse = await groundx.apiKeys.list();
+const createResponse = await groundx.buckets.create({
+  name: "your_bucket_name",
+});
 ```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### name: `string`<a id="name-string"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[ApiKeyManagementListResponse](./models/api-key-management-list-response.ts)
+[BucketResponse](./models/bucket-response.ts)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
-`/v1/apikey` `GET`
+`/v1/bucket` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `groundx.buckets.delete`<a id="groundxbucketsdelete"></a>
+
+Delete a bucket
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const deleteResponse = await groundx.buckets.delete({
+  bucketId: 1,
+});
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### bucketId: `number`<a id="bucketid-number"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[MessageResponse](./models/message-response.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/v1/bucket/{bucketId}` `DELETE`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -152,8 +194,14 @@ Look up existing buckets associated with your account.
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
-const listResponse = await groundx.buckets.list();
+const listResponse = await groundx.buckets.list({});
 ```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### n: `number`<a id="n-number"></a>
+
+##### nextToken: `string`<a id="nexttoken-string"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -177,15 +225,13 @@ Update the configurations of an existing bucket.
 ```typescript
 const updateResponse = await groundx.buckets.update({
   bucketId: 1,
-  bucket: {
-    name: "your_bucket_name",
-  },
+  newName: "your_bucket_name",
 });
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### bucket: [`BucketUpdateRequestBucket`](./models/bucket-update-request-bucket.ts)<a id="bucket-bucketupdaterequestbucketmodelsbucket-update-request-bucketts"></a>
+##### newName: `string`<a id="newname-string"></a>
 
 ##### bucketId: `number`<a id="bucketid-number"></a>
 
@@ -212,13 +258,20 @@ Crawl and ingest a website into GroundX
 
 ```typescript
 const crawlWebsiteResponse = await groundx.documents.crawlWebsite({
-  website: null,
+  websites: [
+    {
+      bucketId: 123,
+      cap: 100,
+      depth: 3,
+      sourceUrl: "https://my.website.com",
+    },
+  ],
 });
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### website: [`WebsiteRequest`](./models/website-request.ts)<a id="website-websiterequestmodelswebsite-requestts"></a>
+##### websites: [`WebsiteCrawlRequestWebsitesInner`](./models/website-crawl-request-websites-inner.ts)[]<a id="websites-websitecrawlrequestwebsitesinnermodelswebsite-crawl-request-websites-innerts"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -241,17 +294,15 @@ Delete one or more documents from GroundX
 
 ```typescript
 const deleteResponse = await groundx.documents.delete({
-  documents: [
-    {
-      documentId: "documentId_example",
-    },
-  ],
+  documentIds: ["documentIds_example"],
 });
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### documents: [`DocumentsDeleteRequestDocumentsInner`](./models/documents-delete-request-documents-inner.ts)[]<a id="documents-documentsdeleterequestdocumentsinnermodelsdocuments-delete-request-documents-innerts"></a>
+##### documentIds: `string`[]<a id="documentids-string"></a>
+
+A comma delimited list of document IDs
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -428,8 +479,6 @@ const uploadLocalResponse = await groundx.documents.uploadLocal([
     blob: fs.readFileSync("/path/to/file"),
     metadata: {
       bucketId: 1234,
-      callbackData: "my_callback_data",
-      callbackUrl: "https://my.callback.url.com",
       fileName: "my_file.txt",
       fileType: "txt",
     },
@@ -465,8 +514,6 @@ const uploadRemoteResponse = await groundx.documents.uploadRemote({
   documents: [
     {
       bucketId: 1234,
-      callbackData: "my_callback_data",
-      callbackUrl: "https://my.callback.url.com",
       fileName: "my_file.txt",
       fileType: "txt",
       sourceUrl: "https://my.source.url.com/file.txt",
@@ -492,6 +539,105 @@ const uploadRemoteResponse = await groundx.documents.uploadRemote({
 ---
 
 
+### `groundx.projects.addBucket`<a id="groundxprojectsaddbucket"></a>
+
+This endpoint allows you to add a bucket to a project.
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const addBucketResponse = await groundx.projects.addBucket({
+  projectId: 1,
+  bucketId: 1,
+});
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### projectId: `number`<a id="projectid-number"></a>
+
+The ID of the project to update.
+
+##### bucketId: `number`<a id="bucketid-number"></a>
+
+The ID of the bucket to update.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[MessageResponse](./models/message-response.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/v1/project/{projectId}/bucket/{bucketId}` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `groundx.projects.create`<a id="groundxprojectscreate"></a>
+
+This endpoint allows you to create a new project.
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const createResponse = await groundx.projects.create({
+  name: "your_project_name",
+  bucketName: "your_new_bucket_name",
+});
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### name: `string`<a id="name-string"></a>
+
+##### bucketName: `string`<a id="bucketname-string"></a>
+
+Include a bucket name to automatically create a bucket and add it to this project
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[ProjectResponse](./models/project-response.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/v1/project` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `groundx.projects.delete`<a id="groundxprojectsdelete"></a>
+
+Delete a project
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const deleteResponse = await groundx.projects.delete({
+  projectId: 1,
+});
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### projectId: `number`<a id="projectid-number"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[MessageResponse](./models/message-response.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/v1/project/{projectId}` `DELETE`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `groundx.projects.get`<a id="groundxprojectsget"></a>
 
 This endpoint allows you to retrieve a specific project by projectId.
@@ -500,13 +646,13 @@ This endpoint allows you to retrieve a specific project by projectId.
 
 ```typescript
 const getResponse = await groundx.projects.get({
-  projectId: "projectId_example",
+  projectId: 1,
 });
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### projectId: `string`<a id="projectid-string"></a>
+##### projectId: `number`<a id="projectid-number"></a>
 
 The ID of the project to retrieve.
 
@@ -530,8 +676,14 @@ This endpoint allows you to retrieve your existing projects.
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
-const listResponse = await groundx.projects.list();
+const listResponse = await groundx.projects.list({});
 ```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### n: `number`<a id="n-number"></a>
+
+##### nextToken: `string`<a id="nexttoken-string"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -546,6 +698,42 @@ const listResponse = await groundx.projects.list();
 ---
 
 
+### `groundx.projects.removeBucket`<a id="groundxprojectsremovebucket"></a>
+
+This endpoint allows you to remove a bucket from a project.
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const removeBucketResponse = await groundx.projects.removeBucket({
+  projectId: 1,
+  bucketId: 1,
+});
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### projectId: `number`<a id="projectid-number"></a>
+
+The ID of the project to update.
+
+##### bucketId: `number`<a id="bucketid-number"></a>
+
+The ID of the bucket to update.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[MessageResponse](./models/message-response.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/v1/project/{projectId}/bucket/{bucketId}` `DELETE`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `groundx.projects.update`<a id="groundxprojectsupdate"></a>
 
 This endpoint allows you to update an existing project.
@@ -554,18 +742,16 @@ This endpoint allows you to update an existing project.
 
 ```typescript
 const updateResponse = await groundx.projects.update({
-  projectId: "projectId_example",
-  project: {
-    name: "your_project_name",
-  },
+  projectId: 1,
+  newName: "your_project_name",
 });
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### project: [`ProjectUpdateRequestProject`](./models/project-update-request-project.ts)<a id="project-projectupdaterequestprojectmodelsproject-update-request-projectts"></a>
+##### newName: `string`<a id="newname-string"></a>
 
-##### projectId: `string`<a id="projectid-string"></a>
+##### projectId: `number`<a id="projectid-number"></a>
 
 The ID of the project to update.
 

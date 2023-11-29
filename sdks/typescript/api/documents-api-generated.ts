@@ -33,17 +33,13 @@ import { DocumentRemoteUploadRequestDocumentsInner } from '../models';
 // @ts-ignore
 import { DocumentResponse } from '../models';
 // @ts-ignore
-import { DocumentsDeleteRequest } from '../models';
-// @ts-ignore
-import { DocumentsDeleteRequestDocumentsInner } from '../models';
-// @ts-ignore
 import { IngestResponse } from '../models';
 // @ts-ignore
 import { ProcessStatusResponse } from '../models';
 // @ts-ignore
 import { WebsiteCrawlRequest } from '../models';
 // @ts-ignore
-import { WebsiteRequest } from '../models';
+import { WebsiteCrawlRequestWebsitesInner } from '../models';
 import { paginate } from "../pagination/paginate";
 import type * as buffer from "buffer"
 import { requestBeforeHook } from '../requestBeforeHook';
@@ -100,11 +96,13 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
         /**
          * 
          * @summary Delete one or more documents from GroundX
-         * @param {DocumentsDeleteRequest} [documentsDeleteRequest] 
+         * @param {Array<string>} documentIds A comma delimited list of document IDs
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        delete: async (documentsDeleteRequest?: DocumentsDeleteRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        delete: async (documentIds: Array<string>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'documentIds' is not null or undefined
+            assertParamExists('delete', 'documentIds', documentIds)
             const localVarPath = `/v1/ingest/documents`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -119,21 +117,20 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
 
             // authentication ApiKeyAuth required
             await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "X-API-Key", configuration })
+            if (documentIds) {
+                localVarQueryParameter['documentIds'] = documentIds.join(COLLECTION_FORMATS.csv);
+            }
+
 
     
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             requestBeforeHook({
-                requestBody: documentsDeleteRequest,
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
                 configuration
             });
-            localVarRequestOptions.data = serializeDataIfNeeded(documentsDeleteRequest, localVarRequestOptions, configuration)
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
@@ -525,7 +522,7 @@ export const DocumentsApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async delete(requestParameters: DocumentsApiDeleteRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IngestResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.delete(requestParameters, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.delete(requestParameters.documentIds, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -724,7 +721,14 @@ export type DocumentsApiCrawlWebsiteRequest = {
  */
 export type DocumentsApiDeleteRequest = {
     
-} & DocumentsDeleteRequest
+    /**
+    * A comma delimited list of document IDs
+    * @type {Array<string>}
+    * @memberof DocumentsApiDelete
+    */
+    readonly documentIds: Array<string>
+    
+}
 
 /**
  * Request parameters for delete_1 operation in DocumentsApi.

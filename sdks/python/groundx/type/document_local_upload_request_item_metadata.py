@@ -25,13 +25,7 @@ class RequiredDocumentLocalUploadRequestItemMetadata(TypedDict):
     fileType: DocumentType
 
 class OptionalDocumentLocalUploadRequestItemMetadata(TypedDict, total=False):
-    # Data that is passed through on callback
-    callbackData: str
-
-    # URL where GroundX will post status changes to the ingest request
-    callbackUrl: str
-
-    metadata: typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]
+    searchData: typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]
 
 class DocumentLocalUploadRequestItemMetadata(RequiredDocumentLocalUploadRequestItemMetadata, OptionalDocumentLocalUploadRequestItemMetadata):
     pass

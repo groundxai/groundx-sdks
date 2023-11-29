@@ -34,54 +34,54 @@ class WebsiteCrawlRequest(
 
     class MetaOapg:
         required = {
-            "website",
+            "websites",
         }
         
         class properties:
         
             @staticmethod
-            def website() -> typing.Type['WebsiteRequest']:
-                return WebsiteRequest
+            def websites() -> typing.Type['WebsiteCrawlRequestWebsites']:
+                return WebsiteCrawlRequestWebsites
             __annotations__ = {
-                "website": website,
+                "websites": websites,
             }
     
-    website: 'WebsiteRequest'
+    websites: 'WebsiteCrawlRequestWebsites'
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["website"]) -> 'WebsiteRequest': ...
+    def __getitem__(self, name: typing_extensions.Literal["websites"]) -> 'WebsiteCrawlRequestWebsites': ...
     
     @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["website", ], str]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["websites", ], str]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["website"]) -> 'WebsiteRequest': ...
+    def get_item_oapg(self, name: typing_extensions.Literal["websites"]) -> 'WebsiteCrawlRequestWebsites': ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["website", ], str]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["websites", ], str]):
         return super().get_item_oapg(name)
     
 
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        website: 'WebsiteRequest',
+        websites: 'WebsiteCrawlRequestWebsites',
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
     ) -> 'WebsiteCrawlRequest':
         return super().__new__(
             cls,
             *args,
-            website=website,
+            websites=websites,
             _configuration=_configuration,
             **kwargs,
         )
 
-from groundx.model.website_request import WebsiteRequest
+from groundx.model.website_crawl_request_websites import WebsiteCrawlRequestWebsites
