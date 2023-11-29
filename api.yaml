@@ -108,6 +108,39 @@ paths:
           description: Invalid process ID
         '401':
           description: Unauthorized to access process with given ID
+  /v1/ingest/documents/{id}:
+    get:
+      tags:
+        - Documents
+      summary: Look up existing documents by processId, bucketId, or projectId
+      operationId: Document_lookup
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: n
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: nextToken
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Look up success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentLookupResponse'
+        '400':
+          description: Invalid process, bucket, or project ID
+        '401':
+          description: Unauthorized to access process, bucket, or project with given ID
   /v1/ingest/documents:
     get:
       tags:
@@ -153,63 +186,7 @@ paths:
           description: Invalid document ID
         '401':
           description: Unauthorized to delete document with given ID
-  /v1/ingest/documents/{id}:
-    get:
-      tags:
-        - Documents
-      summary: Look up existing documents by processId, bucketId, or projectId
-      operationId: Document_lookup
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-        - name: n
-          in: query
-          required: false
-          schema:
-            type: integer
-        - name: nextToken
-          in: query
-          required: false
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Look up success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DocumentLookupResponse'
-        '400':
-          description: Invalid process, bucket, or project ID
-        '401':
-          description: Unauthorized to access process, bucket, or project with given ID
   /v1/ingest/document/{documentId}:
-    get:
-      tags:
-        - Documents
-      summary: Look up an existing document by its ID
-      operationId: Document_get
-      parameters:
-        - name: documentId
-          in: path
-          required: true
-          schema:
-            type: string
-            format: uuid
-      responses:
-        '200':
-          description: Look up success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DocumentResponse'
-        '400':
-          description: Invalid document ID
-        '401':
-          description: Unauthorized to access document with given ID
     delete:
       tags:
         - Documents
@@ -233,6 +210,29 @@ paths:
           description: Invalid document ID
         '401':
           description: Unauthorized to delete document with given ID
+    get:
+      tags:
+        - Documents
+      summary: Look up an existing document by its ID
+      operationId: Document_get
+      parameters:
+        - name: documentId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Look up success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentResponse'
+        '400':
+          description: Invalid document ID
+        '401':
+          description: Unauthorized to access document with given ID
   /v1/search/{id}:
     post:
       tags:
@@ -906,7 +906,7 @@ components:
       required:
         - website
       properties:
-        project:
+        website:
           $ref: '#/components/schemas/WebsiteRequest'
     WebsiteRequest:
       required:
