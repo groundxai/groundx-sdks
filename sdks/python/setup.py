@@ -13,7 +13,7 @@
 from setuptools import setup, find_packages  # noqa: H301
 
 NAME = "groundx-python-sdk"
-VERSION = "1.3.5"
+VERSION = "1.3.6"
 # To install the library, run the following
 #
 # python setup.py install
