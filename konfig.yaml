@@ -31,7 +31,7 @@ readmeHeader:
   url: https://www.groundx.ai
 generators:
   python:
-    version: 1.3.4
+    version: 1.3.5
     packageName: groundx
     projectName: groundx-python-sdk
     responseTypeVersion: '1'
@@ -42,7 +42,7 @@ generators:
       repoId: groundx-sdks/tree/main/sdks/python
     pypiApiTokenEnvironmentVariable: PYPI_TOKEN_1
   typescript:
-    version: 1.3.6
+    version: 1.3.7
     npmName: groundx-typescript-sdk
     outputDirectory: sdks/typescript
     clientName: Groundx
