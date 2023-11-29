@@ -6,7 +6,7 @@
 
 Ground Your RAG Apps in Fact not Fiction
 
-[![npm](https://img.shields.io/badge/npm-v1.3.6-blue)](https://www.npmjs.com/package/groundx-typescript-sdk/v/1.3.6)
+[![npm](https://img.shields.io/badge/npm-v1.3.7-blue)](https://www.npmjs.com/package/groundx-typescript-sdk/v/1.3.7)
 [![GitHub last commit](https://img.shields.io/github/last-commit/groundxai/groundx-sdks/tree/main/sdks/typescript.svg)](https://github.com/groundxai/groundx-sdks/tree/main/sdks/typescript/commits)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://www.groundx.ai/)
 
