@@ -39,7 +39,7 @@ paths:
         '400':
           description: Invalid document type or source URL
         '401':
-          description: Permission denied
+          description: Unauthorized to update bucket with given ID
   /v1/ingest/documents/local:
     post:
       tags:
@@ -61,7 +61,29 @@ paths:
         '400':
           description: Invalid document type or source URL
         '401':
-          description: Permission denied
+          description: Unauthorized to update bucket with ID
+  /v1/ingest/documents/website:
+    post:
+      tags:
+        - Documents
+      summary: Crawl and ingest a website into GroundX
+      operationId: Document_crawlWebsite
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebsiteCrawlRequest'
+      responses:
+        '200':
+          description: Website successfully queued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IngestResponse'
+        '400':
+          description: Invalid source URL
+        '401':
+          description: Unauthorized to update bucket with given ID
   /v1/ingest/{processId}:
     get:
       tags:
@@ -74,6 +96,7 @@ paths:
           required: true
           schema:
             type: string
+            format: uuid
       responses:
         '200':
           description: Look up success
@@ -81,8 +104,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProcessStatusResponse'
+        '400':
+          description: Invalid process ID
         '401':
-          description: Permission denied
+          description: Unauthorized to access process with given ID
   /v1/ingest/documents:
     get:
       tags:
@@ -107,8 +132,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DocumentListResponse'
+    delete:
+      tags:
+        - Documents
+      summary: Delete one or more documents from GroundX
+      operationId: Documents_delete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DocumentsDeleteRequest'
+      responses:
+        '200':
+          description: Documents are queued to be deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IngestResponse'
+        '400':
+          description: Invalid document ID
         '401':
-          description: Permission denied
+          description: Unauthorized to delete document with given ID
   /v1/ingest/documents/{id}:
     get:
       tags:
@@ -138,8 +182,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DocumentLookupResponse'
+        '400':
+          description: Invalid process, bucket, or project ID
         '401':
-          description: Permission denied
+          description: Unauthorized to access process, bucket, or project with given ID
   /v1/ingest/document/{documentId}:
     get:
       tags:
@@ -152,6 +198,7 @@ paths:
           required: true
           schema:
             type: string
+            format: uuid
       responses:
         '200':
           description: Look up success
@@ -162,7 +209,7 @@ paths:
         '400':
           description: Invalid document ID
         '401':
-          description: Permission denied
+          description: Unauthorized to access document with given ID
     delete:
       tags:
         - Documents
@@ -174,26 +221,27 @@ paths:
           required: true
           schema:
             type: string
+            format: uuid
       responses:
         '200':
           description: Document successfully deleted
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DocumentDeleteResponse'
+                $ref: '#/components/schemas/IngestResponse'
         '400':
           description: Invalid document ID
         '401':
-          description: Permission denied
+          description: Unauthorized to delete document with given ID
   /v1/search/{id}:
     post:
       tags:
         - Search
       summary: Perform a search query of your content
       operationId: Search_content
-      description: Search and retrieve relevant content from a project, group, or bucket by id.
+      description: Search and retrieve relevant content from a project or bucket by id.
       parameters:
-        - description: The ID of the project, group, or bucket to search within.
+        - description: The ID of the project or bucket to search within.
           in: path
           name: id
           required: true
@@ -223,7 +271,7 @@ paths:
         '400':
           description: Invalid request data
         '401':
-          description: Permission denied
+          description: Unauthorized to access project or bucket with given ID
   /v1/project:
     get:
       tags:
@@ -259,6 +307,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProjectResponse'
+        '400':
+          description: Invalid project ID
+        '401':
+          description: Unauthorized to access project with given ID
     put:
       tags:
         - Projects
@@ -285,6 +337,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProjectResponse'
+        '400':
+          description: Invalid body parameter
+        '401':
+          description: Unauthorized to update project with given ID
   /v1/bucket:
     get:
       tags:
@@ -299,8 +355,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BucketListResponse'
-        '401':
-          description: Permission denied
   /v1/bucket/{bucketId}:
     get:
       tags:
@@ -325,7 +379,7 @@ paths:
         '400':
           description: Invalid bucket ID
         '401':
-          description: Permission denied
+          description: Unauthorized to access bucket with given ID
     put:
       tags:
         - Buckets
@@ -355,12 +409,12 @@ paths:
         '400':
           description: Invalid body parameter
         '401':
-          description: Permission denied
+          description: Unauthorized to update bucket with given ID
   /v1/apikey:
     get:
       tags:
         - API Keys
-      summary: Get API keys
+      summary: Look up existing API Keys
       operationId: ApiKeyManagement_list
       description: Retrieve the API keys for your account.
       responses:
@@ -370,16 +424,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiKeyManagementListResponse'
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '405':
-          description: Method Not Allowed
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiKeyManagementList405Response'
 components:
   schemas:
     SearchRequest:
@@ -413,16 +457,20 @@ components:
               type: integer
             results:
               type: array
+              description: Search results
               items:
                 $ref: '#/components/schemas/SearchResultItem'
             query:
-              description: The search query
+              description: The original search request query
               type: string
             score:
-              description: Top result relevance score
+              description: Confidence score in the search results
               type: number
+            searchQuery:
+              description: The actual search query, if the search request query was re-written
+              type: string
             text:
-              description: Combined text from results
+              description: Suggested context for LLM completion
               type: string
             nextToken:
               description: For paginated results
@@ -430,23 +478,28 @@ components:
     SearchResultItem:
       type: object
       properties:
-        chunkId:
-          description: Unique system generated ID for the chunk
-          type: string
+        bucketId:
+          description: Content bucket the search result belongs to
+          type: integer
         documentId:
           description: Unique system generated ID for the document
+          format: uuid
           type: string
         metadata:
-          description: Document and chunk level metadata
+          description: Document, section, and chunk metadata, both custom and system-generated
           type: object
         score:
-          description: Result relevance score
+          description: Confidence score in the search result
           type: number
         sourceUrl:
-          description: Document source URL
+          description: Source document URL
+          format: uri
+          type: string
+        suggestedText:
+          description: System-generated text, re-written for LLM completions
           type: string
         text:
-          description: Text from result
+          description: Original text from the source document
           type: string
     ProjectResponse:
       type: object
@@ -462,24 +515,30 @@ components:
       properties:
         buckets:
           type: array
+          description: The content buckets associated with the project
           items:
             $ref: '#/components/schemas/BucketDetail'
         created:
           type: string
+          description: The data time when the project was created, in RFC3339 format
           format: date-time
+          example: '2023-10-03T08:59:39.312Z'
         fileCount:
           type: integer
+          description: The number of files contained in the content buckets associated with the project
         fileSize:
           type: string
-        groupId:
-          type: integer
+          description: The total file size of files contained in the content buckets associated with the project
+          example: 3.1GB
         projectId:
           type: integer
         name:
           type: string
         updated:
           type: string
+          description: The data time when the project was last updated, in RFC3339 format
           format: date-time
+          example: '2023-10-03T08:59:39.312Z'
     BucketDetail:
       type: object
       required:
@@ -489,14 +548,23 @@ components:
           type: integer
         created:
           type: string
+          description: The data time when the bucket was created, in RFC3339 format
+          format: date-time
+          example: '2023-10-03T08:59:39.312Z'
         fileCount:
           type: integer
+          description: The number of files contained in the content bucket
         fileSize:
           type: string
+          description: The total file size of files contained in the content bucket
+          example: 3.1GB
         name:
           type: string
         updated:
           type: string
+          description: The data time when the bucket was last updated, in RFC3339 format
+          format: date-time
+          example: '2023-10-03T08:59:39.312Z'
     BucketUpdateDetail:
       type: object
       required:
@@ -556,24 +624,45 @@ components:
               type: integer
             documentId:
               type: string
+              description: Unique system generated ID for the document
+              format: uuid
             fileName:
               type: string
             fileSize:
               type: string
+              description: The file size of the file stored in GroundX
+              example: 1.4MB
             fileType:
-              type: string
+              $ref: '#/components/schemas/DocumentType'
             metadata:
               type: object
             processId:
               type: string
-            processedUrl:
-              type: string
+              description: Unique system generated ID for the ingest request
+              format: uuid
             sourceUrl:
               type: string
+              description: Source document URL
+              format: uri
             status:
-              type: string
+              $ref: "#/components/schemas/ProcessingStatus"
             statusMessage:
               type: string
+    DocumentsDeleteRequest:
+      type: object
+      required:
+        - documents
+      properties:
+        documents:
+          type: array
+          items:
+            type: object
+            required:
+              - documentId
+            properties:
+              documentId:
+                type: string
+                format: uuid
     DocumentRemoteUploadRequest:
       type: object
       required:
@@ -590,21 +679,29 @@ components:
               bucketId:
                 type: integer
                 example: 1234
-              sourceUrl:
-                type: string
-                example: https://my.source.url.com/file.txt
               callbackData:
                 type: string
+                description: Data that is passed through on callback
                 example: my_callback_data
               callbackUrl:
                 type: string
+                description: URL where GroundX will post status changes to the ingest request
+                format: uri
                 example: https://my.callback.url.com
+              fileName:
+                type: string
+                example: my_file.txt
+              fileType:
+                $ref: '#/components/schemas/DocumentType'
               metadata:
                 type: object
                 example:
                   key: value
-              type:
-                $ref: '#/components/schemas/DocumentType'
+              sourceUrl:
+                type: string
+                description: Source document URL
+                format: uri
+                example: https://my.source.url.com/file.txt
     DocumentType:
       type: string
       enum:
@@ -637,6 +734,15 @@ components:
               bucketId:
                 type: integer
                 example: 1234
+              callbackData:
+                type: string
+                description: Data that is passed through on callback
+                example: my_callback_data
+              callbackUrl:
+                type: string
+                description: URL where GroundX will post status changes to the ingest request
+                format: uri
+                example: https://my.callback.url.com
               fileName:
                 type: string
                 example: my_file.txt
@@ -646,12 +752,6 @@ components:
                 type: object
                 example:
                   key: value
-              callbackData:
-                type: string
-                example: my_callback_data
-              callbackUrl:
-                type: string
-                example: https://my.callback.url.com
     IngestResponse:
       type: object
       required:
@@ -665,6 +765,7 @@ components:
           properties:
             processId:
               type: string
+              format: uuid
             status:
               $ref: "#/components/schemas/ProcessingStatus"
     ProcessStatusResponse:
@@ -680,9 +781,19 @@ components:
           properties:
             processId:
               type: string
+              format: uuid
             progress:
               type: object
               properties:
+                cancelled:
+                  type: object
+                  properties:
+                    documents:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/DocumentResponse'
+                    total:
+                      type: integer
                 complete:
                   type: object
                   properties:
@@ -721,6 +832,7 @@ components:
         - processing
         - error
         - complete
+        - cancelled
     ProjectListResponse:
       type: object
       properties:
@@ -735,11 +847,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BucketDetail'
-    DocumentDeleteResponse:
-      type: object
-      properties:
-        message:
-          type: string
     DocumentListResponse:
       type: object
       properties:
@@ -747,6 +854,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DocumentResponse'
+        nextToken:
+          type: string
     DocumentLookupResponse:
       type: object
       properties:
@@ -754,10 +863,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DocumentResponse'
-    ApiKeyManagementList405Response:
-      type: object
-      properties:
-        message:
+        nextToken:
           type: string
           example: The method you used is not supported for this query
       example:
@@ -772,6 +878,8 @@ components:
             properties:
               created:
                 type: string
+                description: The data time when the API key was created, in RFC3339 format
+                format: date-time
                 example: '2023-10-03T08:59:39.312Z'
               apiKey:
                 type: string
@@ -793,6 +901,47 @@ components:
           - apiKey: XXXXXXXX-05f2-4a16-ab3a-d07fa4661753
             created: '2023-09-20T09:32:11.161Z'
             name: default
+    WebsiteCrawlRequest:
+      type: object
+      required:
+        - website
+      properties:
+        project:
+          $ref: '#/components/schemas/WebsiteRequest'
+    WebsiteRequest:
+      required:
+        - bucketId
+        - sourceUrl
+      properties:
+        bucketId:
+          type: integer
+          example: 123
+        callbackData:
+          type: string
+          description: Data that is passed through on callback
+          example: my_callback_data
+        callbackUrl:
+          type: string
+          description: URL where GroundX will post status changes to the ingest request
+          format: uri
+          example: https://my.callback.url.com
+        cap:
+          type: integer
+          description: The maximum number of pages to crawl
+          example: 100
+        depth:
+          type: integer
+          description: The maximum depth of linked pages to follow from the sourceUrl
+          example: 3
+        metadata:
+          type: object
+          example:
+            key: value
+        sourceUrl:
+          type: string
+          description: Source website URL
+          format: uri
+          example: https://my.website.com
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
