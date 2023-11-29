@@ -16,6 +16,6 @@ class PathValues(str, enum.Enum):
     V1_SEARCH_ID = "/v1/search/{id}"
     V1_PROJECT = "/v1/project"
     V1_PROJECT_PROJECT_ID = "/v1/project/{projectId}"
+    V1_PROJECT_PROJECT_ID_BUCKET_BUCKET_ID = "/v1/project/{projectId}/bucket/{bucketId}"
     V1_BUCKET = "/v1/bucket"
     V1_BUCKET_BUCKET_ID = "/v1/bucket/{bucketId}"
-    V1_APIKEY = "/v1/apikey"

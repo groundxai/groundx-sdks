@@ -34,10 +34,10 @@ class OptionalDocumentResponseDocument(TypedDict, total=False):
 
     fileType: DocumentType
 
-    metadata: typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]
-
     # Unique system generated ID for the ingest request
     processId: str
+
+    searchData: typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]
 
     # Source document URL
     sourceUrl: str

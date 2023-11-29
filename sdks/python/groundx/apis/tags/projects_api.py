@@ -10,14 +10,22 @@
     Created by: https://www.groundx.ai/
 """
 
+from groundx.paths.v1_project_project_id_bucket_bucket_id.post import AddBucket
+from groundx.paths.v1_project.post import Create
+from groundx.paths.v1_project_project_id.delete import Delete
 from groundx.paths.v1_project_project_id.get import Get
 from groundx.paths.v1_project.get import List
+from groundx.paths.v1_project_project_id_bucket_bucket_id.delete import RemoveBucket
 from groundx.paths.v1_project_project_id.put import Update
 
 
 class ProjectsApi(
+    AddBucket,
+    Create,
+    Delete,
     Get,
     List,
+    RemoveBucket,
     Update,
 ):
     """NOTE:

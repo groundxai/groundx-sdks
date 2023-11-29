@@ -37,11 +37,11 @@ from groundx.model.project_response import ProjectResponse as ProjectResponseSch
 from groundx.type.project_response import ProjectResponse
 
 # Path params
-ProjectIdSchema = schemas.StrSchema
+ProjectIdSchema = schemas.IntSchema
 RequestRequiredPathParams = typing_extensions.TypedDict(
     'RequestRequiredPathParams',
     {
-        'projectId': typing.Union[ProjectIdSchema, str, ],
+        'projectId': typing.Union[ProjectIdSchema, decimal.Decimal, int, ],
     }
 )
 RequestOptionalPathParams = typing_extensions.TypedDict(
@@ -124,7 +124,7 @@ class BaseApi(api_client.Api):
 
     def _get_mapped_args(
         self,
-        project_id: str,
+        project_id: int,
     ) -> api_client.MappedArgs:
         args: api_client.MappedArgs = api_client.MappedArgs()
         _path_params = {}
@@ -329,7 +329,7 @@ class Get(BaseApi):
 
     async def aget(
         self,
-        project_id: str,
+        project_id: int,
         **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
@@ -346,7 +346,7 @@ class Get(BaseApi):
     
     def get(
         self,
-        project_id: str,
+        project_id: int,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -363,7 +363,7 @@ class ApiForget(BaseApi):
 
     async def aget(
         self,
-        project_id: str,
+        project_id: int,
         **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
@@ -380,7 +380,7 @@ class ApiForget(BaseApi):
     
     def get(
         self,
-        project_id: str,
+        project_id: int,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,

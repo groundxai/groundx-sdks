@@ -25,18 +25,6 @@ export interface DocumentRemoteUploadRequestDocumentsInner {
      */
     'bucketId': number;
     /**
-     * Data that is passed through on callback
-     * @type {string}
-     * @memberof DocumentRemoteUploadRequestDocumentsInner
-     */
-    'callbackData'?: string;
-    /**
-     * URL where GroundX will post status changes to the ingest request
-     * @type {string}
-     * @memberof DocumentRemoteUploadRequestDocumentsInner
-     */
-    'callbackUrl'?: string;
-    /**
      * 
      * @type {string}
      * @memberof DocumentRemoteUploadRequestDocumentsInner
@@ -53,7 +41,7 @@ export interface DocumentRemoteUploadRequestDocumentsInner {
      * @type {object}
      * @memberof DocumentRemoteUploadRequestDocumentsInner
      */
-    'metadata'?: object;
+    'searchData'?: object;
     /**
      * Source document URL
      * @type {string}

@@ -30,17 +30,17 @@ export interface SearchResultItem {
      */
     'documentId'?: string;
     /**
-     * Document, section, and chunk metadata, both custom and system-generated
-     * @type {object}
-     * @memberof SearchResultItem
-     */
-    'metadata'?: object;
-    /**
      * Confidence score in the search result
      * @type {number}
      * @memberof SearchResultItem
      */
     'score'?: number;
+    /**
+     * Document, section, and chunk search data, both custom and system-generated
+     * @type {object}
+     * @memberof SearchResultItem
+     */
+    'searchData'?: object;
     /**
      * Source document URL
      * @type {string}

@@ -15,10 +15,9 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
-from groundx.type.bucket_update_request_bucket import BucketUpdateRequestBucket
 
 class RequiredBucketUpdateRequest(TypedDict):
-    bucket: BucketUpdateRequestBucket
+    newName: str
 
 class OptionalBucketUpdateRequest(TypedDict, total=False):
     pass

@@ -16,7 +16,6 @@ tags:
   - name: Search
   - name: Projects
   - name: Buckets
-  - name: API Keys
 paths:
   /v1/ingest/documents/remote:
     post:
@@ -170,11 +169,18 @@ paths:
         - Documents
       summary: Delete one or more documents from GroundX
       operationId: Documents_delete
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DocumentsDeleteRequest'
+      parameters:
+        - name: documentIds
+          in: query
+          description: A comma delimited list of document IDs
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+              format: uuid
+          style: form
+          explode: false
       responses:
         '200':
           description: Documents are queued to be deleted
@@ -278,6 +284,17 @@ paths:
         - Projects
       summary: Look up existing projects
       operationId: Project_list
+      parameters:
+        - name: n
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: nextToken
+          in: query
+          required: false
+          schema:
+            type: string
       description: This endpoint allows you to retrieve your existing projects.
       responses:
         '200':
@@ -286,6 +303,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProjectListResponse'
+    post:
+      tags:
+        - Projects
+      summary: Create a new project
+      operationId: Project_create
+      description: This endpoint allows you to create a new project.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectCreateRequest'
+      responses:
+        '200':
+          description: Project successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectResponse'
+        '400':
+          description: Invalid body parameter
   /v1/project/{projectId}:
     get:
       tags:
@@ -299,7 +337,7 @@ paths:
           name: projectId
           required: true
           schema:
-            type: string
+            type: integer
       responses:
         '200':
           description: Successful retrieval of project
@@ -323,7 +361,7 @@ paths:
           name: projectId
           required: true
           schema:
-            type: string
+            type: integer
       requestBody:
         required: true
         content:
@@ -341,12 +379,106 @@ paths:
           description: Invalid body parameter
         '401':
           description: Unauthorized to update project with given ID
+    delete:
+      tags:
+        - Projects
+      summary: Delete a project
+      operationId: Project_delete
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Project successfully deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '400':
+          description: Invalid project ID
+        '401':
+          description: Unauthorized to delete project with given ID
+  /v1/project/{projectId}/bucket/{bucketId}:
+    post:
+      tags:
+        - Projects
+      summary: Add a bucket to a project
+      operationId: Project_addBucket
+      description: This endpoint allows you to add a bucket to a project.
+      parameters:
+        - description: The ID of the project to update.
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: integer
+        - description: The ID of the bucket to update.
+          in: path
+          name: bucketId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful update of project
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '400':
+          description: Invalid path parameter
+        '401':
+          description: Unauthorized to update project with given ID
+    delete:
+      tags:
+        - Projects
+      summary: Remove a bucket from a project
+      operationId: Project_removeBucket
+      description: This endpoint allows you to remove a bucket from a project.
+      parameters:
+        - description: The ID of the project to update.
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: integer
+        - description: The ID of the bucket to update.
+          in: path
+          name: bucketId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful update of project
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '400':
+          description: Invalid path parameter
+        '401':
+          description: Unauthorized to update project with given ID
   /v1/bucket:
     get:
       tags:
         - Buckets
       summary: Look up existing buckets
       operationId: Bucket_list
+      parameters:
+        - name: n
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: nextToken
+          in: query
+          required: false
+          schema:
+            type: string
       description: Look up existing buckets associated with your account.
       responses:
         '200':
@@ -355,6 +487,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BucketListResponse'
+    post:
+      tags:
+        - Buckets
+      summary: Create a new bucket
+      operationId: Bucket_create
+      description: This endpoint allows you to create a new bucket.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BucketCreateRequest'
+      responses:
+        '200':
+          description: Bucket successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BucketResponse'
+        '400':
+          description: Invalid body parameter
   /v1/bucket/{bucketId}:
     get:
       tags:
@@ -410,20 +563,28 @@ paths:
           description: Invalid body parameter
         '401':
           description: Unauthorized to update bucket with given ID
-  /v1/apikey:
-    get:
+    delete:
       tags:
-        - API Keys
-      summary: Look up existing API Keys
-      operationId: ApiKeyManagement_list
-      description: Retrieve the API keys for your account.
+        - Buckets
+      summary: Delete a bucket
+      operationId: Bucket_delete
+      parameters:
+        - name: bucketId
+          in: path
+          required: true
+          schema:
+            type: integer
       responses:
         '200':
-          description: Successful retrieval of API keys
+          description: Bucket successfully deleted
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiKeyManagementListResponse'
+                $ref: '#/components/schemas/MessageResponse'
+        '400':
+          description: Invalid bucket ID
+        '401':
+          description: Unauthorized to delete bucket with given ID
 components:
   schemas:
     SearchRequest:
@@ -485,12 +646,12 @@ components:
           description: Unique system generated ID for the document
           format: uuid
           type: string
-        metadata:
-          description: Document, section, and chunk metadata, both custom and system-generated
-          type: object
         score:
           description: Confidence score in the search result
           type: number
+        searchData:
+          description: Document, section, and chunk search data, both custom and system-generated
+          type: object
         sourceUrl:
           description: Source document URL
           format: uri
@@ -588,32 +749,42 @@ components:
       properties:
         bucket:
           $ref: '#/components/schemas/BucketUpdateDetail'
+    BucketCreateRequest:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          example: your_bucket_name
     BucketUpdateRequest:
       type: object
       required:
-        - bucket
+        - newName
       properties:
-        bucket:
-          type: object
-          required:
-            - name
-          properties:
-            name:
-              type: string
-              example: your_bucket_name
+        newName:
+          type: string
+          example: your_bucket_name
+    ProjectCreateRequest:
+      type: object
+      required:
+       - name
+      properties:
+        name:
+          type: string
+          example: your_project_name
+        bucketName:
+          type: string
+          description: Include a bucket name to automatically create a bucket and add it to this project
+          example: your_new_bucket_name
     ProjectUpdateRequest:
       type: object
       required:
-       - project
+       - newName
       properties:
-        project:
-          type: object
-          required:
-            - name
-          properties:
-            name:
-              type: string
-              example: your_project_name
+        newName:
+          type: string
+          example: your_project_name
     DocumentResponse:
       type: object
       properties:
@@ -634,12 +805,12 @@ components:
               example: 1.4MB
             fileType:
               $ref: '#/components/schemas/DocumentType'
-            metadata:
-              type: object
             processId:
               type: string
               description: Unique system generated ID for the ingest request
               format: uuid
+            searchData:
+              type: object
             sourceUrl:
               type: string
               description: Source document URL
@@ -648,21 +819,6 @@ components:
               $ref: "#/components/schemas/ProcessingStatus"
             statusMessage:
               type: string
-    DocumentsDeleteRequest:
-      type: object
-      required:
-        - documents
-      properties:
-        documents:
-          type: array
-          items:
-            type: object
-            required:
-              - documentId
-            properties:
-              documentId:
-                type: string
-                format: uuid
     DocumentRemoteUploadRequest:
       type: object
       required:
@@ -679,21 +835,12 @@ components:
               bucketId:
                 type: integer
                 example: 1234
-              callbackData:
-                type: string
-                description: Data that is passed through on callback
-                example: my_callback_data
-              callbackUrl:
-                type: string
-                description: URL where GroundX will post status changes to the ingest request
-                format: uri
-                example: https://my.callback.url.com
               fileName:
                 type: string
                 example: my_file.txt
               fileType:
                 $ref: '#/components/schemas/DocumentType'
-              metadata:
+              searchData:
                 type: object
                 example:
                   key: value
@@ -734,21 +881,12 @@ components:
               bucketId:
                 type: integer
                 example: 1234
-              callbackData:
-                type: string
-                description: Data that is passed through on callback
-                example: my_callback_data
-              callbackUrl:
-                type: string
-                description: URL where GroundX will post status changes to the ingest request
-                format: uri
-                example: https://my.callback.url.com
               fileName:
                 type: string
                 example: my_file.txt
               fileType:
                 $ref: '#/components/schemas/DocumentType'
-              metadata:
+              searchData:
                 type: object
                 example:
                   key: value
@@ -868,80 +1006,45 @@ components:
           example: The method you used is not supported for this query
       example:
         message: The method you used is not supported for this query
-    ApiKeyManagementListResponse:
-      type: object
-      properties:
-        apiKeys:
-          type: array
-          items:
-            type: object
-            properties:
-              created:
-                type: string
-                description: The data time when the API key was created, in RFC3339 format
-                format: date-time
-                example: '2023-10-03T08:59:39.312Z'
-              apiKey:
-                type: string
-                example: XXXXXXXX-42c5-4704-a892-81adc9b3e22d
-              name:
-                type: string
-                example: Last recent API key
-      example:
-        apiKeys:
-          - apiKey: XXXXXXXX-42c5-4704-a892-81adc9b3e22d
-            created: '2023-10-03T08:59:39.312Z'
-            name: Last recent API key
-          - apiKey: XXXXXXXX-7ac8-4cb5-ac3a-4638ea360cbf
-            created: '2023-09-21T12:29:55.501Z'
-            name: Recent API key
-          - apiKey: XXXXXXXX-2f96-47a7-9b56-9410051915d9
-            created: '2023-09-20T15:58:50.066Z'
-            name: Lina_Key2
-          - apiKey: XXXXXXXX-05f2-4a16-ab3a-d07fa4661753
-            created: '2023-09-20T09:32:11.161Z'
-            name: default
     WebsiteCrawlRequest:
       type: object
       required:
-        - website
+        - websites
       properties:
-        website:
-          $ref: '#/components/schemas/WebsiteRequest'
-    WebsiteRequest:
-      required:
-        - bucketId
-        - sourceUrl
+        websites:
+          type: array
+          items:
+            type: object
+            required:
+              - bucketId
+              - sourceUrl
+            properties:
+              bucketId:
+                type: integer
+                example: 123
+              cap:
+                type: integer
+                description: The maximum number of pages to crawl
+                example: 100
+              depth:
+                type: integer
+                description: The maximum depth of linked pages to follow from the sourceUrl
+                example: 3
+              searchData:
+                type: object
+                example:
+                  key: value
+              sourceUrl:
+                type: string
+                description: Source website URL
+                format: uri
+                example: https://my.website.com
+    MessageResponse:
+      type: object
       properties:
-        bucketId:
-          type: integer
-          example: 123
-        callbackData:
+        message:
           type: string
-          description: Data that is passed through on callback
-          example: my_callback_data
-        callbackUrl:
-          type: string
-          description: URL where GroundX will post status changes to the ingest request
-          format: uri
-          example: https://my.callback.url.com
-        cap:
-          type: integer
-          description: The maximum number of pages to crawl
-          example: 100
-        depth:
-          type: integer
-          description: The maximum depth of linked pages to follow from the sourceUrl
-          example: 3
-        metadata:
-          type: object
-          example:
-            key: value
-        sourceUrl:
-          type: string
-          description: Source website URL
-          format: uri
-          example: https://my.website.com
+          example: OK
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

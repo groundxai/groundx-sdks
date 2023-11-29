@@ -33,10 +33,10 @@ import frozendict  # noqa: F401
 from groundx import schemas  # noqa: F401
 
 from groundx.model.ingest_response import IngestResponse as IngestResponseSchema
-from groundx.model.website_request import WebsiteRequest as WebsiteRequestSchema
 from groundx.model.website_crawl_request import WebsiteCrawlRequest as WebsiteCrawlRequestSchema
+from groundx.model.website_crawl_request_websites import WebsiteCrawlRequestWebsites as WebsiteCrawlRequestWebsitesSchema
 
-from groundx.type.website_request import WebsiteRequest
+from groundx.type.website_crawl_request_websites import WebsiteCrawlRequestWebsites
 from groundx.type.website_crawl_request import WebsiteCrawlRequest
 from groundx.type.ingest_response import IngestResponse
 
@@ -122,12 +122,12 @@ class BaseApi(api_client.Api):
 
     def _crawl_website_mapped_args(
         self,
-        website: WebsiteRequest,
+        websites: WebsiteCrawlRequestWebsites,
     ) -> api_client.MappedArgs:
         args: api_client.MappedArgs = api_client.MappedArgs()
         _body = {}
-        if website is not None:
-            _body["website"] = website
+        if websites is not None:
+            _body["websites"] = websites
         args.body = _body
         return args
 
@@ -329,7 +329,7 @@ class CrawlWebsite(BaseApi):
 
     async def acrawl_website(
         self,
-        website: WebsiteRequest,
+        websites: WebsiteCrawlRequestWebsites,
         **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
@@ -337,7 +337,7 @@ class CrawlWebsite(BaseApi):
         AsyncGeneratorResponse,
     ]:
         args = self._crawl_website_mapped_args(
-            website=website,
+            websites=websites,
         )
         return await self._acrawl_website_oapg(
             body=args.body,
@@ -346,13 +346,13 @@ class CrawlWebsite(BaseApi):
     
     def crawl_website(
         self,
-        website: WebsiteRequest,
+        websites: WebsiteCrawlRequestWebsites,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
         args = self._crawl_website_mapped_args(
-            website=website,
+            websites=websites,
         )
         return self._crawl_website_oapg(
             body=args.body,
@@ -363,7 +363,7 @@ class ApiForpost(BaseApi):
 
     async def apost(
         self,
-        website: WebsiteRequest,
+        websites: WebsiteCrawlRequestWebsites,
         **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
@@ -371,7 +371,7 @@ class ApiForpost(BaseApi):
         AsyncGeneratorResponse,
     ]:
         args = self._crawl_website_mapped_args(
-            website=website,
+            websites=websites,
         )
         return await self._acrawl_website_oapg(
             body=args.body,
@@ -380,13 +380,13 @@ class ApiForpost(BaseApi):
     
     def post(
         self,
-        website: WebsiteRequest,
+        websites: WebsiteCrawlRequestWebsites,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
         args = self._crawl_website_mapped_args(
-            website=website,
+            websites=websites,
         )
         return self._crawl_website_oapg(
             body=args.body,

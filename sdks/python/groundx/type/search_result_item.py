@@ -26,11 +26,11 @@ class OptionalSearchResultItem(TypedDict, total=False):
     # Unique system generated ID for the document
     documentId: str
 
-    # Document, section, and chunk metadata, both custom and system-generated
-    metadata: typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]
-
     # Confidence score in the search result
     score: typing.Union[int, float]
+
+    # Document, section, and chunk search data, both custom and system-generated
+    searchData: typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]
 
     # Source document URL
     sourceUrl: str

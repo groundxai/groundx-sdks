@@ -10,12 +10,16 @@
     Created by: https://www.groundx.ai/
 """
 
+from groundx.paths.v1_bucket.post import Create
+from groundx.paths.v1_bucket_bucket_id.delete import Delete
 from groundx.paths.v1_bucket_bucket_id.get import Get
 from groundx.paths.v1_bucket.get import List
 from groundx.paths.v1_bucket_bucket_id.put import Update
 
 
 class BucketsApi(
+    Create,
+    Delete,
     Get,
     List,
     Update,

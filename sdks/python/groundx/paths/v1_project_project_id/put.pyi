@@ -34,18 +34,16 @@ from groundx import schemas  # noqa: F401
 
 from groundx.model.project_update_request import ProjectUpdateRequest as ProjectUpdateRequestSchema
 from groundx.model.project_response import ProjectResponse as ProjectResponseSchema
-from groundx.model.project_update_request_project import ProjectUpdateRequestProject as ProjectUpdateRequestProjectSchema
 
 from groundx.type.project_response import ProjectResponse
-from groundx.type.project_update_request_project import ProjectUpdateRequestProject
 from groundx.type.project_update_request import ProjectUpdateRequest
 
 # Path params
-ProjectIdSchema = schemas.StrSchema
+ProjectIdSchema = schemas.IntSchema
 RequestRequiredPathParams = typing_extensions.TypedDict(
     'RequestRequiredPathParams',
     {
-        'projectId': typing.Union[ProjectIdSchema, str, ],
+        'projectId': typing.Union[ProjectIdSchema, decimal.Decimal, int, ],
     }
 )
 RequestOptionalPathParams = typing_extensions.TypedDict(
@@ -139,14 +137,14 @@ class BaseApi(api_client.Api):
 
     def _update_mapped_args(
         self,
-        project: ProjectUpdateRequestProject,
-        project_id: str,
+        new_name: str,
+        project_id: int,
     ) -> api_client.MappedArgs:
         args: api_client.MappedArgs = api_client.MappedArgs()
         _path_params = {}
         _body = {}
-        if project is not None:
-            _body["project"] = project
+        if new_name is not None:
+            _body["newName"] = new_name
         args.body = _body
         if project_id is not None:
             _path_params["projectId"] = project_id
@@ -385,8 +383,8 @@ class Update(BaseApi):
 
     async def aupdate(
         self,
-        project: ProjectUpdateRequestProject,
-        project_id: str,
+        new_name: str,
+        project_id: int,
         **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
@@ -394,7 +392,7 @@ class Update(BaseApi):
         AsyncGeneratorResponse,
     ]:
         args = self._update_mapped_args(
-            project=project,
+            new_name=new_name,
             project_id=project_id,
         )
         return await self._aupdate_oapg(
@@ -405,14 +403,14 @@ class Update(BaseApi):
     
     def update(
         self,
-        project: ProjectUpdateRequestProject,
-        project_id: str,
+        new_name: str,
+        project_id: int,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
         args = self._update_mapped_args(
-            project=project,
+            new_name=new_name,
             project_id=project_id,
         )
         return self._update_oapg(
@@ -425,8 +423,8 @@ class ApiForput(BaseApi):
 
     async def aput(
         self,
-        project: ProjectUpdateRequestProject,
-        project_id: str,
+        new_name: str,
+        project_id: int,
         **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
@@ -434,7 +432,7 @@ class ApiForput(BaseApi):
         AsyncGeneratorResponse,
     ]:
         args = self._update_mapped_args(
-            project=project,
+            new_name=new_name,
             project_id=project_id,
         )
         return await self._aupdate_oapg(
@@ -445,14 +443,14 @@ class ApiForput(BaseApi):
     
     def put(
         self,
-        project: ProjectUpdateRequestProject,
-        project_id: str,
+        new_name: str,
+        project_id: int,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
         args = self._update_mapped_args(
-            project=project,
+            new_name=new_name,
             project_id=project_id,
         )
         return self._update_oapg(

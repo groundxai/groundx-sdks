@@ -24,17 +24,11 @@ class RequiredDocumentRemoteUploadRequestDocumentsItem(TypedDict):
     sourceUrl: str
 
 class OptionalDocumentRemoteUploadRequestDocumentsItem(TypedDict, total=False):
-    # Data that is passed through on callback
-    callbackData: str
-
-    # URL where GroundX will post status changes to the ingest request
-    callbackUrl: str
-
     fileName: str
 
     fileType: DocumentType
 
-    metadata: typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]
+    searchData: typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]
 
 class DocumentRemoteUploadRequestDocumentsItem(RequiredDocumentRemoteUploadRequestDocumentsItem, OptionalDocumentRemoteUploadRequestDocumentsItem):
     pass

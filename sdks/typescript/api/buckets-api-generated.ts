@@ -21,15 +21,17 @@ const FormData = require("form-data")
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
+import { BucketCreateRequest } from '../models';
+// @ts-ignore
 import { BucketListResponse } from '../models';
 // @ts-ignore
 import { BucketResponse } from '../models';
 // @ts-ignore
 import { BucketUpdateRequest } from '../models';
 // @ts-ignore
-import { BucketUpdateRequestBucket } from '../models';
-// @ts-ignore
 import { BucketUpdateResponse } from '../models';
+// @ts-ignore
+import { MessageResponse } from '../models';
 import { paginate } from "../pagination/paginate";
 import type * as buffer from "buffer"
 import { requestBeforeHook } from '../requestBeforeHook';
@@ -39,6 +41,94 @@ import { requestBeforeHook } from '../requestBeforeHook';
  */
 export const BucketsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
+        /**
+         * This endpoint allows you to create a new bucket.
+         * @summary Create a new bucket
+         * @param {BucketCreateRequest} bucketCreateRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        create: async (bucketCreateRequest: BucketCreateRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'bucketCreateRequest' is not null or undefined
+            assertParamExists('create', 'bucketCreateRequest', bucketCreateRequest)
+            const localVarPath = `/v1/bucket`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication ApiKeyAuth required
+            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "X-API-Key", configuration })
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                requestBody: bucketCreateRequest,
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration
+            });
+            localVarRequestOptions.data = serializeDataIfNeeded(bucketCreateRequest, localVarRequestOptions, configuration)
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Delete a bucket
+         * @param {number} bucketId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        delete: async (bucketId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'bucketId' is not null or undefined
+            assertParamExists('delete', 'bucketId', bucketId)
+            const localVarPath = `/v1/bucket/{bucketId}`
+                .replace(`{${"bucketId"}}`, encodeURIComponent(String(bucketId !== undefined ? bucketId : `-bucketId-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication ApiKeyAuth required
+            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "X-API-Key", configuration })
+
+    
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
         /**
          * Look up a bucket by its bucketId.
          * @summary Look up an existing bucket by its ID
@@ -84,10 +174,12 @@ export const BucketsApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * Look up existing buckets associated with your account.
          * @summary Look up existing buckets
+         * @param {number} [n] 
+         * @param {string} [nextToken] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        list: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        list: async (n?: number, nextToken?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/v1/bucket`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -102,6 +194,14 @@ export const BucketsApiAxiosParamCreator = function (configuration?: Configurati
 
             // authentication ApiKeyAuth required
             await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "X-API-Key", configuration })
+            if (n !== undefined) {
+                localVarQueryParameter['n'] = n;
+            }
+
+            if (nextToken !== undefined) {
+                localVarQueryParameter['nextToken'] = nextToken;
+            }
+
 
     
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -180,6 +280,28 @@ export const BucketsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = BucketsApiAxiosParamCreator(configuration)
     return {
         /**
+         * This endpoint allows you to create a new bucket.
+         * @summary Create a new bucket
+         * @param {BucketsApiCreateRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async create(requestParameters: BucketsApiCreateRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BucketResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.create(requestParameters, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Delete a bucket
+         * @param {BucketsApiDeleteRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async delete(requestParameters: BucketsApiDeleteRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MessageResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.delete(requestParameters.bucketId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * Look up a bucket by its bucketId.
          * @summary Look up an existing bucket by its ID
          * @param {BucketsApiGetRequest} requestParameters Request parameters.
@@ -193,11 +315,12 @@ export const BucketsApiFp = function(configuration?: Configuration) {
         /**
          * Look up existing buckets associated with your account.
          * @summary Look up existing buckets
+         * @param {BucketsApiListRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async list(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BucketListResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.list(options);
+        async list(requestParameters: BucketsApiListRequest = {}, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BucketListResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.list(requestParameters.n, requestParameters.nextToken, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -222,6 +345,26 @@ export const BucketsApiFactory = function (configuration?: Configuration, basePa
     const localVarFp = BucketsApiFp(configuration)
     return {
         /**
+         * This endpoint allows you to create a new bucket.
+         * @summary Create a new bucket
+         * @param {BucketsApiCreateRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        create(requestParameters: BucketsApiCreateRequest, options?: AxiosRequestConfig): AxiosPromise<BucketResponse> {
+            return localVarFp.create(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Delete a bucket
+         * @param {BucketsApiDeleteRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        delete(requestParameters: BucketsApiDeleteRequest, options?: AxiosRequestConfig): AxiosPromise<MessageResponse> {
+            return localVarFp.delete(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Look up a bucket by its bucketId.
          * @summary Look up an existing bucket by its ID
          * @param {BucketsApiGetRequest} requestParameters Request parameters.
@@ -234,11 +377,12 @@ export const BucketsApiFactory = function (configuration?: Configuration, basePa
         /**
          * Look up existing buckets associated with your account.
          * @summary Look up existing buckets
+         * @param {BucketsApiListRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        list(options?: AxiosRequestConfig): AxiosPromise<BucketListResponse> {
-            return localVarFp.list(options).then((request) => request(axios, basePath));
+        list(requestParameters: BucketsApiListRequest = {}, options?: AxiosRequestConfig): AxiosPromise<BucketListResponse> {
+            return localVarFp.list(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
          * Update the configurations of an existing bucket.
@@ -254,6 +398,31 @@ export const BucketsApiFactory = function (configuration?: Configuration, basePa
 };
 
 /**
+ * Request parameters for create operation in BucketsApi.
+ * @export
+ * @interface BucketsApiCreateRequest
+ */
+export type BucketsApiCreateRequest = {
+    
+} & BucketCreateRequest
+
+/**
+ * Request parameters for delete operation in BucketsApi.
+ * @export
+ * @interface BucketsApiDeleteRequest
+ */
+export type BucketsApiDeleteRequest = {
+    
+    /**
+    * 
+    * @type {number}
+    * @memberof BucketsApiDelete
+    */
+    readonly bucketId: number
+    
+}
+
+/**
  * Request parameters for get operation in BucketsApi.
  * @export
  * @interface BucketsApiGetRequest
@@ -266,6 +435,29 @@ export type BucketsApiGetRequest = {
     * @memberof BucketsApiGet
     */
     readonly bucketId: number
+    
+}
+
+/**
+ * Request parameters for list operation in BucketsApi.
+ * @export
+ * @interface BucketsApiListRequest
+ */
+export type BucketsApiListRequest = {
+    
+    /**
+    * 
+    * @type {number}
+    * @memberof BucketsApiList
+    */
+    readonly n?: number
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof BucketsApiList
+    */
+    readonly nextToken?: string
     
 }
 
@@ -293,6 +485,30 @@ export type BucketsApiUpdateRequest = {
  */
 export class BucketsApiGenerated extends BaseAPI {
     /**
+     * This endpoint allows you to create a new bucket.
+     * @summary Create a new bucket
+     * @param {BucketsApiCreateRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BucketsApiGenerated
+     */
+    public create(requestParameters: BucketsApiCreateRequest, options?: AxiosRequestConfig) {
+        return BucketsApiFp(this.configuration).create(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Delete a bucket
+     * @param {BucketsApiDeleteRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BucketsApiGenerated
+     */
+    public delete(requestParameters: BucketsApiDeleteRequest, options?: AxiosRequestConfig) {
+        return BucketsApiFp(this.configuration).delete(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Look up a bucket by its bucketId.
      * @summary Look up an existing bucket by its ID
      * @param {BucketsApiGetRequest} requestParameters Request parameters.
@@ -307,12 +523,13 @@ export class BucketsApiGenerated extends BaseAPI {
     /**
      * Look up existing buckets associated with your account.
      * @summary Look up existing buckets
+     * @param {BucketsApiListRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof BucketsApiGenerated
      */
-    public list(options?: AxiosRequestConfig) {
-        return BucketsApiFp(this.configuration).list(options).then((request) => request(this.axios, this.basePath));
+    public list(requestParameters: BucketsApiListRequest = {}, options?: AxiosRequestConfig) {
+        return BucketsApiFp(this.configuration).list(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

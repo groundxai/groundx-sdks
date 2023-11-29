@@ -33,24 +33,58 @@ import frozendict  # noqa: F401
 from groundx import schemas  # noqa: F401
 
 from groundx.model.ingest_response import IngestResponse as IngestResponseSchema
-from groundx.model.documents_delete_request import DocumentsDeleteRequest as DocumentsDeleteRequestSchema
-from groundx.model.documents_delete_request_documents import DocumentsDeleteRequestDocuments as DocumentsDeleteRequestDocumentsSchema
 
-from groundx.type.documents_delete_request import DocumentsDeleteRequest
-from groundx.type.documents_delete_request_documents import DocumentsDeleteRequestDocuments
 from groundx.type.ingest_response import IngestResponse
 
 from . import path
 
-# body param
-SchemaForRequestBodyApplicationJson = DocumentsDeleteRequestSchema
+# Query params
 
 
-request_body_documents_delete_request = api_client.RequestBody(
-    content={
-        'application/json': api_client.MediaType(
-            schema=SchemaForRequestBodyApplicationJson),
+class DocumentIdsSchema(
+    schemas.ListSchema
+):
+
+
+    class MetaOapg:
+        items = schemas.UUIDSchema
+
+    def __new__(
+        cls,
+        arg: typing.Union[typing.Tuple[typing.Union[MetaOapg.items, str, uuid.UUID, ]], typing.List[typing.Union[MetaOapg.items, str, uuid.UUID, ]]],
+        _configuration: typing.Optional[schemas.Configuration] = None,
+    ) -> 'DocumentIdsSchema':
+        return super().__new__(
+            cls,
+            arg,
+            _configuration=_configuration,
+        )
+
+    def __getitem__(self, i: int) -> MetaOapg.items:
+        return super().__getitem__(i)
+RequestRequiredQueryParams = typing_extensions.TypedDict(
+    'RequestRequiredQueryParams',
+    {
+        'documentIds': typing.Union[DocumentIdsSchema, list, tuple, ],
+    }
+)
+RequestOptionalQueryParams = typing_extensions.TypedDict(
+    'RequestOptionalQueryParams',
+    {
     },
+    total=False
+)
+
+
+class RequestQueryParams(RequestRequiredQueryParams, RequestOptionalQueryParams):
+    pass
+
+
+request_query_document_ids = api_client.QueryParameter(
+    name="documentIds",
+    style=api_client.ParameterStyle.FORM,
+    schema=DocumentIdsSchema,
+    required=True,
 )
 _auth = [
     'ApiKeyAuth',
@@ -122,22 +156,21 @@ class BaseApi(api_client.Api):
 
     def _delete_mapped_args(
         self,
-        documents: DocumentsDeleteRequestDocuments,
+        document_ids: typing.List[str],
     ) -> api_client.MappedArgs:
         args: api_client.MappedArgs = api_client.MappedArgs()
-        _body = {}
-        if documents is not None:
-            _body["documents"] = documents
-        args.body = _body
+        _query_params = {}
+        if document_ids is not None:
+            _query_params["documentIds"] = document_ids
+        args.query = _query_params
         return args
 
     async def _adelete_oapg(
         self,
-        body: typing.Any = None,
+            query_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        content_type: str = 'application/json',
         stream: bool = False,
         **kwargs,
     ) -> typing.Union[
@@ -151,7 +184,21 @@ class BaseApi(api_client.Api):
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
         """
+        self._verify_typed_dict_inputs_oapg(RequestQueryParams, query_params)
         used_path = path.value
+    
+        prefix_separator_iterator = None
+        for parameter in (
+            request_query_document_ids,
+        ):
+            parameter_data = query_params.get(parameter.name, schemas.unset)
+            if parameter_data is schemas.unset:
+                continue
+            if prefix_separator_iterator is None:
+                prefix_separator_iterator = parameter.get_prefix_separator_iterator()
+            serialized_data = parameter.serialize(parameter_data, prefix_separator_iterator)
+            for serialized_value in serialized_data.values():
+                used_path += serialized_value
     
         _headers = HTTPHeaderDict()
         # TODO add cookie handling
@@ -159,33 +206,20 @@ class BaseApi(api_client.Api):
             for accept_content_type in accept_content_types:
                 _headers.add('Accept', accept_content_type)
         method = 'delete'.upper()
-        _headers.add('Content-Type', content_type)
-    
-        _fields = None
-        _body = None
         request_before_hook(
             resource_path=used_path,
             method=method,
             configuration=self.api_client.configuration,
-            body=body,
             auth_settings=_auth,
             headers=_headers,
         )
-        if body is not schemas.unset:
-            serialized_data = request_body_documents_delete_request.serialize(body, content_type)
-            if 'fields' in serialized_data:
-                _fields = serialized_data['fields']
-            elif 'body' in serialized_data:
-                _body = serialized_data['body']
     
         response = await self.api_client.async_call_api(
             resource_path=used_path,
             method=method,
             headers=_headers,
-            fields=_fields,
-            serialized_body=_body,
-            body=body,
             auth_settings=_auth,
+            prefix_separator_iterator=prefix_separator_iterator,
             timeout=timeout,
             **kwargs
         )
@@ -246,11 +280,10 @@ class BaseApi(api_client.Api):
 
     def _delete_oapg(
         self,
-        body: typing.Any = None,
+            query_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        content_type: str = 'application/json',
         stream: bool = False,
     ) -> typing.Union[
         ApiResponseFor200,
@@ -262,7 +295,21 @@ class BaseApi(api_client.Api):
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
         """
+        self._verify_typed_dict_inputs_oapg(RequestQueryParams, query_params)
         used_path = path.value
+    
+        prefix_separator_iterator = None
+        for parameter in (
+            request_query_document_ids,
+        ):
+            parameter_data = query_params.get(parameter.name, schemas.unset)
+            if parameter_data is schemas.unset:
+                continue
+            if prefix_separator_iterator is None:
+                prefix_separator_iterator = parameter.get_prefix_separator_iterator()
+            serialized_data = parameter.serialize(parameter_data, prefix_separator_iterator)
+            for serialized_value in serialized_data.values():
+                used_path += serialized_value
     
         _headers = HTTPHeaderDict()
         # TODO add cookie handling
@@ -270,33 +317,20 @@ class BaseApi(api_client.Api):
             for accept_content_type in accept_content_types:
                 _headers.add('Accept', accept_content_type)
         method = 'delete'.upper()
-        _headers.add('Content-Type', content_type)
-    
-        _fields = None
-        _body = None
         request_before_hook(
             resource_path=used_path,
             method=method,
             configuration=self.api_client.configuration,
-            body=body,
             auth_settings=_auth,
             headers=_headers,
         )
-        if body is not schemas.unset:
-            serialized_data = request_body_documents_delete_request.serialize(body, content_type)
-            if 'fields' in serialized_data:
-                _fields = serialized_data['fields']
-            elif 'body' in serialized_data:
-                _body = serialized_data['body']
     
         response = self.api_client.call_api(
             resource_path=used_path,
             method=method,
             headers=_headers,
-            fields=_fields,
-            serialized_body=_body,
-            body=body,
             auth_settings=_auth,
+            prefix_separator_iterator=prefix_separator_iterator,
             timeout=timeout,
         )
     
@@ -329,7 +363,7 @@ class Delete(BaseApi):
 
     async def adelete(
         self,
-        documents: DocumentsDeleteRequestDocuments,
+        document_ids: typing.List[str],
         **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
@@ -337,25 +371,25 @@ class Delete(BaseApi):
         AsyncGeneratorResponse,
     ]:
         args = self._delete_mapped_args(
-            documents=documents,
+            document_ids=document_ids,
         )
         return await self._adelete_oapg(
-            body=args.body,
+            query_params=args.query,
             **kwargs,
         )
     
     def delete(
         self,
-        documents: DocumentsDeleteRequestDocuments,
+        document_ids: typing.List[str],
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
         args = self._delete_mapped_args(
-            documents=documents,
+            document_ids=document_ids,
         )
         return self._delete_oapg(
-            body=args.body,
+            query_params=args.query,
         )
 
 class ApiFordelete(BaseApi):
@@ -363,7 +397,7 @@ class ApiFordelete(BaseApi):
 
     async def adelete(
         self,
-        documents: DocumentsDeleteRequestDocuments,
+        document_ids: typing.List[str],
         **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
@@ -371,24 +405,24 @@ class ApiFordelete(BaseApi):
         AsyncGeneratorResponse,
     ]:
         args = self._delete_mapped_args(
-            documents=documents,
+            document_ids=document_ids,
         )
         return await self._adelete_oapg(
-            body=args.body,
+            query_params=args.query,
             **kwargs,
         )
     
     def delete(
         self,
-        documents: DocumentsDeleteRequestDocuments,
+        document_ids: typing.List[str],
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
         args = self._delete_mapped_args(
-            documents=documents,
+            document_ids=document_ids,
         )
         return self._delete_oapg(
-            body=args.body,
+            query_params=args.query,
         )
 

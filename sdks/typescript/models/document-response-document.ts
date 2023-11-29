@@ -50,17 +50,17 @@ export interface DocumentResponseDocument {
      */
     'fileType'?: DocumentType;
     /**
-     * 
-     * @type {object}
-     * @memberof DocumentResponseDocument
-     */
-    'metadata'?: object;
-    /**
      * Unique system generated ID for the ingest request
      * @type {string}
      * @memberof DocumentResponseDocument
      */
     'processId'?: string;
+    /**
+     * 
+     * @type {object}
+     * @memberof DocumentResponseDocument
+     */
+    'searchData'?: object;
     /**
      * Source document URL
      * @type {string}
