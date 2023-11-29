@@ -21,11 +21,7 @@ const FormData = require("form-data")
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
-import { ApiKeyManagementList405Response } from '../models';
-// @ts-ignore
 import { ApiKeyManagementListResponse } from '../models';
-// @ts-ignore
-import { ApiKeyManagementListResponseApiKeysInner } from '../models';
 import { paginate } from "../pagination/paginate";
 import type * as buffer from "buffer"
 import { requestBeforeHook } from '../requestBeforeHook';
@@ -37,7 +33,7 @@ export const ApiKeysApiAxiosParamCreator = function (configuration?: Configurati
     return {
         /**
          * Retrieve the API keys for your account.
-         * @summary Get API keys
+         * @summary Look up existing API Keys
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -85,7 +81,7 @@ export const ApiKeysApiFp = function(configuration?: Configuration) {
     return {
         /**
          * Retrieve the API keys for your account.
-         * @summary Get API keys
+         * @summary Look up existing API Keys
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -105,7 +101,7 @@ export const ApiKeysApiFactory = function (configuration?: Configuration, basePa
     return {
         /**
          * Retrieve the API keys for your account.
-         * @summary Get API keys
+         * @summary Look up existing API Keys
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -124,7 +120,7 @@ export const ApiKeysApiFactory = function (configuration?: Configuration, basePa
 export class ApiKeysApiGenerated extends BaseAPI {
     /**
      * Retrieve the API keys for your account.
-     * @summary Get API keys
+     * @summary Look up existing API Keys
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ApiKeysApiGenerated

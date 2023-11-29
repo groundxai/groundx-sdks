@@ -32,13 +32,9 @@ import frozendict  # noqa: F401
 
 from groundx import schemas  # noqa: F401
 
-from groundx.model.document_response_document import DocumentResponseDocument as DocumentResponseDocumentSchema
-from groundx.model.document_response import DocumentResponse as DocumentResponseSchema
 from groundx.model.document_list_response import DocumentListResponse as DocumentListResponseSchema
 
-from groundx.type.document_response_document import DocumentResponseDocument
 from groundx.type.document_list_response import DocumentListResponse
-from groundx.type.document_response import DocumentResponse
 
 from . import path
 
@@ -100,25 +96,8 @@ _response_for_200 = api_client.OpenApiResponse(
             schema=SchemaFor200ResponseBodyApplicationJson),
     },
 )
-
-
-@dataclass
-class ApiResponseFor401(api_client.ApiResponse):
-    body: schemas.Unset = schemas.unset
-
-
-@dataclass
-class ApiResponseFor401Async(api_client.AsyncApiResponse):
-    body: schemas.Unset = schemas.unset
-
-
-_response_for_401 = api_client.OpenApiResponse(
-    response_cls=ApiResponseFor401,
-    response_cls_async=ApiResponseFor401Async,
-)
 _status_code_to_response = {
     '200': _response_for_200,
-    '401': _response_for_401,
 }
 _all_accept_content_types = (
     'application/json',
@@ -145,9 +124,10 @@ class BaseApi(api_client.Api):
         self,
             query_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -197,6 +177,7 @@ class BaseApi(api_client.Api):
             auth_settings=_auth,
             prefix_separator_iterator=prefix_separator_iterator,
             timeout=timeout,
+            **kwargs
         )
     
         if stream:
@@ -257,7 +238,7 @@ class BaseApi(api_client.Api):
         self,
             query_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
     ) -> typing.Union[
@@ -341,6 +322,7 @@ class List(BaseApi):
         self,
         n: typing.Optional[int] = None,
         next_token: typing.Optional[str] = None,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -352,6 +334,7 @@ class List(BaseApi):
         )
         return await self._alist_oapg(
             query_params=args.query,
+            **kwargs,
         )
     
     def list(
@@ -377,6 +360,7 @@ class ApiForget(BaseApi):
         self,
         n: typing.Optional[int] = None,
         next_token: typing.Optional[str] = None,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -388,6 +372,7 @@ class ApiForget(BaseApi):
         )
         return await self._alist_oapg(
             query_params=args.query,
+            **kwargs,
         )
     
     def get(

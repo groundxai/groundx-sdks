@@ -1,6 +1,6 @@
 <div align="center">
 
-[![Visit Groundx](https://raw.githubusercontent.com/groundxai/groundx-sdks/HEAD/sdks/python/header.png)](https://www.groundx.ai)
+[![Visit Groundx](https://raw.githubusercontent.com/groundxai/groundx-sdks/HEAD/header.png)](https://www.groundx.ai)
 
 # Groundx<a id="groundx"></a>
 
@@ -8,6 +8,7 @@ Ground Your RAG Apps in Fact not Fiction
 
 
 [![PyPI](https://img.shields.io/badge/PyPI-v1.3.3-blue)](https://pypi.org/project/groundx-python-sdk/1.3.3)
+[![GitHub last commit](https://img.shields.io/github/last-commit/groundxai/groundx-sdks.svg)](https://github.com/groundxai/groundx-sdks/commits)
 [![README.md](https://img.shields.io/badge/README-Click%20Here-green)](https://github.com/groundxai/groundx-sdks/tree/main/sdks/python#readme)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://www.groundx.ai/)
 
@@ -26,7 +27,9 @@ Ground Your RAG Apps in Fact not Fiction
   * [`groundx.buckets.get`](#groundxbucketsget)
   * [`groundx.buckets.list`](#groundxbucketslist)
   * [`groundx.buckets.update`](#groundxbucketsupdate)
+  * [`groundx.documents.crawl_website`](#groundxdocumentscrawl_website)
   * [`groundx.documents.delete`](#groundxdocumentsdelete)
+  * [`groundx.documents.delete_0`](#groundxdocumentsdelete_0)
   * [`groundx.documents.get`](#groundxdocumentsget)
   * [`groundx.documents.get_processing_status_by_id`](#groundxdocumentsget_processing_status_by_id)
   * [`groundx.documents.list`](#groundxdocumentslist)
@@ -61,7 +64,7 @@ groundx = Groundx(
 )
 
 try:
-    # Get API keys
+    # Look up existing API Keys
     list_response = groundx.api_keys.list()
     pprint(list_response.body)
     pprint(list_response.body["api_keys"])
@@ -71,8 +74,6 @@ try:
 except ApiException as e:
     print("Exception when calling APIKeysApi.list: %s\n" % e)
     pprint(e.body)
-    if e.status == 405:
-        pprint(e.body["message"])
     pprint(e.headers)
     pprint(e.status)
     pprint(e.reason)
@@ -95,7 +96,7 @@ groundx = Groundx(
 
 async def main():
     try:
-        # Get API keys
+        # Look up existing API Keys
         list_response = await groundx.api_keys.alist()
         pprint(list_response.body)
         pprint(list_response.body["api_keys"])
@@ -105,8 +106,6 @@ async def main():
     except ApiException as e:
         print("Exception when calling APIKeysApi.list: %s\n" % e)
         pprint(e.body)
-        if e.status == 405:
-            pprint(e.body["message"])
         pprint(e.headers)
         pprint(e.status)
         pprint(e.reason)
@@ -231,14 +230,81 @@ The ID of the bucket to update.
 
 ---
 
+### `groundx.documents.crawl_website`<a id="groundxdocumentscrawl_website"></a>
+
+Crawl and ingest a website into GroundX
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+crawl_website_response = groundx.documents.crawl_website(
+    project=None,
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### project: [`WebsiteRequest`](./groundx/type/website_request.py)<a id="project-websiterequestgroundxtypewebsite_requestpy"></a>
+
+
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
+
+[`WebsiteCrawlRequest`](./groundx/type/website_crawl_request.py)
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`IngestResponse`](./groundx/type/ingest_response.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/v1/ingest/documents/website` `post`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
 ### `groundx.documents.delete`<a id="groundxdocumentsdelete"></a>
+
+Delete one or more documents from GroundX
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+delete_response = groundx.documents.delete(
+    documents=[
+        {
+            "document_id": "document_id_example",
+        }
+    ],
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### documents: [`DocumentsDeleteRequestDocuments`](./groundx/type/documents_delete_request_documents.py)<a id="documents-documentsdeleterequestdocumentsgroundxtypedocuments_delete_request_documentspy"></a>
+
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
+
+[`DocumentsDeleteRequest`](./groundx/type/documents_delete_request.py)
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`IngestResponse`](./groundx/type/ingest_response.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/v1/ingest/documents` `delete`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `groundx.documents.delete_0`<a id="groundxdocumentsdelete_0"></a>
 
 Delete a document
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
-delete_response = groundx.documents.delete(
+delete_0_response = groundx.documents.delete_0(
     document_id="documentId_example",
 )
 ```
@@ -249,7 +315,7 @@ delete_response = groundx.documents.delete(
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[`DocumentDeleteResponse`](./groundx/type/document_delete_response.py)
+[`IngestResponse`](./groundx/type/ingest_response.py)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -393,10 +459,10 @@ upload_local_response = groundx.documents.upload_local(
             "blob": open("/path/to/file", "rb"),
             "metadata": {
                 "bucket_id": 1234,
-                "file_name": "my_file.txt",
-                "file_type": "txt",
                 "callback_data": "my_callback_data",
                 "callback_url": "https://my.callback.url.com",
+                "file_name": "my_file.txt",
+                "file_type": "txt",
             },
         }
     ],
@@ -429,10 +495,11 @@ upload_remote_response = groundx.documents.upload_remote(
     documents=[
         {
             "bucket_id": 1234,
-            "source_url": "https://my.source.url.com/file.txt",
             "callback_data": "my_callback_data",
             "callback_url": "https://my.callback.url.com",
-            "type": "txt",
+            "file_name": "my_file.txt",
+            "file_type": "txt",
+            "source_url": "https://my.source.url.com/file.txt",
         }
     ],
 )
@@ -550,7 +617,7 @@ The ID of the project to update.
 
 ### `groundx.search.content`<a id="groundxsearchcontent"></a>
 
-Search and retrieve relevant content from a project, group, or bucket by id.
+Search and retrieve relevant content from a project or bucket by id.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -572,7 +639,7 @@ content_response = groundx.search.content(
 
 ##### id: `int`<a id="id-int"></a>
 
-The ID of the project, group, or bucket to search within.
+The ID of the project or bucket to search within.
 
 ##### n: `int`<a id="n-int"></a>
 

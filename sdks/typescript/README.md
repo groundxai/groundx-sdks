@@ -7,6 +7,7 @@
 Ground Your RAG Apps in Fact not Fiction
 
 [![npm](https://img.shields.io/badge/npm-v1.3.5-blue)](https://www.npmjs.com/package/groundx-typescript-sdk/v/1.3.5)
+[![GitHub last commit](https://img.shields.io/github/last-commit/groundxai/groundx-sdks/tree/main/sdks/typescript.svg)](https://github.com/groundxai/groundx-sdks/tree/main/sdks/typescript/commits)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://www.groundx.ai/)
 
 </div>
@@ -22,7 +23,9 @@ Ground Your RAG Apps in Fact not Fiction
   * [`groundx.buckets.get`](#groundxbucketsget)
   * [`groundx.buckets.list`](#groundxbucketslist)
   * [`groundx.buckets.update`](#groundxbucketsupdate)
+  * [`groundx.documents.crawlWebsite`](#groundxdocumentscrawlwebsite)
   * [`groundx.documents.delete`](#groundxdocumentsdelete)
+  * [`groundx.documents.delete_0`](#groundxdocumentsdelete_0)
   * [`groundx.documents.get`](#groundxdocumentsget)
   * [`groundx.documents.getProcessingStatusById`](#groundxdocumentsgetprocessingstatusbyid)
   * [`groundx.documents.list`](#groundxdocumentslist)
@@ -201,14 +204,74 @@ The ID of the bucket to update.
 ---
 
 
+### `groundx.documents.crawlWebsite`<a id="groundxdocumentscrawlwebsite"></a>
+
+Crawl and ingest a website into GroundX
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const crawlWebsiteResponse = await groundx.documents.crawlWebsite({});
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### project: [`WebsiteRequest`](./models/website-request.ts)<a id="project-websiterequestmodelswebsite-requestts"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[IngestResponse](./models/ingest-response.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/v1/ingest/documents/website` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `groundx.documents.delete`<a id="groundxdocumentsdelete"></a>
+
+Delete one or more documents from GroundX
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const deleteResponse = await groundx.documents.delete({
+  documents: [
+    {
+      documentId: "documentId_example",
+    },
+  ],
+});
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### documents: [`DocumentsDeleteRequestDocumentsInner`](./models/documents-delete-request-documents-inner.ts)[]<a id="documents-documentsdeleterequestdocumentsinnermodelsdocuments-delete-request-documents-innerts"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[IngestResponse](./models/ingest-response.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/v1/ingest/documents` `DELETE`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `groundx.documents.delete_0`<a id="groundxdocumentsdelete_0"></a>
 
 Delete a document
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
-const deleteResponse = await groundx.documents.delete({
+const delete_0Response = await groundx.documents.delete_0({
   documentId: "documentId_example",
 });
 ```
@@ -219,7 +282,7 @@ const deleteResponse = await groundx.documents.delete({
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[DocumentDeleteResponse](./models/document-delete-response.ts)
+[IngestResponse](./models/ingest-response.ts)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -363,10 +426,10 @@ const uploadLocalResponse = await groundx.documents.uploadLocal([
     blob: fs.readFileSync("/path/to/file"),
     metadata: {
       bucketId: 1234,
-      fileName: "my_file.txt",
-      fileType: "txt",
       callbackData: "my_callback_data",
       callbackUrl: "https://my.callback.url.com",
+      fileName: "my_file.txt",
+      fileType: "txt",
     },
   },
 ]);
@@ -400,10 +463,11 @@ const uploadRemoteResponse = await groundx.documents.uploadRemote({
   documents: [
     {
       bucketId: 1234,
-      sourceUrl: "https://my.source.url.com/file.txt",
       callbackData: "my_callback_data",
       callbackUrl: "https://my.callback.url.com",
-      type: "txt",
+      fileName: "my_file.txt",
+      fileType: "txt",
+      sourceUrl: "https://my.source.url.com/file.txt",
     },
   ],
 });
@@ -518,7 +582,7 @@ The ID of the project to update.
 
 ### `groundx.search.content`<a id="groundxsearchcontent"></a>
 
-Search and retrieve relevant content from a project, group, or bucket by id.
+Search and retrieve relevant content from a project or bucket by id.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -539,7 +603,7 @@ const contentResponse = await groundx.search.content({
 
 ##### id: `number`<a id="id-number"></a>
 
-The ID of the project, group, or bucket to search within.
+The ID of the project or bucket to search within.
 
 ##### n: `number`<a id="n-number"></a>
 

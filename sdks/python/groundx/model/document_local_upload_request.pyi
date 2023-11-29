@@ -53,5 +53,3 @@ class DocumentLocalUploadRequest(
         return super().__getitem__(i)
 
 from groundx.model.document_local_upload_request_item import DocumentLocalUploadRequestItem
-from groundx.model.document_local_upload_request_item_metadata import DocumentLocalUploadRequestItemMetadata
-from groundx.model.document_type import DocumentType

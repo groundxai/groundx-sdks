@@ -21,13 +21,9 @@ const FormData = require("form-data")
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
-import { DocumentDeleteResponse } from '../models';
-// @ts-ignore
 import { DocumentListResponse } from '../models';
 // @ts-ignore
 import { DocumentLocalUploadRequestInner } from '../models';
-// @ts-ignore
-import { DocumentLocalUploadRequestInnerMetadata } from '../models';
 // @ts-ignore
 import { DocumentLookupResponse } from '../models';
 // @ts-ignore
@@ -37,23 +33,17 @@ import { DocumentRemoteUploadRequestDocumentsInner } from '../models';
 // @ts-ignore
 import { DocumentResponse } from '../models';
 // @ts-ignore
-import { DocumentResponseDocument } from '../models';
+import { DocumentsDeleteRequest } from '../models';
 // @ts-ignore
-import { DocumentType } from '../models';
+import { DocumentsDeleteRequestDocumentsInner } from '../models';
 // @ts-ignore
 import { IngestResponse } from '../models';
 // @ts-ignore
-import { IngestResponseIngest } from '../models';
-// @ts-ignore
 import { ProcessStatusResponse } from '../models';
 // @ts-ignore
-import { ProcessStatusResponseIngest } from '../models';
+import { WebsiteCrawlRequest } from '../models';
 // @ts-ignore
-import { ProcessStatusResponseIngestProgress } from '../models';
-// @ts-ignore
-import { ProcessStatusResponseIngestProgressComplete } from '../models';
-// @ts-ignore
-import { ProcessingStatus } from '../models';
+import { WebsiteRequest } from '../models';
 import { paginate } from "../pagination/paginate";
 import type * as buffer from "buffer"
 import { requestBeforeHook } from '../requestBeforeHook';
@@ -65,14 +55,102 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
     return {
         /**
          * 
+         * @summary Crawl and ingest a website into GroundX
+         * @param {WebsiteCrawlRequest} [websiteCrawlRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        crawlWebsite: async (websiteCrawlRequest?: WebsiteCrawlRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/v1/ingest/documents/website`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication ApiKeyAuth required
+            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "X-API-Key", configuration })
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                requestBody: websiteCrawlRequest,
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration
+            });
+            localVarRequestOptions.data = serializeDataIfNeeded(websiteCrawlRequest, localVarRequestOptions, configuration)
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Delete one or more documents from GroundX
+         * @param {DocumentsDeleteRequest} [documentsDeleteRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        delete: async (documentsDeleteRequest?: DocumentsDeleteRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/v1/ingest/documents`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication ApiKeyAuth required
+            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "X-API-Key", configuration })
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                requestBody: documentsDeleteRequest,
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration
+            });
+            localVarRequestOptions.data = serializeDataIfNeeded(documentsDeleteRequest, localVarRequestOptions, configuration)
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Delete a document
          * @param {string} documentId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        delete: async (documentId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        delete_1: async (documentId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'documentId' is not null or undefined
-            assertParamExists('delete', 'documentId', documentId)
+            assertParamExists('delete_1', 'documentId', documentId)
             const localVarPath = `/v1/ingest/document/{documentId}`
                 .replace(`{${"documentId"}}`, encodeURIComponent(String(documentId !== undefined ? documentId : `-documentId-`)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -354,8 +432,6 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
 
             if (documentLocalUploadRequestInner) {
                 for (const element of documentLocalUploadRequestInner) {
-                    await addFormParam('blob', element.blob, true, true)
-                    await addFormParam('metadata', element.metadata, false, false)
                 }
             }
 
@@ -432,13 +508,35 @@ export const DocumentsApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @summary Delete a document
+         * @summary Crawl and ingest a website into GroundX
+         * @param {DocumentsApiCrawlWebsiteRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async crawlWebsite(requestParameters: DocumentsApiCrawlWebsiteRequest = {}, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IngestResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.crawlWebsite(requestParameters, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Delete one or more documents from GroundX
          * @param {DocumentsApiDeleteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async delete(requestParameters: DocumentsApiDeleteRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DocumentDeleteResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.delete(requestParameters.documentId, options);
+        async delete(requestParameters: DocumentsApiDeleteRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IngestResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.delete(requestParameters, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Delete a document
+         * @param {DocumentsApiDelete0Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async delete_1(requestParameters: DocumentsApiDelete0Request, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IngestResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.delete_1(requestParameters.documentId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -519,13 +617,33 @@ export const DocumentsApiFactory = function (configuration?: Configuration, base
     return {
         /**
          * 
-         * @summary Delete a document
+         * @summary Crawl and ingest a website into GroundX
+         * @param {DocumentsApiCrawlWebsiteRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        crawlWebsite(requestParameters: DocumentsApiCrawlWebsiteRequest = {}, options?: AxiosRequestConfig): AxiosPromise<IngestResponse> {
+            return localVarFp.crawlWebsite(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Delete one or more documents from GroundX
          * @param {DocumentsApiDeleteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        delete(requestParameters: DocumentsApiDeleteRequest, options?: AxiosRequestConfig): AxiosPromise<DocumentDeleteResponse> {
+        delete(requestParameters: DocumentsApiDeleteRequest, options?: AxiosRequestConfig): AxiosPromise<IngestResponse> {
             return localVarFp.delete(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Delete a document
+         * @param {DocumentsApiDelete0Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        delete_1(requestParameters: DocumentsApiDelete0Request, options?: AxiosRequestConfig): AxiosPromise<IngestResponse> {
+            return localVarFp.delete_1(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -591,16 +709,34 @@ export const DocumentsApiFactory = function (configuration?: Configuration, base
 };
 
 /**
+ * Request parameters for crawlWebsite operation in DocumentsApi.
+ * @export
+ * @interface DocumentsApiCrawlWebsiteRequest
+ */
+export type DocumentsApiCrawlWebsiteRequest = {
+    
+} & WebsiteCrawlRequest
+
+/**
  * Request parameters for delete operation in DocumentsApi.
  * @export
  * @interface DocumentsApiDeleteRequest
  */
 export type DocumentsApiDeleteRequest = {
     
+} & DocumentsDeleteRequest
+
+/**
+ * Request parameters for delete_1 operation in DocumentsApi.
+ * @export
+ * @interface DocumentsApiDelete0Request
+ */
+export type DocumentsApiDelete0Request = {
+    
     /**
     * 
     * @type {string}
-    * @memberof DocumentsApiDelete
+    * @memberof DocumentsApiDelete0
     */
     readonly documentId: string
     
@@ -716,7 +852,19 @@ export type DocumentsApiUploadRemoteRequest = {
 export class DocumentsApiGenerated extends BaseAPI {
     /**
      * 
-     * @summary Delete a document
+     * @summary Crawl and ingest a website into GroundX
+     * @param {DocumentsApiCrawlWebsiteRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DocumentsApiGenerated
+     */
+    public crawlWebsite(requestParameters: DocumentsApiCrawlWebsiteRequest = {}, options?: AxiosRequestConfig) {
+        return DocumentsApiFp(this.configuration).crawlWebsite(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Delete one or more documents from GroundX
      * @param {DocumentsApiDeleteRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -724,6 +872,18 @@ export class DocumentsApiGenerated extends BaseAPI {
      */
     public delete(requestParameters: DocumentsApiDeleteRequest, options?: AxiosRequestConfig) {
         return DocumentsApiFp(this.configuration).delete(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Delete a document
+     * @param {DocumentsApiDelete0Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DocumentsApiGenerated
+     */
+    public delete_1(requestParameters: DocumentsApiDelete0Request, options?: AxiosRequestConfig) {
+        return DocumentsApiFp(this.configuration).delete_1(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

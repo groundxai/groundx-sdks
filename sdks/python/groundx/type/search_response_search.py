@@ -13,7 +13,7 @@
 from datetime import datetime, date
 import typing
 from enum import Enum
-from typing_extensions import TypedDict, Literal
+from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 from groundx.type.search_result_item import SearchResultItem
 
@@ -24,15 +24,19 @@ class OptionalSearchResponseSearch(TypedDict, total=False):
     # Total results
     count: int
 
+    # Search results
     results: typing.List[SearchResultItem]
 
-    # The search query
+    # The original search request query
     query: str
 
-    # Top result relevance score
+    # Confidence score in the search results
     score: typing.Union[int, float]
 
-    # Combined text from results
+    # The actual search query, if the search request query was re-written
+    searchQuery: str
+
+    # Suggested context for LLM completion
     text: str
 
     # For paginated results

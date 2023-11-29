@@ -25,6 +25,18 @@ export interface DocumentLocalUploadRequestInnerMetadata {
      */
     'bucketId': number;
     /**
+     * Data that is passed through on callback
+     * @type {string}
+     * @memberof DocumentLocalUploadRequestInnerMetadata
+     */
+    'callbackData'?: string;
+    /**
+     * URL where GroundX will post status changes to the ingest request
+     * @type {string}
+     * @memberof DocumentLocalUploadRequestInnerMetadata
+     */
+    'callbackUrl'?: string;
+    /**
      * 
      * @type {string}
      * @memberof DocumentLocalUploadRequestInnerMetadata
@@ -42,17 +54,5 @@ export interface DocumentLocalUploadRequestInnerMetadata {
      * @memberof DocumentLocalUploadRequestInnerMetadata
      */
     'metadata'?: object;
-    /**
-     * 
-     * @type {string}
-     * @memberof DocumentLocalUploadRequestInnerMetadata
-     */
-    'callbackData'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof DocumentLocalUploadRequestInnerMetadata
-     */
-    'callbackUrl'?: string;
 }
 

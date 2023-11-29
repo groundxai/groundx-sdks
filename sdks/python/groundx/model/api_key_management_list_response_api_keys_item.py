@@ -35,7 +35,7 @@ class ApiKeyManagementListResponseApiKeysItem(
     class MetaOapg:
         
         class properties:
-            created = schemas.StrSchema
+            created = schemas.DateTimeSchema
             apiKey = schemas.StrSchema
             name = schemas.StrSchema
             __annotations__ = {
@@ -80,7 +80,7 @@ class ApiKeyManagementListResponseApiKeysItem(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        created: typing.Union[MetaOapg.properties.created, str, schemas.Unset] = schemas.unset,
+        created: typing.Union[MetaOapg.properties.created, str, datetime, schemas.Unset] = schemas.unset,
         apiKey: typing.Union[MetaOapg.properties.apiKey, str, schemas.Unset] = schemas.unset,
         name: typing.Union[MetaOapg.properties.name, str, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,

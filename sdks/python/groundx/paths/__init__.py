@@ -8,6 +8,7 @@ import enum
 class PathValues(str, enum.Enum):
     V1_INGEST_DOCUMENTS_REMOTE = "/v1/ingest/documents/remote"
     V1_INGEST_DOCUMENTS_LOCAL = "/v1/ingest/documents/local"
+    V1_INGEST_DOCUMENTS_WEBSITE = "/v1/ingest/documents/website"
     V1_INGEST_PROCESS_ID = "/v1/ingest/{processId}"
     V1_INGEST_DOCUMENTS = "/v1/ingest/documents"
     V1_INGEST_DOCUMENTS_ID = "/v1/ingest/documents/{id}"

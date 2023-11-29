@@ -36,15 +36,20 @@ class DocumentResponseDocument(
         
         class properties:
             bucketId = schemas.IntSchema
-            documentId = schemas.StrSchema
+            documentId = schemas.UUIDSchema
             fileName = schemas.StrSchema
             fileSize = schemas.StrSchema
-            fileType = schemas.StrSchema
+        
+            @staticmethod
+            def fileType() -> typing.Type['DocumentType']:
+                return DocumentType
             metadata = schemas.DictSchema
-            processId = schemas.StrSchema
-            processedUrl = schemas.StrSchema
+            processId = schemas.UUIDSchema
             sourceUrl = schemas.StrSchema
-            status = schemas.StrSchema
+        
+            @staticmethod
+            def status() -> typing.Type['ProcessingStatus']:
+                return ProcessingStatus
             statusMessage = schemas.StrSchema
             __annotations__ = {
                 "bucketId": bucketId,
@@ -54,7 +59,6 @@ class DocumentResponseDocument(
                 "fileType": fileType,
                 "metadata": metadata,
                 "processId": processId,
-                "processedUrl": processedUrl,
                 "sourceUrl": sourceUrl,
                 "status": status,
                 "statusMessage": statusMessage,
@@ -73,7 +77,7 @@ class DocumentResponseDocument(
     def __getitem__(self, name: typing_extensions.Literal["fileSize"]) -> MetaOapg.properties.fileSize: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["fileType"]) -> MetaOapg.properties.fileType: ...
+    def __getitem__(self, name: typing_extensions.Literal["fileType"]) -> 'DocumentType': ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["metadata"]) -> MetaOapg.properties.metadata: ...
@@ -82,13 +86,10 @@ class DocumentResponseDocument(
     def __getitem__(self, name: typing_extensions.Literal["processId"]) -> MetaOapg.properties.processId: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["processedUrl"]) -> MetaOapg.properties.processedUrl: ...
-    
-    @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["sourceUrl"]) -> MetaOapg.properties.sourceUrl: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["status"]) -> MetaOapg.properties.status: ...
+    def __getitem__(self, name: typing_extensions.Literal["status"]) -> 'ProcessingStatus': ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["statusMessage"]) -> MetaOapg.properties.statusMessage: ...
@@ -96,7 +97,7 @@ class DocumentResponseDocument(
     @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["bucketId", "documentId", "fileName", "fileSize", "fileType", "metadata", "processId", "processedUrl", "sourceUrl", "status", "statusMessage", ], str]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["bucketId", "documentId", "fileName", "fileSize", "fileType", "metadata", "processId", "sourceUrl", "status", "statusMessage", ], str]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -114,7 +115,7 @@ class DocumentResponseDocument(
     def get_item_oapg(self, name: typing_extensions.Literal["fileSize"]) -> typing.Union[MetaOapg.properties.fileSize, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["fileType"]) -> typing.Union[MetaOapg.properties.fileType, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["fileType"]) -> typing.Union['DocumentType', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["metadata"]) -> typing.Union[MetaOapg.properties.metadata, schemas.Unset]: ...
@@ -123,13 +124,10 @@ class DocumentResponseDocument(
     def get_item_oapg(self, name: typing_extensions.Literal["processId"]) -> typing.Union[MetaOapg.properties.processId, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["processedUrl"]) -> typing.Union[MetaOapg.properties.processedUrl, schemas.Unset]: ...
-    
-    @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["sourceUrl"]) -> typing.Union[MetaOapg.properties.sourceUrl, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["status"]) -> typing.Union[MetaOapg.properties.status, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["status"]) -> typing.Union['ProcessingStatus', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["statusMessage"]) -> typing.Union[MetaOapg.properties.statusMessage, schemas.Unset]: ...
@@ -137,7 +135,7 @@ class DocumentResponseDocument(
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["bucketId", "documentId", "fileName", "fileSize", "fileType", "metadata", "processId", "processedUrl", "sourceUrl", "status", "statusMessage", ], str]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["bucketId", "documentId", "fileName", "fileSize", "fileType", "metadata", "processId", "sourceUrl", "status", "statusMessage", ], str]):
         return super().get_item_oapg(name)
     
 
@@ -145,15 +143,14 @@ class DocumentResponseDocument(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
         bucketId: typing.Union[MetaOapg.properties.bucketId, decimal.Decimal, int, schemas.Unset] = schemas.unset,
-        documentId: typing.Union[MetaOapg.properties.documentId, str, schemas.Unset] = schemas.unset,
+        documentId: typing.Union[MetaOapg.properties.documentId, str, uuid.UUID, schemas.Unset] = schemas.unset,
         fileName: typing.Union[MetaOapg.properties.fileName, str, schemas.Unset] = schemas.unset,
         fileSize: typing.Union[MetaOapg.properties.fileSize, str, schemas.Unset] = schemas.unset,
-        fileType: typing.Union[MetaOapg.properties.fileType, str, schemas.Unset] = schemas.unset,
+        fileType: typing.Union['DocumentType', schemas.Unset] = schemas.unset,
         metadata: typing.Union[MetaOapg.properties.metadata, dict, frozendict.frozendict, schemas.Unset] = schemas.unset,
-        processId: typing.Union[MetaOapg.properties.processId, str, schemas.Unset] = schemas.unset,
-        processedUrl: typing.Union[MetaOapg.properties.processedUrl, str, schemas.Unset] = schemas.unset,
+        processId: typing.Union[MetaOapg.properties.processId, str, uuid.UUID, schemas.Unset] = schemas.unset,
         sourceUrl: typing.Union[MetaOapg.properties.sourceUrl, str, schemas.Unset] = schemas.unset,
-        status: typing.Union[MetaOapg.properties.status, str, schemas.Unset] = schemas.unset,
+        status: typing.Union['ProcessingStatus', schemas.Unset] = schemas.unset,
         statusMessage: typing.Union[MetaOapg.properties.statusMessage, str, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
@@ -168,10 +165,12 @@ class DocumentResponseDocument(
             fileType=fileType,
             metadata=metadata,
             processId=processId,
-            processedUrl=processedUrl,
             sourceUrl=sourceUrl,
             status=status,
             statusMessage=statusMessage,
             _configuration=_configuration,
             **kwargs,
         )
+
+from groundx.model.document_type import DocumentType
+from groundx.model.processing_status import ProcessingStatus

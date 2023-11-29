@@ -24,7 +24,7 @@ import frozendict  # noqa: F401
 from groundx import schemas  # noqa: F401
 
 
-class DocumentDeleteResponse(
+class DocumentsDeleteRequestDocumentsItem(
     schemas.DictSchema
 ):
     """
@@ -33,45 +33,50 @@ class DocumentDeleteResponse(
 
 
     class MetaOapg:
+        required = {
+            "documentId",
+        }
         
         class properties:
-            message = schemas.StrSchema
+            documentId = schemas.UUIDSchema
             __annotations__ = {
-                "message": message,
+                "documentId": documentId,
             }
     
+    documentId: MetaOapg.properties.documentId
+    
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["message"]) -> MetaOapg.properties.message: ...
+    def __getitem__(self, name: typing_extensions.Literal["documentId"]) -> MetaOapg.properties.documentId: ...
     
     @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["message", ], str]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["documentId", ], str]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["message"]) -> typing.Union[MetaOapg.properties.message, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["documentId"]) -> MetaOapg.properties.documentId: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["message", ], str]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["documentId", ], str]):
         return super().get_item_oapg(name)
     
 
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        message: typing.Union[MetaOapg.properties.message, str, schemas.Unset] = schemas.unset,
+        documentId: typing.Union[MetaOapg.properties.documentId, str, uuid.UUID, ],
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
-    ) -> 'DocumentDeleteResponse':
+    ) -> 'DocumentsDeleteRequestDocumentsItem':
         return super().__new__(
             cls,
             *args,
-            message=message,
+            documentId=documentId,
             _configuration=_configuration,
             **kwargs,
         )

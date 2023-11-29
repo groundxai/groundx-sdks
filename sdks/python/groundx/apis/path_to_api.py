@@ -3,6 +3,7 @@ import typing_extensions
 from groundx.paths import PathValues
 from groundx.apis.paths.v1_ingest_documents_remote import V1IngestDocumentsRemote
 from groundx.apis.paths.v1_ingest_documents_local import V1IngestDocumentsLocal
+from groundx.apis.paths.v1_ingest_documents_website import V1IngestDocumentsWebsite
 from groundx.apis.paths.v1_ingest_process_id import V1IngestProcessId
 from groundx.apis.paths.v1_ingest_documents import V1IngestDocuments
 from groundx.apis.paths.v1_ingest_documents_id import V1IngestDocumentsId
@@ -19,6 +20,7 @@ PathToApi = typing_extensions.TypedDict(
     {
         PathValues.V1_INGEST_DOCUMENTS_REMOTE: V1IngestDocumentsRemote,
         PathValues.V1_INGEST_DOCUMENTS_LOCAL: V1IngestDocumentsLocal,
+        PathValues.V1_INGEST_DOCUMENTS_WEBSITE: V1IngestDocumentsWebsite,
         PathValues.V1_INGEST_PROCESS_ID: V1IngestProcessId,
         PathValues.V1_INGEST_DOCUMENTS: V1IngestDocuments,
         PathValues.V1_INGEST_DOCUMENTS_ID: V1IngestDocumentsId,
@@ -36,6 +38,7 @@ path_to_api = PathToApi(
     {
         PathValues.V1_INGEST_DOCUMENTS_REMOTE: V1IngestDocumentsRemote,
         PathValues.V1_INGEST_DOCUMENTS_LOCAL: V1IngestDocumentsLocal,
+        PathValues.V1_INGEST_DOCUMENTS_WEBSITE: V1IngestDocumentsWebsite,
         PathValues.V1_INGEST_PROCESS_ID: V1IngestProcessId,
         PathValues.V1_INGEST_DOCUMENTS: V1IngestDocuments,
         PathValues.V1_INGEST_DOCUMENTS_ID: V1IngestDocumentsId,

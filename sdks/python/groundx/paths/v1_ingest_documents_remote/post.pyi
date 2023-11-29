@@ -32,16 +32,12 @@ import frozendict  # noqa: F401
 
 from groundx import schemas  # noqa: F401
 
-from groundx.model.ingest_response_ingest import IngestResponseIngest as IngestResponseIngestSchema
 from groundx.model.ingest_response import IngestResponse as IngestResponseSchema
 from groundx.model.document_remote_upload_request import DocumentRemoteUploadRequest as DocumentRemoteUploadRequestSchema
-from groundx.model.processing_status import ProcessingStatus as ProcessingStatusSchema
 from groundx.model.document_remote_upload_request_documents import DocumentRemoteUploadRequestDocuments as DocumentRemoteUploadRequestDocumentsSchema
 
-from groundx.type.processing_status import ProcessingStatus
 from groundx.type.document_remote_upload_request import DocumentRemoteUploadRequest
 from groundx.type.document_remote_upload_request_documents import DocumentRemoteUploadRequestDocuments
-from groundx.type.ingest_response_ingest import IngestResponseIngest
 from groundx.type.ingest_response import IngestResponse
 
 # body param
@@ -129,10 +125,11 @@ class BaseApi(api_client.Api):
         self,
         body: typing.Any = None,
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         content_type: str = 'application/json',
         stream: bool = False,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -180,6 +177,7 @@ class BaseApi(api_client.Api):
             body=body,
             auth_settings=_auth,
             timeout=timeout,
+            **kwargs
         )
     
         if stream:
@@ -240,7 +238,7 @@ class BaseApi(api_client.Api):
         self,
         body: typing.Any = None,
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         content_type: str = 'application/json',
         stream: bool = False,
@@ -322,6 +320,7 @@ class UploadRemote(BaseApi):
     async def aupload_remote(
         self,
         documents: DocumentRemoteUploadRequestDocuments,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -332,6 +331,7 @@ class UploadRemote(BaseApi):
         )
         return await self._aupload_remote_oapg(
             body=args.body,
+            **kwargs,
         )
     
     def upload_remote(
@@ -354,6 +354,7 @@ class ApiForpost(BaseApi):
     async def apost(
         self,
         documents: DocumentRemoteUploadRequestDocuments,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -364,6 +365,7 @@ class ApiForpost(BaseApi):
         )
         return await self._aupload_remote_oapg(
             body=args.body,
+            **kwargs,
         )
     
     def post(

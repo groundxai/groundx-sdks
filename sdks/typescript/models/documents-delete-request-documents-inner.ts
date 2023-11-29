@@ -14,14 +14,14 @@ import type * as buffer from "buffer"
 /**
  * 
  * @export
- * @interface DocumentDeleteResponse
+ * @interface DocumentsDeleteRequestDocumentsInner
  */
-export interface DocumentDeleteResponse {
+export interface DocumentsDeleteRequestDocumentsInner {
     /**
      * 
      * @type {string}
-     * @memberof DocumentDeleteResponse
+     * @memberof DocumentsDeleteRequestDocumentsInner
      */
-    'message'?: string;
+    'documentId': string;
 }
 

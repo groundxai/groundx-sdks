@@ -37,6 +37,10 @@ class ProcessStatusResponseIngestProgress(
         class properties:
         
             @staticmethod
+            def cancelled() -> typing.Type['ProcessStatusResponseIngestProgressCancelled']:
+                return ProcessStatusResponseIngestProgressCancelled
+        
+            @staticmethod
             def complete() -> typing.Type['ProcessStatusResponseIngestProgressComplete']:
                 return ProcessStatusResponseIngestProgressComplete
         
@@ -48,10 +52,14 @@ class ProcessStatusResponseIngestProgress(
             def processing() -> typing.Type['ProcessStatusResponseIngestProgressProcessing']:
                 return ProcessStatusResponseIngestProgressProcessing
             __annotations__ = {
+                "cancelled": cancelled,
                 "complete": complete,
                 "errors": errors,
                 "processing": processing,
             }
+    
+    @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["cancelled"]) -> 'ProcessStatusResponseIngestProgressCancelled': ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["complete"]) -> 'ProcessStatusResponseIngestProgressComplete': ...
@@ -65,10 +73,13 @@ class ProcessStatusResponseIngestProgress(
     @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["complete", "errors", "processing", ], str]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["cancelled", "complete", "errors", "processing", ], str]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
+    
+    @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["cancelled"]) -> typing.Union['ProcessStatusResponseIngestProgressCancelled', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["complete"]) -> typing.Union['ProcessStatusResponseIngestProgressComplete', schemas.Unset]: ...
@@ -82,13 +93,14 @@ class ProcessStatusResponseIngestProgress(
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["complete", "errors", "processing", ], str]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["cancelled", "complete", "errors", "processing", ], str]):
         return super().get_item_oapg(name)
     
 
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
+        cancelled: typing.Union['ProcessStatusResponseIngestProgressCancelled', schemas.Unset] = schemas.unset,
         complete: typing.Union['ProcessStatusResponseIngestProgressComplete', schemas.Unset] = schemas.unset,
         errors: typing.Union['ProcessStatusResponseIngestProgressErrors', schemas.Unset] = schemas.unset,
         processing: typing.Union['ProcessStatusResponseIngestProgressProcessing', schemas.Unset] = schemas.unset,
@@ -98,6 +110,7 @@ class ProcessStatusResponseIngestProgress(
         return super().__new__(
             cls,
             *args,
+            cancelled=cancelled,
             complete=complete,
             errors=errors,
             processing=processing,
@@ -105,8 +118,7 @@ class ProcessStatusResponseIngestProgress(
             **kwargs,
         )
 
-from groundx.model.document_response import DocumentResponse
-from groundx.model.document_response_document import DocumentResponseDocument
+from groundx.model.process_status_response_ingest_progress_cancelled import ProcessStatusResponseIngestProgressCancelled
 from groundx.model.process_status_response_ingest_progress_complete import ProcessStatusResponseIngestProgressComplete
 from groundx.model.process_status_response_ingest_progress_errors import ProcessStatusResponseIngestProgressErrors
 from groundx.model.process_status_response_ingest_progress_processing import ProcessStatusResponseIngestProgressProcessing

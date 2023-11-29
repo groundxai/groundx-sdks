@@ -18,7 +18,7 @@ import type * as buffer from "buffer"
  */
 export interface ApiKeyManagementListResponseApiKeysInner {
     /**
-     * 
+     * The data time when the API key was created, in RFC3339 format
      * @type {string}
      * @memberof ApiKeyManagementListResponseApiKeysInner
      */

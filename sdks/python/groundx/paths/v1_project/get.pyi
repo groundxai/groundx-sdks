@@ -32,13 +32,9 @@ import frozendict  # noqa: F401
 
 from groundx import schemas  # noqa: F401
 
-from groundx.model.bucket_detail import BucketDetail as BucketDetailSchema
-from groundx.model.project_detail import ProjectDetail as ProjectDetailSchema
 from groundx.model.project_list_response import ProjectListResponse as ProjectListResponseSchema
 
 from groundx.type.project_list_response import ProjectListResponse
-from groundx.type.bucket_detail import BucketDetail
-from groundx.type.project_detail import ProjectDetail
 
 SchemaFor200ResponseBodyApplicationJson = ProjectListResponseSchema
 
@@ -77,9 +73,10 @@ class BaseApi(api_client.Api):
     async def _alist_oapg(
         self,
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -113,6 +110,7 @@ class BaseApi(api_client.Api):
             headers=_headers,
             auth_settings=_auth,
             timeout=timeout,
+            **kwargs
         )
     
         if stream:
@@ -172,7 +170,7 @@ class BaseApi(api_client.Api):
     def _list_oapg(
         self,
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
     ) -> typing.Union[
@@ -238,6 +236,7 @@ class List(BaseApi):
 
     async def alist(
         self,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -246,6 +245,7 @@ class List(BaseApi):
         args = self._list_mapped_args(
         )
         return await self._alist_oapg(
+            **kwargs,
         )
     
     def list(
@@ -264,6 +264,7 @@ class ApiForget(BaseApi):
 
     async def aget(
         self,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -272,6 +273,7 @@ class ApiForget(BaseApi):
         args = self._list_mapped_args(
         )
         return await self._alist_oapg(
+            **kwargs,
         )
     
     def get(

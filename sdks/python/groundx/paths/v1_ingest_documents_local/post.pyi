@@ -32,14 +32,10 @@ import frozendict  # noqa: F401
 
 from groundx import schemas  # noqa: F401
 
-from groundx.model.ingest_response_ingest import IngestResponseIngest as IngestResponseIngestSchema
 from groundx.model.document_local_upload_request import DocumentLocalUploadRequest as DocumentLocalUploadRequestSchema
 from groundx.model.ingest_response import IngestResponse as IngestResponseSchema
-from groundx.model.processing_status import ProcessingStatus as ProcessingStatusSchema
 
-from groundx.type.processing_status import ProcessingStatus
 from groundx.type.document_local_upload_request import DocumentLocalUploadRequest
-from groundx.type.ingest_response_ingest import IngestResponseIngest
 from groundx.type.ingest_response import IngestResponse
 
 # body param
@@ -125,10 +121,11 @@ class BaseApi(api_client.Api):
         self,
         body: typing.Any = None,
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         content_type: str = 'multipart/form-data',
         stream: bool = False,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -176,6 +173,7 @@ class BaseApi(api_client.Api):
             body=body,
             auth_settings=_auth,
             timeout=timeout,
+            **kwargs
         )
     
         if stream:
@@ -236,7 +234,7 @@ class BaseApi(api_client.Api):
         self,
         body: typing.Any = None,
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         content_type: str = 'multipart/form-data',
         stream: bool = False,
@@ -318,6 +316,7 @@ class UploadLocal(BaseApi):
     async def aupload_local(
         self,
         body: typing.Optional[DocumentLocalUploadRequest] = None,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -328,6 +327,7 @@ class UploadLocal(BaseApi):
         )
         return await self._aupload_local_oapg(
             body=args.body,
+            **kwargs,
         )
     
     def upload_local(
@@ -350,6 +350,7 @@ class ApiForpost(BaseApi):
     async def apost(
         self,
         body: typing.Optional[DocumentLocalUploadRequest] = None,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -360,6 +361,7 @@ class ApiForpost(BaseApi):
         )
         return await self._aupload_local_oapg(
             body=args.body,
+            **kwargs,
         )
     
     def post(

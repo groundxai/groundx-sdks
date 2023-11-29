@@ -16,5 +16,5 @@ import type * as buffer from "buffer"
  * @export
  * @enum {string}
  */
-export type ProcessingStatus = 'queued' | 'processing' | 'error' | 'complete'
+export type ProcessingStatus = 'queued' | 'processing' | 'error' | 'complete' | 'cancelled'
 

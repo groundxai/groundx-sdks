@@ -13,8 +13,10 @@
 from datetime import datetime, date
 import typing
 from enum import Enum
-from typing_extensions import TypedDict, Literal
+from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
+from groundx.type.document_type import DocumentType
+from groundx.type.processing_status import ProcessingStatus
 
 class RequiredDocumentResponseDocument(TypedDict):
     pass
@@ -22,23 +24,25 @@ class RequiredDocumentResponseDocument(TypedDict):
 class OptionalDocumentResponseDocument(TypedDict, total=False):
     bucketId: int
 
+    # Unique system generated ID for the document
     documentId: str
 
     fileName: str
 
+    # The file size of the file stored in GroundX
     fileSize: str
 
-    fileType: str
+    fileType: DocumentType
 
     metadata: typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]
 
+    # Unique system generated ID for the ingest request
     processId: str
 
-    processedUrl: str
-
+    # Source document URL
     sourceUrl: str
 
-    status: str
+    status: ProcessingStatus
 
     statusMessage: str
 

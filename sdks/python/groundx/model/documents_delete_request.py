@@ -24,7 +24,7 @@ import frozendict  # noqa: F401
 from groundx import schemas  # noqa: F401
 
 
-class ApiKeyManagementList405Response(
+class DocumentsDeleteRequest(
     schemas.DictSchema
 ):
     """
@@ -33,45 +33,55 @@ class ApiKeyManagementList405Response(
 
 
     class MetaOapg:
+        required = {
+            "documents",
+        }
         
         class properties:
-            message = schemas.StrSchema
+        
+            @staticmethod
+            def documents() -> typing.Type['DocumentsDeleteRequestDocuments']:
+                return DocumentsDeleteRequestDocuments
             __annotations__ = {
-                "message": message,
+                "documents": documents,
             }
     
+    documents: 'DocumentsDeleteRequestDocuments'
+    
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["message"]) -> MetaOapg.properties.message: ...
+    def __getitem__(self, name: typing_extensions.Literal["documents"]) -> 'DocumentsDeleteRequestDocuments': ...
     
     @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["message", ], str]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["documents", ], str]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["message"]) -> typing.Union[MetaOapg.properties.message, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["documents"]) -> 'DocumentsDeleteRequestDocuments': ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["message", ], str]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["documents", ], str]):
         return super().get_item_oapg(name)
     
 
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        message: typing.Union[MetaOapg.properties.message, str, schemas.Unset] = schemas.unset,
+        documents: 'DocumentsDeleteRequestDocuments',
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
-    ) -> 'ApiKeyManagementList405Response':
+    ) -> 'DocumentsDeleteRequest':
         return super().__new__(
             cls,
             *args,
-            message=message,
+            documents=documents,
             _configuration=_configuration,
             **kwargs,
         )
+
+from groundx.model.documents_delete_request_documents import DocumentsDeleteRequestDocuments

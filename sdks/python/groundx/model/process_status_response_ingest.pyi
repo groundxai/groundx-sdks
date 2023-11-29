@@ -39,7 +39,7 @@ class ProcessStatusResponseIngest(
         }
         
         class properties:
-            processId = schemas.StrSchema
+            processId = schemas.UUIDSchema
         
             @staticmethod
             def status() -> typing.Type['ProcessingStatus']:
@@ -101,7 +101,7 @@ class ProcessStatusResponseIngest(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        processId: typing.Union[MetaOapg.properties.processId, str, ],
+        processId: typing.Union[MetaOapg.properties.processId, str, uuid.UUID, ],
         status: 'ProcessingStatus',
         progress: typing.Union['ProcessStatusResponseIngestProgress', schemas.Unset] = schemas.unset,
         statusMessage: typing.Union[MetaOapg.properties.statusMessage, str, schemas.Unset] = schemas.unset,
@@ -119,10 +119,5 @@ class ProcessStatusResponseIngest(
             **kwargs,
         )
 
-from groundx.model.document_response import DocumentResponse
-from groundx.model.document_response_document import DocumentResponseDocument
 from groundx.model.process_status_response_ingest_progress import ProcessStatusResponseIngestProgress
-from groundx.model.process_status_response_ingest_progress_complete import ProcessStatusResponseIngestProgressComplete
-from groundx.model.process_status_response_ingest_progress_errors import ProcessStatusResponseIngestProgressErrors
-from groundx.model.process_status_response_ingest_progress_processing import ProcessStatusResponseIngestProgressProcessing
 from groundx.model.processing_status import ProcessingStatus

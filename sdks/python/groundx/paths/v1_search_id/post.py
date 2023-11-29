@@ -33,13 +33,9 @@ import frozendict  # noqa: F401
 from groundx import schemas  # noqa: F401
 
 from groundx.model.search_request import SearchRequest as SearchRequestSchema
-from groundx.model.search_result_item import SearchResultItem as SearchResultItemSchema
 from groundx.model.search_request_search import SearchRequestSearch as SearchRequestSearchSchema
-from groundx.model.search_response_search import SearchResponseSearch as SearchResponseSearchSchema
 from groundx.model.search_response import SearchResponse as SearchResponseSchema
 
-from groundx.type.search_response_search import SearchResponseSearch
-from groundx.type.search_result_item import SearchResultItem
 from groundx.type.search_response import SearchResponse
 from groundx.type.search_request import SearchRequest
 from groundx.type.search_request_search import SearchRequestSearch
@@ -212,10 +208,11 @@ class BaseApi(api_client.Api):
             query_params: typing.Optional[dict] = {},
             path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         content_type: str = 'application/json',
         stream: bool = False,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -292,6 +289,7 @@ class BaseApi(api_client.Api):
             auth_settings=_auth,
             prefix_separator_iterator=prefix_separator_iterator,
             timeout=timeout,
+            **kwargs
         )
     
         if stream:
@@ -354,7 +352,7 @@ class BaseApi(api_client.Api):
             query_params: typing.Optional[dict] = {},
             path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         content_type: str = 'application/json',
         stream: bool = False,
@@ -467,6 +465,7 @@ class Content(BaseApi):
         search: SearchRequestSearch,
         id: int,
         n: typing.Optional[int] = None,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -481,6 +480,7 @@ class Content(BaseApi):
             body=args.body,
             query_params=args.query,
             path_params=args.path,
+            **kwargs,
         )
     
     def content(
@@ -511,6 +511,7 @@ class ApiForpost(BaseApi):
         search: SearchRequestSearch,
         id: int,
         n: typing.Optional[int] = None,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -525,6 +526,7 @@ class ApiForpost(BaseApi):
             body=args.body,
             query_params=args.query,
             path_params=args.path,
+            **kwargs,
         )
     
     def post(

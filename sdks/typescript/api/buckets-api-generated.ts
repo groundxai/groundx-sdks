@@ -21,13 +21,9 @@ const FormData = require("form-data")
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
-import { BucketDetail } from '../models';
-// @ts-ignore
 import { BucketListResponse } from '../models';
 // @ts-ignore
 import { BucketResponse } from '../models';
-// @ts-ignore
-import { BucketUpdateDetail } from '../models';
 // @ts-ignore
 import { BucketUpdateRequest } from '../models';
 // @ts-ignore

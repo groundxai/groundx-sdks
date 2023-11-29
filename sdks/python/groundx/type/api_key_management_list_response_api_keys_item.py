@@ -13,14 +13,15 @@
 from datetime import datetime, date
 import typing
 from enum import Enum
-from typing_extensions import TypedDict, Literal
+from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 
 class RequiredApiKeyManagementListResponseApiKeysItem(TypedDict):
     pass
 
 class OptionalApiKeyManagementListResponseApiKeysItem(TypedDict, total=False):
-    created: str
+    # The data time when the API key was created, in RFC3339 format
+    created: datetime
 
     apiKey: str
 

@@ -32,13 +32,9 @@ import frozendict  # noqa: F401
 
 from groundx import schemas  # noqa: F401
 
-from groundx.model.document_response_document import DocumentResponseDocument as DocumentResponseDocumentSchema
-from groundx.model.document_response import DocumentResponse as DocumentResponseSchema
 from groundx.model.document_lookup_response import DocumentLookupResponse as DocumentLookupResponseSchema
 
 from groundx.type.document_lookup_response import DocumentLookupResponse
-from groundx.type.document_response_document import DocumentResponseDocument
-from groundx.type.document_response import DocumentResponse
 
 from . import path
 
@@ -129,6 +125,22 @@ _response_for_200 = api_client.OpenApiResponse(
 
 
 @dataclass
+class ApiResponseFor400(api_client.ApiResponse):
+    body: schemas.Unset = schemas.unset
+
+
+@dataclass
+class ApiResponseFor400Async(api_client.AsyncApiResponse):
+    body: schemas.Unset = schemas.unset
+
+
+_response_for_400 = api_client.OpenApiResponse(
+    response_cls=ApiResponseFor400,
+    response_cls_async=ApiResponseFor400Async,
+)
+
+
+@dataclass
 class ApiResponseFor401(api_client.ApiResponse):
     body: schemas.Unset = schemas.unset
 
@@ -144,6 +156,7 @@ _response_for_401 = api_client.OpenApiResponse(
 )
 _status_code_to_response = {
     '200': _response_for_200,
+    '400': _response_for_400,
     '401': _response_for_401,
 }
 _all_accept_content_types = (
@@ -177,9 +190,10 @@ class BaseApi(api_client.Api):
             query_params: typing.Optional[dict] = {},
             path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -243,6 +257,7 @@ class BaseApi(api_client.Api):
             auth_settings=_auth,
             prefix_separator_iterator=prefix_separator_iterator,
             timeout=timeout,
+            **kwargs
         )
     
         if stream:
@@ -304,7 +319,7 @@ class BaseApi(api_client.Api):
             query_params: typing.Optional[dict] = {},
             path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
     ) -> typing.Union[
@@ -403,6 +418,7 @@ class Lookup(BaseApi):
         id: int,
         n: typing.Optional[int] = None,
         next_token: typing.Optional[str] = None,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -416,6 +432,7 @@ class Lookup(BaseApi):
         return await self._alookup_oapg(
             query_params=args.query,
             path_params=args.path,
+            **kwargs,
         )
     
     def lookup(
@@ -445,6 +462,7 @@ class ApiForget(BaseApi):
         id: int,
         n: typing.Optional[int] = None,
         next_token: typing.Optional[str] = None,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -458,6 +476,7 @@ class ApiForget(BaseApi):
         return await self._alookup_oapg(
             query_params=args.query,
             path_params=args.path,
+            **kwargs,
         )
     
     def get(

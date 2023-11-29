@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestV1Apikey(ApiTestMixin, unittest.TestCase):
     """
     V1Apikey unit test stubs
-        Get API keys
+        Look up existing API Keys
     """
 
     def setUp(self):

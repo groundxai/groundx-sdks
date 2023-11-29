@@ -24,19 +24,19 @@ export interface BucketDetail {
      */
     'bucketId': number;
     /**
-     * 
+     * The data time when the bucket was created, in RFC3339 format
      * @type {string}
      * @memberof BucketDetail
      */
     'created'?: string;
     /**
-     * 
+     * The number of files contained in the content bucket
      * @type {number}
      * @memberof BucketDetail
      */
     'fileCount'?: number;
     /**
-     * 
+     * The total file size of files contained in the content bucket
      * @type {string}
      * @memberof BucketDetail
      */
@@ -48,7 +48,7 @@ export interface BucketDetail {
      */
     'name'?: string;
     /**
-     * 
+     * The data time when the bucket was last updated, in RFC3339 format
      * @type {string}
      * @memberof BucketDetail
      */
