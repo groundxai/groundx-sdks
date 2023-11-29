@@ -112,12 +112,12 @@ class BaseApi(api_client.Api):
 
     def _crawl_website_mapped_args(
         self,
-        project: typing.Optional[WebsiteRequest] = None,
+        website: WebsiteRequest,
     ) -> api_client.MappedArgs:
         args: api_client.MappedArgs = api_client.MappedArgs()
         _body = {}
-        if project is not None:
-            _body["project"] = project
+        if website is not None:
+            _body["website"] = website
         args.body = _body
         return args
 
@@ -319,7 +319,7 @@ class CrawlWebsite(BaseApi):
 
     async def acrawl_website(
         self,
-        project: typing.Optional[WebsiteRequest] = None,
+        website: WebsiteRequest,
         **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
@@ -327,7 +327,7 @@ class CrawlWebsite(BaseApi):
         AsyncGeneratorResponse,
     ]:
         args = self._crawl_website_mapped_args(
-            project=project,
+            website=website,
         )
         return await self._acrawl_website_oapg(
             body=args.body,
@@ -336,13 +336,13 @@ class CrawlWebsite(BaseApi):
     
     def crawl_website(
         self,
-        project: typing.Optional[WebsiteRequest] = None,
+        website: WebsiteRequest,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
         args = self._crawl_website_mapped_args(
-            project=project,
+            website=website,
         )
         return self._crawl_website_oapg(
             body=args.body,
@@ -353,7 +353,7 @@ class ApiForpost(BaseApi):
 
     async def apost(
         self,
-        project: typing.Optional[WebsiteRequest] = None,
+        website: WebsiteRequest,
         **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
@@ -361,7 +361,7 @@ class ApiForpost(BaseApi):
         AsyncGeneratorResponse,
     ]:
         args = self._crawl_website_mapped_args(
-            project=project,
+            website=website,
         )
         return await self._acrawl_website_oapg(
             body=args.body,
@@ -370,13 +370,13 @@ class ApiForpost(BaseApi):
     
     def post(
         self,
-        project: typing.Optional[WebsiteRequest] = None,
+        website: WebsiteRequest,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
         args = self._crawl_website_mapped_args(
-            project=project,
+            website=website,
         )
         return self._crawl_website_oapg(
             body=args.body,

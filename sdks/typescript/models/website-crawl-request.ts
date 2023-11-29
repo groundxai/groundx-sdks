@@ -23,6 +23,6 @@ export interface WebsiteCrawlRequest {
      * @type {WebsiteRequest}
      * @memberof WebsiteCrawlRequest
      */
-    'project'?: WebsiteRequest;
+    'website': WebsiteRequest;
 }
 

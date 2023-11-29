@@ -40,46 +40,46 @@ class WebsiteCrawlRequest(
         class properties:
         
             @staticmethod
-            def project() -> typing.Type['WebsiteRequest']:
+            def website() -> typing.Type['WebsiteRequest']:
                 return WebsiteRequest
             __annotations__ = {
-                "project": project,
+                "website": website,
             }
     
-    website: schemas.AnyTypeSchema
+    website: 'WebsiteRequest'
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["project"]) -> 'WebsiteRequest': ...
+    def __getitem__(self, name: typing_extensions.Literal["website"]) -> 'WebsiteRequest': ...
     
     @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["project", ], str]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["website", ], str]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["project"]) -> typing.Union['WebsiteRequest', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["website"]) -> 'WebsiteRequest': ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["project", ], str]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["website", ], str]):
         return super().get_item_oapg(name)
     
 
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        project: typing.Union['WebsiteRequest', schemas.Unset] = schemas.unset,
+        website: 'WebsiteRequest',
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
     ) -> 'WebsiteCrawlRequest':
         return super().__new__(
             cls,
             *args,
-            project=project,
+            website=website,
             _configuration=_configuration,
             **kwargs,
         )

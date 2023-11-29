@@ -513,7 +513,7 @@ export const DocumentsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async crawlWebsite(requestParameters: DocumentsApiCrawlWebsiteRequest = {}, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IngestResponse>> {
+        async crawlWebsite(requestParameters: DocumentsApiCrawlWebsiteRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IngestResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.crawlWebsite(requestParameters, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -622,7 +622,7 @@ export const DocumentsApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        crawlWebsite(requestParameters: DocumentsApiCrawlWebsiteRequest = {}, options?: AxiosRequestConfig): AxiosPromise<IngestResponse> {
+        crawlWebsite(requestParameters: DocumentsApiCrawlWebsiteRequest, options?: AxiosRequestConfig): AxiosPromise<IngestResponse> {
             return localVarFp.crawlWebsite(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
@@ -858,7 +858,7 @@ export class DocumentsApiGenerated extends BaseAPI {
      * @throws {RequiredError}
      * @memberof DocumentsApiGenerated
      */
-    public crawlWebsite(requestParameters: DocumentsApiCrawlWebsiteRequest = {}, options?: AxiosRequestConfig) {
+    public crawlWebsite(requestParameters: DocumentsApiCrawlWebsiteRequest, options?: AxiosRequestConfig) {
         return DocumentsApiFp(this.configuration).crawlWebsite(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 

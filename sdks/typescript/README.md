@@ -211,12 +211,14 @@ Crawl and ingest a website into GroundX
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
-const crawlWebsiteResponse = await groundx.documents.crawlWebsite({});
+const crawlWebsiteResponse = await groundx.documents.crawlWebsite({
+  website: null,
+});
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### project: [`WebsiteRequest`](./models/website-request.ts)<a id="project-websiterequestmodelswebsite-requestts"></a>
+##### website: [`WebsiteRequest`](./models/website-request.ts)<a id="website-websiterequestmodelswebsite-requestts"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
