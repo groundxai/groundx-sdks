@@ -1003,9 +1003,6 @@ components:
             $ref: '#/components/schemas/DocumentResponse'
         nextToken:
           type: string
-          example: The method you used is not supported for this query
-      example:
-        message: The method you used is not supported for this query
     WebsiteCrawlRequest:
       type: object
       required:
