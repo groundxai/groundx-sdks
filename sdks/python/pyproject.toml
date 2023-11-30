@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "groundx-python-sdk"
-version = "1.3.6"
+version = "1.3.7"
 description = "Client for GroundX API"
 authors = ["Konfig <support@groundx.ai>"]
 license = "MIT"

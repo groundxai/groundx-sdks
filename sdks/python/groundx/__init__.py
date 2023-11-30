@@ -12,7 +12,7 @@
     Created by: https://www.groundx.ai/
 """
 
-__version__ = "1.3.6"
+__version__ = "1.3.7"
 
 # import ApiClient
 from groundx.api_client import ApiClient
