@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestV1IngestDocuments(ApiTestMixin, unittest.TestCase):
     """
     V1IngestDocuments unit test stubs
-        Delete one or more documents from GroundX
+        documents.delete (multiple)
     """
 
     def setUp(self):

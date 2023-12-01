@@ -18,13 +18,13 @@ import type * as buffer from "buffer"
  */
 export interface SearchRequestSearch {
     /**
-     * The search query
+     * The search query to be used to find relevant documentation. <WIP>
      * @type {string}
      * @memberof SearchRequestSearch
      */
     'query': string;
     /**
-     * Token to retrieve the next set of paginated results
+     * A token for pagination. If the number of documents for a given query is larger than n, the response will include a \"nextToken\" value. That token can be included in this field to retrieve the next batch of n documents.
      * @type {string}
      * @memberof SearchRequestSearch
      */

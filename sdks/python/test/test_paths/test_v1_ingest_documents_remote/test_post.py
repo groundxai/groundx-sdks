@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestV1IngestDocumentsRemote(ApiTestMixin, unittest.TestCase):
     """
     V1IngestDocumentsRemote unit test stubs
-        Upload hosted documents to GroundX
+        documents.upload_remote
     """
 
     def setUp(self):

@@ -40,10 +40,10 @@ import { requestBeforeHook } from '../requestBeforeHook';
 export const ProjectsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * This endpoint allows you to add a bucket to a project.
-         * @summary Add a bucket to a project
-         * @param {number} projectId The ID of the project to update.
-         * @param {number} bucketId The ID of the bucket to update.
+         * Add an existing bucket to an existing project. Buckets and projects can be associated many to many.
+         * @summary project.addBucket
+         * @param {number} projectId The projectId of the project which the bucket will be added to.
+         * @param {number} bucketId The bucketId of the bucket being added to the project.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -86,8 +86,8 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * This endpoint allows you to create a new project.
-         * @summary Create a new project
+         * create a new project.
+         * @summary projects.create
          * @param {ProjectCreateRequest} projectCreateRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -132,9 +132,9 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * 
-         * @summary Delete a project
-         * @param {number} projectId 
+         * delete a project.
+         * @summary projects.delete
+         * @param {number} projectId The projectId of the project to be deleted.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -174,9 +174,9 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * This endpoint allows you to retrieve a specific project by projectId.
-         * @summary Look up an existing project by its ID
-         * @param {number} projectId The ID of the project to retrieve.
+         * look up a specific project by its projectId.
+         * @summary projects.get
+         * @param {number} projectId The projectId of the project to look up.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -216,10 +216,10 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * This endpoint allows you to retrieve your existing projects.
-         * @summary Look up existing projects
-         * @param {number} [n] 
-         * @param {string} [nextToken] 
+         * list all projects within your GroundX account.
+         * @summary projects.list
+         * @param {number} [n] The maximum number of returned documents. Accepts 1-100 with a default of 20.
+         * @param {string} [nextToken] A token for pagination. If the number of documents for a given query is larger than n, the response will include a \&quot;nextToken\&quot; value. That token can be included in this field to retrieve the next batch of n documents.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -264,10 +264,10 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * This endpoint allows you to remove a bucket from a project.
-         * @summary Remove a bucket from a project
-         * @param {number} projectId The ID of the project to update.
-         * @param {number} bucketId The ID of the bucket to update.
+         * remove a bucket from a project. Buckets and projects can be associated many to many, this removes one bucket to project association without disturbing others.
+         * @summary projects.removeBucket
+         * @param {number} projectId The projectId of the project which the bucket will be removed from.
+         * @param {number} bucketId The bucketId of the bucket which will be removed from the project.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -310,9 +310,9 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * This endpoint allows you to update an existing project.
-         * @summary Update an existing project
-         * @param {number} projectId The ID of the project to update.
+         * Rename a project
+         * @summary projects.update
+         * @param {number} projectId The projectId of the project to update.
          * @param {ProjectUpdateRequest} projectUpdateRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -370,8 +370,8 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ProjectsApiAxiosParamCreator(configuration)
     return {
         /**
-         * This endpoint allows you to add a bucket to a project.
-         * @summary Add a bucket to a project
+         * Add an existing bucket to an existing project. Buckets and projects can be associated many to many.
+         * @summary project.addBucket
          * @param {ProjectsApiAddBucketRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -381,8 +381,8 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * This endpoint allows you to create a new project.
-         * @summary Create a new project
+         * create a new project.
+         * @summary projects.create
          * @param {ProjectsApiCreateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -392,8 +392,8 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
-         * @summary Delete a project
+         * delete a project.
+         * @summary projects.delete
          * @param {ProjectsApiDeleteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -403,8 +403,8 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * This endpoint allows you to retrieve a specific project by projectId.
-         * @summary Look up an existing project by its ID
+         * look up a specific project by its projectId.
+         * @summary projects.get
          * @param {ProjectsApiGetRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -414,8 +414,8 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * This endpoint allows you to retrieve your existing projects.
-         * @summary Look up existing projects
+         * list all projects within your GroundX account.
+         * @summary projects.list
          * @param {ProjectsApiListRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -425,8 +425,8 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * This endpoint allows you to remove a bucket from a project.
-         * @summary Remove a bucket from a project
+         * remove a bucket from a project. Buckets and projects can be associated many to many, this removes one bucket to project association without disturbing others.
+         * @summary projects.removeBucket
          * @param {ProjectsApiRemoveBucketRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -436,8 +436,8 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * This endpoint allows you to update an existing project.
-         * @summary Update an existing project
+         * Rename a project
+         * @summary projects.update
          * @param {ProjectsApiUpdateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -457,8 +457,8 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
     const localVarFp = ProjectsApiFp(configuration)
     return {
         /**
-         * This endpoint allows you to add a bucket to a project.
-         * @summary Add a bucket to a project
+         * Add an existing bucket to an existing project. Buckets and projects can be associated many to many.
+         * @summary project.addBucket
          * @param {ProjectsApiAddBucketRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -467,8 +467,8 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.addBucket(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * This endpoint allows you to create a new project.
-         * @summary Create a new project
+         * create a new project.
+         * @summary projects.create
          * @param {ProjectsApiCreateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -477,8 +477,8 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.create(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary Delete a project
+         * delete a project.
+         * @summary projects.delete
          * @param {ProjectsApiDeleteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -487,8 +487,8 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.delete(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * This endpoint allows you to retrieve a specific project by projectId.
-         * @summary Look up an existing project by its ID
+         * look up a specific project by its projectId.
+         * @summary projects.get
          * @param {ProjectsApiGetRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -497,8 +497,8 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.get(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * This endpoint allows you to retrieve your existing projects.
-         * @summary Look up existing projects
+         * list all projects within your GroundX account.
+         * @summary projects.list
          * @param {ProjectsApiListRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -507,8 +507,8 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.list(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * This endpoint allows you to remove a bucket from a project.
-         * @summary Remove a bucket from a project
+         * remove a bucket from a project. Buckets and projects can be associated many to many, this removes one bucket to project association without disturbing others.
+         * @summary projects.removeBucket
          * @param {ProjectsApiRemoveBucketRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -517,8 +517,8 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.removeBucket(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * This endpoint allows you to update an existing project.
-         * @summary Update an existing project
+         * Rename a project
+         * @summary projects.update
          * @param {ProjectsApiUpdateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -537,14 +537,14 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
 export type ProjectsApiAddBucketRequest = {
     
     /**
-    * The ID of the project to update.
+    * The projectId of the project which the bucket will be added to.
     * @type {number}
     * @memberof ProjectsApiAddBucket
     */
     readonly projectId: number
     
     /**
-    * The ID of the bucket to update.
+    * The bucketId of the bucket being added to the project.
     * @type {number}
     * @memberof ProjectsApiAddBucket
     */
@@ -569,7 +569,7 @@ export type ProjectsApiCreateRequest = {
 export type ProjectsApiDeleteRequest = {
     
     /**
-    * 
+    * The projectId of the project to be deleted.
     * @type {number}
     * @memberof ProjectsApiDelete
     */
@@ -585,7 +585,7 @@ export type ProjectsApiDeleteRequest = {
 export type ProjectsApiGetRequest = {
     
     /**
-    * The ID of the project to retrieve.
+    * The projectId of the project to look up.
     * @type {number}
     * @memberof ProjectsApiGet
     */
@@ -601,14 +601,14 @@ export type ProjectsApiGetRequest = {
 export type ProjectsApiListRequest = {
     
     /**
-    * 
+    * The maximum number of returned documents. Accepts 1-100 with a default of 20.
     * @type {number}
     * @memberof ProjectsApiList
     */
     readonly n?: number
     
     /**
-    * 
+    * A token for pagination. If the number of documents for a given query is larger than n, the response will include a \"nextToken\" value. That token can be included in this field to retrieve the next batch of n documents.
     * @type {string}
     * @memberof ProjectsApiList
     */
@@ -624,14 +624,14 @@ export type ProjectsApiListRequest = {
 export type ProjectsApiRemoveBucketRequest = {
     
     /**
-    * The ID of the project to update.
+    * The projectId of the project which the bucket will be removed from.
     * @type {number}
     * @memberof ProjectsApiRemoveBucket
     */
     readonly projectId: number
     
     /**
-    * The ID of the bucket to update.
+    * The bucketId of the bucket which will be removed from the project.
     * @type {number}
     * @memberof ProjectsApiRemoveBucket
     */
@@ -647,7 +647,7 @@ export type ProjectsApiRemoveBucketRequest = {
 export type ProjectsApiUpdateRequest = {
     
     /**
-    * The ID of the project to update.
+    * The projectId of the project to update.
     * @type {number}
     * @memberof ProjectsApiUpdate
     */
@@ -663,8 +663,8 @@ export type ProjectsApiUpdateRequest = {
  */
 export class ProjectsApiGenerated extends BaseAPI {
     /**
-     * This endpoint allows you to add a bucket to a project.
-     * @summary Add a bucket to a project
+     * Add an existing bucket to an existing project. Buckets and projects can be associated many to many.
+     * @summary project.addBucket
      * @param {ProjectsApiAddBucketRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -675,8 +675,8 @@ export class ProjectsApiGenerated extends BaseAPI {
     }
 
     /**
-     * This endpoint allows you to create a new project.
-     * @summary Create a new project
+     * create a new project.
+     * @summary projects.create
      * @param {ProjectsApiCreateRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -687,8 +687,8 @@ export class ProjectsApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
-     * @summary Delete a project
+     * delete a project.
+     * @summary projects.delete
      * @param {ProjectsApiDeleteRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -699,8 +699,8 @@ export class ProjectsApiGenerated extends BaseAPI {
     }
 
     /**
-     * This endpoint allows you to retrieve a specific project by projectId.
-     * @summary Look up an existing project by its ID
+     * look up a specific project by its projectId.
+     * @summary projects.get
      * @param {ProjectsApiGetRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -711,8 +711,8 @@ export class ProjectsApiGenerated extends BaseAPI {
     }
 
     /**
-     * This endpoint allows you to retrieve your existing projects.
-     * @summary Look up existing projects
+     * list all projects within your GroundX account.
+     * @summary projects.list
      * @param {ProjectsApiListRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -723,8 +723,8 @@ export class ProjectsApiGenerated extends BaseAPI {
     }
 
     /**
-     * This endpoint allows you to remove a bucket from a project.
-     * @summary Remove a bucket from a project
+     * remove a bucket from a project. Buckets and projects can be associated many to many, this removes one bucket to project association without disturbing others.
+     * @summary projects.removeBucket
      * @param {ProjectsApiRemoveBucketRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -735,8 +735,8 @@ export class ProjectsApiGenerated extends BaseAPI {
     }
 
     /**
-     * This endpoint allows you to update an existing project.
-     * @summary Update an existing project
+     * Rename a project
+     * @summary projects.update
      * @param {ProjectsApiUpdateRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

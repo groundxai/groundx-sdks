@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestV1IngestDocumentsLocal(ApiTestMixin, unittest.TestCase):
     """
     V1IngestDocumentsLocal unit test stubs
-        Upload local documents to GroundX
+        documents.upload_local
     """
 
     def setUp(self):

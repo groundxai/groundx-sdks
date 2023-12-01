@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestV1SearchId(ApiTestMixin, unittest.TestCase):
     """
     V1SearchId unit test stubs
-        Perform a search query of your content
+        search.content
     """
 
     def setUp(self):

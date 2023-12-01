@@ -69,7 +69,7 @@ groundx = Groundx(
 )
 
 try:
-    # Create a new bucket
+    # buckets.create
     create_response = groundx.buckets.create(
         name="your_bucket_name",
     )
@@ -103,7 +103,7 @@ groundx = Groundx(
 
 async def main():
     try:
-        # Create a new bucket
+        # buckets.create
         create_response = await groundx.buckets.acreate(
             name="your_bucket_name",
         )
@@ -128,7 +128,7 @@ asyncio.run(main())
 ## Reference<a id="reference"></a>
 ### `groundx.buckets.create`<a id="groundxbucketscreate"></a>
 
-This endpoint allows you to create a new bucket.
+create a new bucket.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -159,7 +159,7 @@ create_response = groundx.buckets.create(
 
 ### `groundx.buckets.delete`<a id="groundxbucketsdelete"></a>
 
-Delete a bucket
+delete a bucket.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -172,6 +172,8 @@ delete_response = groundx.buckets.delete(
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### bucket_id: `int`<a id="bucket_id-int"></a>
+
+The bucketId of the bucket being deleted.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -187,7 +189,7 @@ delete_response = groundx.buckets.delete(
 
 ### `groundx.buckets.get`<a id="groundxbucketsget"></a>
 
-Look up a bucket by its bucketId.
+look up a specific bucket by its bucketId.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -201,7 +203,7 @@ get_response = groundx.buckets.get(
 
 ##### bucket_id: `int`<a id="bucket_id-int"></a>
 
-The ID of the bucket to retrieve.
+The bucketId of the bucket to look up.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -217,7 +219,7 @@ The ID of the bucket to retrieve.
 
 ### `groundx.buckets.list`<a id="groundxbucketslist"></a>
 
-Look up existing buckets associated with your account.
+List all buckets within your GroundX account
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -232,7 +234,11 @@ list_response = groundx.buckets.list(
 
 ##### n: `int`<a id="n-int"></a>
 
+The maximum number of returned documents. Accepts 1-100 with a default of 20.
+
 ##### next_token: `str`<a id="next_token-str"></a>
+
+A token for pagination. If the number of documents for a given query is larger than n, the response will include a \"nextToken\" value. That token can be included in this field to retrieve the next batch of n documents.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -248,7 +254,7 @@ list_response = groundx.buckets.list(
 
 ### `groundx.buckets.update`<a id="groundxbucketsupdate"></a>
 
-Update the configurations of an existing bucket.
+Rename a bucket
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -265,7 +271,7 @@ update_response = groundx.buckets.update(
 
 ##### bucket_id: `int`<a id="bucket_id-int"></a>
 
-The ID of the bucket to update.
+The bucketId of the bucket being updated.
 
 #### ⚙️ Request Body<a id="⚙️-request-body"></a>
 
@@ -284,7 +290,7 @@ The ID of the bucket to update.
 
 ### `groundx.documents.crawl_website`<a id="groundxdocumentscrawl_website"></a>
 
-Crawl and ingest a website into GroundX
+Upload the content of a publicly accessible website to a GroundX bucket. This is done by following links within a specified URL, recursively, up to a specified depth or number of pages.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -322,7 +328,7 @@ crawl_website_response = groundx.documents.crawl_website(
 
 ### `groundx.documents.delete`<a id="groundxdocumentsdelete"></a>
 
-Delete one or more documents from GroundX
+Delete multiple documents hosted on GroundX
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -336,7 +342,7 @@ delete_response = groundx.documents.delete(
 
 ##### document_ids: List[`str`]<a id="document_ids-liststr"></a>
 
-A comma delimited list of document IDs
+A list of documentIds which correspond to documents uploaded to GroundX
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -352,7 +358,7 @@ A comma delimited list of document IDs
 
 ### `groundx.documents.delete_0`<a id="groundxdocumentsdelete_0"></a>
 
-Delete a document
+Delete a single document hosted on GroundX
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -365,6 +371,8 @@ delete_0_response = groundx.documents.delete_0(
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### document_id: `str`<a id="document_id-str"></a>
+
+A documentId which correspond to a document uploaded to GroundX
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -408,7 +416,7 @@ get_response = groundx.documents.get(
 
 ### `groundx.documents.get_processing_status_by_id`<a id="groundxdocumentsget_processing_status_by_id"></a>
 
-Look up the processing status of documents for a given processId
+Get the current status of an upload, initiated with documents.upload_remote, documents.upload_local, or documents.crawl_website, by specifying the processId (which is included in the response of the upload functions).
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -436,7 +444,7 @@ get_processing_status_by_id_response = groundx.documents.get_processing_status_b
 
 ### `groundx.documents.list`<a id="groundxdocumentslist"></a>
 
-Look up all existing documents
+lookup all documents across all resources which are currently on GroundX
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -451,7 +459,11 @@ list_response = groundx.documents.list(
 
 ##### n: `int`<a id="n-int"></a>
 
+The maximum number of returned documents. Accepts 1-100 with a default of 20.
+
 ##### next_token: `str`<a id="next_token-str"></a>
+
+A token for pagination. If the number of documents for a given query is larger than n, the response will include a \"nextToken\" value. That token can be included in this field to retrieve the next batch of n documents.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -467,7 +479,7 @@ list_response = groundx.documents.list(
 
 ### `groundx.documents.lookup`<a id="groundxdocumentslookup"></a>
 
-Look up existing documents by processId, bucketId, or projectId
+lookup the document(s) associated with a processId, bucketId, or projectId.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -483,9 +495,15 @@ lookup_response = groundx.documents.lookup(
 
 ##### id: `int`<a id="id-int"></a>
 
+a processId, bucketId, or projectId
+
 ##### n: `int`<a id="n-int"></a>
 
+The maximum number of returned documents. Accepts 1-100 with a default of 20.
+
 ##### next_token: `str`<a id="next_token-str"></a>
+
+A token for pagination. If the number of documents for a given query is larger than n, the response will include a \"nextToken\" value. That token can be included in this field to retrieve the next batch of n documents.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -501,7 +519,7 @@ lookup_response = groundx.documents.lookup(
 
 ### `groundx.documents.upload_local`<a id="groundxdocumentsupload_local"></a>
 
-Upload local documents to GroundX
+Upload documents hosted on a local file system to a GroundX bucket
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -537,7 +555,7 @@ upload_local_response = groundx.documents.upload_local(
 
 ### `groundx.documents.upload_remote`<a id="groundxdocumentsupload_remote"></a>
 
-Upload hosted documents to GroundX
+Upload documents which are hosted on public URLs to a GroundX bucket
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -575,7 +593,7 @@ upload_remote_response = groundx.documents.upload_remote(
 
 ### `groundx.projects.add_bucket`<a id="groundxprojectsadd_bucket"></a>
 
-This endpoint allows you to add a bucket to a project.
+Add an existing bucket to an existing project. Buckets and projects can be associated many to many.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -590,11 +608,11 @@ add_bucket_response = groundx.projects.add_bucket(
 
 ##### project_id: `int`<a id="project_id-int"></a>
 
-The ID of the project to update.
+The projectId of the project which the bucket will be added to.
 
 ##### bucket_id: `int`<a id="bucket_id-int"></a>
 
-The ID of the bucket to update.
+The bucketId of the bucket being added to the project.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -610,7 +628,7 @@ The ID of the bucket to update.
 
 ### `groundx.projects.create`<a id="groundxprojectscreate"></a>
 
-This endpoint allows you to create a new project.
+create a new project.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -646,7 +664,7 @@ Include a bucket name to automatically create a bucket and add it to this projec
 
 ### `groundx.projects.delete`<a id="groundxprojectsdelete"></a>
 
-Delete a project
+delete a project.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -659,6 +677,8 @@ delete_response = groundx.projects.delete(
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### project_id: `int`<a id="project_id-int"></a>
+
+The projectId of the project to be deleted.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -674,7 +694,7 @@ delete_response = groundx.projects.delete(
 
 ### `groundx.projects.get`<a id="groundxprojectsget"></a>
 
-This endpoint allows you to retrieve a specific project by projectId.
+look up a specific project by its projectId.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -688,7 +708,7 @@ get_response = groundx.projects.get(
 
 ##### project_id: `int`<a id="project_id-int"></a>
 
-The ID of the project to retrieve.
+The projectId of the project to look up.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -704,7 +724,7 @@ The ID of the project to retrieve.
 
 ### `groundx.projects.list`<a id="groundxprojectslist"></a>
 
-This endpoint allows you to retrieve your existing projects.
+list all projects within your GroundX account.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -719,7 +739,11 @@ list_response = groundx.projects.list(
 
 ##### n: `int`<a id="n-int"></a>
 
+The maximum number of returned documents. Accepts 1-100 with a default of 20.
+
 ##### next_token: `str`<a id="next_token-str"></a>
+
+A token for pagination. If the number of documents for a given query is larger than n, the response will include a \"nextToken\" value. That token can be included in this field to retrieve the next batch of n documents.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -735,7 +759,7 @@ list_response = groundx.projects.list(
 
 ### `groundx.projects.remove_bucket`<a id="groundxprojectsremove_bucket"></a>
 
-This endpoint allows you to remove a bucket from a project.
+remove a bucket from a project. Buckets and projects can be associated many to many, this removes one bucket to project association without disturbing others.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -750,11 +774,11 @@ remove_bucket_response = groundx.projects.remove_bucket(
 
 ##### project_id: `int`<a id="project_id-int"></a>
 
-The ID of the project to update.
+The projectId of the project which the bucket will be removed from.
 
 ##### bucket_id: `int`<a id="bucket_id-int"></a>
 
-The ID of the bucket to update.
+The bucketId of the bucket which will be removed from the project.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -770,7 +794,7 @@ The ID of the bucket to update.
 
 ### `groundx.projects.update`<a id="groundxprojectsupdate"></a>
 
-This endpoint allows you to update an existing project.
+Rename a project
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -787,7 +811,7 @@ update_response = groundx.projects.update(
 
 ##### project_id: `int`<a id="project_id-int"></a>
 
-The ID of the project to update.
+The projectId of the project to update.
 
 #### ⚙️ Request Body<a id="⚙️-request-body"></a>
 
@@ -806,7 +830,7 @@ The ID of the project to update.
 
 ### `groundx.search.content`<a id="groundxsearchcontent"></a>
 
-Search and retrieve relevant content from a project or bucket by id.
+Search documents on GroundX for the most relevant information to a given query. The result of this query is typically used in one of two ways; result['search']['text'] can be used to provide context to a language model, facilitating RAG, or result['search']['results'] can be used to observe chunks of text which are relevant to the query, facilitating citation.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -828,11 +852,11 @@ content_response = groundx.search.content(
 
 ##### id: `int`<a id="id-int"></a>
 
-The ID of the project or bucket to search within.
+The bucketId or projectId of the bucket or project being searched. The documents within the specified container will be compared to the query, and relevant information will be extracted.
 
 ##### n: `int`<a id="n-int"></a>
 
-Number of results
+The maximum number of returned documents. Accepts 1-100 with a default of 20. <TODO clarify>
 
 #### ⚙️ Request Body<a id="⚙️-request-body"></a>
 
