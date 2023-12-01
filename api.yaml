@@ -21,7 +21,8 @@ paths:
     post:
       tags:
         - Documents
-      summary: Upload hosted documents to GroundX
+      summary: documents.upload_remote
+      description: Upload documents which are hosted on public URLs to a GroundX bucket
       operationId: Document_uploadRemote
       requestBody:
         content:
@@ -43,7 +44,8 @@ paths:
     post:
       tags:
         - Documents
-      summary: Upload local documents to GroundX
+      summary: documents.upload_local
+      description: Upload documents hosted on a local file system to a GroundX bucket
       operationId: Document_uploadLocal
       requestBody:
         content:
@@ -65,7 +67,8 @@ paths:
     post:
       tags:
         - Documents
-      summary: Crawl and ingest a website into GroundX
+      summary: documents.crawl_website
+      description: Upload the content of a publicly accessible website to a GroundX bucket. This is done by following links within a specified URL, recursively, up to a specified depth or number of pages.
       operationId: Document_crawlWebsite
       requestBody:
         content:
@@ -87,8 +90,9 @@ paths:
     get:
       tags:
         - Documents
-      summary: Look up the processing status of documents for a given processId
+      summary: documents.get_processing_status_by_id
       operationId: Document_getProcessingStatusById
+      description: Get the current status of an upload, initiated with documents.upload_remote, documents.upload_local, or documents.crawl_website, by specifying the processId (which is included in the response of the upload functions).
       parameters:
         - name: processId
           in: path
@@ -111,20 +115,24 @@ paths:
     get:
       tags:
         - Documents
-      summary: Look up existing documents by processId, bucketId, or projectId
+      summary: documents.lookup
       operationId: Document_lookup
+      description: lookup the document(s) associated with a processId, bucketId, or projectId.
       parameters:
         - name: id
+          description: a processId, bucketId, or projectId
           in: path
           required: true
           schema:
             type: integer
         - name: n
+          description: The maximum number of returned documents. Accepts 1-100 with a default of 20.
           in: query
           required: false
           schema:
             type: integer
         - name: nextToken
+          description: A token for pagination. If the number of documents for a given query is larger than n, the response will include a "nextToken" value. That token can be included in this field to retrieve the next batch of n documents. 
           in: query
           required: false
           schema:
@@ -144,15 +152,18 @@ paths:
     get:
       tags:
         - Documents
-      summary: Look up all existing documents
+      summary: documents.list
       operationId: Document_list
+      description: lookup all documents across all resources which are currently on GroundX
       parameters:
         - name: n
+          description: The maximum number of returned documents. Accepts 1-100 with a default of 20.
           in: query
           required: false
           schema:
             type: integer
         - name: nextToken
+          description: A token for pagination. If the number of documents for a given query is larger than n, the response will include a "nextToken" value. That token can be included in this field to retrieve the next batch of n documents. 
           in: query
           required: false
           schema:
@@ -167,12 +178,13 @@ paths:
     delete:
       tags:
         - Documents
-      summary: Delete one or more documents from GroundX
+      summary: documents.delete (multiple)
+      description: Delete multiple documents hosted on GroundX
       operationId: Documents_delete
       parameters:
         - name: documentIds
           in: query
-          description: A comma delimited list of document IDs
+          description: A list of documentIds which correspond to documents uploaded to GroundX
           required: true
           schema:
             type: array
@@ -196,10 +208,12 @@ paths:
     delete:
       tags:
         - Documents
-      summary: Delete a document
+      summary: documents.delete (singular)
+      description: Delete a single document hosted on GroundX
       operationId: Document_delete
       parameters:
         - name: documentId
+          description: A documentId which correspond to a document uploaded to GroundX
           in: path
           required: true
           schema:
@@ -243,17 +257,17 @@ paths:
     post:
       tags:
         - Search
-      summary: Perform a search query of your content
+      summary: search.content
       operationId: Search_content
-      description: Search and retrieve relevant content from a project or bucket by id.
+      description: Search documents on GroundX for the most relevant information to a given query. The result of this query is typically used in one of two ways; result['search']['text'] can be used to provide context to a language model, facilitating RAG, or result['search']['results'] can be used to observe chunks of text which are relevant to the query, facilitating citation.
       parameters:
-        - description: The ID of the project or bucket to search within.
+        - description: The bucketId or projectId of the bucket or project being searched. The documents within the specified container will be compared to the query, and relevant information will be extracted.
           in: path
           name: id
           required: true
           schema:
             type: integer
-        - description: Number of results
+        - description: The maximum number of returned documents. Accepts 1-100 with a default of 20. <TODO clarify>
           in: query
           name: 'n'
           required: false
@@ -282,20 +296,22 @@ paths:
     get:
       tags:
         - Projects
-      summary: Look up existing projects
+      summary: projects.list
+      description: list all projects within your GroundX account.
       operationId: Project_list
       parameters:
         - name: n
+          description: The maximum number of returned documents. Accepts 1-100 with a default of 20.
           in: query
           required: false
           schema:
             type: integer
         - name: nextToken
+          description: A token for pagination. If the number of documents for a given query is larger than n, the response will include a "nextToken" value. That token can be included in this field to retrieve the next batch of n documents.
           in: query
           required: false
           schema:
             type: string
-      description: This endpoint allows you to retrieve your existing projects.
       responses:
         '200':
           description: Successful retrieval of projects
@@ -306,9 +322,9 @@ paths:
     post:
       tags:
         - Projects
-      summary: Create a new project
+      summary: projects.create
       operationId: Project_create
-      description: This endpoint allows you to create a new project.
+      description: create a new project.
       requestBody:
         required: true
         content:
@@ -328,11 +344,11 @@ paths:
     get:
       tags:
         - Projects
-      summary: Look up an existing project by its ID
+      summary: projects.get
       operationId: Project_get
-      description: This endpoint allows you to retrieve a specific project by projectId.
+      description: look up a specific project by its projectId.
       parameters:
-        - description: The ID of the project to retrieve.
+        - description: The projectId of the project to look up.
           in: path
           name: projectId
           required: true
@@ -352,11 +368,11 @@ paths:
     put:
       tags:
         - Projects
-      summary: Update an existing project
+      summary: projects.update
       operationId: Project_update
-      description: This endpoint allows you to update an existing project.
+      description: Rename a project
       parameters:
-        - description: The ID of the project to update.
+        - description: The projectId of the project to update.
           in: path
           name: projectId
           required: true
@@ -382,10 +398,12 @@ paths:
     delete:
       tags:
         - Projects
-      summary: Delete a project
+      summary: projects.delete
+      description: delete a project.
       operationId: Project_delete
       parameters:
         - name: projectId
+          description: The projectId of the project to be deleted.
           in: path
           required: true
           schema:
@@ -405,17 +423,17 @@ paths:
     post:
       tags:
         - Projects
-      summary: Add a bucket to a project
+      summary: project.addBucket
       operationId: Project_addBucket
-      description: This endpoint allows you to add a bucket to a project.
+      description: Add an existing bucket to an existing project. Buckets and projects can be associated many to many.
       parameters:
-        - description: The ID of the project to update.
+        - description: The projectId of the project which the bucket will be added to.
           in: path
           name: projectId
           required: true
           schema:
             type: integer
-        - description: The ID of the bucket to update.
+        - description: The bucketId of the bucket being added to the project.
           in: path
           name: bucketId
           required: true
@@ -435,17 +453,17 @@ paths:
     delete:
       tags:
         - Projects
-      summary: Remove a bucket from a project
+      summary: projects.removeBucket
       operationId: Project_removeBucket
-      description: This endpoint allows you to remove a bucket from a project.
+      description: remove a bucket from a project. Buckets and projects can be associated many to many, this removes one bucket to project association without disturbing others.
       parameters:
-        - description: The ID of the project to update.
+        - description: The projectId of the project which the bucket will be removed from.
           in: path
           name: projectId
           required: true
           schema:
             type: integer
-        - description: The ID of the bucket to update.
+        - description: The bucketId of the bucket which will be removed from the project.
           in: path
           name: bucketId
           required: true
@@ -466,20 +484,22 @@ paths:
     get:
       tags:
         - Buckets
-      summary: Look up existing buckets
+      summary: buckets.list
+      description: List all buckets within your GroundX account
       operationId: Bucket_list
       parameters:
         - name: n
+          description: The maximum number of returned documents. Accepts 1-100 with a default of 20.
           in: query
           required: false
           schema:
             type: integer
         - name: nextToken
+          description: A token for pagination. If the number of documents for a given query is larger than n, the response will include a "nextToken" value. That token can be included in this field to retrieve the next batch of n documents.
           in: query
           required: false
           schema:
             type: string
-      description: Look up existing buckets associated with your account.
       responses:
         '200':
           description: Look up success
@@ -490,9 +510,9 @@ paths:
     post:
       tags:
         - Buckets
-      summary: Create a new bucket
+      summary: buckets.create
       operationId: Bucket_create
-      description: This endpoint allows you to create a new bucket.
+      description: create a new bucket.
       requestBody:
         required: true
         content:
@@ -512,11 +532,11 @@ paths:
     get:
       tags:
         - Buckets
-      summary: Look up an existing bucket by its ID
+      summary: buckets.get
       operationId: Bucket_get
-      description: Look up a bucket by its bucketId.
+      description: look up a specific bucket by its bucketId.
       parameters:
-        - description: The ID of the bucket to retrieve.
+        - description: The bucketId of the bucket to look up.
           in: path
           name: bucketId
           required: true
@@ -536,11 +556,11 @@ paths:
     put:
       tags:
         - Buckets
-      summary: Update an existing bucket
+      summary: buckets.update
       operationId: Bucket_update
-      description: Update the configurations of an existing bucket.
+      description: Rename a bucket
       parameters:
-        - description: The ID of the bucket to update.
+        - description: The bucketId of the bucket being updated.
           in: path
           name: bucketId
           required: true
@@ -566,10 +586,12 @@ paths:
     delete:
       tags:
         - Buckets
-      summary: Delete a bucket
+      summary: buckets.delete
+      description: delete a bucket.
       operationId: Bucket_delete
       parameters:
         - name: bucketId
+          description: The bucketId of the bucket being deleted.
           in: path
           required: true
           schema:
@@ -598,11 +620,11 @@ components:
             - query
           properties:
             query:
-              description: The search query
+              description: The search query to be used to find relevant documentation. <WIP>
               type: string
               example: 'my search query'
             nextToken:
-              description: Token to retrieve the next set of paginated results
+              description: A token for pagination. If the number of documents for a given query is larger than n, the response will include a "nextToken" value. That token can be included in this field to retrieve the next batch of n documents. 
               type: string
               example: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
     SearchResponse:
@@ -1003,6 +1025,9 @@ components:
             $ref: '#/components/schemas/DocumentResponse'
         nextToken:
           type: string
+          example: The method you used is not supported for this query
+      example:
+        message: The method you used is not supported for this query
     WebsiteCrawlRequest:
       type: object
       required:
