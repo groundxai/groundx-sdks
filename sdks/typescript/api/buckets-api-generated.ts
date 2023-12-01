@@ -42,8 +42,8 @@ import { requestBeforeHook } from '../requestBeforeHook';
 export const BucketsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * This endpoint allows you to create a new bucket.
-         * @summary Create a new bucket
+         * create a new bucket.
+         * @summary buckets.create
          * @param {BucketCreateRequest} bucketCreateRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -88,9 +88,9 @@ export const BucketsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 
-         * @summary Delete a bucket
-         * @param {number} bucketId 
+         * delete a bucket.
+         * @summary buckets.delete
+         * @param {number} bucketId The bucketId of the bucket being deleted.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -130,9 +130,9 @@ export const BucketsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Look up a bucket by its bucketId.
-         * @summary Look up an existing bucket by its ID
-         * @param {number} bucketId The ID of the bucket to retrieve.
+         * look up a specific bucket by its bucketId.
+         * @summary buckets.get
+         * @param {number} bucketId The bucketId of the bucket to look up.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -172,10 +172,10 @@ export const BucketsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Look up existing buckets associated with your account.
-         * @summary Look up existing buckets
-         * @param {number} [n] 
-         * @param {string} [nextToken] 
+         * List all buckets within your GroundX account
+         * @summary buckets.list
+         * @param {number} [n] The maximum number of returned documents. Accepts 1-100 with a default of 20.
+         * @param {string} [nextToken] A token for pagination. If the number of documents for a given query is larger than n, the response will include a \&quot;nextToken\&quot; value. That token can be included in this field to retrieve the next batch of n documents.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -220,9 +220,9 @@ export const BucketsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Update the configurations of an existing bucket.
-         * @summary Update an existing bucket
-         * @param {number} bucketId The ID of the bucket to update.
+         * Rename a bucket
+         * @summary buckets.update
+         * @param {number} bucketId The bucketId of the bucket being updated.
          * @param {BucketUpdateRequest} bucketUpdateRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -280,8 +280,8 @@ export const BucketsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = BucketsApiAxiosParamCreator(configuration)
     return {
         /**
-         * This endpoint allows you to create a new bucket.
-         * @summary Create a new bucket
+         * create a new bucket.
+         * @summary buckets.create
          * @param {BucketsApiCreateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -291,8 +291,8 @@ export const BucketsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
-         * @summary Delete a bucket
+         * delete a bucket.
+         * @summary buckets.delete
          * @param {BucketsApiDeleteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -302,8 +302,8 @@ export const BucketsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Look up a bucket by its bucketId.
-         * @summary Look up an existing bucket by its ID
+         * look up a specific bucket by its bucketId.
+         * @summary buckets.get
          * @param {BucketsApiGetRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -313,8 +313,8 @@ export const BucketsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Look up existing buckets associated with your account.
-         * @summary Look up existing buckets
+         * List all buckets within your GroundX account
+         * @summary buckets.list
          * @param {BucketsApiListRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -324,8 +324,8 @@ export const BucketsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Update the configurations of an existing bucket.
-         * @summary Update an existing bucket
+         * Rename a bucket
+         * @summary buckets.update
          * @param {BucketsApiUpdateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -345,8 +345,8 @@ export const BucketsApiFactory = function (configuration?: Configuration, basePa
     const localVarFp = BucketsApiFp(configuration)
     return {
         /**
-         * This endpoint allows you to create a new bucket.
-         * @summary Create a new bucket
+         * create a new bucket.
+         * @summary buckets.create
          * @param {BucketsApiCreateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -355,8 +355,8 @@ export const BucketsApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.create(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary Delete a bucket
+         * delete a bucket.
+         * @summary buckets.delete
          * @param {BucketsApiDeleteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -365,8 +365,8 @@ export const BucketsApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.delete(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Look up a bucket by its bucketId.
-         * @summary Look up an existing bucket by its ID
+         * look up a specific bucket by its bucketId.
+         * @summary buckets.get
          * @param {BucketsApiGetRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -375,8 +375,8 @@ export const BucketsApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.get(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Look up existing buckets associated with your account.
-         * @summary Look up existing buckets
+         * List all buckets within your GroundX account
+         * @summary buckets.list
          * @param {BucketsApiListRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -385,8 +385,8 @@ export const BucketsApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.list(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Update the configurations of an existing bucket.
-         * @summary Update an existing bucket
+         * Rename a bucket
+         * @summary buckets.update
          * @param {BucketsApiUpdateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -414,7 +414,7 @@ export type BucketsApiCreateRequest = {
 export type BucketsApiDeleteRequest = {
     
     /**
-    * 
+    * The bucketId of the bucket being deleted.
     * @type {number}
     * @memberof BucketsApiDelete
     */
@@ -430,7 +430,7 @@ export type BucketsApiDeleteRequest = {
 export type BucketsApiGetRequest = {
     
     /**
-    * The ID of the bucket to retrieve.
+    * The bucketId of the bucket to look up.
     * @type {number}
     * @memberof BucketsApiGet
     */
@@ -446,14 +446,14 @@ export type BucketsApiGetRequest = {
 export type BucketsApiListRequest = {
     
     /**
-    * 
+    * The maximum number of returned documents. Accepts 1-100 with a default of 20.
     * @type {number}
     * @memberof BucketsApiList
     */
     readonly n?: number
     
     /**
-    * 
+    * A token for pagination. If the number of documents for a given query is larger than n, the response will include a \"nextToken\" value. That token can be included in this field to retrieve the next batch of n documents.
     * @type {string}
     * @memberof BucketsApiList
     */
@@ -469,7 +469,7 @@ export type BucketsApiListRequest = {
 export type BucketsApiUpdateRequest = {
     
     /**
-    * The ID of the bucket to update.
+    * The bucketId of the bucket being updated.
     * @type {number}
     * @memberof BucketsApiUpdate
     */
@@ -485,8 +485,8 @@ export type BucketsApiUpdateRequest = {
  */
 export class BucketsApiGenerated extends BaseAPI {
     /**
-     * This endpoint allows you to create a new bucket.
-     * @summary Create a new bucket
+     * create a new bucket.
+     * @summary buckets.create
      * @param {BucketsApiCreateRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -497,8 +497,8 @@ export class BucketsApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
-     * @summary Delete a bucket
+     * delete a bucket.
+     * @summary buckets.delete
      * @param {BucketsApiDeleteRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -509,8 +509,8 @@ export class BucketsApiGenerated extends BaseAPI {
     }
 
     /**
-     * Look up a bucket by its bucketId.
-     * @summary Look up an existing bucket by its ID
+     * look up a specific bucket by its bucketId.
+     * @summary buckets.get
      * @param {BucketsApiGetRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -521,8 +521,8 @@ export class BucketsApiGenerated extends BaseAPI {
     }
 
     /**
-     * Look up existing buckets associated with your account.
-     * @summary Look up existing buckets
+     * List all buckets within your GroundX account
+     * @summary buckets.list
      * @param {BucketsApiListRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -533,8 +533,8 @@ export class BucketsApiGenerated extends BaseAPI {
     }
 
     /**
-     * Update the configurations of an existing bucket.
-     * @summary Update an existing bucket
+     * Rename a bucket
+     * @summary buckets.update
      * @param {BucketsApiUpdateRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

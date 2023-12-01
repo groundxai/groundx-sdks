@@ -50,8 +50,8 @@ import { requestBeforeHook } from '../requestBeforeHook';
 export const DocumentsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * 
-         * @summary Crawl and ingest a website into GroundX
+         * Upload the content of a publicly accessible website to a GroundX bucket. This is done by following links within a specified URL, recursively, up to a specified depth or number of pages.
+         * @summary documents.crawl_website
          * @param {WebsiteCrawlRequest} [websiteCrawlRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -94,9 +94,9 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * 
-         * @summary Delete one or more documents from GroundX
-         * @param {Array<string>} documentIds A comma delimited list of document IDs
+         * Delete multiple documents hosted on GroundX
+         * @summary documents.delete (multiple)
+         * @param {Array<string>} documentIds A list of documentIds which correspond to documents uploaded to GroundX
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -139,9 +139,9 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * 
-         * @summary Delete a document
-         * @param {string} documentId 
+         * Delete a single document hosted on GroundX
+         * @summary documents.delete (singular)
+         * @param {string} documentId A documentId which correspond to a document uploaded to GroundX
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -223,8 +223,8 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * 
-         * @summary Look up the processing status of documents for a given processId
+         * Get the current status of an upload, initiated with documents.upload_remote, documents.upload_local, or documents.crawl_website, by specifying the processId (which is included in the response of the upload functions).
+         * @summary documents.get_processing_status_by_id
          * @param {string} processId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -265,10 +265,10 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * 
-         * @summary Look up all existing documents
-         * @param {number} [n] 
-         * @param {string} [nextToken] 
+         * lookup all documents across all resources which are currently on GroundX
+         * @summary documents.list
+         * @param {number} [n] The maximum number of returned documents. Accepts 1-100 with a default of 20.
+         * @param {string} [nextToken] A token for pagination. If the number of documents for a given query is larger than n, the response will include a \&quot;nextToken\&quot; value. That token can be included in this field to retrieve the next batch of n documents.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -313,11 +313,11 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * 
-         * @summary Look up existing documents by processId, bucketId, or projectId
-         * @param {number} id 
-         * @param {number} [n] 
-         * @param {string} [nextToken] 
+         * lookup the document(s) associated with a processId, bucketId, or projectId.
+         * @summary documents.lookup
+         * @param {number} id a processId, bucketId, or projectId
+         * @param {number} [n] The maximum number of returned documents. Accepts 1-100 with a default of 20.
+         * @param {string} [nextToken] A token for pagination. If the number of documents for a given query is larger than n, the response will include a \&quot;nextToken\&quot; value. That token can be included in this field to retrieve the next batch of n documents.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -365,8 +365,8 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * 
-         * @summary Upload local documents to GroundX
+         * Upload documents hosted on a local file system to a GroundX bucket
+         * @summary documents.upload_local
          * @param {Array<DocumentLocalUploadRequestInner>} [documentLocalUploadRequestInner] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -450,8 +450,8 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * 
-         * @summary Upload hosted documents to GroundX
+         * Upload documents which are hosted on public URLs to a GroundX bucket
+         * @summary documents.upload_remote
          * @param {DocumentRemoteUploadRequest} [documentRemoteUploadRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -504,8 +504,8 @@ export const DocumentsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = DocumentsApiAxiosParamCreator(configuration)
     return {
         /**
-         * 
-         * @summary Crawl and ingest a website into GroundX
+         * Upload the content of a publicly accessible website to a GroundX bucket. This is done by following links within a specified URL, recursively, up to a specified depth or number of pages.
+         * @summary documents.crawl_website
          * @param {DocumentsApiCrawlWebsiteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -515,8 +515,8 @@ export const DocumentsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
-         * @summary Delete one or more documents from GroundX
+         * Delete multiple documents hosted on GroundX
+         * @summary documents.delete (multiple)
          * @param {DocumentsApiDeleteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -526,8 +526,8 @@ export const DocumentsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
-         * @summary Delete a document
+         * Delete a single document hosted on GroundX
+         * @summary documents.delete (singular)
          * @param {DocumentsApiDelete0Request} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -548,8 +548,8 @@ export const DocumentsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
-         * @summary Look up the processing status of documents for a given processId
+         * Get the current status of an upload, initiated with documents.upload_remote, documents.upload_local, or documents.crawl_website, by specifying the processId (which is included in the response of the upload functions).
+         * @summary documents.get_processing_status_by_id
          * @param {DocumentsApiGetProcessingStatusByIdRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -559,8 +559,8 @@ export const DocumentsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
-         * @summary Look up all existing documents
+         * lookup all documents across all resources which are currently on GroundX
+         * @summary documents.list
          * @param {DocumentsApiListRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -570,8 +570,8 @@ export const DocumentsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
-         * @summary Look up existing documents by processId, bucketId, or projectId
+         * lookup the document(s) associated with a processId, bucketId, or projectId.
+         * @summary documents.lookup
          * @param {DocumentsApiLookupRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -581,8 +581,8 @@ export const DocumentsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
-         * @summary Upload local documents to GroundX
+         * Upload documents hosted on a local file system to a GroundX bucket
+         * @summary documents.upload_local
          * @param {DocumentsApiUploadLocalRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -592,8 +592,8 @@ export const DocumentsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
-         * @summary Upload hosted documents to GroundX
+         * Upload documents which are hosted on public URLs to a GroundX bucket
+         * @summary documents.upload_remote
          * @param {DocumentsApiUploadRemoteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -613,8 +613,8 @@ export const DocumentsApiFactory = function (configuration?: Configuration, base
     const localVarFp = DocumentsApiFp(configuration)
     return {
         /**
-         * 
-         * @summary Crawl and ingest a website into GroundX
+         * Upload the content of a publicly accessible website to a GroundX bucket. This is done by following links within a specified URL, recursively, up to a specified depth or number of pages.
+         * @summary documents.crawl_website
          * @param {DocumentsApiCrawlWebsiteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -623,8 +623,8 @@ export const DocumentsApiFactory = function (configuration?: Configuration, base
             return localVarFp.crawlWebsite(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary Delete one or more documents from GroundX
+         * Delete multiple documents hosted on GroundX
+         * @summary documents.delete (multiple)
          * @param {DocumentsApiDeleteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -633,8 +633,8 @@ export const DocumentsApiFactory = function (configuration?: Configuration, base
             return localVarFp.delete(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary Delete a document
+         * Delete a single document hosted on GroundX
+         * @summary documents.delete (singular)
          * @param {DocumentsApiDelete0Request} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -653,8 +653,8 @@ export const DocumentsApiFactory = function (configuration?: Configuration, base
             return localVarFp.get(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary Look up the processing status of documents for a given processId
+         * Get the current status of an upload, initiated with documents.upload_remote, documents.upload_local, or documents.crawl_website, by specifying the processId (which is included in the response of the upload functions).
+         * @summary documents.get_processing_status_by_id
          * @param {DocumentsApiGetProcessingStatusByIdRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -663,8 +663,8 @@ export const DocumentsApiFactory = function (configuration?: Configuration, base
             return localVarFp.getProcessingStatusById(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary Look up all existing documents
+         * lookup all documents across all resources which are currently on GroundX
+         * @summary documents.list
          * @param {DocumentsApiListRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -673,8 +673,8 @@ export const DocumentsApiFactory = function (configuration?: Configuration, base
             return localVarFp.list(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary Look up existing documents by processId, bucketId, or projectId
+         * lookup the document(s) associated with a processId, bucketId, or projectId.
+         * @summary documents.lookup
          * @param {DocumentsApiLookupRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -683,8 +683,8 @@ export const DocumentsApiFactory = function (configuration?: Configuration, base
             return localVarFp.lookup(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary Upload local documents to GroundX
+         * Upload documents hosted on a local file system to a GroundX bucket
+         * @summary documents.upload_local
          * @param {DocumentsApiUploadLocalRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -693,8 +693,8 @@ export const DocumentsApiFactory = function (configuration?: Configuration, base
             return localVarFp.uploadLocal(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary Upload hosted documents to GroundX
+         * Upload documents which are hosted on public URLs to a GroundX bucket
+         * @summary documents.upload_remote
          * @param {DocumentsApiUploadRemoteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -722,7 +722,7 @@ export type DocumentsApiCrawlWebsiteRequest = {
 export type DocumentsApiDeleteRequest = {
     
     /**
-    * A comma delimited list of document IDs
+    * A list of documentIds which correspond to documents uploaded to GroundX
     * @type {Array<string>}
     * @memberof DocumentsApiDelete
     */
@@ -738,7 +738,7 @@ export type DocumentsApiDeleteRequest = {
 export type DocumentsApiDelete0Request = {
     
     /**
-    * 
+    * A documentId which correspond to a document uploaded to GroundX
     * @type {string}
     * @memberof DocumentsApiDelete0
     */
@@ -786,14 +786,14 @@ export type DocumentsApiGetProcessingStatusByIdRequest = {
 export type DocumentsApiListRequest = {
     
     /**
-    * 
+    * The maximum number of returned documents. Accepts 1-100 with a default of 20.
     * @type {number}
     * @memberof DocumentsApiList
     */
     readonly n?: number
     
     /**
-    * 
+    * A token for pagination. If the number of documents for a given query is larger than n, the response will include a \"nextToken\" value. That token can be included in this field to retrieve the next batch of n documents.
     * @type {string}
     * @memberof DocumentsApiList
     */
@@ -809,21 +809,21 @@ export type DocumentsApiListRequest = {
 export type DocumentsApiLookupRequest = {
     
     /**
-    * 
+    * a processId, bucketId, or projectId
     * @type {number}
     * @memberof DocumentsApiLookup
     */
     readonly id: number
     
     /**
-    * 
+    * The maximum number of returned documents. Accepts 1-100 with a default of 20.
     * @type {number}
     * @memberof DocumentsApiLookup
     */
     readonly n?: number
     
     /**
-    * 
+    * A token for pagination. If the number of documents for a given query is larger than n, the response will include a \"nextToken\" value. That token can be included in this field to retrieve the next batch of n documents.
     * @type {string}
     * @memberof DocumentsApiLookup
     */
@@ -855,8 +855,8 @@ export type DocumentsApiUploadRemoteRequest = {
  */
 export class DocumentsApiGenerated extends BaseAPI {
     /**
-     * 
-     * @summary Crawl and ingest a website into GroundX
+     * Upload the content of a publicly accessible website to a GroundX bucket. This is done by following links within a specified URL, recursively, up to a specified depth or number of pages.
+     * @summary documents.crawl_website
      * @param {DocumentsApiCrawlWebsiteRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -867,8 +867,8 @@ export class DocumentsApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
-     * @summary Delete one or more documents from GroundX
+     * Delete multiple documents hosted on GroundX
+     * @summary documents.delete (multiple)
      * @param {DocumentsApiDeleteRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -879,8 +879,8 @@ export class DocumentsApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
-     * @summary Delete a document
+     * Delete a single document hosted on GroundX
+     * @summary documents.delete (singular)
      * @param {DocumentsApiDelete0Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -903,8 +903,8 @@ export class DocumentsApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
-     * @summary Look up the processing status of documents for a given processId
+     * Get the current status of an upload, initiated with documents.upload_remote, documents.upload_local, or documents.crawl_website, by specifying the processId (which is included in the response of the upload functions).
+     * @summary documents.get_processing_status_by_id
      * @param {DocumentsApiGetProcessingStatusByIdRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -915,8 +915,8 @@ export class DocumentsApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
-     * @summary Look up all existing documents
+     * lookup all documents across all resources which are currently on GroundX
+     * @summary documents.list
      * @param {DocumentsApiListRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -927,8 +927,8 @@ export class DocumentsApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
-     * @summary Look up existing documents by processId, bucketId, or projectId
+     * lookup the document(s) associated with a processId, bucketId, or projectId.
+     * @summary documents.lookup
      * @param {DocumentsApiLookupRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -939,8 +939,8 @@ export class DocumentsApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
-     * @summary Upload local documents to GroundX
+     * Upload documents hosted on a local file system to a GroundX bucket
+     * @summary documents.upload_local
      * @param {DocumentsApiUploadLocalRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -951,8 +951,8 @@ export class DocumentsApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
-     * @summary Upload hosted documents to GroundX
+     * Upload documents which are hosted on public URLs to a GroundX bucket
+     * @summary documents.upload_remote
      * @param {DocumentsApiUploadRemoteRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

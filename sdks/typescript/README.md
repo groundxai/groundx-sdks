@@ -100,7 +100,7 @@ console.log(createResponse);
 
 ### `groundx.buckets.create`<a id="groundxbucketscreate"></a>
 
-This endpoint allows you to create a new bucket.
+create a new bucket.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -129,7 +129,7 @@ const createResponse = await groundx.buckets.create({
 
 ### `groundx.buckets.delete`<a id="groundxbucketsdelete"></a>
 
-Delete a bucket
+delete a bucket.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -142,6 +142,8 @@ const deleteResponse = await groundx.buckets.delete({
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### bucketId: `number`<a id="bucketid-number"></a>
+
+The bucketId of the bucket being deleted.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -158,7 +160,7 @@ const deleteResponse = await groundx.buckets.delete({
 
 ### `groundx.buckets.get`<a id="groundxbucketsget"></a>
 
-Look up a bucket by its bucketId.
+look up a specific bucket by its bucketId.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -172,7 +174,7 @@ const getResponse = await groundx.buckets.get({
 
 ##### bucketId: `number`<a id="bucketid-number"></a>
 
-The ID of the bucket to retrieve.
+The bucketId of the bucket to look up.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -189,7 +191,7 @@ The ID of the bucket to retrieve.
 
 ### `groundx.buckets.list`<a id="groundxbucketslist"></a>
 
-Look up existing buckets associated with your account.
+List all buckets within your GroundX account
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -201,7 +203,11 @@ const listResponse = await groundx.buckets.list({});
 
 ##### n: `number`<a id="n-number"></a>
 
+The maximum number of returned documents. Accepts 1-100 with a default of 20.
+
 ##### nextToken: `string`<a id="nexttoken-string"></a>
+
+A token for pagination. If the number of documents for a given query is larger than n, the response will include a \"nextToken\" value. That token can be included in this field to retrieve the next batch of n documents.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -218,7 +224,7 @@ const listResponse = await groundx.buckets.list({});
 
 ### `groundx.buckets.update`<a id="groundxbucketsupdate"></a>
 
-Update the configurations of an existing bucket.
+Rename a bucket
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -235,7 +241,7 @@ const updateResponse = await groundx.buckets.update({
 
 ##### bucketId: `number`<a id="bucketid-number"></a>
 
-The ID of the bucket to update.
+The bucketId of the bucket being updated.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -252,7 +258,7 @@ The ID of the bucket to update.
 
 ### `groundx.documents.crawlWebsite`<a id="groundxdocumentscrawlwebsite"></a>
 
-Crawl and ingest a website into GroundX
+Upload the content of a publicly accessible website to a GroundX bucket. This is done by following links within a specified URL, recursively, up to a specified depth or number of pages.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -288,7 +294,7 @@ const crawlWebsiteResponse = await groundx.documents.crawlWebsite({
 
 ### `groundx.documents.delete`<a id="groundxdocumentsdelete"></a>
 
-Delete one or more documents from GroundX
+Delete multiple documents hosted on GroundX
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -302,7 +308,7 @@ const deleteResponse = await groundx.documents.delete({
 
 ##### documentIds: `string`[]<a id="documentids-string"></a>
 
-A comma delimited list of document IDs
+A list of documentIds which correspond to documents uploaded to GroundX
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -319,7 +325,7 @@ A comma delimited list of document IDs
 
 ### `groundx.documents.delete_0`<a id="groundxdocumentsdelete_0"></a>
 
-Delete a document
+Delete a single document hosted on GroundX
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -332,6 +338,8 @@ const delete_0Response = await groundx.documents.delete_0({
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### documentId: `string`<a id="documentid-string"></a>
+
+A documentId which correspond to a document uploaded to GroundX
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -377,7 +385,7 @@ const getResponse = await groundx.documents.get({
 
 ### `groundx.documents.getProcessingStatusById`<a id="groundxdocumentsgetprocessingstatusbyid"></a>
 
-Look up the processing status of documents for a given processId
+Get the current status of an upload, initiated with documents.upload_remote, documents.upload_local, or documents.crawl_website, by specifying the processId (which is included in the response of the upload functions).
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -407,7 +415,7 @@ const getProcessingStatusByIdResponse =
 
 ### `groundx.documents.list`<a id="groundxdocumentslist"></a>
 
-Look up all existing documents
+lookup all documents across all resources which are currently on GroundX
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -419,7 +427,11 @@ const listResponse = await groundx.documents.list({});
 
 ##### n: `number`<a id="n-number"></a>
 
+The maximum number of returned documents. Accepts 1-100 with a default of 20.
+
 ##### nextToken: `string`<a id="nexttoken-string"></a>
+
+A token for pagination. If the number of documents for a given query is larger than n, the response will include a \"nextToken\" value. That token can be included in this field to retrieve the next batch of n documents.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -436,7 +448,7 @@ const listResponse = await groundx.documents.list({});
 
 ### `groundx.documents.lookup`<a id="groundxdocumentslookup"></a>
 
-Look up existing documents by processId, bucketId, or projectId
+lookup the document(s) associated with a processId, bucketId, or projectId.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -450,9 +462,15 @@ const lookupResponse = await groundx.documents.lookup({
 
 ##### id: `number`<a id="id-number"></a>
 
+a processId, bucketId, or projectId
+
 ##### n: `number`<a id="n-number"></a>
 
+The maximum number of returned documents. Accepts 1-100 with a default of 20.
+
 ##### nextToken: `string`<a id="nexttoken-string"></a>
+
+A token for pagination. If the number of documents for a given query is larger than n, the response will include a \"nextToken\" value. That token can be included in this field to retrieve the next batch of n documents.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -469,7 +487,7 @@ const lookupResponse = await groundx.documents.lookup({
 
 ### `groundx.documents.uploadLocal`<a id="groundxdocumentsuploadlocal"></a>
 
-Upload local documents to GroundX
+Upload documents hosted on a local file system to a GroundX bucket
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -505,7 +523,7 @@ const uploadLocalResponse = await groundx.documents.uploadLocal([
 
 ### `groundx.documents.uploadRemote`<a id="groundxdocumentsuploadremote"></a>
 
-Upload hosted documents to GroundX
+Upload documents which are hosted on public URLs to a GroundX bucket
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -541,7 +559,7 @@ const uploadRemoteResponse = await groundx.documents.uploadRemote({
 
 ### `groundx.projects.addBucket`<a id="groundxprojectsaddbucket"></a>
 
-This endpoint allows you to add a bucket to a project.
+Add an existing bucket to an existing project. Buckets and projects can be associated many to many.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -556,11 +574,11 @@ const addBucketResponse = await groundx.projects.addBucket({
 
 ##### projectId: `number`<a id="projectid-number"></a>
 
-The ID of the project to update.
+The projectId of the project which the bucket will be added to.
 
 ##### bucketId: `number`<a id="bucketid-number"></a>
 
-The ID of the bucket to update.
+The bucketId of the bucket being added to the project.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -577,7 +595,7 @@ The ID of the bucket to update.
 
 ### `groundx.projects.create`<a id="groundxprojectscreate"></a>
 
-This endpoint allows you to create a new project.
+create a new project.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -611,7 +629,7 @@ Include a bucket name to automatically create a bucket and add it to this projec
 
 ### `groundx.projects.delete`<a id="groundxprojectsdelete"></a>
 
-Delete a project
+delete a project.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -624,6 +642,8 @@ const deleteResponse = await groundx.projects.delete({
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### projectId: `number`<a id="projectid-number"></a>
+
+The projectId of the project to be deleted.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -640,7 +660,7 @@ const deleteResponse = await groundx.projects.delete({
 
 ### `groundx.projects.get`<a id="groundxprojectsget"></a>
 
-This endpoint allows you to retrieve a specific project by projectId.
+look up a specific project by its projectId.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -654,7 +674,7 @@ const getResponse = await groundx.projects.get({
 
 ##### projectId: `number`<a id="projectid-number"></a>
 
-The ID of the project to retrieve.
+The projectId of the project to look up.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -671,7 +691,7 @@ The ID of the project to retrieve.
 
 ### `groundx.projects.list`<a id="groundxprojectslist"></a>
 
-This endpoint allows you to retrieve your existing projects.
+list all projects within your GroundX account.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -683,7 +703,11 @@ const listResponse = await groundx.projects.list({});
 
 ##### n: `number`<a id="n-number"></a>
 
+The maximum number of returned documents. Accepts 1-100 with a default of 20.
+
 ##### nextToken: `string`<a id="nexttoken-string"></a>
+
+A token for pagination. If the number of documents for a given query is larger than n, the response will include a \"nextToken\" value. That token can be included in this field to retrieve the next batch of n documents.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -700,7 +724,7 @@ const listResponse = await groundx.projects.list({});
 
 ### `groundx.projects.removeBucket`<a id="groundxprojectsremovebucket"></a>
 
-This endpoint allows you to remove a bucket from a project.
+remove a bucket from a project. Buckets and projects can be associated many to many, this removes one bucket to project association without disturbing others.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -715,11 +739,11 @@ const removeBucketResponse = await groundx.projects.removeBucket({
 
 ##### projectId: `number`<a id="projectid-number"></a>
 
-The ID of the project to update.
+The projectId of the project which the bucket will be removed from.
 
 ##### bucketId: `number`<a id="bucketid-number"></a>
 
-The ID of the bucket to update.
+The bucketId of the bucket which will be removed from the project.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -736,7 +760,7 @@ The ID of the bucket to update.
 
 ### `groundx.projects.update`<a id="groundxprojectsupdate"></a>
 
-This endpoint allows you to update an existing project.
+Rename a project
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -753,7 +777,7 @@ const updateResponse = await groundx.projects.update({
 
 ##### projectId: `number`<a id="projectid-number"></a>
 
-The ID of the project to update.
+The projectId of the project to update.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -770,7 +794,7 @@ The ID of the project to update.
 
 ### `groundx.search.content`<a id="groundxsearchcontent"></a>
 
-Search and retrieve relevant content from a project or bucket by id.
+Search documents on GroundX for the most relevant information to a given query. The result of this query is typically used in one of two ways; result[\'search\'][\'text\'] can be used to provide context to a language model, facilitating RAG, or result[\'search\'][\'results\'] can be used to observe chunks of text which are relevant to the query, facilitating citation.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -791,11 +815,11 @@ const contentResponse = await groundx.search.content({
 
 ##### id: `number`<a id="id-number"></a>
 
-The ID of the project or bucket to search within.
+The bucketId or projectId of the bucket or project being searched. The documents within the specified container will be compared to the query, and relevant information will be extracted.
 
 ##### n: `number`<a id="n-number"></a>
 
-Number of results
+The maximum number of returned documents. Accepts 1-100 with a default of 20. <TODO clarify>
 
 #### 🔄 Return<a id="🔄-return"></a>
 

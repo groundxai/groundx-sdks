@@ -190,7 +190,7 @@ class BaseApi(api_client.Api):
         AsyncGeneratorResponse,
     ]:
         """
-        Look up existing documents by processId, bucketId, or projectId
+        documents.lookup
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
@@ -317,7 +317,7 @@ class BaseApi(api_client.Api):
         api_client.ApiResponseWithoutDeserialization,
     ]:
         """
-        Look up existing documents by processId, bucketId, or projectId
+        documents.lookup
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances

@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestV1IngestDocumentsWebsite(ApiTestMixin, unittest.TestCase):
     """
     V1IngestDocumentsWebsite unit test stubs
-        Crawl and ingest a website into GroundX
+        documents.crawl_website
     """
 
     def setUp(self):

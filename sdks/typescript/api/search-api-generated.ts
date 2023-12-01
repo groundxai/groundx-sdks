@@ -36,10 +36,10 @@ import { requestBeforeHook } from '../requestBeforeHook';
 export const SearchApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Search and retrieve relevant content from a project or bucket by id.
-         * @summary Perform a search query of your content
-         * @param {number} id The ID of the project or bucket to search within.
-         * @param {number} [n] Number of results
+         * Search documents on GroundX for the most relevant information to a given query. The result of this query is typically used in one of two ways; result[\'search\'][\'text\'] can be used to provide context to a language model, facilitating RAG, or result[\'search\'][\'results\'] can be used to observe chunks of text which are relevant to the query, facilitating citation.
+         * @summary search.content
+         * @param {number} id The bucketId or projectId of the bucket or project being searched. The documents within the specified container will be compared to the query, and relevant information will be extracted.
+         * @param {number} [n] The maximum number of returned documents. Accepts 1-100 with a default of 20. &lt;TODO clarify&gt;
          * @param {SearchRequest} [searchRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -99,8 +99,8 @@ export const SearchApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = SearchApiAxiosParamCreator(configuration)
     return {
         /**
-         * Search and retrieve relevant content from a project or bucket by id.
-         * @summary Perform a search query of your content
+         * Search documents on GroundX for the most relevant information to a given query. The result of this query is typically used in one of two ways; result[\'search\'][\'text\'] can be used to provide context to a language model, facilitating RAG, or result[\'search\'][\'results\'] can be used to observe chunks of text which are relevant to the query, facilitating citation.
+         * @summary search.content
          * @param {SearchApiContentRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -120,8 +120,8 @@ export const SearchApiFactory = function (configuration?: Configuration, basePat
     const localVarFp = SearchApiFp(configuration)
     return {
         /**
-         * Search and retrieve relevant content from a project or bucket by id.
-         * @summary Perform a search query of your content
+         * Search documents on GroundX for the most relevant information to a given query. The result of this query is typically used in one of two ways; result[\'search\'][\'text\'] can be used to provide context to a language model, facilitating RAG, or result[\'search\'][\'results\'] can be used to observe chunks of text which are relevant to the query, facilitating citation.
+         * @summary search.content
          * @param {SearchApiContentRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -140,14 +140,14 @@ export const SearchApiFactory = function (configuration?: Configuration, basePat
 export type SearchApiContentRequest = {
     
     /**
-    * The ID of the project or bucket to search within.
+    * The bucketId or projectId of the bucket or project being searched. The documents within the specified container will be compared to the query, and relevant information will be extracted.
     * @type {number}
     * @memberof SearchApiContent
     */
     readonly id: number
     
     /**
-    * Number of results
+    * The maximum number of returned documents. Accepts 1-100 with a default of 20. <TODO clarify>
     * @type {number}
     * @memberof SearchApiContent
     */
@@ -163,8 +163,8 @@ export type SearchApiContentRequest = {
  */
 export class SearchApiGenerated extends BaseAPI {
     /**
-     * Search and retrieve relevant content from a project or bucket by id.
-     * @summary Perform a search query of your content
+     * Search documents on GroundX for the most relevant information to a given query. The result of this query is typically used in one of two ways; result[\'search\'][\'text\'] can be used to provide context to a language model, facilitating RAG, or result[\'search\'][\'results\'] can be used to observe chunks of text which are relevant to the query, facilitating citation.
+     * @summary search.content
      * @param {SearchApiContentRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

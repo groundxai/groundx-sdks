@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestV1ProjectProjectIdBucketBucketId(ApiTestMixin, unittest.TestCase):
     """
     V1ProjectProjectIdBucketBucketId unit test stubs
-        Remove a bucket from a project
+        projects.removeBucket
     """
 
     def setUp(self):

@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestV1IngestDocumentsId(ApiTestMixin, unittest.TestCase):
     """
     V1IngestDocumentsId unit test stubs
-        Look up existing documents by processId, bucketId, or projectId
+        documents.lookup
     """
 
     def setUp(self):
