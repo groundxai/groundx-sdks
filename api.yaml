@@ -718,6 +718,7 @@ components:
       properties:
         query:
           description: The search query to be used to find relevant documentation.
+          default: my search query
           type: string
           example: 'my search query'
     SearchResponse:
