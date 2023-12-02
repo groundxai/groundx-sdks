@@ -404,6 +404,8 @@ get_response = groundx.documents.get(
 
 ##### document_id: `str`<a id="document_id-str"></a>
 
+The documentId of the document for which GroundX information will be provided.
+
 #### 🔄 Return<a id="🔄-return"></a>
 
 [`DocumentResponse`](./groundx/type/document_response.py)
@@ -844,19 +846,18 @@ Search documents on GroundX for the most relevant information to a given query. 
 
 ```python
 content_response = groundx.search.content(
-    search={
-        "query": "my search query",
-        "next_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9",
-    },
+    query="my search query",
     id=1,
     n=20,
+    next_token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9",
 )
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### search: [`SearchRequestSearch`](./groundx/type/search_request_search.py)<a id="search-searchrequestsearchgroundxtypesearch_request_searchpy"></a>
+##### query: `str`<a id="query-str"></a>
 
+The search query to be used to find relevant documentation.
 
 ##### id: `int`<a id="id-int"></a>
 
@@ -864,7 +865,11 @@ The bucketId or projectId of the bucket or project being searched. The documents
 
 ##### n: `int`<a id="n-int"></a>
 
-The maximum number of returned documents. Accepts 1-100 with a default of 20. <TODO clarify>
+The maximum number of returned documents. Accepts 1-100 with a default of 20.
+
+##### next_token: `str`<a id="next_token-str"></a>
+
+A token for pagination. If the number of search results for a given query is larger than n, the response will include a \"nextToken\" value. That token can be included in this field to retrieve the next batch of n search results.
 
 #### ⚙️ Request Body<a id="⚙️-request-body"></a>
 

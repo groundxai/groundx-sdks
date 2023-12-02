@@ -41,7 +41,7 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
     return {
         /**
          * Add an existing bucket to an existing project. Buckets and projects can be associated many to many.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
-         * @summary project.addBucket
+         * @summary addBucket
          * @param {number} projectId The projectId of the project which the bucket will be added to.
          * @param {number} bucketId The bucketId of the bucket being added to the project.
          * @param {*} [options] Override http request option.
@@ -371,7 +371,7 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
     return {
         /**
          * Add an existing bucket to an existing project. Buckets and projects can be associated many to many.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
-         * @summary project.addBucket
+         * @summary addBucket
          * @param {ProjectsApiAddBucketRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -458,7 +458,7 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
     return {
         /**
          * Add an existing bucket to an existing project. Buckets and projects can be associated many to many.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
-         * @summary project.addBucket
+         * @summary addBucket
          * @param {ProjectsApiAddBucketRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -664,7 +664,7 @@ export type ProjectsApiUpdateRequest = {
 export class ProjectsApiGenerated extends BaseAPI {
     /**
      * Add an existing bucket to an existing project. Buckets and projects can be associated many to many.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
-     * @summary project.addBucket
+     * @summary addBucket
      * @param {ProjectsApiAddBucketRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

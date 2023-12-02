@@ -372,6 +372,8 @@ const getResponse = await groundx.documents.get({
 
 ##### documentId: `string`<a id="documentid-string"></a>
 
+The documentId of the document for which GroundX information will be provided.
+
 #### 🔄 Return<a id="🔄-return"></a>
 
 [DocumentResponse](./models/document-response.ts)
@@ -810,16 +812,16 @@ Search documents on GroundX for the most relevant information to a given query. 
 const contentResponse = await groundx.search.content({
   id: 1,
   n: 20,
-  search: {
-    query: "my search query",
-    nextToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9",
-  },
+  nextToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9",
+  query: "my search query",
 });
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### search: [`SearchRequestSearch`](./models/search-request-search.ts)<a id="search-searchrequestsearchmodelssearch-request-searchts"></a>
+##### query: `string`<a id="query-string"></a>
+
+The search query to be used to find relevant documentation.
 
 ##### id: `number`<a id="id-number"></a>
 
@@ -827,7 +829,11 @@ The bucketId or projectId of the bucket or project being searched. The documents
 
 ##### n: `number`<a id="n-number"></a>
 
-The maximum number of returned documents. Accepts 1-100 with a default of 20. <TODO clarify>
+The maximum number of returned documents. Accepts 1-100 with a default of 20.
+
+##### nextToken: `string`<a id="nexttoken-string"></a>
+
+A token for pagination. If the number of search results for a given query is larger than n, the response will include a \"nextToken\" value. That token can be included in this field to retrieve the next batch of n search results.
 
 #### 🔄 Return<a id="🔄-return"></a>
 

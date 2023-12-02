@@ -15,10 +15,10 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
-from groundx.type.search_request_search import SearchRequestSearch
 
 class RequiredSearchRequest(TypedDict):
-    search: SearchRequestSearch
+    # The search query to be used to find relevant documentation.
+    query: str
 
 class OptionalSearchRequest(TypedDict, total=False):
     pass

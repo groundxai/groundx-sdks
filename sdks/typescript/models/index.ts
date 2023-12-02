@@ -28,7 +28,6 @@ export * from './project-list-response';
 export * from './project-response';
 export * from './project-update-request';
 export * from './search-request';
-export * from './search-request-search';
 export * from './search-response';
 export * from './search-response-search';
 export * from './search-result-item';

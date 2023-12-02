@@ -34,54 +34,49 @@ class SearchRequest(
 
     class MetaOapg:
         required = {
-            "search",
+            "query",
         }
         
         class properties:
-        
-            @staticmethod
-            def search() -> typing.Type['SearchRequestSearch']:
-                return SearchRequestSearch
+            query = schemas.StrSchema
             __annotations__ = {
-                "search": search,
+                "query": query,
             }
     
-    search: 'SearchRequestSearch'
+    query: MetaOapg.properties.query
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["search"]) -> 'SearchRequestSearch': ...
+    def __getitem__(self, name: typing_extensions.Literal["query"]) -> MetaOapg.properties.query: ...
     
     @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["search", ], str]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["query", ], str]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["search"]) -> 'SearchRequestSearch': ...
+    def get_item_oapg(self, name: typing_extensions.Literal["query"]) -> MetaOapg.properties.query: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["search", ], str]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["query", ], str]):
         return super().get_item_oapg(name)
     
 
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        search: 'SearchRequestSearch',
+        query: typing.Union[MetaOapg.properties.query, str, ],
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
     ) -> 'SearchRequest':
         return super().__new__(
             cls,
             *args,
-            search=search,
+            query=query,
             _configuration=_configuration,
             **kwargs,
         )
-
-from groundx.model.search_request_search import SearchRequestSearch

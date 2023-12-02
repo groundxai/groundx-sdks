@@ -18,7 +18,7 @@ from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 from groundx.type.document_type import DocumentType
 
 class RequiredDocumentLocalUploadRequestItemMetadata(TypedDict):
-    # the bucketId of the bucket which remote file will be uploaded to.
+    # the bucketId of the bucket which this local file will be uploaded to.
     bucketId: int
 
     # The name of the file being uploaded

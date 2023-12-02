@@ -276,6 +276,7 @@ paths:
       operationId: Document_get
       parameters:
         - name: documentId
+          description: The documentId of the document for which GroundX information will be provided.
           in: path
           required: true
           schema:
@@ -313,7 +314,7 @@ paths:
           required: true
           schema:
             type: integer
-        - description: The maximum number of returned documents. Accepts 1-100 with a default of 20. <TODO clarify>
+        - description: The maximum number of returned documents. Accepts 1-100 with a default of 20.
           in: query
           name: 'n'
           required: false
@@ -322,6 +323,13 @@ paths:
             default: 20
             minimum: 1
             maximum: 100
+        - name: nextToken
+          description: A token for pagination. If the number of search results for a given query is larger than n, the response will include a "nextToken" value. That token can be included in this field to retrieve the next batch of n search results. 
+          in: query
+          required: false
+          schema:
+            type: string
+            example: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
       requestBody:
         content:
           application/json:
@@ -489,7 +497,7 @@ paths:
     post:
       tags:
         - Projects
-      summary: project.addBucket
+      summary: addBucket
       operationId: Project_addBucket
       description: >
         Add an existing bucket to an existing project. Buckets and projects can be associated many to many.
@@ -706,21 +714,12 @@ components:
     SearchRequest:
       type: object
       required:
-        - search
+        - query
       properties:
-        search:
-          type: object
-          required:
-            - query
-          properties:
-            query:
-              description: The search query to be used to find relevant documentation. <WIP>
-              type: string
-              example: 'my search query'
-            nextToken:
-              description: A token for pagination. If the number of documents for a given query is larger than n, the response will include a "nextToken" value. That token can be included in this field to retrieve the next batch of n documents. 
-              type: string
-              example: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
+        query:
+          description: The search query to be used to find relevant documentation.
+          type: string
+          example: 'my search query'
     SearchResponse:
       type: object
       required:
@@ -952,7 +951,7 @@ components:
               - sourceUrl
             properties:
               bucketId:
-                description: the bucketId of the bucket which remote file will be uploaded to.
+                description: the bucketId of the bucket which this remote file will be uploaded to.
                 type: integer
                 example: 1234
               fileName:
@@ -1002,7 +1001,7 @@ components:
               - fileType
             properties:
               bucketId:
-                description: the bucketId of the bucket which remote file will be uploaded to.
+                description: the bucketId of the bucket which this local file will be uploaded to.
                 type: integer
                 example: 1234
               fileName:
@@ -1146,7 +1145,7 @@ components:
               - sourceUrl
             properties:
               bucketId:
-                description: the bucketId of the bucket which remote file will be uploaded to.
+                description: the bucketId of the bucket which this website will be uploaded to.
                 type: integer
                 example: 123
               cap:

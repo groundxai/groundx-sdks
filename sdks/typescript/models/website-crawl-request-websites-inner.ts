@@ -18,7 +18,7 @@ import type * as buffer from "buffer"
  */
 export interface WebsiteCrawlRequestWebsitesInner {
     /**
-     * the bucketId of the bucket which remote file will be uploaded to.
+     * the bucketId of the bucket which this website will be uploaded to.
      * @type {number}
      * @memberof WebsiteCrawlRequestWebsitesInner
      */

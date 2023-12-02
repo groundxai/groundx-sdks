@@ -33,12 +33,10 @@ import frozendict  # noqa: F401
 from groundx import schemas  # noqa: F401
 
 from groundx.model.search_request import SearchRequest as SearchRequestSchema
-from groundx.model.search_request_search import SearchRequestSearch as SearchRequestSearchSchema
 from groundx.model.search_response import SearchResponse as SearchResponseSchema
 
 from groundx.type.search_response import SearchResponse
 from groundx.type.search_request import SearchRequest
-from groundx.type.search_request_search import SearchRequestSearch
 
 from . import path
 
@@ -53,6 +51,7 @@ class NSchema(
     class MetaOapg:
         inclusive_maximum = 100
         inclusive_minimum = 1
+NextTokenSchema = schemas.StrSchema
 RequestRequiredQueryParams = typing_extensions.TypedDict(
     'RequestRequiredQueryParams',
     {
@@ -62,6 +61,7 @@ RequestOptionalQueryParams = typing_extensions.TypedDict(
     'RequestOptionalQueryParams',
     {
         'n': typing.Union[NSchema, decimal.Decimal, int, ],
+        'nextToken': typing.Union[NextTokenSchema, str, ],
     },
     total=False
 )
@@ -75,6 +75,12 @@ request_query_n = api_client.QueryParameter(
     name="n",
     style=api_client.ParameterStyle.FORM,
     schema=NSchema,
+    explode=True,
+)
+request_query_next_token = api_client.QueryParameter(
+    name="nextToken",
+    style=api_client.ParameterStyle.FORM,
+    schema=NextTokenSchema,
     explode=True,
 )
 # Path params
@@ -183,19 +189,22 @@ class BaseApi(api_client.Api):
 
     def _content_mapped_args(
         self,
-        search: SearchRequestSearch,
+        query: str,
         id: int,
         n: typing.Optional[int] = None,
+        next_token: typing.Optional[str] = None,
     ) -> api_client.MappedArgs:
         args: api_client.MappedArgs = api_client.MappedArgs()
         _query_params = {}
         _path_params = {}
         _body = {}
-        if search is not None:
-            _body["search"] = search
+        if query is not None:
+            _body["query"] = query
         args.body = _body
         if n is not None:
             _query_params["n"] = n
+        if next_token is not None:
+            _query_params["nextToken"] = next_token
         if id is not None:
             _path_params["id"] = id
         args.query = _query_params
@@ -244,6 +253,7 @@ class BaseApi(api_client.Api):
         prefix_separator_iterator = None
         for parameter in (
             request_query_n,
+            request_query_next_token,
         ):
             parameter_data = query_params.get(parameter.name, schemas.unset)
             if parameter_data is schemas.unset:
@@ -386,6 +396,7 @@ class BaseApi(api_client.Api):
         prefix_separator_iterator = None
         for parameter in (
             request_query_n,
+            request_query_next_token,
         ):
             parameter_data = query_params.get(parameter.name, schemas.unset)
             if parameter_data is schemas.unset:
@@ -462,9 +473,10 @@ class Content(BaseApi):
 
     async def acontent(
         self,
-        search: SearchRequestSearch,
+        query: str,
         id: int,
         n: typing.Optional[int] = None,
+        next_token: typing.Optional[str] = None,
         **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
@@ -472,9 +484,10 @@ class Content(BaseApi):
         AsyncGeneratorResponse,
     ]:
         args = self._content_mapped_args(
-            search=search,
+            query=query,
             id=id,
             n=n,
+            next_token=next_token,
         )
         return await self._acontent_oapg(
             body=args.body,
@@ -485,17 +498,19 @@ class Content(BaseApi):
     
     def content(
         self,
-        search: SearchRequestSearch,
+        query: str,
         id: int,
         n: typing.Optional[int] = None,
+        next_token: typing.Optional[str] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
         args = self._content_mapped_args(
-            search=search,
+            query=query,
             id=id,
             n=n,
+            next_token=next_token,
         )
         return self._content_oapg(
             body=args.body,
@@ -508,9 +523,10 @@ class ApiForpost(BaseApi):
 
     async def apost(
         self,
-        search: SearchRequestSearch,
+        query: str,
         id: int,
         n: typing.Optional[int] = None,
+        next_token: typing.Optional[str] = None,
         **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
@@ -518,9 +534,10 @@ class ApiForpost(BaseApi):
         AsyncGeneratorResponse,
     ]:
         args = self._content_mapped_args(
-            search=search,
+            query=query,
             id=id,
             n=n,
+            next_token=next_token,
         )
         return await self._acontent_oapg(
             body=args.body,
@@ -531,17 +548,19 @@ class ApiForpost(BaseApi):
     
     def post(
         self,
-        search: SearchRequestSearch,
+        query: str,
         id: int,
         n: typing.Optional[int] = None,
+        next_token: typing.Optional[str] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
         args = self._content_mapped_args(
-            search=search,
+            query=query,
             id=id,
             n=n,
+            next_token=next_token,
         )
         return self._content_oapg(
             body=args.body,

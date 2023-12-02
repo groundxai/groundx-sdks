@@ -19,7 +19,7 @@ import { DocumentType } from './document-type';
  */
 export interface DocumentLocalUploadRequestInnerMetadata {
     /**
-     * the bucketId of the bucket which remote file will be uploaded to.
+     * the bucketId of the bucket which this local file will be uploaded to.
      * @type {number}
      * @memberof DocumentLocalUploadRequestInnerMetadata
      */
