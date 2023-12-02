@@ -23,8 +23,6 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 // @ts-ignore
 import { SearchRequest } from '../models';
 // @ts-ignore
-import { SearchRequestSearch } from '../models';
-// @ts-ignore
 import { SearchResponse } from '../models';
 import { paginate } from "../pagination/paginate";
 import type * as buffer from "buffer"
@@ -39,12 +37,13 @@ export const SearchApiAxiosParamCreator = function (configuration?: Configuratio
          * Search documents on GroundX for the most relevant information to a given query.  The result of this query is typically used in one of two ways; result[\'search\'][\'text\'] can be used to provide context to a language model, facilitating RAG, or result[\'search\'][\'results\'] can be used to observe chunks of text which are relevant to the query, facilitating citation.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
          * @summary search.content
          * @param {number} id The bucketId or projectId of the bucket or project being searched. The documents within the specified container will be compared to the query, and relevant information will be extracted.
-         * @param {number} [n] The maximum number of returned documents. Accepts 1-100 with a default of 20. &lt;TODO clarify&gt;
+         * @param {number} [n] The maximum number of returned documents. Accepts 1-100 with a default of 20.
+         * @param {string} [nextToken] A token for pagination. If the number of search results for a given query is larger than n, the response will include a \&quot;nextToken\&quot; value. That token can be included in this field to retrieve the next batch of n search results.
          * @param {SearchRequest} [searchRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        content: async (id: number, n?: number, searchRequest?: SearchRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        content: async (id: number, n?: number, nextToken?: string, searchRequest?: SearchRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('content', 'id', id)
             const localVarPath = `/v1/search/{id}`
@@ -64,6 +63,10 @@ export const SearchApiAxiosParamCreator = function (configuration?: Configuratio
             await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "X-API-Key", configuration })
             if (n !== undefined) {
                 localVarQueryParameter['n'] = n;
+            }
+
+            if (nextToken !== undefined) {
+                localVarQueryParameter['nextToken'] = nextToken;
             }
 
 
@@ -106,7 +109,7 @@ export const SearchApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async content(requestParameters: SearchApiContentRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SearchResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.content(requestParameters.id, requestParameters.n, requestParameters, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.content(requestParameters.id, requestParameters.n, requestParameters.nextToken, requestParameters, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -147,11 +150,18 @@ export type SearchApiContentRequest = {
     readonly id: number
     
     /**
-    * The maximum number of returned documents. Accepts 1-100 with a default of 20. <TODO clarify>
+    * The maximum number of returned documents. Accepts 1-100 with a default of 20.
     * @type {number}
     * @memberof SearchApiContent
     */
     readonly n?: number
+    
+    /**
+    * A token for pagination. If the number of search results for a given query is larger than n, the response will include a \"nextToken\" value. That token can be included in this field to retrieve the next batch of n search results.
+    * @type {string}
+    * @memberof SearchApiContent
+    */
+    readonly nextToken?: string
     
 } & SearchRequest
 

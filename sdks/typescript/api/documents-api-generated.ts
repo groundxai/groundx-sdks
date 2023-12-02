@@ -183,7 +183,7 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
         /**
          * Look up an existing document by documentId.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
          * @summary get
-         * @param {string} documentId 
+         * @param {string} documentId The documentId of the document for which GroundX information will be provided.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -754,7 +754,7 @@ export type DocumentsApiDelete0Request = {
 export type DocumentsApiGetRequest = {
     
     /**
-    * 
+    * The documentId of the document for which GroundX information will be provided.
     * @type {string}
     * @memberof DocumentsApiGet
     */
