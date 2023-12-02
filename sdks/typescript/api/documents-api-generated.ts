@@ -50,8 +50,8 @@ import { requestBeforeHook } from '../requestBeforeHook';
 export const DocumentsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Upload the content of a publicly accessible website to a GroundX bucket. This is done by following links within a specified URL, recursively, up to a specified depth or number of pages.
-         * @summary documents.crawl_website
+         * Upload the content of a publicly accessible website to a GroundX bucket. This is done by following links within a specified URL, recursively, up to a specified depth or number of pages.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary crawl_website
          * @param {WebsiteCrawlRequest} [websiteCrawlRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -94,8 +94,8 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * Delete multiple documents hosted on GroundX
-         * @summary documents.delete (multiple)
+         * Delete multiple documents hosted on GroundX  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary delete (multiple)
          * @param {Array<string>} documentIds A list of documentIds which correspond to documents uploaded to GroundX
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -139,8 +139,8 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * Delete a single document hosted on GroundX
-         * @summary documents.delete (singular)
+         * Delete a single document hosted on GroundX  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary delete (singular)
          * @param {string} documentId A documentId which correspond to a document uploaded to GroundX
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -181,8 +181,8 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * 
-         * @summary Look up an existing document by its ID
+         * Look up an existing document by documentId.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary get
          * @param {string} documentId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -223,9 +223,9 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * Get the current status of an upload, initiated with documents.upload_remote, documents.upload_local, or documents.crawl_website, by specifying the processId (which is included in the response of the upload functions).
-         * @summary documents.get_processing_status_by_id
-         * @param {string} processId 
+         * Get the current status of an upload, initiated with documents.upload_remote, documents.upload_local, or documents.crawl_website, by specifying the processId (the processId is included in the response of the documents.upload functions).  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary get_processing_status_by_id
+         * @param {string} processId the processId for the upload process being checked
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -265,8 +265,8 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * lookup all documents across all resources which are currently on GroundX
-         * @summary documents.list
+         * lookup all documents across all resources which are currently on GroundX  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary list
          * @param {number} [n] The maximum number of returned documents. Accepts 1-100 with a default of 20.
          * @param {string} [nextToken] A token for pagination. If the number of documents for a given query is larger than n, the response will include a \&quot;nextToken\&quot; value. That token can be included in this field to retrieve the next batch of n documents.
          * @param {*} [options] Override http request option.
@@ -313,8 +313,8 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * lookup the document(s) associated with a processId, bucketId, or projectId.
-         * @summary documents.lookup
+         * lookup the document(s) associated with a processId, bucketId, or projectId.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary lookup
          * @param {number} id a processId, bucketId, or projectId
          * @param {number} [n] The maximum number of returned documents. Accepts 1-100 with a default of 20.
          * @param {string} [nextToken] A token for pagination. If the number of documents for a given query is larger than n, the response will include a \&quot;nextToken\&quot; value. That token can be included in this field to retrieve the next batch of n documents.
@@ -365,8 +365,8 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * Upload documents hosted on a local file system to a GroundX bucket
-         * @summary documents.upload_local
+         * Upload documents hosted on a local file system to a GroundX bucket.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary upload_local
          * @param {Array<DocumentLocalUploadRequestInner>} [documentLocalUploadRequestInner] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -450,8 +450,8 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * Upload documents which are hosted on public URLs to a GroundX bucket
-         * @summary documents.upload_remote
+         * Upload documents hosted on public URLs to a GroundX bucket.   Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary upload_remote
          * @param {DocumentRemoteUploadRequest} [documentRemoteUploadRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -504,8 +504,8 @@ export const DocumentsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = DocumentsApiAxiosParamCreator(configuration)
     return {
         /**
-         * Upload the content of a publicly accessible website to a GroundX bucket. This is done by following links within a specified URL, recursively, up to a specified depth or number of pages.
-         * @summary documents.crawl_website
+         * Upload the content of a publicly accessible website to a GroundX bucket. This is done by following links within a specified URL, recursively, up to a specified depth or number of pages.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary crawl_website
          * @param {DocumentsApiCrawlWebsiteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -515,8 +515,8 @@ export const DocumentsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Delete multiple documents hosted on GroundX
-         * @summary documents.delete (multiple)
+         * Delete multiple documents hosted on GroundX  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary delete (multiple)
          * @param {DocumentsApiDeleteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -526,8 +526,8 @@ export const DocumentsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Delete a single document hosted on GroundX
-         * @summary documents.delete (singular)
+         * Delete a single document hosted on GroundX  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary delete (singular)
          * @param {DocumentsApiDelete0Request} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -537,8 +537,8 @@ export const DocumentsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
-         * @summary Look up an existing document by its ID
+         * Look up an existing document by documentId.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary get
          * @param {DocumentsApiGetRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -548,8 +548,8 @@ export const DocumentsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Get the current status of an upload, initiated with documents.upload_remote, documents.upload_local, or documents.crawl_website, by specifying the processId (which is included in the response of the upload functions).
-         * @summary documents.get_processing_status_by_id
+         * Get the current status of an upload, initiated with documents.upload_remote, documents.upload_local, or documents.crawl_website, by specifying the processId (the processId is included in the response of the documents.upload functions).  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary get_processing_status_by_id
          * @param {DocumentsApiGetProcessingStatusByIdRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -559,8 +559,8 @@ export const DocumentsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * lookup all documents across all resources which are currently on GroundX
-         * @summary documents.list
+         * lookup all documents across all resources which are currently on GroundX  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary list
          * @param {DocumentsApiListRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -570,8 +570,8 @@ export const DocumentsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * lookup the document(s) associated with a processId, bucketId, or projectId.
-         * @summary documents.lookup
+         * lookup the document(s) associated with a processId, bucketId, or projectId.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary lookup
          * @param {DocumentsApiLookupRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -581,8 +581,8 @@ export const DocumentsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Upload documents hosted on a local file system to a GroundX bucket
-         * @summary documents.upload_local
+         * Upload documents hosted on a local file system to a GroundX bucket.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary upload_local
          * @param {DocumentsApiUploadLocalRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -592,8 +592,8 @@ export const DocumentsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Upload documents which are hosted on public URLs to a GroundX bucket
-         * @summary documents.upload_remote
+         * Upload documents hosted on public URLs to a GroundX bucket.   Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary upload_remote
          * @param {DocumentsApiUploadRemoteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -613,8 +613,8 @@ export const DocumentsApiFactory = function (configuration?: Configuration, base
     const localVarFp = DocumentsApiFp(configuration)
     return {
         /**
-         * Upload the content of a publicly accessible website to a GroundX bucket. This is done by following links within a specified URL, recursively, up to a specified depth or number of pages.
-         * @summary documents.crawl_website
+         * Upload the content of a publicly accessible website to a GroundX bucket. This is done by following links within a specified URL, recursively, up to a specified depth or number of pages.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary crawl_website
          * @param {DocumentsApiCrawlWebsiteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -623,8 +623,8 @@ export const DocumentsApiFactory = function (configuration?: Configuration, base
             return localVarFp.crawlWebsite(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Delete multiple documents hosted on GroundX
-         * @summary documents.delete (multiple)
+         * Delete multiple documents hosted on GroundX  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary delete (multiple)
          * @param {DocumentsApiDeleteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -633,8 +633,8 @@ export const DocumentsApiFactory = function (configuration?: Configuration, base
             return localVarFp.delete(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Delete a single document hosted on GroundX
-         * @summary documents.delete (singular)
+         * Delete a single document hosted on GroundX  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary delete (singular)
          * @param {DocumentsApiDelete0Request} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -643,8 +643,8 @@ export const DocumentsApiFactory = function (configuration?: Configuration, base
             return localVarFp.delete_1(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary Look up an existing document by its ID
+         * Look up an existing document by documentId.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary get
          * @param {DocumentsApiGetRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -653,8 +653,8 @@ export const DocumentsApiFactory = function (configuration?: Configuration, base
             return localVarFp.get(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Get the current status of an upload, initiated with documents.upload_remote, documents.upload_local, or documents.crawl_website, by specifying the processId (which is included in the response of the upload functions).
-         * @summary documents.get_processing_status_by_id
+         * Get the current status of an upload, initiated with documents.upload_remote, documents.upload_local, or documents.crawl_website, by specifying the processId (the processId is included in the response of the documents.upload functions).  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary get_processing_status_by_id
          * @param {DocumentsApiGetProcessingStatusByIdRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -663,8 +663,8 @@ export const DocumentsApiFactory = function (configuration?: Configuration, base
             return localVarFp.getProcessingStatusById(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * lookup all documents across all resources which are currently on GroundX
-         * @summary documents.list
+         * lookup all documents across all resources which are currently on GroundX  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary list
          * @param {DocumentsApiListRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -673,8 +673,8 @@ export const DocumentsApiFactory = function (configuration?: Configuration, base
             return localVarFp.list(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * lookup the document(s) associated with a processId, bucketId, or projectId.
-         * @summary documents.lookup
+         * lookup the document(s) associated with a processId, bucketId, or projectId.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary lookup
          * @param {DocumentsApiLookupRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -683,8 +683,8 @@ export const DocumentsApiFactory = function (configuration?: Configuration, base
             return localVarFp.lookup(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Upload documents hosted on a local file system to a GroundX bucket
-         * @summary documents.upload_local
+         * Upload documents hosted on a local file system to a GroundX bucket.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary upload_local
          * @param {DocumentsApiUploadLocalRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -693,8 +693,8 @@ export const DocumentsApiFactory = function (configuration?: Configuration, base
             return localVarFp.uploadLocal(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Upload documents which are hosted on public URLs to a GroundX bucket
-         * @summary documents.upload_remote
+         * Upload documents hosted on public URLs to a GroundX bucket.   Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary upload_remote
          * @param {DocumentsApiUploadRemoteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -770,7 +770,7 @@ export type DocumentsApiGetRequest = {
 export type DocumentsApiGetProcessingStatusByIdRequest = {
     
     /**
-    * 
+    * the processId for the upload process being checked
     * @type {string}
     * @memberof DocumentsApiGetProcessingStatusById
     */
@@ -855,8 +855,8 @@ export type DocumentsApiUploadRemoteRequest = {
  */
 export class DocumentsApiGenerated extends BaseAPI {
     /**
-     * Upload the content of a publicly accessible website to a GroundX bucket. This is done by following links within a specified URL, recursively, up to a specified depth or number of pages.
-     * @summary documents.crawl_website
+     * Upload the content of a publicly accessible website to a GroundX bucket. This is done by following links within a specified URL, recursively, up to a specified depth or number of pages.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+     * @summary crawl_website
      * @param {DocumentsApiCrawlWebsiteRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -867,8 +867,8 @@ export class DocumentsApiGenerated extends BaseAPI {
     }
 
     /**
-     * Delete multiple documents hosted on GroundX
-     * @summary documents.delete (multiple)
+     * Delete multiple documents hosted on GroundX  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+     * @summary delete (multiple)
      * @param {DocumentsApiDeleteRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -879,8 +879,8 @@ export class DocumentsApiGenerated extends BaseAPI {
     }
 
     /**
-     * Delete a single document hosted on GroundX
-     * @summary documents.delete (singular)
+     * Delete a single document hosted on GroundX  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+     * @summary delete (singular)
      * @param {DocumentsApiDelete0Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -891,8 +891,8 @@ export class DocumentsApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
-     * @summary Look up an existing document by its ID
+     * Look up an existing document by documentId.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+     * @summary get
      * @param {DocumentsApiGetRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -903,8 +903,8 @@ export class DocumentsApiGenerated extends BaseAPI {
     }
 
     /**
-     * Get the current status of an upload, initiated with documents.upload_remote, documents.upload_local, or documents.crawl_website, by specifying the processId (which is included in the response of the upload functions).
-     * @summary documents.get_processing_status_by_id
+     * Get the current status of an upload, initiated with documents.upload_remote, documents.upload_local, or documents.crawl_website, by specifying the processId (the processId is included in the response of the documents.upload functions).  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+     * @summary get_processing_status_by_id
      * @param {DocumentsApiGetProcessingStatusByIdRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -915,8 +915,8 @@ export class DocumentsApiGenerated extends BaseAPI {
     }
 
     /**
-     * lookup all documents across all resources which are currently on GroundX
-     * @summary documents.list
+     * lookup all documents across all resources which are currently on GroundX  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+     * @summary list
      * @param {DocumentsApiListRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -927,8 +927,8 @@ export class DocumentsApiGenerated extends BaseAPI {
     }
 
     /**
-     * lookup the document(s) associated with a processId, bucketId, or projectId.
-     * @summary documents.lookup
+     * lookup the document(s) associated with a processId, bucketId, or projectId.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+     * @summary lookup
      * @param {DocumentsApiLookupRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -939,8 +939,8 @@ export class DocumentsApiGenerated extends BaseAPI {
     }
 
     /**
-     * Upload documents hosted on a local file system to a GroundX bucket
-     * @summary documents.upload_local
+     * Upload documents hosted on a local file system to a GroundX bucket.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+     * @summary upload_local
      * @param {DocumentsApiUploadLocalRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -951,8 +951,8 @@ export class DocumentsApiGenerated extends BaseAPI {
     }
 
     /**
-     * Upload documents which are hosted on public URLs to a GroundX bucket
-     * @summary documents.upload_remote
+     * Upload documents hosted on public URLs to a GroundX bucket.   Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+     * @summary upload_remote
      * @param {DocumentsApiUploadRemoteRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

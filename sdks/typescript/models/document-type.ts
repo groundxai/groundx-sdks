@@ -12,7 +12,7 @@ import type * as buffer from "buffer"
 
 
 /**
- * 
+ * The type of document (one of the seven currently supported file types)
  * @export
  * @enum {string}
  */

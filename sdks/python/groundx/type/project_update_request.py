@@ -17,6 +17,7 @@ from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 
 class RequiredProjectUpdateRequest(TypedDict):
+    # The new name of the project being renamed.
     newName: str
 
 class OptionalProjectUpdateRequest(TypedDict, total=False):

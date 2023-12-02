@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestV1IngestDocumentsId(ApiTestMixin, unittest.TestCase):
     """
     V1IngestDocumentsId unit test stubs
-        documents.lookup
+        lookup
     """
 
     def setUp(self):

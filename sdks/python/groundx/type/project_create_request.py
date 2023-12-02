@@ -17,10 +17,11 @@ from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 
 class RequiredProjectCreateRequest(TypedDict):
+    # The name of the project being created.
     name: str
 
 class OptionalProjectCreateRequest(TypedDict, total=False):
-    # Include a bucket name to automatically create a bucket and add it to this project
+    # Specify bucketName to automatically create a bucket, by the name specified, and add it to the created project.
     bucketName: str
 
 class ProjectCreateRequest(RequiredProjectCreateRequest, OptionalProjectCreateRequest):

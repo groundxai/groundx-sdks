@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestV1IngestDocumentDocumentId(ApiTestMixin, unittest.TestCase):
     """
     V1IngestDocumentDocumentId unit test stubs
-        documents.delete (singular)
+        delete (singular)
     """
 
     def setUp(self):

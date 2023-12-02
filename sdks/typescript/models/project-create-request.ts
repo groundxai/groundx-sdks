@@ -18,13 +18,13 @@ import type * as buffer from "buffer"
  */
 export interface ProjectCreateRequest {
     /**
-     * 
+     * The name of the project being created.
      * @type {string}
      * @memberof ProjectCreateRequest
      */
     'name': string;
     /**
-     * Include a bucket name to automatically create a bucket and add it to this project
+     * Specify bucketName to automatically create a bucket, by the name specified, and add it to the created project.
      * @type {string}
      * @memberof ProjectCreateRequest
      */

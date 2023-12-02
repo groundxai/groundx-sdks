@@ -19,13 +19,13 @@ import { DocumentType } from './document-type';
  */
 export interface DocumentRemoteUploadRequestDocumentsInner {
     /**
-     * 
+     * the bucketId of the bucket which remote file will be uploaded to.
      * @type {number}
      * @memberof DocumentRemoteUploadRequestDocumentsInner
      */
     'bucketId': number;
     /**
-     * 
+     * The name of the file being uploaded
      * @type {string}
      * @memberof DocumentRemoteUploadRequestDocumentsInner
      */
@@ -37,13 +37,13 @@ export interface DocumentRemoteUploadRequestDocumentsInner {
      */
     'fileType'?: DocumentType;
     /**
-     * 
+     * Custom metadata which can be used to influence GroundX\'s search functionality. This data can be used to further hone GroundX search.
      * @type {object}
      * @memberof DocumentRemoteUploadRequestDocumentsInner
      */
     'searchData'?: object;
     /**
-     * Source document URL
+     * The URL of the document being uploaded to GroundX.
      * @type {string}
      * @memberof DocumentRemoteUploadRequestDocumentsInner
      */
