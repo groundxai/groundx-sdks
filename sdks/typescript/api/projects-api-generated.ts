@@ -40,7 +40,7 @@ import { requestBeforeHook } from '../requestBeforeHook';
 export const ProjectsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Add an existing bucket to an existing project. Buckets and projects can be associated many to many.
+         * Add an existing bucket to an existing project. Buckets and projects can be associated many to many.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
          * @summary project.addBucket
          * @param {number} projectId The projectId of the project which the bucket will be added to.
          * @param {number} bucketId The bucketId of the bucket being added to the project.
@@ -86,8 +86,8 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * create a new project.
-         * @summary projects.create
+         * create a new project, a project being a collection of buckets which can be searched.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary create
          * @param {ProjectCreateRequest} projectCreateRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -132,8 +132,8 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * delete a project.
-         * @summary projects.delete
+         * Delete a project.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary delete
          * @param {number} projectId The projectId of the project to be deleted.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -174,8 +174,8 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * look up a specific project by its projectId.
-         * @summary projects.get
+         * look up a specific project by its projectId.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary get
          * @param {number} projectId The projectId of the project to look up.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -216,8 +216,8 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * list all projects within your GroundX account.
-         * @summary projects.list
+         * list all projects within your GroundX account.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary list
          * @param {number} [n] The maximum number of returned documents. Accepts 1-100 with a default of 20.
          * @param {string} [nextToken] A token for pagination. If the number of documents for a given query is larger than n, the response will include a \&quot;nextToken\&quot; value. That token can be included in this field to retrieve the next batch of n documents.
          * @param {*} [options] Override http request option.
@@ -264,8 +264,8 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * remove a bucket from a project. Buckets and projects can be associated many to many, this removes one bucket to project association without disturbing others.
-         * @summary projects.removeBucket
+         * remove a bucket from a project. Buckets and projects can be associated many to many, this removes one bucket to project association without disturbing others.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary removeBucket
          * @param {number} projectId The projectId of the project which the bucket will be removed from.
          * @param {number} bucketId The bucketId of the bucket which will be removed from the project.
          * @param {*} [options] Override http request option.
@@ -310,8 +310,8 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Rename a project
-         * @summary projects.update
+         * Rename a project  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary update
          * @param {number} projectId The projectId of the project to update.
          * @param {ProjectUpdateRequest} projectUpdateRequest 
          * @param {*} [options] Override http request option.
@@ -370,7 +370,7 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ProjectsApiAxiosParamCreator(configuration)
     return {
         /**
-         * Add an existing bucket to an existing project. Buckets and projects can be associated many to many.
+         * Add an existing bucket to an existing project. Buckets and projects can be associated many to many.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
          * @summary project.addBucket
          * @param {ProjectsApiAddBucketRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -381,8 +381,8 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * create a new project.
-         * @summary projects.create
+         * create a new project, a project being a collection of buckets which can be searched.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary create
          * @param {ProjectsApiCreateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -392,8 +392,8 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * delete a project.
-         * @summary projects.delete
+         * Delete a project.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary delete
          * @param {ProjectsApiDeleteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -403,8 +403,8 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * look up a specific project by its projectId.
-         * @summary projects.get
+         * look up a specific project by its projectId.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary get
          * @param {ProjectsApiGetRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -414,8 +414,8 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * list all projects within your GroundX account.
-         * @summary projects.list
+         * list all projects within your GroundX account.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary list
          * @param {ProjectsApiListRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -425,8 +425,8 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * remove a bucket from a project. Buckets and projects can be associated many to many, this removes one bucket to project association without disturbing others.
-         * @summary projects.removeBucket
+         * remove a bucket from a project. Buckets and projects can be associated many to many, this removes one bucket to project association without disturbing others.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary removeBucket
          * @param {ProjectsApiRemoveBucketRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -436,8 +436,8 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Rename a project
-         * @summary projects.update
+         * Rename a project  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary update
          * @param {ProjectsApiUpdateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -457,7 +457,7 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
     const localVarFp = ProjectsApiFp(configuration)
     return {
         /**
-         * Add an existing bucket to an existing project. Buckets and projects can be associated many to many.
+         * Add an existing bucket to an existing project. Buckets and projects can be associated many to many.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
          * @summary project.addBucket
          * @param {ProjectsApiAddBucketRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -467,8 +467,8 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.addBucket(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * create a new project.
-         * @summary projects.create
+         * create a new project, a project being a collection of buckets which can be searched.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary create
          * @param {ProjectsApiCreateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -477,8 +477,8 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.create(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * delete a project.
-         * @summary projects.delete
+         * Delete a project.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary delete
          * @param {ProjectsApiDeleteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -487,8 +487,8 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.delete(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * look up a specific project by its projectId.
-         * @summary projects.get
+         * look up a specific project by its projectId.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary get
          * @param {ProjectsApiGetRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -497,8 +497,8 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.get(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * list all projects within your GroundX account.
-         * @summary projects.list
+         * list all projects within your GroundX account.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary list
          * @param {ProjectsApiListRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -507,8 +507,8 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.list(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * remove a bucket from a project. Buckets and projects can be associated many to many, this removes one bucket to project association without disturbing others.
-         * @summary projects.removeBucket
+         * remove a bucket from a project. Buckets and projects can be associated many to many, this removes one bucket to project association without disturbing others.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary removeBucket
          * @param {ProjectsApiRemoveBucketRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -517,8 +517,8 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.removeBucket(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Rename a project
-         * @summary projects.update
+         * Rename a project  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary update
          * @param {ProjectsApiUpdateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -663,7 +663,7 @@ export type ProjectsApiUpdateRequest = {
  */
 export class ProjectsApiGenerated extends BaseAPI {
     /**
-     * Add an existing bucket to an existing project. Buckets and projects can be associated many to many.
+     * Add an existing bucket to an existing project. Buckets and projects can be associated many to many.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
      * @summary project.addBucket
      * @param {ProjectsApiAddBucketRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -675,8 +675,8 @@ export class ProjectsApiGenerated extends BaseAPI {
     }
 
     /**
-     * create a new project.
-     * @summary projects.create
+     * create a new project, a project being a collection of buckets which can be searched.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+     * @summary create
      * @param {ProjectsApiCreateRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -687,8 +687,8 @@ export class ProjectsApiGenerated extends BaseAPI {
     }
 
     /**
-     * delete a project.
-     * @summary projects.delete
+     * Delete a project.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+     * @summary delete
      * @param {ProjectsApiDeleteRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -699,8 +699,8 @@ export class ProjectsApiGenerated extends BaseAPI {
     }
 
     /**
-     * look up a specific project by its projectId.
-     * @summary projects.get
+     * look up a specific project by its projectId.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+     * @summary get
      * @param {ProjectsApiGetRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -711,8 +711,8 @@ export class ProjectsApiGenerated extends BaseAPI {
     }
 
     /**
-     * list all projects within your GroundX account.
-     * @summary projects.list
+     * list all projects within your GroundX account.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+     * @summary list
      * @param {ProjectsApiListRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -723,8 +723,8 @@ export class ProjectsApiGenerated extends BaseAPI {
     }
 
     /**
-     * remove a bucket from a project. Buckets and projects can be associated many to many, this removes one bucket to project association without disturbing others.
-     * @summary projects.removeBucket
+     * remove a bucket from a project. Buckets and projects can be associated many to many, this removes one bucket to project association without disturbing others.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+     * @summary removeBucket
      * @param {ProjectsApiRemoveBucketRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -735,8 +735,8 @@ export class ProjectsApiGenerated extends BaseAPI {
     }
 
     /**
-     * Rename a project
-     * @summary projects.update
+     * Rename a project  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+     * @summary update
      * @param {ProjectsApiUpdateRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

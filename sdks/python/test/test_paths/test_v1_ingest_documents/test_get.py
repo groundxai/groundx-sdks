@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestV1IngestDocuments(ApiTestMixin, unittest.TestCase):
     """
     V1IngestDocuments unit test stubs
-        documents.list
+        list
     """
 
     def setUp(self):

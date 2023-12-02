@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestV1Bucket(ApiTestMixin, unittest.TestCase):
     """
     V1Bucket unit test stubs
-        buckets.create
+        create
     """
 
     def setUp(self):

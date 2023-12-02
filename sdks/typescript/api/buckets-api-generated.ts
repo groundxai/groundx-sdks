@@ -42,8 +42,8 @@ import { requestBeforeHook } from '../requestBeforeHook';
 export const BucketsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * create a new bucket.
-         * @summary buckets.create
+         * Create a new bucket.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary create
          * @param {BucketCreateRequest} bucketCreateRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -88,8 +88,8 @@ export const BucketsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * delete a bucket.
-         * @summary buckets.delete
+         * Delete a bucket.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary delete
          * @param {number} bucketId The bucketId of the bucket being deleted.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -130,8 +130,8 @@ export const BucketsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * look up a specific bucket by its bucketId.
-         * @summary buckets.get
+         * Look up a specific bucket by its bucketId.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary get
          * @param {number} bucketId The bucketId of the bucket to look up.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -172,8 +172,8 @@ export const BucketsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * List all buckets within your GroundX account
-         * @summary buckets.list
+         * List all buckets within your GroundX account  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary list
          * @param {number} [n] The maximum number of returned documents. Accepts 1-100 with a default of 20.
          * @param {string} [nextToken] A token for pagination. If the number of documents for a given query is larger than n, the response will include a \&quot;nextToken\&quot; value. That token can be included in this field to retrieve the next batch of n documents.
          * @param {*} [options] Override http request option.
@@ -220,8 +220,8 @@ export const BucketsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Rename a bucket
-         * @summary buckets.update
+         * Rename a bucket.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary update
          * @param {number} bucketId The bucketId of the bucket being updated.
          * @param {BucketUpdateRequest} bucketUpdateRequest 
          * @param {*} [options] Override http request option.
@@ -280,8 +280,8 @@ export const BucketsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = BucketsApiAxiosParamCreator(configuration)
     return {
         /**
-         * create a new bucket.
-         * @summary buckets.create
+         * Create a new bucket.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary create
          * @param {BucketsApiCreateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -291,8 +291,8 @@ export const BucketsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * delete a bucket.
-         * @summary buckets.delete
+         * Delete a bucket.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary delete
          * @param {BucketsApiDeleteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -302,8 +302,8 @@ export const BucketsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * look up a specific bucket by its bucketId.
-         * @summary buckets.get
+         * Look up a specific bucket by its bucketId.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary get
          * @param {BucketsApiGetRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -313,8 +313,8 @@ export const BucketsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * List all buckets within your GroundX account
-         * @summary buckets.list
+         * List all buckets within your GroundX account  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary list
          * @param {BucketsApiListRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -324,8 +324,8 @@ export const BucketsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Rename a bucket
-         * @summary buckets.update
+         * Rename a bucket.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary update
          * @param {BucketsApiUpdateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -345,8 +345,8 @@ export const BucketsApiFactory = function (configuration?: Configuration, basePa
     const localVarFp = BucketsApiFp(configuration)
     return {
         /**
-         * create a new bucket.
-         * @summary buckets.create
+         * Create a new bucket.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary create
          * @param {BucketsApiCreateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -355,8 +355,8 @@ export const BucketsApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.create(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * delete a bucket.
-         * @summary buckets.delete
+         * Delete a bucket.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary delete
          * @param {BucketsApiDeleteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -365,8 +365,8 @@ export const BucketsApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.delete(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * look up a specific bucket by its bucketId.
-         * @summary buckets.get
+         * Look up a specific bucket by its bucketId.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary get
          * @param {BucketsApiGetRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -375,8 +375,8 @@ export const BucketsApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.get(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * List all buckets within your GroundX account
-         * @summary buckets.list
+         * List all buckets within your GroundX account  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary list
          * @param {BucketsApiListRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -385,8 +385,8 @@ export const BucketsApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.list(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Rename a bucket
-         * @summary buckets.update
+         * Rename a bucket.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary update
          * @param {BucketsApiUpdateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -485,8 +485,8 @@ export type BucketsApiUpdateRequest = {
  */
 export class BucketsApiGenerated extends BaseAPI {
     /**
-     * create a new bucket.
-     * @summary buckets.create
+     * Create a new bucket.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+     * @summary create
      * @param {BucketsApiCreateRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -497,8 +497,8 @@ export class BucketsApiGenerated extends BaseAPI {
     }
 
     /**
-     * delete a bucket.
-     * @summary buckets.delete
+     * Delete a bucket.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+     * @summary delete
      * @param {BucketsApiDeleteRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -509,8 +509,8 @@ export class BucketsApiGenerated extends BaseAPI {
     }
 
     /**
-     * look up a specific bucket by its bucketId.
-     * @summary buckets.get
+     * Look up a specific bucket by its bucketId.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+     * @summary get
      * @param {BucketsApiGetRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -521,8 +521,8 @@ export class BucketsApiGenerated extends BaseAPI {
     }
 
     /**
-     * List all buckets within your GroundX account
-     * @summary buckets.list
+     * List all buckets within your GroundX account  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+     * @summary list
      * @param {BucketsApiListRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -533,8 +533,8 @@ export class BucketsApiGenerated extends BaseAPI {
     }
 
     /**
-     * Rename a bucket
-     * @summary buckets.update
+     * Rename a bucket.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+     * @summary update
      * @param {BucketsApiUpdateRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

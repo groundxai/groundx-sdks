@@ -18,7 +18,7 @@ import type * as buffer from "buffer"
  */
 export interface WebsiteCrawlRequestWebsitesInner {
     /**
-     * 
+     * the bucketId of the bucket which remote file will be uploaded to.
      * @type {number}
      * @memberof WebsiteCrawlRequestWebsitesInner
      */
@@ -36,13 +36,13 @@ export interface WebsiteCrawlRequestWebsitesInner {
      */
     'depth'?: number;
     /**
-     * 
+     * Custom metadata which can be used to influence GroundX\'s search functionality. This data can be used to further hone GroundX search.
      * @type {object}
      * @memberof WebsiteCrawlRequestWebsitesInner
      */
     'searchData'?: object;
     /**
-     * Source website URL
+     * The URL from which the crawl is initiated.
      * @type {string}
      * @memberof WebsiteCrawlRequestWebsitesInner
      */

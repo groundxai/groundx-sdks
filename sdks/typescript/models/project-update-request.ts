@@ -18,7 +18,7 @@ import type * as buffer from "buffer"
  */
 export interface ProjectUpdateRequest {
     /**
-     * 
+     * The new name of the project being renamed.
      * @type {string}
      * @memberof ProjectUpdateRequest
      */

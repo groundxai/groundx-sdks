@@ -18,13 +18,16 @@ from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 from groundx.type.document_type import DocumentType
 
 class RequiredDocumentLocalUploadRequestItemMetadata(TypedDict):
+    # the bucketId of the bucket which remote file will be uploaded to.
     bucketId: int
 
+    # The name of the file being uploaded
     fileName: str
 
     fileType: DocumentType
 
 class OptionalDocumentLocalUploadRequestItemMetadata(TypedDict, total=False):
+    # Custom metadata which can be used to influence GroundX's search functionality. This data can be used to further hone GroundX search.
     searchData: typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]
 
 class DocumentLocalUploadRequestItemMetadata(RequiredDocumentLocalUploadRequestItemMetadata, OptionalDocumentLocalUploadRequestItemMetadata):

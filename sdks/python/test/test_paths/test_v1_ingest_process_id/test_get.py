@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestV1IngestProcessId(ApiTestMixin, unittest.TestCase):
     """
     V1IngestProcessId unit test stubs
-        documents.get_processing_status_by_id
+        get_processing_status_by_id
     """
 
     def setUp(self):

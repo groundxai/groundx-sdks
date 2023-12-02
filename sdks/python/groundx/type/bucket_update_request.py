@@ -17,6 +17,7 @@ from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 
 class RequiredBucketUpdateRequest(TypedDict):
+    # The new name of the bucket being renamed.
     newName: str
 
 class OptionalBucketUpdateRequest(TypedDict, total=False):

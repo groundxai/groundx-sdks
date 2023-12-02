@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestV1BucketBucketId(ApiTestMixin, unittest.TestCase):
     """
     V1BucketBucketId unit test stubs
-        buckets.delete
+        delete
     """
 
     def setUp(self):

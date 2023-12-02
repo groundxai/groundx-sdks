@@ -18,7 +18,7 @@ import type * as buffer from "buffer"
  */
 export interface BucketUpdateRequest {
     /**
-     * 
+     * The new name of the bucket being renamed.
      * @type {string}
      * @memberof BucketUpdateRequest
      */

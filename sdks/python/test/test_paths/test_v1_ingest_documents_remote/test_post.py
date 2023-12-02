@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestV1IngestDocumentsRemote(ApiTestMixin, unittest.TestCase):
     """
     V1IngestDocumentsRemote unit test stubs
-        documents.upload_remote
+        upload_remote
     """
 
     def setUp(self):

@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestV1IngestDocumentDocumentId(ApiTestMixin, unittest.TestCase):
     """
     V1IngestDocumentDocumentId unit test stubs
-        Look up an existing document by its ID
+        get
     """
 
     def setUp(self):
