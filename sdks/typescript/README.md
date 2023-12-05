@@ -26,7 +26,7 @@ Ground Your RAG Apps in Fact not Fiction
   * [`groundx.buckets.update`](#groundxbucketsupdate)
   * [`groundx.documents.crawlWebsite`](#groundxdocumentscrawlwebsite)
   * [`groundx.documents.delete`](#groundxdocumentsdelete)
-  * [`groundx.documents.delete_0`](#groundxdocumentsdelete_0)
+  * [`groundx.documents.delete1`](#groundxdocumentsdelete1)
   * [`groundx.documents.get`](#groundxdocumentsget)
   * [`groundx.documents.getProcessingStatusById`](#groundxdocumentsgetprocessingstatusbyid)
   * [`groundx.documents.list`](#groundxdocumentslist)
@@ -325,14 +325,14 @@ A list of documentIds which correspond to documents uploaded to GroundX
 ---
 
 
-### `groundx.documents.delete_0`<a id="groundxdocumentsdelete_0"></a>
+### `groundx.documents.delete1`<a id="groundxdocumentsdelete1"></a>
 
 Delete a single document hosted on GroundX  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
-const delete_0Response = await groundx.documents.delete_0({
+const delete1Response = await groundx.documents.delete1({
   documentId: "documentId_example",
 });
 ```
