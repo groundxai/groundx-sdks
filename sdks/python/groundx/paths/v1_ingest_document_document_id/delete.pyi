@@ -122,7 +122,7 @@ _all_accept_content_types = (
 
 class BaseApi(api_client.Api):
 
-    def _delete_0_mapped_args(
+    def _delete1_mapped_args(
         self,
         document_id: str,
     ) -> api_client.MappedArgs:
@@ -133,7 +133,7 @@ class BaseApi(api_client.Api):
         args.path = _path_params
         return args
 
-    async def _adelete_0_oapg(
+    async def _adelete1_oapg(
         self,
             path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
@@ -245,7 +245,7 @@ class BaseApi(api_client.Api):
         return api_response
 
 
-    def _delete_0_oapg(
+    def _delete1_oapg(
         self,
             path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
@@ -324,10 +324,10 @@ class BaseApi(api_client.Api):
         return api_response
 
 
-class Delete0(BaseApi):
+class Delete1(BaseApi):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
-    async def adelete_0(
+    async def adelete1(
         self,
         document_id: str,
         **kwargs,
@@ -336,25 +336,25 @@ class Delete0(BaseApi):
         api_client.ApiResponseWithoutDeserializationAsync,
         AsyncGeneratorResponse,
     ]:
-        args = self._delete_0_mapped_args(
+        args = self._delete1_mapped_args(
             document_id=document_id,
         )
-        return await self._adelete_0_oapg(
+        return await self._adelete1_oapg(
             path_params=args.path,
             **kwargs,
         )
     
-    def delete_0(
+    def delete1(
         self,
         document_id: str,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        args = self._delete_0_mapped_args(
+        args = self._delete1_mapped_args(
             document_id=document_id,
         )
-        return self._delete_0_oapg(
+        return self._delete1_oapg(
             path_params=args.path,
         )
 
@@ -370,10 +370,10 @@ class ApiFordelete(BaseApi):
         api_client.ApiResponseWithoutDeserializationAsync,
         AsyncGeneratorResponse,
     ]:
-        args = self._delete_0_mapped_args(
+        args = self._delete1_mapped_args(
             document_id=document_id,
         )
-        return await self._adelete_0_oapg(
+        return await self._adelete1_oapg(
             path_params=args.path,
             **kwargs,
         )
@@ -385,10 +385,10 @@ class ApiFordelete(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        args = self._delete_0_mapped_args(
+        args = self._delete1_mapped_args(
             document_id=document_id,
         )
-        return self._delete_0_oapg(
+        return self._delete1_oapg(
             path_params=args.path,
         )
 

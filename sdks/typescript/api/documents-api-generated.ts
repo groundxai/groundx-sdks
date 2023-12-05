@@ -145,9 +145,9 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        delete_1: async (documentId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        delete1: async (documentId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'documentId' is not null or undefined
-            assertParamExists('delete_1', 'documentId', documentId)
+            assertParamExists('delete1', 'documentId', documentId)
             const localVarPath = `/v1/ingest/document/{documentId}`
                 .replace(`{${"documentId"}}`, encodeURIComponent(String(documentId !== undefined ? documentId : `-documentId-`)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -528,12 +528,12 @@ export const DocumentsApiFp = function(configuration?: Configuration) {
         /**
          * Delete a single document hosted on GroundX  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
          * @summary delete (singular)
-         * @param {DocumentsApiDelete0Request} requestParameters Request parameters.
+         * @param {DocumentsApiDelete1Request} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async delete_1(requestParameters: DocumentsApiDelete0Request, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IngestResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.delete_1(requestParameters.documentId, options);
+        async delete1(requestParameters: DocumentsApiDelete1Request, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IngestResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.delete1(requestParameters.documentId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -635,12 +635,12 @@ export const DocumentsApiFactory = function (configuration?: Configuration, base
         /**
          * Delete a single document hosted on GroundX  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
          * @summary delete (singular)
-         * @param {DocumentsApiDelete0Request} requestParameters Request parameters.
+         * @param {DocumentsApiDelete1Request} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        delete_1(requestParameters: DocumentsApiDelete0Request, options?: AxiosRequestConfig): AxiosPromise<IngestResponse> {
-            return localVarFp.delete_1(requestParameters, options).then((request) => request(axios, basePath));
+        delete1(requestParameters: DocumentsApiDelete1Request, options?: AxiosRequestConfig): AxiosPromise<IngestResponse> {
+            return localVarFp.delete1(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
          * Look up an existing document by documentId.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
@@ -731,16 +731,16 @@ export type DocumentsApiDeleteRequest = {
 }
 
 /**
- * Request parameters for delete_1 operation in DocumentsApi.
+ * Request parameters for delete1 operation in DocumentsApi.
  * @export
- * @interface DocumentsApiDelete0Request
+ * @interface DocumentsApiDelete1Request
  */
-export type DocumentsApiDelete0Request = {
+export type DocumentsApiDelete1Request = {
     
     /**
     * A documentId which correspond to a document uploaded to GroundX
     * @type {string}
-    * @memberof DocumentsApiDelete0
+    * @memberof DocumentsApiDelete1
     */
     readonly documentId: string
     
@@ -881,13 +881,13 @@ export class DocumentsApiGenerated extends BaseAPI {
     /**
      * Delete a single document hosted on GroundX  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
      * @summary delete (singular)
-     * @param {DocumentsApiDelete0Request} requestParameters Request parameters.
+     * @param {DocumentsApiDelete1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DocumentsApiGenerated
      */
-    public delete_1(requestParameters: DocumentsApiDelete0Request, options?: AxiosRequestConfig) {
-        return DocumentsApiFp(this.configuration).delete_1(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    public delete1(requestParameters: DocumentsApiDelete1Request, options?: AxiosRequestConfig) {
+        return DocumentsApiFp(this.configuration).delete1(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
