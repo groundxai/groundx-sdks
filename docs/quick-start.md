@@ -269,19 +269,17 @@ curl https://api.groundx.ai/api/v1/search/:id \
      -X POST \
      -H "X-API-KEY: <your_api_key>" \
      -H "Content-Type: application/json" \
-     -d '{"search":{"query":query}}'
+     -d '{"query":query}'
 ```
 
 ```python
-content_response = groundx.search.content(id=id, search={"query": query})
+content_response = groundx.search.content(id=id, query=query)
 ```
 
 ```typescript
 const searchResponse = await groundx.search.content({
   id: id,
-  search: {
-    query: query
-  },
+  query: query,
 });
 ```
 
@@ -302,17 +300,20 @@ If your request is successful, will receive a response that looks something like
     "results":[
       {
         "documentId": "<unique_system_generated_id>",
-        "metadata": {
+        "score": <float_relevance_score_of_result>,
+        "searchData": {
             <document_metadata>
         },
-        "score": <float_relevance_score_of_result>,
         "sourceUrl": "<source_document_url>",
-        "text":  "<text_of_result>"
+        "suggestedText": "<rewritten_text_for_LLM_completions>",
+        "text":  "<original_text_of_result>"
       }
     ]
   }
 }
 ```
+
+We strongly recommend you use `search.text` for your LLM completions. We provide `search.results` in case you want to create your own context from the search results. If you choose to do this, rather than use `search.text`, we strongly recommend you use `search.results[n].suggestedText` for your context.
 
 If you need to look up a `projectId`, `groupId`, or `bucketId`, you can find them in the [GroundX Dashboard](https://dashboard.groundx.ai) or by querying for them using the APIs.
 
