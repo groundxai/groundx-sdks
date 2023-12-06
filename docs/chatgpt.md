@@ -67,7 +67,7 @@ Next, you will submit a query to the GroundX Search API.  A request will look so
 :::code
 
 ```python
-content_response = groundx.search.content(id=groundxId, search={"query": query})
+content_response = groundx.search.content(id=groundxId, query=query)
 
 results = content_response.body["search"]
 ```
@@ -75,9 +75,7 @@ results = content_response.body["search"]
 ```typescript
 const result = await groundx.search.content({
   id: groundxId,
-  search: {
-    query: query
-  },
+  query: query
 });
 ```
 
@@ -116,33 +114,18 @@ Here is an example of what that could look like:
 :::code
 
 ```python
-llmText = ""
-for r in results["results"]:
-  if "text" in r and len(r["text"]) > 0:
-    if len(llmText) + len(r["text"]) > maxInstructCharacters:
-      break
-    elif len(llmText) > 0:
-      llmText += "\n"
-    llmText += r["text"]
+llmText = results["text"]
 ```
 
 ```typescript
-let llmText = "";
-result.data.search.results.forEach((r) => {
-  if (r["text"] && r["text"].length > 0) {
-    if (llmText.length + r["text"].length > maxInstructCharacters) {
-      return;
-    } else if (llmText.length > 0) {
-      llmText += "\n";
-    }
-    llmText += r["text"];
-  }
-});
+let llmText = result.data.search.text;
 ```
 
 :::
 
-In this example, `maxInstructCharacters` serves to limit the size of the request to conform to the token limits of OpenAI models. Reference the OpenAI documentation for the most current model token limits. Keep in mind that a token is roughly equivalent to 3.5 characters and that token limits apply to the combined size of the request and completion response.
+Use the `search.text` field from the response. It contains the suggested context for LLM completion. If `search.text` is too long for your model context limits, either truncate `search.text` or iterate `search.results` and use the `suggestedText` field of each search result.
+
+Reference the OpenAI documentation for the most current model token limits. Keep in mind that a token is roughly equivalent to 3.5 characters and that token limits apply to the combined size of the request and completion response.
 
 ## Step 5: Submit a Completion Request to OpenAI
 
