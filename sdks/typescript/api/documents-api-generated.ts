@@ -409,7 +409,15 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
                     }
                 } else {
                     if (isPrimitiveType) {
-                        localVarFormParams.append(name, data as any);
+                        /**
+                         * FormData can only accept string or Blob so we need to convert
+                         * non-string primitives to string. We also need to convert
+                         */
+                        if (typeof data === "object") {
+                          localVarFormParams.append(name, JSON.stringify(data));
+                        } else {
+                          localVarFormParams.append(name, data);
+                        }
                     } else {
                         if (isBrowser()) {
                             localVarFormParams.append(name, new Blob([JSON.stringify(data)], { type: "application/json" }))
@@ -429,6 +437,8 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
 
             if (documentLocalUploadRequestInner) {
                 for (const element of documentLocalUploadRequestInner) {
+                    await addFormParam('blob', element.blob, true, true)
+                    await addFormParam('metadata', element.metadata, false, false)
                 }
             }
 
