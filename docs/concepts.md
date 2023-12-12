@@ -1,4 +1,5 @@
 # Concepts
+<iframe width="560" height="315" src="https://www.youtube.com/embed/-JT-yRtF5-M?si=Nb5jIBLfJsNZ8lwJ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 This page introduces some of the key concepts that form the foundation of GroundX's suite of APIs and services. Understanding these concepts will help you make the most of our APIs.
 
@@ -21,7 +22,3 @@ GroundX's Search API implements a proprietary combined vector and semantic appro
 ## Authentication
 
 To ensure secure access to its services, GroundX uses API Key based authentication. The API Key is provided to the users upon completion of a request form and is used in the request header (X-API-Key) for authentication.
-
-## GroundX Beta
-
-GroundX is currently in closed beta, which means that access to APIs is granted upon request. Potential users are invited to fill a form to request access to the APIs.

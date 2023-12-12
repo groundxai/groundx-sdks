@@ -1,24 +1,49 @@
 # Welcome
 
-GroundX is an API framework that helps you rapidly build LLM-powered applications with private data where your answers are grounded in fact not fiction.
+<iframe width="560" height="315" src="https://www.youtube.com/embed/SBZWj7qKtFA?si=neogiHQmE7i-8Uvz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-We’ve been building the GroundX platform alongside LLM providers like OpenAI, Google and Meta for more than three years and have worked hard to build a framework that will save you many hours of pain.
+GroundX APIs help you rapidly build RAG (retreieval augmented generation) applications that you can trust.
 
-## Grounded Generation
+We’ve been building the GroundX platform alongside LLM providers like OpenAI, Google and Meta for more than two years and have worked hard to build a framework that will save you many hours of pain while providing the accurate, hallucination resistant answers you need. 
 
-Importantly, our APIs are designed to tackle one of the most difficult challenges of working with LLMs — their tendency to hallucinate when they don’t know the right answer.  
+## Build Your First RAG App in 10 Minutes or Less
 
-At its core, LLM hallucination is the result of poor search and retrieval or lack of appropriate content.
+Whether you're new to RAG development or already deep in the practice, GroundX APIs are designed to save you time. We've bundled all the pieces you need into one seemless platform that just works:
+- Proprietary ETL Engine (extract, transform, load) to process your documents
+- Semantic Database
+- Dynamic Chunker
+- Powerful Content Search with Proprietary Re-Ranker
+- Light Orchestrator
+- Enterprise security with bank level encryption
 
-We call our approach to solving these problems grounded generation and it involves the following components:
+If you're not familar with all of those terms, don't worry. We've removed the time, pain and expense of writing thousands of lines of code and integrating multiple platforms into just a few API calls. Your complex documents go in one side, LLM ready search retrievals come out the other with industry leading accuracy. Then call the LLM of your choice for completions. 
 
-- **Smart pre-processing** that accurately breaks down many documents and data types.
-- **An automated ingest pipeline** that chunks, labels, classifies and clusters your data so an LLM has proper context when processing it.
-- **A hallucination checking algorithm** that scores every LLM response for its fidelity to your corpus of data.
+Some engineers have told us they are building RAG apps up to 10 times faster than with any other tools on the market.  
+
+## Cutting Edge Accuracy
+
+GroundX is also designed to tackle one of the most difficult challenges of working with LLMs — their tendency to make things up or hallucinate when they don’t know the right answer. 
+
+To tackle hallucinations, we first have to understand what they are. Essentially, when LLMs run out of facts, they just make them up. They’re like the know-it-all at the party that should have shut up 30 minutes ago. The problem is much worse with RAG apps where the LLMs have never seen your data before.
+
+The key here is to make sure the LLM understands your data when you send it for completion. We’ve found that 90% of hallucinations are data problems NOT prompt problems. And you can't prompt your way out of a data problem.
+
+**GroundX solves these issues with a proprietary ingest pipeline for your data that:**
+- Converts your documents, cleans the text and reformats it into LLM friendly data
+- Dynamically chunks your content at natural break points that express full ideas
+- Automatically creates contextual metadata for your chunks
+- Automatically builds a knowledge graph to maintain entity relationships across documents (Coming Soon)
+
+Under the hood, we’ve built a fine-tuned computer vision model for your docs and a pipeline of several LLMs to understand the layout of your documents, dynamically chunk and summarize your content and search your data. Give us your complex documents littered with tables, forms, headers, footers, index pages and other visual formatting that chokes LLMs and our pipeline returns clean, simple LLM-ready data. 
+
+We also built a proprietary search engine that outperforms vector similarity, provides fuller retrievals and re-ranks each retrieved chunk for its adherence to the question.
+
+**This all happens without writing a single line of code. Just ingest your content, search and complete. With GroundX you finally have RAG you can trust, made simple.** 
+
 
 ## Key Features
 
-In addition to grounded generation, our core features are:
+In addition to speed and accuracy, our core features are:
 
 - **Effortless Content Upload**: Upload content from various sources like websites, documents, presentations, and raw text files in one centralized location with our Content Upload API.
 - **Sophisticated Automated Pre-Processing**: Our ingestion pipeline will automatically clean and format your content for use with LLMs, generate valuable metadata, and improve search and retrieval performance.
@@ -39,15 +64,25 @@ GroundX's pre-processing capabilities enable you to enhance your content's utili
 
 ## Superior Search Capabilities
 
-Discover the power of intelligent search with GroundX's Search API. Our proprietary combined vector and semantic approach ensures your search queries yield the most relevant results. With the added advantage of real-time pre-processing, the Search API provides an unrivaled level of understanding and matching queries to the right content.
+At GroundX, we've taken a fresh approach to search that's optimized for RAG applications. The results consistently outperform vector similarity (the industry standard). How does it work?
+
+First, we're storing LLM friendly versions of your data in our database (explained above). That's vital for LLMs to be able to understand your content. Every retrieval contains the original text, automatically created metadata that summarizes the key elements of your chunks and an LLM-friendly rewrite of your chunks.
+
+Then we pair a semantic search with a proprietary re-ranker that scores every retrieval for adherence to the question. And finally, we merge all of those components to creat a suggested retrieval that is tuned to send to LLMs for completion. 
+
+It's the first search and retrieval engine built specifically for RAG and LLM apps.
 
 ## Secure Storage and Transmission
 
-Security and privacy are paramount when building enterprise applications. First, we believe your data is your data. You or your customers own it, not us. Second, your uploaded data is encrypted at REST and encrypted in transmission to an LLM. We don’t train on your data, each corpus is stored in virtual isolation and we make it easy to control when your data is purged.
+The GroundX team spent more than a decade at IBM building highly-trusted enterprise applications for millions of global users. We know how important security and privacy are to every enterprise and how much work goes into getting there. So we built enterprise security right into the platform.
+
+First, we believe your data is your data. You or your customers own it, not us. Your uploaded data is always encrypted at rest and in transit. We don’t train LLMs on your data and the whole environment runs in a  virtual private cloud with one set of keys that you control. 
+
+Today, this runs as a service we manage for you on AWS. Soon we'll have versions of our platform you can run on your own managed cloud. 
 
 ## What You Can Build
 
-Our customers are building all kinds of amazing LLM-powered applications with GroundX APIs including customer service bots, personalized sales assistants, legal tools, advanced knowledge base search tools, live health applications and more. Let your imagination run wild and be sure to tell us what you’re cooking. We love to support the amazing applications built on GroundX.
+Our customers are building all kinds of amazing LLM-powered applications with GroundX APIs including customer service bots, personalized sales assistants, legal tools, advanced knowledge base search tools, health applications and more. Let your imagination run wild and be sure to tell us what you’re cooking. We love to support the amazing applications built on GroundX.
 
 ## Getting Started
 

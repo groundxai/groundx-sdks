@@ -1,4 +1,5 @@
 # Quick Start
+<iframe width="560" height="315" src="https://www.youtube.com/embed/wH0DR7U0l3c?si=yPkV9ub3OdWx0ZlG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 This Quick Start guide is intended to show you how to upload documents and search them using the GroundX APIs. The code within this QuickStart guide can be downloaded from the [code samples GitHub repository](https://github.com/groundxai/code-samples) in [Python](https://github.com/groundxai/code-samples/tree/master/python/getting-started) and [TypeScript](https://github.com/groundxai/code-samples/tree/master/typescript/getting-started).
 

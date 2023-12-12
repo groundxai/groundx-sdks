@@ -18,6 +18,12 @@ portal:
               path: docs/welcome.md
             - id: concepts
               path: docs/concepts.md
+            - id: ingest-local-content
+              path: docs/localingest.md
+            - id: ingest-remote-content
+              path: docs/remoteingest.md
+            - id: search
+              path: docs/search.md
         - label: Tutorials
           links:
             - id: quick-start
