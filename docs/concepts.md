@@ -21,7 +21,3 @@ GroundX's Search API implements a proprietary combined vector and semantic appro
 ## Authentication
 
 To ensure secure access to its services, GroundX uses API Key based authentication. The API Key is provided to the users upon completion of a request form and is used in the request header (X-API-Key) for authentication.
-
-## GroundX Beta
-
-GroundX is currently in closed beta, which means that access to APIs is granted upon request. Potential users are invited to fill a form to request access to the APIs.
