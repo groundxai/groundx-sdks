@@ -1,4 +1,5 @@
 # Concepts
+<iframe width="560" height="315" src="https://www.youtube.com/embed/-JT-yRtF5-M?si=Nb5jIBLfJsNZ8lwJ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 This page introduces some of the key concepts that form the foundation of GroundX's suite of APIs and services. Understanding these concepts will help you make the most of our APIs.
 
