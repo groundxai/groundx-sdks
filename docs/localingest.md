@@ -142,14 +142,14 @@ const response = await groundx.documents.uploadLocal([
 
 After making the request, you should receive a response with "processId" and "status". This response indicates that GroundX is uploading or ingesting your file into the indicated bucket.
 
-:::json
+```json
 {
     'ingest': {
         'processId': '23e782ac-3829-4833-965d-e77b4e289885', 
         'status': 'queued'
     }
 }
-:::
+```
 
 ## Final details
 
