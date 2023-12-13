@@ -1,67 +1,140 @@
 # Understanding Search in GroundX
 <iframe width="560" height="315" src="https://www.youtube.com/embed/gqNO5zGXU1w?si=CXtwQ3ziOuTnBP7P" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-In this tutorial, we’ll go over the GroundX search API.  What makes GroundX search results so special?
+## Introduction
+In this tutorial, we’ll explore the Ground X search API.
+
+What makes Ground X search results stand out?
 
 **Under the hood, the GroundX Search API goes through the following process:**
 
-First, it analyzes your search query, and improves it if necessary, to carry out a semantic search that helps avoid the hallucination trap most “RAG” apps fall into with their vectorized searches.
+First, it analyzes your search query, and improves it if necessary, to carry out a semantic search that helps avoid the hallucination trap most RAG apps fall into with their vectorized searches.
 
-
-Next, it searches through GroundX buckets where your content and its metadata are stored. GroundX’s unique metadata approach helps maintain your content within its original context. After finding relevant content, the Search API returns much more than just simple, unformatted chunks of raw text like most RAG (retrieval augmented generation) systems.
-
-Instead, GroundX returns a search response bundled with intelligible text chunks along with custom metadata, automatically generated documentation and section summaries, source URL, and a new, more readable, contextualized, and performant version of the text chunk ready for LLM use.
+Next, it searches through Ground X buckets where your content and its extra search data are stored.
+Ground X’s unique extra search data approach helps maintain your content within its original context.
+After finding relevant content, the Search API returns much more than just simple, unformatted chunks of raw text like most RAG systems.
+Instead, Ground X returns a search response bundled with intelligible text chunks along with extra search data, automatically generated documentation and section summaries, source URL, and a new, more readable, contextualized, and performant version of the text chunk ready for LLM use.
 
 Then, GroundX uses its proprietary re-ranker that scores every chunk for how well it answers the original question to ensure that the most trustworthy results are always on top.
 
-And finally, it merges all of the suggested texts for LLM use into a simple text block that you can straightforwardly send to the LLM of your choice. Thus, helping you get accurate, contextualized, and hallucination-free responses from your LLMs when working with your content.
+And finally, it merges all of this into a simple text block that you can send to the LLM of your choice, so you get accurate, contextualized, and hallucination-free responses from your LLMs when working with your content.
 
-**Sounds complex?**  
+## LLM integration
+_Sounds complex?_
 Luckily GroundX does all the hard stuff for you in the background, you just have to follow these simple steps:
 
-- Make an API search request.
-- Retrieve the search text property and pass it on to the LLM of your choice.
-- Get a response from the LLM using your retrieved data.
+1. Make an API search request.
+
+_Example:_
+
+:::code
+
+```python
+
+```
+
+```javascript
+const queryString = "How many workers walk to work in the Bay Area?"
+
+const result = await groundx.search.content({
+    id: 6839,
+    n: 10,
+    query: queryString
+  });
+```
+
+2. Retrieve the `search.text` property and pass it on to the LLM of your choice.
+
+_Example:_
+:::code
+```python
+
+```
+
+```javascript
+const llmText = result.data.search.text;
+```
+
+:::
+
+3. Get a response from the LLM using your retrieved data.
+
+_Example:_
+
+:::code
+
+```python
+
+```
+
+```javascript
+
+```
+
+:::
+
+:::info{Title: LLM API}
+Make sure to get the API key, endpoints, and SDK from your LLM provider. For example, if using ChatGPT, go to the [OpenAI documentation](https://platform.openai.com/docs/overview)
+:::
 
 The end result: retrievals that outperform traditional vector systems and boost the accuracy of LLM completions.
 
-**Let’s go into the details.**
+## Getting started
+Let’s go into the details.
 
 To make an API request you’ll need to do the following:
 
-- First, make sure you’ve already uploaded to a GroundX bucket the content you want to search through.
-- Next, set up your environment with the GroundX SDK.
-- Get the ID of the bucket or project you want to search through.
-- Go to the documentation or view our videos for information on how to obtain a bucket or project ID. 
+### Ingest content
+First, make sure you’ve already uploaded to a GroundX bucket the content you want to search through.
 
-**Create a search query string.**
+### Set up environment
+Next, set up your environment with the GroundX SDK.
 
-The string can be a question or the keywords you want to search for. GroundX processes the string to search through your content and its metadata to retrieve the most relevant results. If query strings are more than 30 words long, GroundX automatically rewrites the string with keywords using its internal LLM.
+### Bucket or project ID
+Get the ID of the project or bucket you want to search through.
 
+:::note
+Go to the documentation for information on how to obtain a project or bucket ID with the corresponding endpoint:
+- :api[Bucket_list]
+- :api[Project_list]
+:::
+
+## Search query string
+Create a search query string. The string can be a question or the keywords you want to search for.
+If query strings are more than 30 words long, GroundX automatically rewrites the string with keywords using its internal LLM.
+GroundX processes the string to search through your content and its extra search data to retrieve the most relevant results.
+
+## Number of results
 Optionally, you can also set the number of results that are returned by the search request. By default, search queries return up to 20 results.
 
-**You’re now ready to make the API search request.**
-Include the ID and search query string in the request body. After making the request, you will receive a Search object as the response.
+## API request
+You’re now ready to make the API search request.
+Include the ID and search query string in the request body. 
+
+## API response
+After making the request, you will receive a Search object as the response.
 
 **Let’s go over some of the details of the Search schema.**
 
-The most significant property returned by the search response is the text property, which contains a compilation of suggested texts with their corresponding metadata. In other words, it’s a string that includes all the automatically rewritten text chunks and the custom metadata that was manually added to the original content.
-
+### Recommended data
+The most significant property returned by the search response is the text property, which contains a compilation of suggested texts with their corresponding extra search data.
+In other words, it’s a string that includes all the automatically rewritten text chunks and the extra search data that was manually added to the original content.
 
 As already mentioned, this content that is automatically generated by GroundX’s internal LLM provides you with intelligible, contextualized, and machine-understandable content that you can straightforwardly pass on to your LLM to work with.
 
-
-Although we recommend passing the “search.text" property directly to the LLM you’re working with for response generation, you can also add your own logic to handle the “search.results" property.
+### Advanced data handling
+Although we recommend passing the `search.text` property directly to the LLM you’re working with for response generation, you can also add your own logic to handle the `search.results` property.
 
 
 **Let’s take a closer look:**
 
-
-The results property contains a list of all the original text chunks that matched the search query. Chunks are ordered by a score based on semantic search and re-ranking methodologies. 
+The `results` property contains a list of all the original text chunks that matched the search query. Chunks are ordered by a score based on semantic search and re-ranking methodologies. 
 Here, you can also find the suggested text we’ve been mentioning, which is the more intelligible and performant version of the text chunk.
 
-Furthermore, you can find automatically generated metadata, like summaries of the document and section the text chunks are found in. 
+Furthermore, you can find automatically generated extra search data, like summaries of the document and section the text chunks are found in.
 
-The custom metadata added to your content is available as well.  And to help keep source information available, the GroundX URL, document ID, and bucket ID of the content where the text chunks were extracted from are also provided.
- 
+The extra search data added to your content is available as well.
+And to help keep source information available, the GroundX URL, document ID, and bucket ID of the content where the text chunks were extracted from are also provided.
+
+## Final details
 You’re now ready to integrate GroundX with your LLM to generate accurate, hallucination-free responses using data from your own content.
