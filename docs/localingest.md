@@ -98,6 +98,7 @@ const groundx = new Groundx({
 
 :::info{title="API Key"}
 - The "GROUNDX_API_KEY" placeholder represents your API key. We recommend storing your API key as an environment variable and accessing it from there. For this purpose, you can use libraries such as [dotenv](https://www.npmjs.com/package/dotenv) in Node.js or [os](https://docs.python.org/3/library/os.html#os.environ) in Python.
+- Go to the [GroundX dashboard](https://dashboard.groundx.ai/auth/login) to get your API key.
 - Go to the [GroundX-SDKs documentation](https://github.com/groundxai/groundx-sdks#groundx-sdks) for installation details.
 :::
 
