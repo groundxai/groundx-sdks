@@ -149,9 +149,9 @@ After making the request, you should receive a response with "processId" and "st
 
 ```json
 {
-    'ingest': {
-        'processId': '23e782ac-3829-4833-965d-e77b4e289885', 
-        'status': 'queued'
+    "ingest": {
+        "processId": "23e782ac-3829-4833-965d-e77b4e289885", 
+        "status": "queued"
     }
 }
 ```
