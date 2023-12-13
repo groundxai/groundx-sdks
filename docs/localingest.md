@@ -139,6 +139,10 @@ const response = await groundx.documents.uploadLocal([
 
 :::
 
+:::note
+Go to :api[Document_uploadLocal] for endpoint details.
+:::
+
 ## API response
 
 After making the request, you should receive a response with "processId" and "status". This response indicates that GroundX is uploading or ingesting your file into the indicated bucket.
