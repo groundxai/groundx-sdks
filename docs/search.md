@@ -59,7 +59,7 @@ The [search API request](#getting-started) is explained further below.
 
 :::
 
-1. Retrieve the `search.text` property and pass it on to the LLM of your choice.
+2. Retrieve the `search.text` property and pass it on to the LLM of your choice.
 
 _Example:_
 
@@ -127,7 +127,7 @@ Make sure to get the API key, endpoints, and SDK from your LLM provider. For exa
 
 3. Get a response from the LLM using your retrieved data.
 
-_Example using :_
+_Example:_
 
 :::code
 
@@ -257,7 +257,7 @@ _Example:_
 ```python
 response = groundx.search.content(
     id=groundxId, 
-    query=query,
+    query=queryString,
     n=n,
 )
 
