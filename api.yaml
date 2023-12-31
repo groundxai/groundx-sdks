@@ -762,6 +762,9 @@ components:
           description: Unique system generated ID for the document
           format: uuid
           type: string
+        fileName:
+          description: Name of ingested file
+          type: string
         score:
           description: Confidence score in the search result
           type: number
@@ -982,6 +985,8 @@ components:
         - pdf
         - png
         - jpg
+        - csv
+        - tsv
     DocumentLocalUploadRequest:
       type: array
       items:
