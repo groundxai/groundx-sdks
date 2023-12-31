@@ -16,5 +16,5 @@ import type * as buffer from "buffer"
  * @export
  * @enum {string}
  */
-export type DocumentType = 'txt' | 'docx' | 'pptx' | 'xlsx' | 'pdf' | 'png' | 'jpg'
+export type DocumentType = 'txt' | 'docx' | 'pptx' | 'xlsx' | 'pdf' | 'png' | 'jpg' | 'csv' | 'tsv'
 

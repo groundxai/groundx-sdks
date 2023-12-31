@@ -30,6 +30,12 @@ export interface SearchResultItem {
      */
     'documentId'?: string;
     /**
+     * Name of ingested file
+     * @type {string}
+     * @memberof SearchResultItem
+     */
+    'fileName'?: string;
+    /**
      * Confidence score in the search result
      * @type {number}
      * @memberof SearchResultItem

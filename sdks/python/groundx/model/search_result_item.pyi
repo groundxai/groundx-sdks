@@ -37,6 +37,7 @@ class SearchResultItem(
         class properties:
             bucketId = schemas.IntSchema
             documentId = schemas.UUIDSchema
+            fileName = schemas.StrSchema
             score = schemas.NumberSchema
             searchData = schemas.DictSchema
             sourceUrl = schemas.StrSchema
@@ -45,6 +46,7 @@ class SearchResultItem(
             __annotations__ = {
                 "bucketId": bucketId,
                 "documentId": documentId,
+                "fileName": fileName,
                 "score": score,
                 "searchData": searchData,
                 "sourceUrl": sourceUrl,
@@ -57,6 +59,9 @@ class SearchResultItem(
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["documentId"]) -> MetaOapg.properties.documentId: ...
+    
+    @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["fileName"]) -> MetaOapg.properties.fileName: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["score"]) -> MetaOapg.properties.score: ...
@@ -76,7 +81,7 @@ class SearchResultItem(
     @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["bucketId", "documentId", "score", "searchData", "sourceUrl", "suggestedText", "text", ], str]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["bucketId", "documentId", "fileName", "score", "searchData", "sourceUrl", "suggestedText", "text", ], str]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -86,6 +91,9 @@ class SearchResultItem(
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["documentId"]) -> typing.Union[MetaOapg.properties.documentId, schemas.Unset]: ...
+    
+    @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["fileName"]) -> typing.Union[MetaOapg.properties.fileName, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["score"]) -> typing.Union[MetaOapg.properties.score, schemas.Unset]: ...
@@ -105,7 +113,7 @@ class SearchResultItem(
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["bucketId", "documentId", "score", "searchData", "sourceUrl", "suggestedText", "text", ], str]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["bucketId", "documentId", "fileName", "score", "searchData", "sourceUrl", "suggestedText", "text", ], str]):
         return super().get_item_oapg(name)
     
 
@@ -114,6 +122,7 @@ class SearchResultItem(
         *args: typing.Union[dict, frozendict.frozendict, ],
         bucketId: typing.Union[MetaOapg.properties.bucketId, decimal.Decimal, int, schemas.Unset] = schemas.unset,
         documentId: typing.Union[MetaOapg.properties.documentId, str, uuid.UUID, schemas.Unset] = schemas.unset,
+        fileName: typing.Union[MetaOapg.properties.fileName, str, schemas.Unset] = schemas.unset,
         score: typing.Union[MetaOapg.properties.score, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         searchData: typing.Union[MetaOapg.properties.searchData, dict, frozendict.frozendict, schemas.Unset] = schemas.unset,
         sourceUrl: typing.Union[MetaOapg.properties.sourceUrl, str, schemas.Unset] = schemas.unset,
@@ -127,6 +136,7 @@ class SearchResultItem(
             *args,
             bucketId=bucketId,
             documentId=documentId,
+            fileName=fileName,
             score=score,
             searchData=searchData,
             sourceUrl=sourceUrl,
