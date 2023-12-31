@@ -26,6 +26,9 @@ class OptionalSearchResultItem(TypedDict, total=False):
     # Unique system generated ID for the document
     documentId: str
 
+    # Name of ingested file
+    fileName: str
+
     # Confidence score in the search result
     score: typing.Union[int, float]
 

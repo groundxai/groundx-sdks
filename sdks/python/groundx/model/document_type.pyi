@@ -61,3 +61,11 @@ class DocumentType(
     @schemas.classproperty
     def JPG(cls):
         return cls("jpg")
+    
+    @schemas.classproperty
+    def CSV(cls):
+        return cls("csv")
+    
+    @schemas.classproperty
+    def TSV(cls):
+        return cls("tsv")
