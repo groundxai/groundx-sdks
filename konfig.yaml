@@ -45,6 +45,7 @@ generators:
     packageName: groundx
     projectName: groundx-python-sdk
     responseTypeVersion: '1'
+    useAiohttp3_8: true
     outputDirectory: sdks/python
     clientName: Groundx
     git:
