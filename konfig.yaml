@@ -57,6 +57,7 @@ generators:
     npmName: groundx-typescript-sdk
     outputDirectory: sdks/typescript
     clientName: Groundx
+    useAxios0_27_2: true
     git:
       userId: groundxai
       repoId: groundx-sdks/tree/main/sdks/typescript
