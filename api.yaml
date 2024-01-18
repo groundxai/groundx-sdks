@@ -330,6 +330,14 @@ paths:
           schema:
             type: string
             example: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
+        - description: The amount of data returned with each search result. 0 == no search results, only the recommended context. 1 == search results but no searchData. 2 == search results and searchData.
+          in: query
+          name: 'verbosity'
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 2
       requestBody:
         content:
           application/json:
