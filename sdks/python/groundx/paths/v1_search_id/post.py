@@ -52,6 +52,16 @@ class NSchema(
         inclusive_maximum = 100
         inclusive_minimum = 1
 NextTokenSchema = schemas.StrSchema
+
+
+class VerbositySchema(
+    schemas.IntSchema
+):
+
+
+    class MetaOapg:
+        inclusive_maximum = 2
+        inclusive_minimum = 0
 RequestRequiredQueryParams = typing_extensions.TypedDict(
     'RequestRequiredQueryParams',
     {
@@ -62,6 +72,7 @@ RequestOptionalQueryParams = typing_extensions.TypedDict(
     {
         'n': typing.Union[NSchema, decimal.Decimal, int, ],
         'nextToken': typing.Union[NextTokenSchema, str, ],
+        'verbosity': typing.Union[VerbositySchema, decimal.Decimal, int, ],
     },
     total=False
 )
@@ -81,6 +92,12 @@ request_query_next_token = api_client.QueryParameter(
     name="nextToken",
     style=api_client.ParameterStyle.FORM,
     schema=NextTokenSchema,
+    explode=True,
+)
+request_query_verbosity = api_client.QueryParameter(
+    name="verbosity",
+    style=api_client.ParameterStyle.FORM,
+    schema=VerbositySchema,
     explode=True,
 )
 # Path params
@@ -193,6 +210,7 @@ class BaseApi(api_client.Api):
         id: int,
         n: typing.Optional[int] = None,
         next_token: typing.Optional[str] = None,
+        verbosity: typing.Optional[int] = None,
     ) -> api_client.MappedArgs:
         args: api_client.MappedArgs = api_client.MappedArgs()
         _query_params = {}
@@ -205,6 +223,8 @@ class BaseApi(api_client.Api):
             _query_params["n"] = n
         if next_token is not None:
             _query_params["nextToken"] = next_token
+        if verbosity is not None:
+            _query_params["verbosity"] = verbosity
         if id is not None:
             _path_params["id"] = id
         args.query = _query_params
@@ -254,6 +274,7 @@ class BaseApi(api_client.Api):
         for parameter in (
             request_query_n,
             request_query_next_token,
+            request_query_verbosity,
         ):
             parameter_data = query_params.get(parameter.name, schemas.unset)
             if parameter_data is schemas.unset:
@@ -397,6 +418,7 @@ class BaseApi(api_client.Api):
         for parameter in (
             request_query_n,
             request_query_next_token,
+            request_query_verbosity,
         ):
             parameter_data = query_params.get(parameter.name, schemas.unset)
             if parameter_data is schemas.unset:
@@ -477,6 +499,7 @@ class Content(BaseApi):
         id: int,
         n: typing.Optional[int] = None,
         next_token: typing.Optional[str] = None,
+        verbosity: typing.Optional[int] = None,
         **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
@@ -488,6 +511,7 @@ class Content(BaseApi):
             id=id,
             n=n,
             next_token=next_token,
+            verbosity=verbosity,
         )
         return await self._acontent_oapg(
             body=args.body,
@@ -502,6 +526,7 @@ class Content(BaseApi):
         id: int,
         n: typing.Optional[int] = None,
         next_token: typing.Optional[str] = None,
+        verbosity: typing.Optional[int] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -511,6 +536,7 @@ class Content(BaseApi):
             id=id,
             n=n,
             next_token=next_token,
+            verbosity=verbosity,
         )
         return self._content_oapg(
             body=args.body,
@@ -527,6 +553,7 @@ class ApiForpost(BaseApi):
         id: int,
         n: typing.Optional[int] = None,
         next_token: typing.Optional[str] = None,
+        verbosity: typing.Optional[int] = None,
         **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
@@ -538,6 +565,7 @@ class ApiForpost(BaseApi):
             id=id,
             n=n,
             next_token=next_token,
+            verbosity=verbosity,
         )
         return await self._acontent_oapg(
             body=args.body,
@@ -552,6 +580,7 @@ class ApiForpost(BaseApi):
         id: int,
         n: typing.Optional[int] = None,
         next_token: typing.Optional[str] = None,
+        verbosity: typing.Optional[int] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -561,6 +590,7 @@ class ApiForpost(BaseApi):
             id=id,
             n=n,
             next_token=next_token,
+            verbosity=verbosity,
         )
         return self._content_oapg(
             body=args.body,

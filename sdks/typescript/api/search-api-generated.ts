@@ -39,11 +39,12 @@ export const SearchApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {number} id The bucketId or projectId of the bucket or project being searched. The documents within the specified container will be compared to the query, and relevant information will be extracted.
          * @param {number} [n] The maximum number of returned documents. Accepts 1-100 with a default of 20.
          * @param {string} [nextToken] A token for pagination. If the number of search results for a given query is larger than n, the response will include a \&quot;nextToken\&quot; value. That token can be included in this field to retrieve the next batch of n search results.
+         * @param {number} [verbosity] The amount of data returned with each search result. 0 &#x3D;&#x3D; no search results, only the recommended context. 1 &#x3D;&#x3D; search results but no searchData. 2 &#x3D;&#x3D; search results and searchData.
          * @param {SearchRequest} [searchRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        content: async (id: number, n?: number, nextToken?: string, searchRequest?: SearchRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        content: async (id: number, n?: number, nextToken?: string, verbosity?: number, searchRequest?: SearchRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('content', 'id', id)
             const localVarPath = `/v1/search/{id}`
@@ -67,6 +68,10 @@ export const SearchApiAxiosParamCreator = function (configuration?: Configuratio
 
             if (nextToken !== undefined) {
                 localVarQueryParameter['nextToken'] = nextToken;
+            }
+
+            if (verbosity !== undefined) {
+                localVarQueryParameter['verbosity'] = verbosity;
             }
 
 
@@ -109,7 +114,7 @@ export const SearchApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async content(requestParameters: SearchApiContentRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SearchResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.content(requestParameters.id, requestParameters.n, requestParameters.nextToken, requestParameters, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.content(requestParameters.id, requestParameters.n, requestParameters.nextToken, requestParameters.verbosity, requestParameters, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -162,6 +167,13 @@ export type SearchApiContentRequest = {
     * @memberof SearchApiContent
     */
     readonly nextToken?: string
+    
+    /**
+    * The amount of data returned with each search result. 0 == no search results, only the recommended context. 1 == search results but no searchData. 2 == search results and searchData.
+    * @type {number}
+    * @memberof SearchApiContent
+    */
+    readonly verbosity?: number
     
 } & SearchRequest
 

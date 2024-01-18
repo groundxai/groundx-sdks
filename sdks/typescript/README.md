@@ -7,7 +7,6 @@
 Ground Your RAG Apps in Fact not Fiction
 
 [![npm](https://img.shields.io/badge/npm-v1.3.15-blue)](https://www.npmjs.com/package/groundx-typescript-sdk/v/1.3.15)
-[![GitHub last commit](https://img.shields.io/github/last-commit/groundxai/groundx-sdks/tree/main/sdks/typescript.svg)](https://github.com/groundxai/groundx-sdks/tree/main/sdks/typescript/commits)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://www.groundx.ai/)
 
 </div>
@@ -834,6 +833,10 @@ The maximum number of returned documents. Accepts 1-100 with a default of 20.
 ##### nextToken: `string`<a id="nexttoken-string"></a>
 
 A token for pagination. If the number of search results for a given query is larger than n, the response will include a \"nextToken\" value. That token can be included in this field to retrieve the next batch of n search results.
+
+##### verbosity: `number`<a id="verbosity-number"></a>
+
+The amount of data returned with each search result. 0 == no search results, only the recommended context. 1 == search results but no searchData. 2 == search results and searchData.
 
 #### 🔄 Return<a id="🔄-return"></a>
 

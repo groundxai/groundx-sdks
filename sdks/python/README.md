@@ -8,7 +8,6 @@ Ground Your RAG Apps in Fact not Fiction
 
 
 [![PyPI](https://img.shields.io/badge/PyPI-v1.3.12-blue)](https://pypi.org/project/groundx-python-sdk/1.3.12)
-[![GitHub last commit](https://img.shields.io/github/last-commit/groundxai/groundx-sdks.svg)](https://github.com/groundxai/groundx-sdks/commits)
 [![README.md](https://img.shields.io/badge/README-Click%20Here-green)](https://github.com/groundxai/groundx-sdks/tree/main/sdks/python#readme)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://www.groundx.ai/)
 
@@ -850,6 +849,7 @@ content_response = groundx.search.content(
     id=1,
     n=20,
     next_token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9",
+    verbosity=0,
 )
 ```
 
@@ -870,6 +870,10 @@ The maximum number of returned documents. Accepts 1-100 with a default of 20.
 ##### next_token: `str`<a id="next_token-str"></a>
 
 A token for pagination. If the number of search results for a given query is larger than n, the response will include a \"nextToken\" value. That token can be included in this field to retrieve the next batch of n search results.
+
+##### verbosity: `int`<a id="verbosity-int"></a>
+
+The amount of data returned with each search result. 0 == no search results, only the recommended context. 1 == search results but no searchData. 2 == search results and searchData.
 
 #### ⚙️ Request Body<a id="⚙️-request-body"></a>
 
