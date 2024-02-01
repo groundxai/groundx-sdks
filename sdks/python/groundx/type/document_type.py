@@ -16,4 +16,4 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 
-DocumentType = Literal["txt", "docx", "pptx", "xlsx", "pdf", "png", "jpg", "csv", "tsv"]
+DocumentType = Literal["txt", "docx", "pptx", "xlsx", "pdf", "png", "jpg", "csv", "tsv", "json"]

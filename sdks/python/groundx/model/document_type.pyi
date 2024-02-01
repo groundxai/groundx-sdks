@@ -69,3 +69,7 @@ class DocumentType(
     @schemas.classproperty
     def TSV(cls):
         return cls("tsv")
+    
+    @schemas.classproperty
+    def JSON(cls):
+        return cls("json")
