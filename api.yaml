@@ -995,6 +995,7 @@ components:
         - jpg
         - csv
         - tsv
+        - json
     DocumentLocalUploadRequest:
       type: array
       items:
