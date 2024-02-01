@@ -503,7 +503,7 @@ const uploadLocalResponse = await groundx.documents.uploadLocal([
     metadata: {
       bucketId: 1234,
       fileName: "my_file.txt",
-      fileType: "txt",
+      fileType: "string_example",
     },
   },
 ]);
@@ -538,7 +538,6 @@ const uploadRemoteResponse = await groundx.documents.uploadRemote({
     {
       bucketId: 1234,
       fileName: "my_file.txt",
-      fileType: "txt",
       sourceUrl: "https://my.source.url.com/file.txt",
     },
   ],

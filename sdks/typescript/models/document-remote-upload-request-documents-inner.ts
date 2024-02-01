@@ -31,7 +31,7 @@ export interface DocumentRemoteUploadRequestDocumentsInner {
      */
     'fileName'?: string;
     /**
-     * 
+     * The type of document (one of the seven currently supported file types)
      * @type {DocumentType}
      * @memberof DocumentRemoteUploadRequestDocumentsInner
      */

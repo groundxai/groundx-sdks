@@ -44,7 +44,7 @@ export interface DocumentResponseDocument {
      */
     'fileSize'?: string;
     /**
-     * 
+     * The type of document (one of the seven currently supported file types)
      * @type {DocumentType}
      * @memberof DocumentResponseDocument
      */

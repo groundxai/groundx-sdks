@@ -46,6 +46,7 @@ class DocumentType(
             "jpg": "JPG",
             "csv": "CSV",
             "tsv": "TSV",
+            "json": "JSON",
         }
     
     @schemas.classproperty
@@ -83,3 +84,7 @@ class DocumentType(
     @schemas.classproperty
     def TSV(cls):
         return cls("tsv")
+    
+    @schemas.classproperty
+    def JSON(cls):
+        return cls("json")
