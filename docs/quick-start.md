@@ -274,19 +274,19 @@ curl https://api.groundx.ai/api/v1/search/:id \
 ```
 
 ```python
-content_response = groundx.search.content(id=id, query=query)
+content_response = groundx.search.content(id=bucketId, query=query)
 ```
 
 ```typescript
 const searchResponse = await groundx.search.content({
-  id: id,
+  id: bucketId,
   query: query,
 });
 ```
 
 :::
 
-Replace `id` with your `projectId`, `groupId`, or `bucketId` and `query` with the query you want to use to search your content.
+You can also use `projectId` or `groupId` in place of `bucketId` in your search query. Any of the 3 values will work for search queries. Replace `query` with the query you want to use to search your content.
 
 If your request is successful, will receive a response that looks something like this:
 
