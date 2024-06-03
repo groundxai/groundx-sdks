@@ -70,7 +70,7 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
             const localVarQueryParameter = {} as any;
 
             // authentication ApiKeyAuth required
-            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "X-API-Key", configuration })
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "X-API-Key", keyParamName: "xAPIKey", configuration })
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -83,7 +83,9 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/v1/ingest/documents/website',
+                httpMethod: 'POST'
             });
             localVarRequestOptions.data = serializeDataIfNeeded(websiteCrawlRequest, localVarRequestOptions, configuration)
 
@@ -116,7 +118,7 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
             const localVarQueryParameter = {} as any;
 
             // authentication ApiKeyAuth required
-            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "X-API-Key", configuration })
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "X-API-Key", keyParamName: "xAPIKey", configuration })
             if (documentIds) {
                 localVarQueryParameter['documentIds'] = documentIds.join(COLLECTION_FORMATS.csv);
             }
@@ -129,7 +131,9 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/v1/ingest/documents',
+                httpMethod: 'DELETE'
             });
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -162,7 +166,7 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
             const localVarQueryParameter = {} as any;
 
             // authentication ApiKeyAuth required
-            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "X-API-Key", configuration })
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "X-API-Key", keyParamName: "xAPIKey", configuration })
 
     
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -171,7 +175,9 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/v1/ingest/document/{documentId}',
+                httpMethod: 'DELETE'
             });
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -204,7 +210,7 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
             const localVarQueryParameter = {} as any;
 
             // authentication ApiKeyAuth required
-            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "X-API-Key", configuration })
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "X-API-Key", keyParamName: "xAPIKey", configuration })
 
     
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -213,7 +219,9 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/v1/ingest/document/{documentId}',
+                httpMethod: 'GET'
             });
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -246,7 +254,7 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
             const localVarQueryParameter = {} as any;
 
             // authentication ApiKeyAuth required
-            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "X-API-Key", configuration })
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "X-API-Key", keyParamName: "xAPIKey", configuration })
 
     
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -255,7 +263,9 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/v1/ingest/{processId}',
+                httpMethod: 'GET'
             });
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -286,7 +296,7 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
             const localVarQueryParameter = {} as any;
 
             // authentication ApiKeyAuth required
-            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "X-API-Key", configuration })
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "X-API-Key", keyParamName: "xAPIKey", configuration })
             if (n !== undefined) {
                 localVarQueryParameter['n'] = n;
             }
@@ -303,7 +313,9 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/v1/ingest/documents',
+                httpMethod: 'GET'
             });
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -338,7 +350,7 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
             const localVarQueryParameter = {} as any;
 
             // authentication ApiKeyAuth required
-            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "X-API-Key", configuration })
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "X-API-Key", keyParamName: "xAPIKey", configuration })
             if (n !== undefined) {
                 localVarQueryParameter['n'] = n;
             }
@@ -355,7 +367,9 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/v1/ingest/documents/{id}',
+                httpMethod: 'GET'
             });
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -430,7 +444,7 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
             if (!isBrowser()) Object.assign(localVarHeaderParameter, localVarFormParams.getHeaders());
 
             // authentication ApiKeyAuth required
-            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "X-API-Key", configuration })
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "X-API-Key", keyParamName: "xAPIKey", configuration })
 
     
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
@@ -450,7 +464,9 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/v1/ingest/documents/local',
+                httpMethod: 'POST'
             });
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -480,7 +496,7 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
             const localVarQueryParameter = {} as any;
 
             // authentication ApiKeyAuth required
-            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "X-API-Key", configuration })
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "X-API-Key", keyParamName: "xAPIKey", configuration })
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -493,7 +509,9 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/v1/ingest/documents/remote',
+                httpMethod: 'POST'
             });
             localVarRequestOptions.data = serializeDataIfNeeded(documentRemoteUploadRequest, localVarRequestOptions, configuration)
 
@@ -521,7 +539,10 @@ export const DocumentsApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async crawlWebsite(requestParameters: DocumentsApiCrawlWebsiteRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IngestResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.crawlWebsite(requestParameters, options);
+            const websiteCrawlRequest: WebsiteCrawlRequest = {
+                websites: requestParameters.websites
+            };
+            const localVarAxiosArgs = await localVarAxiosParamCreator.crawlWebsite(websiteCrawlRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -598,7 +619,8 @@ export const DocumentsApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async uploadLocal(requestParameters: DocumentsApiUploadLocalRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IngestResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadLocal(requestParameters, options);
+            const documentLocalUploadRequestInner: Array<DocumentLocalUploadRequestInner> = requestParameters;
+            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadLocal(documentLocalUploadRequestInner, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -609,7 +631,10 @@ export const DocumentsApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async uploadRemote(requestParameters: DocumentsApiUploadRemoteRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IngestResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadRemote(requestParameters, options);
+            const documentRemoteUploadRequest: DocumentRemoteUploadRequest = {
+                documents: requestParameters.documents
+            };
+            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadRemote(documentRemoteUploadRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }

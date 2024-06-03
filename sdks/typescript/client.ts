@@ -13,6 +13,7 @@ import { AxiosRequestConfig } from "axios";
 import {
   BucketsApi,
   DocumentsApi,
+  HealthApi,
   ProjectsApi,
   SearchApi,
 } from "./api";
@@ -22,6 +23,7 @@ import { GroundxCustom } from "./client-custom";
 export class Groundx extends GroundxCustom {
   readonly buckets: BucketsApi;
   readonly documents: DocumentsApi;
+  readonly health: HealthApi;
   readonly projects: ProjectsApi;
   readonly search: SearchApi;
 
@@ -30,6 +32,7 @@ export class Groundx extends GroundxCustom {
     const configuration = new Configuration(configurationParameters);
     this.buckets = new BucketsApi(configuration);
     this.documents = new DocumentsApi(configuration);
+    this.health = new HealthApi(configuration);
     this.projects = new ProjectsApi(configuration);
     this.search = new SearchApi(configuration);
   }

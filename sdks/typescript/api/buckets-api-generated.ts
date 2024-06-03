@@ -64,7 +64,7 @@ export const BucketsApiAxiosParamCreator = function (configuration?: Configurati
             const localVarQueryParameter = {} as any;
 
             // authentication ApiKeyAuth required
-            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "X-API-Key", configuration })
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "X-API-Key", keyParamName: "xAPIKey", configuration })
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -77,7 +77,9 @@ export const BucketsApiAxiosParamCreator = function (configuration?: Configurati
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/v1/bucket',
+                httpMethod: 'POST'
             });
             localVarRequestOptions.data = serializeDataIfNeeded(bucketCreateRequest, localVarRequestOptions, configuration)
 
@@ -111,7 +113,7 @@ export const BucketsApiAxiosParamCreator = function (configuration?: Configurati
             const localVarQueryParameter = {} as any;
 
             // authentication ApiKeyAuth required
-            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "X-API-Key", configuration })
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "X-API-Key", keyParamName: "xAPIKey", configuration })
 
     
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -120,7 +122,9 @@ export const BucketsApiAxiosParamCreator = function (configuration?: Configurati
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/v1/bucket/{bucketId}',
+                httpMethod: 'DELETE'
             });
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -153,7 +157,7 @@ export const BucketsApiAxiosParamCreator = function (configuration?: Configurati
             const localVarQueryParameter = {} as any;
 
             // authentication ApiKeyAuth required
-            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "X-API-Key", configuration })
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "X-API-Key", keyParamName: "xAPIKey", configuration })
 
     
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -162,7 +166,9 @@ export const BucketsApiAxiosParamCreator = function (configuration?: Configurati
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/v1/bucket/{bucketId}',
+                httpMethod: 'GET'
             });
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -193,7 +199,7 @@ export const BucketsApiAxiosParamCreator = function (configuration?: Configurati
             const localVarQueryParameter = {} as any;
 
             // authentication ApiKeyAuth required
-            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "X-API-Key", configuration })
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "X-API-Key", keyParamName: "xAPIKey", configuration })
             if (n !== undefined) {
                 localVarQueryParameter['n'] = n;
             }
@@ -210,7 +216,9 @@ export const BucketsApiAxiosParamCreator = function (configuration?: Configurati
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/v1/bucket',
+                httpMethod: 'GET'
             });
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -246,7 +254,7 @@ export const BucketsApiAxiosParamCreator = function (configuration?: Configurati
             const localVarQueryParameter = {} as any;
 
             // authentication ApiKeyAuth required
-            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "X-API-Key", configuration })
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "X-API-Key", keyParamName: "xAPIKey", configuration })
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -259,7 +267,9 @@ export const BucketsApiAxiosParamCreator = function (configuration?: Configurati
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/v1/bucket/{bucketId}',
+                httpMethod: 'PUT'
             });
             localVarRequestOptions.data = serializeDataIfNeeded(bucketUpdateRequest, localVarRequestOptions, configuration)
 
@@ -287,7 +297,10 @@ export const BucketsApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async create(requestParameters: BucketsApiCreateRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BucketResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.create(requestParameters, options);
+            const bucketCreateRequest: BucketCreateRequest = {
+                name: requestParameters.name
+            };
+            const localVarAxiosArgs = await localVarAxiosParamCreator.create(bucketCreateRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -331,7 +344,10 @@ export const BucketsApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async update(requestParameters: BucketsApiUpdateRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BucketUpdateResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.update(requestParameters.bucketId, requestParameters, options);
+            const bucketUpdateRequest: BucketUpdateRequest = {
+                newName: requestParameters.newName
+            };
+            const localVarAxiosArgs = await localVarAxiosParamCreator.update(requestParameters.bucketId, bucketUpdateRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }

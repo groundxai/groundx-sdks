@@ -20,6 +20,7 @@ class RequiredProjectCreateRequest(TypedDict):
     # The name of the project being created.
     name: str
 
+
 class OptionalProjectCreateRequest(TypedDict, total=False):
     # Specify bucketName to automatically create a bucket, by the name specified, and add it to the created project.
     bucketName: str

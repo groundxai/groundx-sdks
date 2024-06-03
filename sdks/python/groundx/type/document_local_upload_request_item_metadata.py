@@ -26,6 +26,7 @@ class RequiredDocumentLocalUploadRequestItemMetadata(TypedDict):
 
     fileType: DocumentType
 
+
 class OptionalDocumentLocalUploadRequestItemMetadata(TypedDict, total=False):
     # Custom metadata which can be used to influence GroundX's search functionality. This data can be used to further hone GroundX search.
     searchData: typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]

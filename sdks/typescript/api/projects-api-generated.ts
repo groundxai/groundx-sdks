@@ -67,7 +67,7 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
             const localVarQueryParameter = {} as any;
 
             // authentication ApiKeyAuth required
-            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "X-API-Key", configuration })
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "X-API-Key", keyParamName: "xAPIKey", configuration })
 
     
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -76,7 +76,9 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/v1/project/{projectId}/bucket/{bucketId}',
+                httpMethod: 'POST'
             });
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -108,7 +110,7 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
             const localVarQueryParameter = {} as any;
 
             // authentication ApiKeyAuth required
-            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "X-API-Key", configuration })
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "X-API-Key", keyParamName: "xAPIKey", configuration })
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -121,7 +123,9 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/v1/project',
+                httpMethod: 'POST'
             });
             localVarRequestOptions.data = serializeDataIfNeeded(projectCreateRequest, localVarRequestOptions, configuration)
 
@@ -155,7 +159,7 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
             const localVarQueryParameter = {} as any;
 
             // authentication ApiKeyAuth required
-            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "X-API-Key", configuration })
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "X-API-Key", keyParamName: "xAPIKey", configuration })
 
     
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -164,7 +168,9 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/v1/project/{projectId}',
+                httpMethod: 'DELETE'
             });
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -197,7 +203,7 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
             const localVarQueryParameter = {} as any;
 
             // authentication ApiKeyAuth required
-            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "X-API-Key", configuration })
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "X-API-Key", keyParamName: "xAPIKey", configuration })
 
     
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -206,7 +212,9 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/v1/project/{projectId}',
+                httpMethod: 'GET'
             });
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -237,7 +245,7 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
             const localVarQueryParameter = {} as any;
 
             // authentication ApiKeyAuth required
-            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "X-API-Key", configuration })
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "X-API-Key", keyParamName: "xAPIKey", configuration })
             if (n !== undefined) {
                 localVarQueryParameter['n'] = n;
             }
@@ -254,7 +262,9 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/v1/project',
+                httpMethod: 'GET'
             });
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -291,7 +301,7 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
             const localVarQueryParameter = {} as any;
 
             // authentication ApiKeyAuth required
-            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "X-API-Key", configuration })
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "X-API-Key", keyParamName: "xAPIKey", configuration })
 
     
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -300,7 +310,9 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/v1/project/{projectId}/bucket/{bucketId}',
+                httpMethod: 'DELETE'
             });
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -336,7 +348,7 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
             const localVarQueryParameter = {} as any;
 
             // authentication ApiKeyAuth required
-            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "X-API-Key", configuration })
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "X-API-Key", keyParamName: "xAPIKey", configuration })
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -349,7 +361,9 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/v1/project/{projectId}',
+                httpMethod: 'PUT'
             });
             localVarRequestOptions.data = serializeDataIfNeeded(projectUpdateRequest, localVarRequestOptions, configuration)
 
@@ -388,7 +402,11 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async create(requestParameters: ProjectsApiCreateRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.create(requestParameters, options);
+            const projectCreateRequest: ProjectCreateRequest = {
+                name: requestParameters.name,
+                bucketName: requestParameters.bucketName
+            };
+            const localVarAxiosArgs = await localVarAxiosParamCreator.create(projectCreateRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -443,7 +461,10 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async update(requestParameters: ProjectsApiUpdateRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.update(requestParameters.projectId, requestParameters, options);
+            const projectUpdateRequest: ProjectUpdateRequest = {
+                newName: requestParameters.newName
+            };
+            const localVarAxiosArgs = await localVarAxiosParamCreator.update(requestParameters.projectId, projectUpdateRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }

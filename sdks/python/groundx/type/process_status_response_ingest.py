@@ -23,6 +23,7 @@ class RequiredProcessStatusResponseIngest(TypedDict):
 
     status: ProcessingStatus
 
+
 class OptionalProcessStatusResponseIngest(TypedDict, total=False):
     progress: ProcessStatusResponseIngestProgress
 

@@ -19,3 +19,5 @@ class PathValues(str, enum.Enum):
     V1_PROJECT_PROJECT_ID_BUCKET_BUCKET_ID = "/v1/project/{projectId}/bucket/{bucketId}"
     V1_BUCKET = "/v1/bucket"
     V1_BUCKET_BUCKET_ID = "/v1/bucket/{bucketId}"
+    V1_HEALTH = "/v1/health"
+    V1_HEALTH_SERVICE = "/v1/health/{service}"
