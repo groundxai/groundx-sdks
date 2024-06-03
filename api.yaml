@@ -16,7 +16,7 @@ tags:
   - name: Search
   - name: Projects
   - name: Buckets
-  - name: test
+  - name: Health
 paths:
   /v1/ingest/documents/remote:
     post:
@@ -717,6 +717,46 @@ paths:
           description: Invalid bucket ID
         '401':
           description: Unauthorized to delete bucket with given ID
+  /v1/health:
+    get:
+      tags:
+        - Health
+      summary: list
+      operationId: Health_list
+      description: >
+        List the current health status of all services. Statuses update every 5 minutes.
+      responses:
+        '200':
+          description: Look up success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+  /v1/health/{service}:
+    get:
+      tags:
+        - Health
+      summary: get
+      operationId: Health_get
+      description: >
+        Look up the current health status of a specific service. Statuses update every 5 minutes.
+      parameters:
+        - description: The name of the service to look up.
+          in: path
+          name: service
+          example: search
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Look up success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+        '400':
+          description: Invalid service name
 components:
   schemas:
     SearchRequest:
@@ -1187,6 +1227,44 @@ components:
         message:
           type: string
           example: OK
+    HealthService:
+      type: object
+      required:
+        - lastUpdate
+        - service
+        - status
+      properties:
+        lastUpdate:
+          type: string
+          description: The data time when the service status was last updated, in RFC3339 format
+          format: date-time
+          example: '2023-10-03T08:59:39.312Z'
+        service:
+          type: string
+          description: The name of the service
+          example: search
+        status:
+          type: string
+          description: The health status of the service
+          enum:
+            - healthy
+            - degraded
+            - down
+            - unknown
+    HealthResponse:
+      type: object
+      required:
+        - health
+      properties:
+        health:
+          type: object
+          required:
+            - services
+          properties:
+            services:
+              type: array
+              items: 
+                $ref: '#/components/schemas/HealthService'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
