@@ -24,6 +24,7 @@ class RequiredDocumentRemoteUploadRequestDocumentsItem(TypedDict):
     # The URL of the document being uploaded to GroundX.
     sourceUrl: str
 
+
 class OptionalDocumentRemoteUploadRequestDocumentsItem(TypedDict, total=False):
     # The name of the file being uploaded
     fileName: str

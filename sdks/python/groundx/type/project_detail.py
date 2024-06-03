@@ -20,6 +20,7 @@ from groundx.type.bucket_detail import BucketDetail
 class RequiredProjectDetail(TypedDict):
     projectId: int
 
+
 class OptionalProjectDetail(TypedDict, total=False):
     # The content buckets associated with the project
     buckets: typing.List[BucketDetail]

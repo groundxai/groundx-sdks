@@ -19,6 +19,7 @@ from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 class RequiredBucketUpdateDetail(TypedDict):
     bucketId: int
 
+
 class OptionalBucketUpdateDetail(TypedDict, total=False):
     name: str
 

@@ -19,6 +19,7 @@ from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 class RequiredBucketDetail(TypedDict):
     bucketId: int
 
+
 class OptionalBucketDetail(TypedDict, total=False):
     # The data time when the bucket was created, in RFC3339 format
     created: datetime

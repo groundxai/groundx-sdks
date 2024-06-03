@@ -19,6 +19,7 @@ type ApiKey =
   | { [apiKeyName: string]: string | undefined };
 
 export interface ConfigurationParameters {
+
     /**
      * parameter for apiKey security
      * @param name security name
@@ -63,6 +64,10 @@ export class Configuration {
      */
     accessToken?: string | Promise<string> | ((name?: string, scopes?: string[]) => string) | ((name?: string, scopes?: string[]) => Promise<string>);
     /**
+     * When the access token expires, measured in Unix time in seconds
+     */
+    accessTokenExpiresIn?: number;
+    /**
      * override base path
      *
      * @type {string}
@@ -90,6 +95,7 @@ export class Configuration {
     userAgent: string;
 
     constructor(param: ConfigurationParameters) {
+
         this.apiKey = param.apiKey
         if (this.apiKey === undefined) {
             this.apiKey = {}

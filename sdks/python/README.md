@@ -1,6 +1,6 @@
 <div align="center">
 
-[![Visit Groundx](https://raw.githubusercontent.com/groundxai/groundx-sdks/HEAD/header.png)](https://www.groundx.ai)
+[![Visit Groundx](https://raw.githubusercontent.com/groundxai/groundx-sdks/HEAD/sdks/python/header.png)](https://www.groundx.ai)
 
 # Groundx<a id="groundx"></a>
 
@@ -18,7 +18,7 @@ Ground Your RAG Apps in Fact not Fiction
 <!-- toc -->
 
 - [Requirements](#requirements)
-- [Installing](#installing)
+- [Installation](#installation)
 - [Getting Started](#getting-started)
 - [Async](#async)
 - [Reference](#reference)
@@ -36,6 +36,8 @@ Ground Your RAG Apps in Fact not Fiction
   * [`groundx.documents.lookup`](#groundxdocumentslookup)
   * [`groundx.documents.upload_local`](#groundxdocumentsupload_local)
   * [`groundx.documents.upload_remote`](#groundxdocumentsupload_remote)
+  * [`groundx.health.get`](#groundxhealthget)
+  * [`groundx.health.list`](#groundxhealthlist)
   * [`groundx.projects.add_bucket`](#groundxprojectsadd_bucket)
   * [`groundx.projects.create`](#groundxprojectscreate)
   * [`groundx.projects.delete`](#groundxprojectsdelete)
@@ -51,7 +53,7 @@ Ground Your RAG Apps in Fact not Fiction
 
 Python >=3.7
 
-## Installing<a id="installing"></a>
+## Installation<a id="installation"></a>
 
 ```sh
 pip install groundx-python-sdk==1.3.14
@@ -127,7 +129,10 @@ asyncio.run(main())
 ## Reference<a id="reference"></a>
 ### `groundx.buckets.create`<a id="groundxbucketscreate"></a>
 
-Create a new bucket.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+Create a new bucket.
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -158,7 +163,10 @@ create_response = groundx.buckets.create(
 
 ### `groundx.buckets.delete`<a id="groundxbucketsdelete"></a>
 
-Delete a bucket.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+Delete a bucket.
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -188,7 +196,10 @@ The bucketId of the bucket being deleted.
 
 ### `groundx.buckets.get`<a id="groundxbucketsget"></a>
 
-Look up a specific bucket by its bucketId.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+Look up a specific bucket by its bucketId.
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -218,7 +229,10 @@ The bucketId of the bucket to look up.
 
 ### `groundx.buckets.list`<a id="groundxbucketslist"></a>
 
-List all buckets within your GroundX account  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+List all buckets within your GroundX account
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -253,7 +267,10 @@ A token for pagination. If the number of documents for a given query is larger t
 
 ### `groundx.buckets.update`<a id="groundxbucketsupdate"></a>
 
-Rename a bucket.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+Rename a bucket.
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -291,7 +308,10 @@ The bucketId of the bucket being updated.
 
 ### `groundx.documents.crawl_website`<a id="groundxdocumentscrawl_website"></a>
 
-Upload the content of a publicly accessible website to a GroundX bucket. This is done by following links within a specified URL, recursively, up to a specified depth or number of pages.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+Upload the content of a publicly accessible website to a GroundX bucket. This is done by following links within a specified URL, recursively, up to a specified depth or number of pages.
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -329,7 +349,10 @@ crawl_website_response = groundx.documents.crawl_website(
 
 ### `groundx.documents.delete`<a id="groundxdocumentsdelete"></a>
 
-Delete multiple documents hosted on GroundX  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+Delete multiple documents hosted on GroundX
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -359,7 +382,10 @@ A list of documentIds which correspond to documents uploaded to GroundX
 
 ### `groundx.documents.delete1`<a id="groundxdocumentsdelete1"></a>
 
-Delete a single document hosted on GroundX  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+Delete a single document hosted on GroundX
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -389,7 +415,10 @@ A documentId which correspond to a document uploaded to GroundX
 
 ### `groundx.documents.get`<a id="groundxdocumentsget"></a>
 
-Look up an existing document by documentId.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+Look up an existing document by documentId.
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -419,7 +448,10 @@ The documentId of the document for which GroundX information will be provided.
 
 ### `groundx.documents.get_processing_status_by_id`<a id="groundxdocumentsget_processing_status_by_id"></a>
 
-Get the current status of an upload, initiated with documents.upload_remote, documents.upload_local, or documents.crawl_website, by specifying the processId (the processId is included in the response of the documents.upload functions).  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+Get the current status of an upload, initiated with documents.upload_remote, documents.upload_local, or documents.crawl_website, by specifying the processId (the processId is included in the response of the documents.upload functions).
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -449,7 +481,10 @@ the processId for the upload process being checked
 
 ### `groundx.documents.list`<a id="groundxdocumentslist"></a>
 
-lookup all documents across all resources which are currently on GroundX  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+lookup all documents across all resources which are currently on GroundX
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -484,7 +519,10 @@ A token for pagination. If the number of documents for a given query is larger t
 
 ### `groundx.documents.lookup`<a id="groundxdocumentslookup"></a>
 
-lookup the document(s) associated with a processId, bucketId, or projectId.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+lookup the document(s) associated with a processId, bucketId, or projectId.
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -524,7 +562,10 @@ A token for pagination. If the number of documents for a given query is larger t
 
 ### `groundx.documents.upload_local`<a id="groundxdocumentsupload_local"></a>
 
-Upload documents hosted on a local file system to a GroundX bucket.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+Upload documents hosted on a local file system to a GroundX bucket.
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -560,7 +601,10 @@ upload_local_response = groundx.documents.upload_local(
 
 ### `groundx.documents.upload_remote`<a id="groundxdocumentsupload_remote"></a>
 
-Upload documents hosted on public URLs to a GroundX bucket.   Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+Upload documents hosted on public URLs to a GroundX bucket. 
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -596,9 +640,66 @@ upload_remote_response = groundx.documents.upload_remote(
 
 ---
 
+### `groundx.health.get`<a id="groundxhealthget"></a>
+
+Look up the current health status of a specific service. Statuses update every 5 minutes.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+get_response = groundx.health.get(
+    service="search",
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### service: `str`<a id="service-str"></a>
+
+The name of the service to look up.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`HealthResponse`](./groundx/type/health_response.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/v1/health/{service}` `get`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `groundx.health.list`<a id="groundxhealthlist"></a>
+
+List the current health status of all services. Statuses update every 5 minutes.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+list_response = groundx.health.list()
+```
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`HealthResponse`](./groundx/type/health_response.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/v1/health` `get`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
 ### `groundx.projects.add_bucket`<a id="groundxprojectsadd_bucket"></a>
 
-Add an existing bucket to an existing project. Buckets and projects can be associated many to many.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+Add an existing bucket to an existing project. Buckets and projects can be associated many to many.
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -633,7 +734,10 @@ The bucketId of the bucket being added to the project.
 
 ### `groundx.projects.create`<a id="groundxprojectscreate"></a>
 
-create a new project, a project being a collection of buckets which can be searched.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+create a new project, a project being a collection of buckets which can be searched.
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -671,7 +775,10 @@ Specify bucketName to automatically create a bucket, by the name specified, and 
 
 ### `groundx.projects.delete`<a id="groundxprojectsdelete"></a>
 
-Delete a project.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+Delete a project.
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -701,7 +808,10 @@ The projectId of the project to be deleted.
 
 ### `groundx.projects.get`<a id="groundxprojectsget"></a>
 
-look up a specific project by its projectId.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+look up a specific project by its projectId.
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -731,7 +841,10 @@ The projectId of the project to look up.
 
 ### `groundx.projects.list`<a id="groundxprojectslist"></a>
 
-list all projects within your GroundX account.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+list all projects within your GroundX account.
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -766,7 +879,10 @@ A token for pagination. If the number of documents for a given query is larger t
 
 ### `groundx.projects.remove_bucket`<a id="groundxprojectsremove_bucket"></a>
 
-remove a bucket from a project. Buckets and projects can be associated many to many, this removes one bucket to project association without disturbing others.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+remove a bucket from a project. Buckets and projects can be associated many to many, this removes one bucket to project association without disturbing others.
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -801,7 +917,10 @@ The bucketId of the bucket which will be removed from the project.
 
 ### `groundx.projects.update`<a id="groundxprojectsupdate"></a>
 
-Rename a project  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+Rename a project
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -839,7 +958,12 @@ The projectId of the project to update.
 
 ### `groundx.search.content`<a id="groundxsearchcontent"></a>
 
-Search documents on GroundX for the most relevant information to a given query.  The result of this query is typically used in one of two ways; result['search']['text'] can be used to provide context to a language model, facilitating RAG, or result['search']['results'] can be used to observe chunks of text which are relevant to the query, facilitating citation.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+Search documents on GroundX for the most relevant information to a given query.
+
+The result of this query is typically used in one of two ways; result['search']['text'] can be used to provide context to a language model, facilitating RAG, or result['search']['results'] can be used to observe chunks of text which are relevant to the query, facilitating citation.
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 

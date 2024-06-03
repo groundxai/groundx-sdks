@@ -61,7 +61,7 @@ export const SearchApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarQueryParameter = {} as any;
 
             // authentication ApiKeyAuth required
-            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "X-API-Key", configuration })
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "X-API-Key", keyParamName: "xAPIKey", configuration })
             if (n !== undefined) {
                 localVarQueryParameter['n'] = n;
             }
@@ -86,7 +86,9 @@ export const SearchApiAxiosParamCreator = function (configuration?: Configuratio
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/v1/search/{id}',
+                httpMethod: 'POST'
             });
             localVarRequestOptions.data = serializeDataIfNeeded(searchRequest, localVarRequestOptions, configuration)
 
@@ -114,7 +116,10 @@ export const SearchApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async content(requestParameters: SearchApiContentRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SearchResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.content(requestParameters.id, requestParameters.n, requestParameters.nextToken, requestParameters.verbosity, requestParameters, options);
+            const searchRequest: SearchRequest = {
+                query: requestParameters.query
+            };
+            const localVarAxiosArgs = await localVarAxiosParamCreator.content(requestParameters.id, requestParameters.n, requestParameters.nextToken, requestParameters.verbosity, searchRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }

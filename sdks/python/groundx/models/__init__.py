@@ -29,6 +29,9 @@ from groundx.model.document_remote_upload_request_documents_item import Document
 from groundx.model.document_response import DocumentResponse
 from groundx.model.document_response_document import DocumentResponseDocument
 from groundx.model.document_type import DocumentType
+from groundx.model.health_response import HealthResponse
+from groundx.model.health_response_health import HealthResponseHealth
+from groundx.model.health_service import HealthService
 from groundx.model.ingest_response import IngestResponse
 from groundx.model.ingest_response_ingest import IngestResponseIngest
 from groundx.model.message_response import MessageResponse

@@ -23,6 +23,7 @@ class RequiredWebsiteCrawlRequestWebsitesItem(TypedDict):
     # The URL from which the crawl is initiated.
     sourceUrl: str
 
+
 class OptionalWebsiteCrawlRequestWebsitesItem(TypedDict, total=False):
     # The maximum number of pages to crawl
     cap: int
