@@ -492,6 +492,7 @@ Interact with the "Request Body" below to explore the arguments of this function
 list_response = groundx.documents.list(
     n=1,
     next_token="string_example",
+    status="queued",
 )
 ```
 
@@ -504,6 +505,10 @@ The maximum number of returned documents. Accepts 1-100 with a default of 20.
 ##### next_token: `str`<a id="next_token-str"></a>
 
 A token for pagination. If the number of documents for a given query is larger than n, the response will include a \"nextToken\" value. That token can be included in this field to retrieve the next batch of n documents.
+
+##### status: [`ProcessingStatus`](./groundx/type/.py)<a id="status-processingstatusgroundxtypepy"></a>
+
+A status filter on the get documents query. If this value is set, then only documents with this status will be returned in the results.
 
 #### 🔄 Return<a id="🔄-return"></a>
 

@@ -460,7 +460,9 @@ Interact with the "Request Body" below to explore the arguments of this function
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
-const listResponse = await groundx.documents.list({});
+const listResponse = await groundx.documents.list({
+  status: "queued",
+});
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
@@ -472,6 +474,10 @@ The maximum number of returned documents. Accepts 1-100 with a default of 20.
 ##### nextToken: `string`<a id="nexttoken-string"></a>
 
 A token for pagination. If the number of documents for a given query is larger than n, the response will include a \"nextToken\" value. That token can be included in this field to retrieve the next batch of n documents.
+
+##### status: [`ProcessingStatus`](./models/processing-status.ts)<a id="status-processingstatusmodelsprocessing-statusts"></a>
+
+A status filter on the get documents query. If this value is set, then only documents with this status will be returned in the results.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
