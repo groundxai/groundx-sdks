@@ -83,6 +83,9 @@ operation_parameter_map = {
             {
                 'name': 'nextToken'
             },
+            {
+                'name': 'status'
+            },
         ]
     },
     '/v1/ingest/documents/{id}-GET': {

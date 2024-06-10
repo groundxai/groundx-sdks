@@ -194,6 +194,12 @@ paths:
           required: false
           schema:
             type: string
+        - name: status
+          description: A status filter on the get documents query. If this value is set, then only documents with this status will be returned in the results.
+          in: query
+          required: false
+          schema:
+            $ref: "#/components/schemas/ProcessingStatus"
       responses:
         '200':
           description: Look up success

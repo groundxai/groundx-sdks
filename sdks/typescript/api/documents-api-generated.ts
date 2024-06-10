@@ -37,6 +37,8 @@ import { IngestResponse } from '../models';
 // @ts-ignore
 import { ProcessStatusResponse } from '../models';
 // @ts-ignore
+import { ProcessingStatus } from '../models';
+// @ts-ignore
 import { WebsiteCrawlRequest } from '../models';
 // @ts-ignore
 import { WebsiteCrawlRequestWebsitesInner } from '../models';
@@ -279,10 +281,11 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
          * @summary list
          * @param {number} [n] The maximum number of returned documents. Accepts 1-100 with a default of 20.
          * @param {string} [nextToken] A token for pagination. If the number of documents for a given query is larger than n, the response will include a \&quot;nextToken\&quot; value. That token can be included in this field to retrieve the next batch of n documents.
+         * @param {ProcessingStatus} [status] A status filter on the get documents query. If this value is set, then only documents with this status will be returned in the results.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        list: async (n?: number, nextToken?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        list: async (n?: number, nextToken?: string, status?: ProcessingStatus, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/v1/ingest/documents`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -303,6 +306,10 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
 
             if (nextToken !== undefined) {
                 localVarQueryParameter['nextToken'] = nextToken;
+            }
+
+            if (status !== undefined) {
+                localVarQueryParameter['status'] = status;
             }
 
 
@@ -597,7 +604,7 @@ export const DocumentsApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async list(requestParameters: DocumentsApiListRequest = {}, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DocumentListResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.list(requestParameters.n, requestParameters.nextToken, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.list(requestParameters.n, requestParameters.nextToken, requestParameters.status, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -833,6 +840,13 @@ export type DocumentsApiListRequest = {
     * @memberof DocumentsApiList
     */
     readonly nextToken?: string
+    
+    /**
+    * A status filter on the get documents query. If this value is set, then only documents with this status will be returned in the results.
+    * @type {ProcessingStatus}
+    * @memberof DocumentsApiList
+    */
+    readonly status?: ProcessingStatus
     
 }
 

@@ -32,8 +32,10 @@ import frozendict  # noqa: F401
 
 from groundx import schemas  # noqa: F401
 
+from groundx.model.processing_status import ProcessingStatus as ProcessingStatusSchema
 from groundx.model.document_list_response import DocumentListResponse as DocumentListResponseSchema
 
+from groundx.type.processing_status import ProcessingStatus
 from groundx.type.document_list_response import DocumentListResponse
 
 from . import path
@@ -41,6 +43,7 @@ from . import path
 # Query params
 NSchema = schemas.IntSchema
 NextTokenSchema = schemas.StrSchema
+StatusSchema = ProcessingStatusSchema
 RequestRequiredQueryParams = typing_extensions.TypedDict(
     'RequestRequiredQueryParams',
     {
@@ -51,6 +54,7 @@ RequestOptionalQueryParams = typing_extensions.TypedDict(
     {
         'n': typing.Union[NSchema, decimal.Decimal, int, ],
         'nextToken': typing.Union[NextTokenSchema, str, ],
+        'status': typing.Union[StatusSchema, ],
     },
     total=False
 )
@@ -70,6 +74,12 @@ request_query_next_token = api_client.QueryParameter(
     name="nextToken",
     style=api_client.ParameterStyle.FORM,
     schema=NextTokenSchema,
+    explode=True,
+)
+request_query_status = api_client.QueryParameter(
+    name="status",
+    style=api_client.ParameterStyle.FORM,
+    schema=ProcessingStatusSchema,
     explode=True,
 )
 _auth = [
@@ -110,6 +120,7 @@ class BaseApi(api_client.Api):
         self,
         n: typing.Optional[int] = None,
         next_token: typing.Optional[str] = None,
+        status: typing.Optional[ProcessingStatus] = None,
     ) -> api_client.MappedArgs:
         args: api_client.MappedArgs = api_client.MappedArgs()
         _query_params = {}
@@ -117,6 +128,8 @@ class BaseApi(api_client.Api):
             _query_params["n"] = n
         if next_token is not None:
             _query_params["nextToken"] = next_token
+        if status is not None:
+            _query_params["status"] = status
         args.query = _query_params
         return args
 
@@ -146,6 +159,7 @@ class BaseApi(api_client.Api):
         for parameter in (
             request_query_n,
             request_query_next_token,
+            request_query_status,
         ):
             parameter_data = query_params.get(parameter.name, schemas.unset)
             if parameter_data is schemas.unset:
@@ -259,6 +273,7 @@ class BaseApi(api_client.Api):
         for parameter in (
             request_query_n,
             request_query_next_token,
+            request_query_status,
         ):
             parameter_data = query_params.get(parameter.name, schemas.unset)
             if parameter_data is schemas.unset:
@@ -324,6 +339,7 @@ class List(BaseApi):
         self,
         n: typing.Optional[int] = None,
         next_token: typing.Optional[str] = None,
+        status: typing.Optional[ProcessingStatus] = None,
         **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
@@ -333,6 +349,7 @@ class List(BaseApi):
         args = self._list_mapped_args(
             n=n,
             next_token=next_token,
+            status=status,
         )
         return await self._alist_oapg(
             query_params=args.query,
@@ -343,6 +360,7 @@ class List(BaseApi):
         self,
         n: typing.Optional[int] = None,
         next_token: typing.Optional[str] = None,
+        status: typing.Optional[ProcessingStatus] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -350,6 +368,7 @@ class List(BaseApi):
         args = self._list_mapped_args(
             n=n,
             next_token=next_token,
+            status=status,
         )
         return self._list_oapg(
             query_params=args.query,
@@ -362,6 +381,7 @@ class ApiForget(BaseApi):
         self,
         n: typing.Optional[int] = None,
         next_token: typing.Optional[str] = None,
+        status: typing.Optional[ProcessingStatus] = None,
         **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
@@ -371,6 +391,7 @@ class ApiForget(BaseApi):
         args = self._list_mapped_args(
             n=n,
             next_token=next_token,
+            status=status,
         )
         return await self._alist_oapg(
             query_params=args.query,
@@ -381,6 +402,7 @@ class ApiForget(BaseApi):
         self,
         n: typing.Optional[int] = None,
         next_token: typing.Optional[str] = None,
+        status: typing.Optional[ProcessingStatus] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -388,6 +410,7 @@ class ApiForget(BaseApi):
         args = self._list_mapped_args(
             n=n,
             next_token=next_token,
+            status=status,
         )
         return self._list_oapg(
             query_params=args.query,
