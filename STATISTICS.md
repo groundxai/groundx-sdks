@@ -2,6 +2,6 @@
 
 | SDK Name | Lines of Code |
 | -------- | ------------- |
-| python | 44386 |
-| typescript | 15095 |
-| **Total** | 59481 |
+| python | 44895 |
+| typescript | 15218 |
+| **Total** | 60113 |

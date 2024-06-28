@@ -21,9 +21,15 @@ class RequiredDocumentLookupResponse(TypedDict):
     pass
 
 class OptionalDocumentLookupResponse(TypedDict, total=False):
+    # The number of results returned in the current response
+    count: int
+
     documents: typing.List[DocumentResponse]
 
     nextToken: str
+
+    # The total number of results found
+    total: int
 
 class DocumentLookupResponse(RequiredDocumentLookupResponse, OptionalDocumentLookupResponse):
     pass

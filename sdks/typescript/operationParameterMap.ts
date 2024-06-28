@@ -100,6 +100,15 @@ export const operationParameterMap: Record<string, Entry> = {
                 name: 'id'
             },
             {
+                name: 'filter'
+            },
+            {
+                name: 'sort'
+            },
+            {
+                name: 'sortOrder'
+            },
+            {
                 name: 'n'
             },
             {

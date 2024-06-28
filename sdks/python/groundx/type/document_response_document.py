@@ -46,5 +46,8 @@ class OptionalDocumentResponseDocument(TypedDict, total=False):
 
     statusMessage: str
 
+    # Document X-Ray results
+    xrayUrl: str
+
 class DocumentResponseDocument(RequiredDocumentResponseDocument, OptionalDocumentResponseDocument):
     pass

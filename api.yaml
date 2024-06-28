@@ -147,6 +147,24 @@ paths:
           required: true
           schema:
             type: integer
+        - name: filter
+          description: Only documents with names that contain the filter string will be returned in the results.
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: sort
+          description: The document attribute that will be used to sort the results.
+          in: query
+          required: false
+          schema:
+            $ref: "#/components/schemas/Sort"
+        - name: sortOrder
+          description: The order in which to sort the results. A value for sort must also be set.
+          in: query
+          required: false
+          schema:
+            $ref: "#/components/schemas/SortOrder"
         - name: n
           description: The maximum number of returned documents. Accepts 1-100 with a default of 20.
           in: query
@@ -995,6 +1013,10 @@ components:
               $ref: "#/components/schemas/ProcessingStatus"
             statusMessage:
               type: string
+            xrayUrl:
+              type: string
+              description: Document X-Ray results
+              format: uri
     DocumentRemoteUploadRequest:
       type: object
       required:
@@ -1183,6 +1205,10 @@ components:
     DocumentLookupResponse:
       type: object
       properties:
+        count:
+          type: integer
+          example: 20
+          description: The number of results returned in the current response
         documents:
           type: array
           items:
@@ -1190,6 +1216,10 @@ components:
         nextToken:
           type: string
           example: The method you used is not supported for this query
+        total:
+          type: integer
+          example: 30
+          description: The total number of results found
       example:
         message: The method you used is not supported for this query
     WebsiteCrawlRequest:
@@ -1227,6 +1257,18 @@ components:
                 type: string
                 format: uri
                 example: https://my.website.com
+    Sort:
+      description: The attribute to use to sort results
+      type: string
+      enum:
+        - name
+        - created
+    SortOrder:
+      description: The order in which to sort results
+      type: string
+      enum:
+        - asc
+        - desc
     MessageResponse:
       type: object
       properties:

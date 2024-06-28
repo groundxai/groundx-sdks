@@ -39,6 +39,10 @@ import { ProcessStatusResponse } from '../models';
 // @ts-ignore
 import { ProcessingStatus } from '../models';
 // @ts-ignore
+import { Sort } from '../models';
+// @ts-ignore
+import { SortOrder } from '../models';
+// @ts-ignore
 import { WebsiteCrawlRequest } from '../models';
 // @ts-ignore
 import { WebsiteCrawlRequestWebsitesInner } from '../models';
@@ -335,12 +339,15 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
          * lookup the document(s) associated with a processId, bucketId, or projectId.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
          * @summary lookup
          * @param {number} id a processId, bucketId, or projectId
+         * @param {string} [filter] Only documents with names that contain the filter string will be returned in the results.
+         * @param {Sort} [sort] The document attribute that will be used to sort the results.
+         * @param {SortOrder} [sortOrder] The order in which to sort the results. A value for sort must also be set.
          * @param {number} [n] The maximum number of returned documents. Accepts 1-100 with a default of 20.
          * @param {string} [nextToken] A token for pagination. If the number of documents for a given query is larger than n, the response will include a \&quot;nextToken\&quot; value. That token can be included in this field to retrieve the next batch of n documents.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        lookup: async (id: number, n?: number, nextToken?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        lookup: async (id: number, filter?: string, sort?: Sort, sortOrder?: SortOrder, n?: number, nextToken?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('lookup', 'id', id)
             const localVarPath = `/v1/ingest/documents/{id}`
@@ -358,6 +365,18 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
 
             // authentication ApiKeyAuth required
             await setApiKeyToObject({ object: localVarHeaderParameter, key: "X-API-Key", keyParamName: "xAPIKey", configuration })
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+            if (sort !== undefined) {
+                localVarQueryParameter['sort'] = sort;
+            }
+
+            if (sortOrder !== undefined) {
+                localVarQueryParameter['sortOrder'] = sortOrder;
+            }
+
             if (n !== undefined) {
                 localVarQueryParameter['n'] = n;
             }
@@ -615,7 +634,7 @@ export const DocumentsApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async lookup(requestParameters: DocumentsApiLookupRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DocumentLookupResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.lookup(requestParameters.id, requestParameters.n, requestParameters.nextToken, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.lookup(requestParameters.id, requestParameters.filter, requestParameters.sort, requestParameters.sortOrder, requestParameters.n, requestParameters.nextToken, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -863,6 +882,27 @@ export type DocumentsApiLookupRequest = {
     * @memberof DocumentsApiLookup
     */
     readonly id: number
+    
+    /**
+    * Only documents with names that contain the filter string will be returned in the results.
+    * @type {string}
+    * @memberof DocumentsApiLookup
+    */
+    readonly filter?: string
+    
+    /**
+    * The document attribute that will be used to sort the results.
+    * @type {Sort}
+    * @memberof DocumentsApiLookup
+    */
+    readonly sort?: Sort
+    
+    /**
+    * The order in which to sort the results. A value for sort must also be set.
+    * @type {SortOrder}
+    * @memberof DocumentsApiLookup
+    */
+    readonly sortOrder?: SortOrder
     
     /**
     * The maximum number of returned documents. Accepts 1-100 with a default of 20.

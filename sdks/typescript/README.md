@@ -504,6 +504,8 @@ Interact with the "Request Body" below to explore the arguments of this function
 ```typescript
 const lookupResponse = await groundx.documents.lookup({
   id: 1,
+  sort: "name",
+  sortOrder: "asc",
 });
 ```
 
@@ -512,6 +514,18 @@ const lookupResponse = await groundx.documents.lookup({
 ##### id: `number`<a id="id-number"></a>
 
 a processId, bucketId, or projectId
+
+##### filter: `string`<a id="filter-string"></a>
+
+Only documents with names that contain the filter string will be returned in the results.
+
+##### sort: [`Sort`](./models/sort.ts)<a id="sort-sortmodelssortts"></a>
+
+The document attribute that will be used to sort the results.
+
+##### sortOrder: [`SortOrder`](./models/sort-order.ts)<a id="sortorder-sortordermodelssort-orderts"></a>
+
+The order in which to sort the results. A value for sort must also be set.
 
 ##### n: `number`<a id="n-number"></a>
 

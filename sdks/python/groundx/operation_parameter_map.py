@@ -94,6 +94,15 @@ operation_parameter_map = {
                 'name': 'id'
             },
             {
+                'name': 'filter'
+            },
+            {
+                'name': 'sort'
+            },
+            {
+                'name': 'sortOrder'
+            },
+            {
                 'name': 'n'
             },
             {
