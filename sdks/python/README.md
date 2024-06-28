@@ -7,7 +7,7 @@
 Ground Your RAG Apps in Fact not Fiction
 
 
-[![PyPI](https://img.shields.io/badge/PyPI-v1.3.16-blue)](https://pypi.org/project/groundx-python-sdk/1.3.16)
+[![PyPI](https://img.shields.io/badge/PyPI-v1.3.17-blue)](https://pypi.org/project/groundx-python-sdk/1.3.17)
 [![README.md](https://img.shields.io/badge/README-Click%20Here-green)](https://github.com/groundxai/groundx-sdks/tree/main/sdks/python#readme)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://www.groundx.ai/)
 
@@ -56,7 +56,7 @@ Python >=3.7
 ## Installation<a id="installation"></a>
 
 ```sh
-pip install groundx-python-sdk==1.3.16
+pip install groundx-python-sdk==1.3.17
 ```
 
 ## Getting Started<a id="getting-started"></a>
@@ -66,8 +66,7 @@ from pprint import pprint
 from groundx import Groundx, ApiException
 
 groundx = Groundx(
-
-    api_key = 'YOUR_API_KEY',
+    api_key="YOUR_API_KEY",
 )
 
 try:
@@ -94,15 +93,14 @@ except ApiException as e:
 `async` support is available by prepending `a` to any method.
 
 ```python
-
 import asyncio
 from pprint import pprint
 from groundx import Groundx, ApiException
 
 groundx = Groundx(
-
-    api_key = 'YOUR_API_KEY',
+    api_key="YOUR_API_KEY",
 )
+
 
 async def main():
     try:
@@ -122,6 +120,7 @@ async def main():
         pprint(e.status)
         pprint(e.reason)
         pprint(e.round_trip_time)
+
 
 asyncio.run(main())
 ```
@@ -359,9 +358,7 @@ Interact with the "Request Body" below to explore the arguments of this function
 
 ```python
 delete_response = groundx.documents.delete(
-    document_ids=[
-        "documentIds_example"
-    ],
+    document_ids=["documentIds_example"],
 )
 ```
 
@@ -596,7 +593,7 @@ Interact with the "Request Body" below to explore the arguments of this function
 upload_local_response = groundx.documents.upload_local(
     body=[
         {
-            "blob": open('/path/to/file', 'rb'),
+            "blob": open("/path/to/file", "rb"),
             "metadata": {
                 "bucket_id": 1234,
                 "file_name": "my_file.txt",
