@@ -79,5 +79,11 @@ export interface DocumentResponseDocument {
      * @memberof DocumentResponseDocument
      */
     'statusMessage'?: string;
+    /**
+     * Document X-Ray results
+     * @type {string}
+     * @memberof DocumentResponseDocument
+     */
+    'xrayUrl'?: string;
 }
 

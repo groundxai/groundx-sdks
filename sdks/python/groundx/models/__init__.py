@@ -52,6 +52,8 @@ from groundx.model.search_request import SearchRequest
 from groundx.model.search_response import SearchResponse
 from groundx.model.search_response_search import SearchResponseSearch
 from groundx.model.search_result_item import SearchResultItem
+from groundx.model.sort import Sort
+from groundx.model.sort_order import SortOrder
 from groundx.model.website_crawl_request import WebsiteCrawlRequest
 from groundx.model.website_crawl_request_websites import WebsiteCrawlRequestWebsites
 from groundx.model.website_crawl_request_websites_item import WebsiteCrawlRequestWebsitesItem

@@ -32,13 +32,20 @@ import frozendict  # noqa: F401
 
 from groundx import schemas  # noqa: F401
 
+from groundx.model.sort_order import SortOrder as SortOrderSchema
+from groundx.model.sort import Sort as SortSchema
 from groundx.model.document_lookup_response import DocumentLookupResponse as DocumentLookupResponseSchema
 
 from groundx.type.document_lookup_response import DocumentLookupResponse
+from groundx.type.sort_order import SortOrder
+from groundx.type.sort import Sort
 
 from . import path
 
 # Query params
+FilterSchema = schemas.StrSchema
+SortSchema = SortSchema
+SortOrderSchema = SortOrderSchema
 NSchema = schemas.IntSchema
 NextTokenSchema = schemas.StrSchema
 RequestRequiredQueryParams = typing_extensions.TypedDict(
@@ -49,6 +56,9 @@ RequestRequiredQueryParams = typing_extensions.TypedDict(
 RequestOptionalQueryParams = typing_extensions.TypedDict(
     'RequestOptionalQueryParams',
     {
+        'filter': typing.Union[FilterSchema, str, ],
+        'sort': typing.Union[SortSchema, ],
+        'sortOrder': typing.Union[SortOrderSchema, ],
         'n': typing.Union[NSchema, decimal.Decimal, int, ],
         'nextToken': typing.Union[NextTokenSchema, str, ],
     },
@@ -60,6 +70,24 @@ class RequestQueryParams(RequestRequiredQueryParams, RequestOptionalQueryParams)
     pass
 
 
+request_query_filter = api_client.QueryParameter(
+    name="filter",
+    style=api_client.ParameterStyle.FORM,
+    schema=FilterSchema,
+    explode=True,
+)
+request_query_sort = api_client.QueryParameter(
+    name="sort",
+    style=api_client.ParameterStyle.FORM,
+    schema=SortSchema,
+    explode=True,
+)
+request_query_sort_order = api_client.QueryParameter(
+    name="sortOrder",
+    style=api_client.ParameterStyle.FORM,
+    schema=SortOrderSchema,
+    explode=True,
+)
 request_query_n = api_client.QueryParameter(
     name="n",
     style=api_client.ParameterStyle.FORM,
@@ -169,12 +197,21 @@ class BaseApi(api_client.Api):
     def _lookup_mapped_args(
         self,
         id: int,
+        filter: typing.Optional[str] = None,
+        sort: typing.Optional[Sort] = None,
+        sort_order: typing.Optional[SortOrder] = None,
         n: typing.Optional[int] = None,
         next_token: typing.Optional[str] = None,
     ) -> api_client.MappedArgs:
         args: api_client.MappedArgs = api_client.MappedArgs()
         _query_params = {}
         _path_params = {}
+        if filter is not None:
+            _query_params["filter"] = filter
+        if sort is not None:
+            _query_params["sort"] = sort
+        if sort_order is not None:
+            _query_params["sortOrder"] = sort_order
         if n is not None:
             _query_params["n"] = n
         if next_token is not None:
@@ -224,6 +261,9 @@ class BaseApi(api_client.Api):
     
         prefix_separator_iterator = None
         for parameter in (
+            request_query_filter,
+            request_query_sort,
+            request_query_sort_order,
             request_query_n,
             request_query_next_token,
         ):
@@ -352,6 +392,9 @@ class BaseApi(api_client.Api):
     
         prefix_separator_iterator = None
         for parameter in (
+            request_query_filter,
+            request_query_sort,
+            request_query_sort_order,
             request_query_n,
             request_query_next_token,
         ):
@@ -418,6 +461,9 @@ class Lookup(BaseApi):
     async def alookup(
         self,
         id: int,
+        filter: typing.Optional[str] = None,
+        sort: typing.Optional[Sort] = None,
+        sort_order: typing.Optional[SortOrder] = None,
         n: typing.Optional[int] = None,
         next_token: typing.Optional[str] = None,
         **kwargs,
@@ -428,6 +474,9 @@ class Lookup(BaseApi):
     ]:
         args = self._lookup_mapped_args(
             id=id,
+            filter=filter,
+            sort=sort,
+            sort_order=sort_order,
             n=n,
             next_token=next_token,
         )
@@ -440,6 +489,9 @@ class Lookup(BaseApi):
     def lookup(
         self,
         id: int,
+        filter: typing.Optional[str] = None,
+        sort: typing.Optional[Sort] = None,
+        sort_order: typing.Optional[SortOrder] = None,
         n: typing.Optional[int] = None,
         next_token: typing.Optional[str] = None,
     ) -> typing.Union[
@@ -448,6 +500,9 @@ class Lookup(BaseApi):
     ]:
         args = self._lookup_mapped_args(
             id=id,
+            filter=filter,
+            sort=sort,
+            sort_order=sort_order,
             n=n,
             next_token=next_token,
         )
@@ -462,6 +517,9 @@ class ApiForget(BaseApi):
     async def aget(
         self,
         id: int,
+        filter: typing.Optional[str] = None,
+        sort: typing.Optional[Sort] = None,
+        sort_order: typing.Optional[SortOrder] = None,
         n: typing.Optional[int] = None,
         next_token: typing.Optional[str] = None,
         **kwargs,
@@ -472,6 +530,9 @@ class ApiForget(BaseApi):
     ]:
         args = self._lookup_mapped_args(
             id=id,
+            filter=filter,
+            sort=sort,
+            sort_order=sort_order,
             n=n,
             next_token=next_token,
         )
@@ -484,6 +545,9 @@ class ApiForget(BaseApi):
     def get(
         self,
         id: int,
+        filter: typing.Optional[str] = None,
+        sort: typing.Optional[Sort] = None,
+        sort_order: typing.Optional[SortOrder] = None,
         n: typing.Optional[int] = None,
         next_token: typing.Optional[str] = None,
     ) -> typing.Union[
@@ -492,6 +556,9 @@ class ApiForget(BaseApi):
     ]:
         args = self._lookup_mapped_args(
             id=id,
+            filter=filter,
+            sort=sort,
+            sort_order=sort_order,
             n=n,
             next_token=next_token,
         )

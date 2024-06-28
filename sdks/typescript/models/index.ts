@@ -34,5 +34,7 @@ export * from './search-request';
 export * from './search-response';
 export * from './search-response-search';
 export * from './search-result-item';
+export * from './sort';
+export * from './sort-order';
 export * from './website-crawl-request';
 export * from './website-crawl-request-websites-inner';

@@ -51,6 +51,7 @@ class DocumentResponseDocument(
             def status() -> typing.Type['ProcessingStatus']:
                 return ProcessingStatus
             statusMessage = schemas.StrSchema
+            xrayUrl = schemas.StrSchema
             __annotations__ = {
                 "bucketId": bucketId,
                 "documentId": documentId,
@@ -62,6 +63,7 @@ class DocumentResponseDocument(
                 "sourceUrl": sourceUrl,
                 "status": status,
                 "statusMessage": statusMessage,
+                "xrayUrl": xrayUrl,
             }
     
     @typing.overload
@@ -95,9 +97,12 @@ class DocumentResponseDocument(
     def __getitem__(self, name: typing_extensions.Literal["statusMessage"]) -> MetaOapg.properties.statusMessage: ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["xrayUrl"]) -> MetaOapg.properties.xrayUrl: ...
+    
+    @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["bucketId", "documentId", "fileName", "fileSize", "fileType", "processId", "searchData", "sourceUrl", "status", "statusMessage", ], str]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["bucketId", "documentId", "fileName", "fileSize", "fileType", "processId", "searchData", "sourceUrl", "status", "statusMessage", "xrayUrl", ], str]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -133,9 +138,12 @@ class DocumentResponseDocument(
     def get_item_oapg(self, name: typing_extensions.Literal["statusMessage"]) -> typing.Union[MetaOapg.properties.statusMessage, schemas.Unset]: ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["xrayUrl"]) -> typing.Union[MetaOapg.properties.xrayUrl, schemas.Unset]: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["bucketId", "documentId", "fileName", "fileSize", "fileType", "processId", "searchData", "sourceUrl", "status", "statusMessage", ], str]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["bucketId", "documentId", "fileName", "fileSize", "fileType", "processId", "searchData", "sourceUrl", "status", "statusMessage", "xrayUrl", ], str]):
         return super().get_item_oapg(name)
     
 
@@ -152,6 +160,7 @@ class DocumentResponseDocument(
         sourceUrl: typing.Union[MetaOapg.properties.sourceUrl, str, schemas.Unset] = schemas.unset,
         status: typing.Union['ProcessingStatus', schemas.Unset] = schemas.unset,
         statusMessage: typing.Union[MetaOapg.properties.statusMessage, str, schemas.Unset] = schemas.unset,
+        xrayUrl: typing.Union[MetaOapg.properties.xrayUrl, str, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
     ) -> 'DocumentResponseDocument':
@@ -168,6 +177,7 @@ class DocumentResponseDocument(
             sourceUrl=sourceUrl,
             status=status,
             statusMessage=statusMessage,
+            xrayUrl=xrayUrl,
             _configuration=_configuration,
             **kwargs,
         )

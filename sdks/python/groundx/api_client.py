@@ -52,6 +52,7 @@ from groundx.schemas import (
     unset,
 )
 
+
 @dataclass
 class MappedArgs:
     body: typing.Any = None

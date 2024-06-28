@@ -66,7 +66,8 @@ from pprint import pprint
 from groundx import Groundx, ApiException
 
 groundx = Groundx(
-    api_key="YOUR_API_KEY",
+
+    api_key = 'YOUR_API_KEY',
 )
 
 try:
@@ -93,14 +94,15 @@ except ApiException as e:
 `async` support is available by prepending `a` to any method.
 
 ```python
+
 import asyncio
 from pprint import pprint
 from groundx import Groundx, ApiException
 
 groundx = Groundx(
-    api_key="YOUR_API_KEY",
-)
 
+    api_key = 'YOUR_API_KEY',
+)
 
 async def main():
     try:
@@ -120,7 +122,6 @@ async def main():
         pprint(e.status)
         pprint(e.reason)
         pprint(e.round_trip_time)
-
 
 asyncio.run(main())
 ```
@@ -358,7 +359,9 @@ Interact with the "Request Body" below to explore the arguments of this function
 
 ```python
 delete_response = groundx.documents.delete(
-    document_ids=["documentIds_example"],
+    document_ids=[
+        "documentIds_example"
+    ],
 )
 ```
 
@@ -534,6 +537,9 @@ Interact with the "Request Body" below to explore the arguments of this function
 ```python
 lookup_response = groundx.documents.lookup(
     id=1,
+    filter="string_example",
+    sort="name",
+    sort_order="asc",
     n=1,
     next_token="string_example",
 )
@@ -544,6 +550,18 @@ lookup_response = groundx.documents.lookup(
 ##### id: `int`<a id="id-int"></a>
 
 a processId, bucketId, or projectId
+
+##### filter: `str`<a id="filter-str"></a>
+
+Only documents with names that contain the filter string will be returned in the results.
+
+##### sort: [`Sort`](./groundx/type/.py)<a id="sort-sortgroundxtypepy"></a>
+
+The document attribute that will be used to sort the results.
+
+##### sort_order: [`SortOrder`](./groundx/type/.py)<a id="sort_order-sortordergroundxtypepy"></a>
+
+The order in which to sort the results. A value for sort must also be set.
 
 ##### n: `int`<a id="n-int"></a>
 
@@ -578,7 +596,7 @@ Interact with the "Request Body" below to explore the arguments of this function
 upload_local_response = groundx.documents.upload_local(
     body=[
         {
-            "blob": open("/path/to/file", "rb"),
+            "blob": open('/path/to/file', 'rb'),
             "metadata": {
                 "bucket_id": 1234,
                 "file_name": "my_file.txt",

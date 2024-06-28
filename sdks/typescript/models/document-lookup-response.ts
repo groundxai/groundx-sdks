@@ -19,6 +19,12 @@ import { DocumentResponse } from './document-response';
  */
 export interface DocumentLookupResponse {
     /**
+     * The number of results returned in the current response
+     * @type {number}
+     * @memberof DocumentLookupResponse
+     */
+    'count'?: number;
+    /**
      * 
      * @type {Array<DocumentResponse>}
      * @memberof DocumentLookupResponse
@@ -30,5 +36,11 @@ export interface DocumentLookupResponse {
      * @memberof DocumentLookupResponse
      */
     'nextToken'?: string;
+    /**
+     * The total number of results found
+     * @type {number}
+     * @memberof DocumentLookupResponse
+     */
+    'total'?: number;
 }
 
