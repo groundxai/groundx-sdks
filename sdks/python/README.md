@@ -491,8 +491,11 @@ Interact with the "Request Body" below to explore the arguments of this function
 ```python
 list_response = groundx.documents.list(
     n=1,
-    next_token="string_example",
+    filter="string_example",
+    sort="name",
+    sort_order="asc",
     status="queued",
+    next_token="string_example",
 )
 ```
 
@@ -502,13 +505,25 @@ list_response = groundx.documents.list(
 
 The maximum number of returned documents. Accepts 1-100 with a default of 20.
 
-##### next_token: `str`<a id="next_token-str"></a>
+##### filter: `str`<a id="filter-str"></a>
 
-A token for pagination. If the number of documents for a given query is larger than n, the response will include a \"nextToken\" value. That token can be included in this field to retrieve the next batch of n documents.
+Only documents with names that contain the filter string will be returned in the results.
+
+##### sort: [`Sort`](./groundx/type/.py)<a id="sort-sortgroundxtypepy"></a>
+
+The document attribute that will be used to sort the results.
+
+##### sort_order: [`SortOrder`](./groundx/type/.py)<a id="sort_order-sortordergroundxtypepy"></a>
+
+The order in which to sort the results. A value for sort must also be set.
 
 ##### status: [`ProcessingStatus`](./groundx/type/.py)<a id="status-processingstatusgroundxtypepy"></a>
 
 A status filter on the get documents query. If this value is set, then only documents with this status will be returned in the results.
+
+##### next_token: `str`<a id="next_token-str"></a>
+
+A token for pagination. If the number of documents for a given query is larger than n, the response will include a \"nextToken\" value. That token can be included in this field to retrieve the next batch of n documents.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -534,10 +549,11 @@ Interact with the "Request Body" below to explore the arguments of this function
 ```python
 lookup_response = groundx.documents.lookup(
     id=1,
+    n=1,
     filter="string_example",
     sort="name",
     sort_order="asc",
-    n=1,
+    status="queued",
     next_token="string_example",
 )
 ```
@@ -547,6 +563,10 @@ lookup_response = groundx.documents.lookup(
 ##### id: `int`<a id="id-int"></a>
 
 a processId, bucketId, or projectId
+
+##### n: `int`<a id="n-int"></a>
+
+The maximum number of returned documents. Accepts 1-100 with a default of 20.
 
 ##### filter: `str`<a id="filter-str"></a>
 
@@ -560,9 +580,9 @@ The document attribute that will be used to sort the results.
 
 The order in which to sort the results. A value for sort must also be set.
 
-##### n: `int`<a id="n-int"></a>
+##### status: [`ProcessingStatus`](./groundx/type/.py)<a id="status-processingstatusgroundxtypepy"></a>
 
-The maximum number of returned documents. Accepts 1-100 with a default of 20.
+A status filter on the get documents query. If this value is set, then only documents with this status will be returned in the results.
 
 ##### next_token: `str`<a id="next_token-str"></a>
 

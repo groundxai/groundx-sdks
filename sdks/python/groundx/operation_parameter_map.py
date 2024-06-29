@@ -81,10 +81,19 @@ operation_parameter_map = {
                 'name': 'n'
             },
             {
-                'name': 'nextToken'
+                'name': 'filter'
+            },
+            {
+                'name': 'sort'
+            },
+            {
+                'name': 'sortOrder'
             },
             {
                 'name': 'status'
+            },
+            {
+                'name': 'nextToken'
             },
         ]
     },
@@ -92,6 +101,9 @@ operation_parameter_map = {
         'parameters': [
             {
                 'name': 'id'
+            },
+            {
+                'name': 'n'
             },
             {
                 'name': 'filter'
@@ -103,7 +115,7 @@ operation_parameter_map = {
                 'name': 'sortOrder'
             },
             {
-                'name': 'n'
+                'name': 'status'
             },
             {
                 'name': 'nextToken'

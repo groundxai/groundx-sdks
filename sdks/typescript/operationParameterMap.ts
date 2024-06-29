@@ -87,10 +87,19 @@ export const operationParameterMap: Record<string, Entry> = {
                 name: 'n'
             },
             {
-                name: 'nextToken'
+                name: 'filter'
+            },
+            {
+                name: 'sort'
+            },
+            {
+                name: 'sortOrder'
             },
             {
                 name: 'status'
+            },
+            {
+                name: 'nextToken'
             },
         ]
     },
@@ -98,6 +107,9 @@ export const operationParameterMap: Record<string, Entry> = {
         parameters: [
             {
                 name: 'id'
+            },
+            {
+                name: 'n'
             },
             {
                 name: 'filter'
@@ -109,7 +121,7 @@ export const operationParameterMap: Record<string, Entry> = {
                 name: 'sortOrder'
             },
             {
-                name: 'n'
+                name: 'status'
             },
             {
                 name: 'nextToken'

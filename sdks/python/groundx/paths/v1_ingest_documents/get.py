@@ -32,18 +32,25 @@ import frozendict  # noqa: F401
 
 from groundx import schemas  # noqa: F401
 
+from groundx.model.sort_order import SortOrder as SortOrderSchema
 from groundx.model.processing_status import ProcessingStatus as ProcessingStatusSchema
 from groundx.model.document_list_response import DocumentListResponse as DocumentListResponseSchema
+from groundx.model.sort import Sort as SortSchema
 
 from groundx.type.processing_status import ProcessingStatus
+from groundx.type.sort_order import SortOrder
+from groundx.type.sort import Sort
 from groundx.type.document_list_response import DocumentListResponse
 
 from . import path
 
 # Query params
 NSchema = schemas.IntSchema
-NextTokenSchema = schemas.StrSchema
+FilterSchema = schemas.StrSchema
+SortSchema = SortSchema
+SortOrderSchema = SortOrderSchema
 StatusSchema = ProcessingStatusSchema
+NextTokenSchema = schemas.StrSchema
 RequestRequiredQueryParams = typing_extensions.TypedDict(
     'RequestRequiredQueryParams',
     {
@@ -53,8 +60,11 @@ RequestOptionalQueryParams = typing_extensions.TypedDict(
     'RequestOptionalQueryParams',
     {
         'n': typing.Union[NSchema, decimal.Decimal, int, ],
-        'nextToken': typing.Union[NextTokenSchema, str, ],
+        'filter': typing.Union[FilterSchema, str, ],
+        'sort': typing.Union[SortSchema, ],
+        'sortOrder': typing.Union[SortOrderSchema, ],
         'status': typing.Union[StatusSchema, ],
+        'nextToken': typing.Union[NextTokenSchema, str, ],
     },
     total=False
 )
@@ -70,16 +80,34 @@ request_query_n = api_client.QueryParameter(
     schema=NSchema,
     explode=True,
 )
-request_query_next_token = api_client.QueryParameter(
-    name="nextToken",
+request_query_filter = api_client.QueryParameter(
+    name="filter",
     style=api_client.ParameterStyle.FORM,
-    schema=NextTokenSchema,
+    schema=FilterSchema,
+    explode=True,
+)
+request_query_sort = api_client.QueryParameter(
+    name="sort",
+    style=api_client.ParameterStyle.FORM,
+    schema=SortSchema,
+    explode=True,
+)
+request_query_sort_order = api_client.QueryParameter(
+    name="sortOrder",
+    style=api_client.ParameterStyle.FORM,
+    schema=SortOrderSchema,
     explode=True,
 )
 request_query_status = api_client.QueryParameter(
     name="status",
     style=api_client.ParameterStyle.FORM,
     schema=ProcessingStatusSchema,
+    explode=True,
+)
+request_query_next_token = api_client.QueryParameter(
+    name="nextToken",
+    style=api_client.ParameterStyle.FORM,
+    schema=NextTokenSchema,
     explode=True,
 )
 _auth = [
@@ -119,17 +147,26 @@ class BaseApi(api_client.Api):
     def _list_mapped_args(
         self,
         n: typing.Optional[int] = None,
-        next_token: typing.Optional[str] = None,
+        filter: typing.Optional[str] = None,
+        sort: typing.Optional[Sort] = None,
+        sort_order: typing.Optional[SortOrder] = None,
         status: typing.Optional[ProcessingStatus] = None,
+        next_token: typing.Optional[str] = None,
     ) -> api_client.MappedArgs:
         args: api_client.MappedArgs = api_client.MappedArgs()
         _query_params = {}
         if n is not None:
             _query_params["n"] = n
-        if next_token is not None:
-            _query_params["nextToken"] = next_token
+        if filter is not None:
+            _query_params["filter"] = filter
+        if sort is not None:
+            _query_params["sort"] = sort
+        if sort_order is not None:
+            _query_params["sortOrder"] = sort_order
         if status is not None:
             _query_params["status"] = status
+        if next_token is not None:
+            _query_params["nextToken"] = next_token
         args.query = _query_params
         return args
 
@@ -158,8 +195,11 @@ class BaseApi(api_client.Api):
         prefix_separator_iterator = None
         for parameter in (
             request_query_n,
-            request_query_next_token,
+            request_query_filter,
+            request_query_sort,
+            request_query_sort_order,
             request_query_status,
+            request_query_next_token,
         ):
             parameter_data = query_params.get(parameter.name, schemas.unset)
             if parameter_data is schemas.unset:
@@ -272,8 +312,11 @@ class BaseApi(api_client.Api):
         prefix_separator_iterator = None
         for parameter in (
             request_query_n,
-            request_query_next_token,
+            request_query_filter,
+            request_query_sort,
+            request_query_sort_order,
             request_query_status,
+            request_query_next_token,
         ):
             parameter_data = query_params.get(parameter.name, schemas.unset)
             if parameter_data is schemas.unset:
@@ -338,8 +381,11 @@ class List(BaseApi):
     async def alist(
         self,
         n: typing.Optional[int] = None,
-        next_token: typing.Optional[str] = None,
+        filter: typing.Optional[str] = None,
+        sort: typing.Optional[Sort] = None,
+        sort_order: typing.Optional[SortOrder] = None,
         status: typing.Optional[ProcessingStatus] = None,
+        next_token: typing.Optional[str] = None,
         **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
@@ -348,8 +394,11 @@ class List(BaseApi):
     ]:
         args = self._list_mapped_args(
             n=n,
-            next_token=next_token,
+            filter=filter,
+            sort=sort,
+            sort_order=sort_order,
             status=status,
+            next_token=next_token,
         )
         return await self._alist_oapg(
             query_params=args.query,
@@ -359,16 +408,22 @@ class List(BaseApi):
     def list(
         self,
         n: typing.Optional[int] = None,
-        next_token: typing.Optional[str] = None,
+        filter: typing.Optional[str] = None,
+        sort: typing.Optional[Sort] = None,
+        sort_order: typing.Optional[SortOrder] = None,
         status: typing.Optional[ProcessingStatus] = None,
+        next_token: typing.Optional[str] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
         args = self._list_mapped_args(
             n=n,
-            next_token=next_token,
+            filter=filter,
+            sort=sort,
+            sort_order=sort_order,
             status=status,
+            next_token=next_token,
         )
         return self._list_oapg(
             query_params=args.query,
@@ -380,8 +435,11 @@ class ApiForget(BaseApi):
     async def aget(
         self,
         n: typing.Optional[int] = None,
-        next_token: typing.Optional[str] = None,
+        filter: typing.Optional[str] = None,
+        sort: typing.Optional[Sort] = None,
+        sort_order: typing.Optional[SortOrder] = None,
         status: typing.Optional[ProcessingStatus] = None,
+        next_token: typing.Optional[str] = None,
         **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
@@ -390,8 +448,11 @@ class ApiForget(BaseApi):
     ]:
         args = self._list_mapped_args(
             n=n,
-            next_token=next_token,
+            filter=filter,
+            sort=sort,
+            sort_order=sort_order,
             status=status,
+            next_token=next_token,
         )
         return await self._alist_oapg(
             query_params=args.query,
@@ -401,16 +462,22 @@ class ApiForget(BaseApi):
     def get(
         self,
         n: typing.Optional[int] = None,
-        next_token: typing.Optional[str] = None,
+        filter: typing.Optional[str] = None,
+        sort: typing.Optional[Sort] = None,
+        sort_order: typing.Optional[SortOrder] = None,
         status: typing.Optional[ProcessingStatus] = None,
+        next_token: typing.Optional[str] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
         args = self._list_mapped_args(
             n=n,
-            next_token=next_token,
+            filter=filter,
+            sort=sort,
+            sort_order=sort_order,
             status=status,
+            next_token=next_token,
         )
         return self._list_oapg(
             query_params=args.query,

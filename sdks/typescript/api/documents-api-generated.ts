@@ -284,12 +284,15 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
          * lookup all documents across all resources which are currently on GroundX  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
          * @summary list
          * @param {number} [n] The maximum number of returned documents. Accepts 1-100 with a default of 20.
-         * @param {string} [nextToken] A token for pagination. If the number of documents for a given query is larger than n, the response will include a \&quot;nextToken\&quot; value. That token can be included in this field to retrieve the next batch of n documents.
+         * @param {string} [filter] Only documents with names that contain the filter string will be returned in the results.
+         * @param {Sort} [sort] The document attribute that will be used to sort the results.
+         * @param {SortOrder} [sortOrder] The order in which to sort the results. A value for sort must also be set.
          * @param {ProcessingStatus} [status] A status filter on the get documents query. If this value is set, then only documents with this status will be returned in the results.
+         * @param {string} [nextToken] A token for pagination. If the number of documents for a given query is larger than n, the response will include a \&quot;nextToken\&quot; value. That token can be included in this field to retrieve the next batch of n documents.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        list: async (n?: number, nextToken?: string, status?: ProcessingStatus, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        list: async (n?: number, filter?: string, sort?: Sort, sortOrder?: SortOrder, status?: ProcessingStatus, nextToken?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/v1/ingest/documents`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -308,12 +311,24 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
                 localVarQueryParameter['n'] = n;
             }
 
-            if (nextToken !== undefined) {
-                localVarQueryParameter['nextToken'] = nextToken;
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+            if (sort !== undefined) {
+                localVarQueryParameter['sort'] = sort;
+            }
+
+            if (sortOrder !== undefined) {
+                localVarQueryParameter['sortOrder'] = sortOrder;
             }
 
             if (status !== undefined) {
                 localVarQueryParameter['status'] = status;
+            }
+
+            if (nextToken !== undefined) {
+                localVarQueryParameter['nextToken'] = nextToken;
             }
 
 
@@ -339,15 +354,16 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
          * lookup the document(s) associated with a processId, bucketId, or projectId.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
          * @summary lookup
          * @param {number} id a processId, bucketId, or projectId
+         * @param {number} [n] The maximum number of returned documents. Accepts 1-100 with a default of 20.
          * @param {string} [filter] Only documents with names that contain the filter string will be returned in the results.
          * @param {Sort} [sort] The document attribute that will be used to sort the results.
          * @param {SortOrder} [sortOrder] The order in which to sort the results. A value for sort must also be set.
-         * @param {number} [n] The maximum number of returned documents. Accepts 1-100 with a default of 20.
+         * @param {ProcessingStatus} [status] A status filter on the get documents query. If this value is set, then only documents with this status will be returned in the results.
          * @param {string} [nextToken] A token for pagination. If the number of documents for a given query is larger than n, the response will include a \&quot;nextToken\&quot; value. That token can be included in this field to retrieve the next batch of n documents.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        lookup: async (id: number, filter?: string, sort?: Sort, sortOrder?: SortOrder, n?: number, nextToken?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        lookup: async (id: number, n?: number, filter?: string, sort?: Sort, sortOrder?: SortOrder, status?: ProcessingStatus, nextToken?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('lookup', 'id', id)
             const localVarPath = `/v1/ingest/documents/{id}`
@@ -365,6 +381,10 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
 
             // authentication ApiKeyAuth required
             await setApiKeyToObject({ object: localVarHeaderParameter, key: "X-API-Key", keyParamName: "xAPIKey", configuration })
+            if (n !== undefined) {
+                localVarQueryParameter['n'] = n;
+            }
+
             if (filter !== undefined) {
                 localVarQueryParameter['filter'] = filter;
             }
@@ -377,8 +397,8 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
                 localVarQueryParameter['sortOrder'] = sortOrder;
             }
 
-            if (n !== undefined) {
-                localVarQueryParameter['n'] = n;
+            if (status !== undefined) {
+                localVarQueryParameter['status'] = status;
             }
 
             if (nextToken !== undefined) {
@@ -623,7 +643,7 @@ export const DocumentsApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async list(requestParameters: DocumentsApiListRequest = {}, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DocumentListResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.list(requestParameters.n, requestParameters.nextToken, requestParameters.status, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.list(requestParameters.n, requestParameters.filter, requestParameters.sort, requestParameters.sortOrder, requestParameters.status, requestParameters.nextToken, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -634,7 +654,7 @@ export const DocumentsApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async lookup(requestParameters: DocumentsApiLookupRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DocumentLookupResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.lookup(requestParameters.id, requestParameters.filter, requestParameters.sort, requestParameters.sortOrder, requestParameters.n, requestParameters.nextToken, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.lookup(requestParameters.id, requestParameters.n, requestParameters.filter, requestParameters.sort, requestParameters.sortOrder, requestParameters.status, requestParameters.nextToken, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -854,11 +874,25 @@ export type DocumentsApiListRequest = {
     readonly n?: number
     
     /**
-    * A token for pagination. If the number of documents for a given query is larger than n, the response will include a \"nextToken\" value. That token can be included in this field to retrieve the next batch of n documents.
+    * Only documents with names that contain the filter string will be returned in the results.
     * @type {string}
     * @memberof DocumentsApiList
     */
-    readonly nextToken?: string
+    readonly filter?: string
+    
+    /**
+    * The document attribute that will be used to sort the results.
+    * @type {Sort}
+    * @memberof DocumentsApiList
+    */
+    readonly sort?: Sort
+    
+    /**
+    * The order in which to sort the results. A value for sort must also be set.
+    * @type {SortOrder}
+    * @memberof DocumentsApiList
+    */
+    readonly sortOrder?: SortOrder
     
     /**
     * A status filter on the get documents query. If this value is set, then only documents with this status will be returned in the results.
@@ -866,6 +900,13 @@ export type DocumentsApiListRequest = {
     * @memberof DocumentsApiList
     */
     readonly status?: ProcessingStatus
+    
+    /**
+    * A token for pagination. If the number of documents for a given query is larger than n, the response will include a \"nextToken\" value. That token can be included in this field to retrieve the next batch of n documents.
+    * @type {string}
+    * @memberof DocumentsApiList
+    */
+    readonly nextToken?: string
     
 }
 
@@ -882,6 +923,13 @@ export type DocumentsApiLookupRequest = {
     * @memberof DocumentsApiLookup
     */
     readonly id: number
+    
+    /**
+    * The maximum number of returned documents. Accepts 1-100 with a default of 20.
+    * @type {number}
+    * @memberof DocumentsApiLookup
+    */
+    readonly n?: number
     
     /**
     * Only documents with names that contain the filter string will be returned in the results.
@@ -905,11 +953,11 @@ export type DocumentsApiLookupRequest = {
     readonly sortOrder?: SortOrder
     
     /**
-    * The maximum number of returned documents. Accepts 1-100 with a default of 20.
-    * @type {number}
+    * A status filter on the get documents query. If this value is set, then only documents with this status will be returned in the results.
+    * @type {ProcessingStatus}
     * @memberof DocumentsApiLookup
     */
-    readonly n?: number
+    readonly status?: ProcessingStatus
     
     /**
     * A token for pagination. If the number of documents for a given query is larger than n, the response will include a \"nextToken\" value. That token can be included in this field to retrieve the next batch of n documents.
