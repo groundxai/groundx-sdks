@@ -461,6 +461,8 @@ Interact with the "Request Body" below to explore the arguments of this function
 
 ```typescript
 const listResponse = await groundx.documents.list({
+  sort: "name",
+  sortOrder: "asc",
   status: "queued",
 });
 ```
@@ -471,13 +473,25 @@ const listResponse = await groundx.documents.list({
 
 The maximum number of returned documents. Accepts 1-100 with a default of 20.
 
-##### nextToken: `string`<a id="nexttoken-string"></a>
+##### filter: `string`<a id="filter-string"></a>
 
-A token for pagination. If the number of documents for a given query is larger than n, the response will include a \"nextToken\" value. That token can be included in this field to retrieve the next batch of n documents.
+Only documents with names that contain the filter string will be returned in the results.
+
+##### sort: [`Sort`](./models/sort.ts)<a id="sort-sortmodelssortts"></a>
+
+The document attribute that will be used to sort the results.
+
+##### sortOrder: [`SortOrder`](./models/sort-order.ts)<a id="sortorder-sortordermodelssort-orderts"></a>
+
+The order in which to sort the results. A value for sort must also be set.
 
 ##### status: [`ProcessingStatus`](./models/processing-status.ts)<a id="status-processingstatusmodelsprocessing-statusts"></a>
 
 A status filter on the get documents query. If this value is set, then only documents with this status will be returned in the results.
+
+##### nextToken: `string`<a id="nexttoken-string"></a>
+
+A token for pagination. If the number of documents for a given query is larger than n, the response will include a \"nextToken\" value. That token can be included in this field to retrieve the next batch of n documents.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -506,6 +520,7 @@ const lookupResponse = await groundx.documents.lookup({
   id: 1,
   sort: "name",
   sortOrder: "asc",
+  status: "queued",
 });
 ```
 
@@ -514,6 +529,10 @@ const lookupResponse = await groundx.documents.lookup({
 ##### id: `number`<a id="id-number"></a>
 
 a processId, bucketId, or projectId
+
+##### n: `number`<a id="n-number"></a>
+
+The maximum number of returned documents. Accepts 1-100 with a default of 20.
 
 ##### filter: `string`<a id="filter-string"></a>
 
@@ -527,9 +546,9 @@ The document attribute that will be used to sort the results.
 
 The order in which to sort the results. A value for sort must also be set.
 
-##### n: `number`<a id="n-number"></a>
+##### status: [`ProcessingStatus`](./models/processing-status.ts)<a id="status-processingstatusmodelsprocessing-statusts"></a>
 
-The maximum number of returned documents. Accepts 1-100 with a default of 20.
+A status filter on the get documents query. If this value is set, then only documents with this status will be returned in the results.
 
 ##### nextToken: `string`<a id="nexttoken-string"></a>
 

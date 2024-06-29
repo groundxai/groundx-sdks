@@ -147,6 +147,12 @@ paths:
           required: true
           schema:
             type: integer
+        - name: n
+          description: The maximum number of returned documents. Accepts 1-100 with a default of 20.
+          in: query
+          required: false
+          schema:
+            type: integer
         - name: filter
           description: Only documents with names that contain the filter string will be returned in the results.
           in: query
@@ -165,12 +171,12 @@ paths:
           required: false
           schema:
             $ref: "#/components/schemas/SortOrder"
-        - name: n
-          description: The maximum number of returned documents. Accepts 1-100 with a default of 20.
+        - name: status
+          description: A status filter on the get documents query. If this value is set, then only documents with this status will be returned in the results.
           in: query
           required: false
           schema:
-            type: integer
+            $ref: "#/components/schemas/ProcessingStatus"
         - name: nextToken
           description: A token for pagination. If the number of documents for a given query is larger than n, the response will include a "nextToken" value. That token can be included in this field to retrieve the next batch of n documents. 
           in: query
@@ -206,18 +212,36 @@ paths:
           required: false
           schema:
             type: integer
-        - name: nextToken
-          description: A token for pagination. If the number of documents for a given query is larger than n, the response will include a "nextToken" value. That token can be included in this field to retrieve the next batch of n documents. 
+        - name: filter
+          description: Only documents with names that contain the filter string will be returned in the results.
           in: query
           required: false
           schema:
             type: string
+        - name: sort
+          description: The document attribute that will be used to sort the results.
+          in: query
+          required: false
+          schema:
+            $ref: "#/components/schemas/Sort"
+        - name: sortOrder
+          description: The order in which to sort the results. A value for sort must also be set.
+          in: query
+          required: false
+          schema:
+            $ref: "#/components/schemas/SortOrder"
         - name: status
           description: A status filter on the get documents query. If this value is set, then only documents with this status will be returned in the results.
           in: query
           required: false
           schema:
             $ref: "#/components/schemas/ProcessingStatus"
+        - name: nextToken
+          description: A token for pagination. If the number of documents for a given query is larger than n, the response will include a "nextToken" value. That token can be included in this field to retrieve the next batch of n documents. 
+          in: query
+          required: false
+          schema:
+            type: string
       responses:
         '200':
           description: Look up success
