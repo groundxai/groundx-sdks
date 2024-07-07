@@ -148,6 +148,7 @@ The structure of the X-Ray document data looks something like this:
           "json": [ // Element text, reformatted into JSON format, for "table" and "figure" elements only
             "object" // Auto-generated JSON object describing a section of the information within the "table" or "figure"
           ],
+          "multimodalUrl": "string", // Element image, for multimodal processing "table" and "figure" elements only
           "narrative": [ // Element text, reformatted into narrative format, for "table" and "figure" elements only
             "string" // Auto-generated narrative description of a section of the information within the "table" or "figure"
           ],
