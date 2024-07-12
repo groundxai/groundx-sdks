@@ -6,6 +6,7 @@ portal:
   primaryColor: '#6b37d9'
   title: GroundX
   logo: portal-logo.png
+  googleAnalyticsId: G-JHGLN0JCT0
   favicon: favicon.png
   socials:
     website: https://www.groundx.ai/
@@ -22,8 +23,12 @@ portal:
               path: docs/localingest.md
             - id: ingest-remote-content
               path: docs/remoteingest.md
+            - id: x-ray
+              path: docs/document-understanding.md
             - id: search
               path: docs/search.md
+            - id: file-types
+              path: docs/file-types.md
         - label: Tutorials
           links:
             - id: quick-start

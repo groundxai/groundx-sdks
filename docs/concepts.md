@@ -7,6 +7,10 @@ This page introduces some of the key concepts that form the foundation of Ground
 
 GroundX's Ingest API provides a powerful tool for uploading your content, supporting a variety of data types and formats. You can upload entire websites via a URL, documents, presentations, and raw text files. The API is designed to ensure secure transmission and centralized storage of your content, simplifying content management.
 
+## X-Ray
+
+A document X-Ray is the summarized GroundX understanding of your documents. It is the end result of the GroundX Ingest API and contains document, section, and chunk layout and metadata information. This information is stored in the GroundX search database and can be accessed using the GroundX Search API. You can also download the X-Ray data and use it outside of GroundX Search in your own internal systems.
+
 ## Buckets
 
 Buckets are a core feature of the GroundX APIs, aimed at the effective organization and storage of content. When documents or other forms of content are uploaded to the GroundX pipeline, they are processed and then stored in buckets. These buckets act as an organizational unit for content, making it easy to reuse and share buckets of content across different projects. The search APIs will search through the content in any buckets associated with a particular project.

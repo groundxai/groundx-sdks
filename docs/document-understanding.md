@@ -1,4 +1,4 @@
-# Document Understanding in GroundX
+# X-Ray: Document Understanding
 
 ## Introduction
 In this tutorial, we’ll explore the GroundX document ingestion pipeline.

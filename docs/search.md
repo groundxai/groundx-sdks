@@ -1,4 +1,4 @@
-# Understanding Search in GroundX
+# Search
 <iframe width="560" height="315" src="https://www.youtube.com/embed/gqNO5zGXU1w?si=CXtwQ3ziOuTnBP7P" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ## Introduction
