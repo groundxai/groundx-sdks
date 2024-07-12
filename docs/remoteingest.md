@@ -1,9 +1,9 @@
-# Remote Content Ingest
+# Remote Hosted Content Ingest
 <iframe width="560" height="315" src="https://www.youtube.com/embed/KUeOKCiK2gw?si=vTpI-YLgE_iZPH7a" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ## Introduction
 
-In this tutorial, we'll go over how to add or ingest remote content into Ground X. This is the step where the magic begins. Ground X's ingestion pipeline is much more than just simply extracting content from your files. 
+In this tutorial, we'll go over how to add or ingest remote hosted content into Ground X. This is the step where the magic begins. Ground X's ingestion pipeline is much more than just simply extracting content from your files. 
 
 **Through its unique ingestion pipeline, comprised of three critical stages, Ground X:**
 - Formats your content for LLM use

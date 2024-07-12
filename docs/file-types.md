@@ -1,4 +1,4 @@
-# Supported File Types
+# Supported Document File Types
 
 The currently supported file types are:
 

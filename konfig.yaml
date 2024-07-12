@@ -16,28 +16,39 @@ portal:
         - label: Guides
           links:
             - id: welcome
+              label: Welcome
               path: docs/welcome.md
             - id: concepts
+              label: Concepts
               path: docs/concepts.md
             - id: ingest-local-content
+              label: Local Content Ingest
               path: docs/localingest.md
             - id: ingest-remote-content
+              label: Hosted Content Ingest
               path: docs/remoteingest.md
             - id: x-ray
+              label: X-Ray - GroundX Document Understanding
               path: docs/document-understanding.md
             - id: search
+              label: Search
               path: docs/search.md
             - id: file-types
+              label: Supported Document Types
               path: docs/file-types.md
         - label: Tutorials
           links:
             - id: quick-start
+              label: Quick Start
               path: docs/quick-start.md
             - id: chatgpt
+              label: Integrating with ChatGPT
               path: docs/chatgpt.md
             - id: upload-remote
+              label: Upload Documents from a Remote Hosted Location
               path: docs/upload-remote.md
             - id: upload-local
+              label: Upload Documents Stored Locally
               path: docs/upload-local.md
 infoContactUrl: https://www.groundx.ai/
 readmeHeader:
