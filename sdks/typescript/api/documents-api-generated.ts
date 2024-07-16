@@ -23,13 +23,13 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 // @ts-ignore
 import { DocumentListResponse } from '../models';
 // @ts-ignore
-import { DocumentLocalUploadRequestInner } from '../models';
+import { DocumentLocalIngestRequestInner } from '../models';
 // @ts-ignore
 import { DocumentLookupResponse } from '../models';
 // @ts-ignore
-import { DocumentRemoteUploadRequest } from '../models';
+import { DocumentRemoteIngestRequest } from '../models';
 // @ts-ignore
-import { DocumentRemoteUploadRequestDocumentsInner } from '../models';
+import { DocumentRemoteIngestRequestDocumentsInner } from '../models';
 // @ts-ignore
 import { DocumentResponse } from '../models';
 // @ts-ignore
@@ -56,7 +56,7 @@ import { requestBeforeHook } from '../requestBeforeHook';
 export const DocumentsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Upload the content of a publicly accessible website to a GroundX bucket. This is done by following links within a specified URL, recursively, up to a specified depth or number of pages.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * Upload the content of a publicly accessible website for ingestion into a GroundX bucket. This is done by following links within a specified URL, recursively, up to a specified depth or number of pages.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
          * @summary crawl_website
          * @param {WebsiteCrawlRequest} [websiteCrawlRequest] 
          * @param {*} [options] Override http request option.
@@ -104,7 +104,7 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
         /**
          * Delete multiple documents hosted on GroundX  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
          * @summary delete (multiple)
-         * @param {Array<string>} documentIds A list of documentIds which correspond to documents uploaded to GroundX
+         * @param {Array<string>} documentIds A list of documentIds which correspond to documents ingested by GroundX
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -151,7 +151,7 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
         /**
          * Delete a single document hosted on GroundX  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
          * @summary delete (singular)
-         * @param {string} documentId A documentId which correspond to a document uploaded to GroundX
+         * @param {string} documentId A documentId which correspond to a document ingested by GroundX
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -237,9 +237,9 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * Get the current status of an upload, initiated with documents.upload_remote, documents.upload_local, or documents.crawl_website, by specifying the processId (the processId is included in the response of the documents.upload functions).  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * Get the current status of an ingest, initiated with documents.ingest_remote, documents.ingest_local, or documents.crawl_website, by specifying the processId (the processId is included in the response of the documents.ingest functions).  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
          * @summary get_processing_status_by_id
-         * @param {string} processId the processId for the upload process being checked
+         * @param {string} processId the processId for the ingest process being checked
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -273,6 +273,149 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
                 pathTemplate: '/v1/ingest/{processId}',
                 httpMethod: 'GET'
             });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Upload documents hosted on a local file system for ingestion into a GroundX bucket.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary ingest_local
+         * @param {Array<DocumentLocalIngestRequestInner>} [documentLocalIngestRequestInner] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        ingestLocal: async (documentLocalIngestRequestInner?: Array<DocumentLocalIngestRequestInner>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/v1/ingest/documents/local`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
+            const addFormParam = async (name: string, data: any, isBinary: boolean, isPrimitiveType: boolean) => {
+                if (isBinary) {
+                    if (data instanceof Uint8Array) {
+                        // Handle Buffer data
+                        const filetype = await fromBuffer(data)
+                        const filename = filetype === undefined ? name : `${name}.${filetype.ext}`
+                        localVarFormParams.append(name, data as any, filename);
+                    } else if ("name" in data) {
+                        // File instances in browsers and Node.js have the
+                        // "name" property "Duck typing" files to handle browser
+                        // File class or Node.js File class
+                        // Web: https://developer.mozilla.org/en-US/docs/Web/API/File
+                        // Node.js: https://nodejs.org/api/buffer.html#new-bufferfilesources-filename-options
+                        if (isBrowser()) {
+                            // FormData in browser can accept File/Blob directly
+                            localVarFormParams.append(name, data, data.name);
+                        } else {
+                            // FormData in Node.js can only accept raw Buffer so convert before passing
+                            const bytes = await data.arrayBuffer()
+                            const buffer = Buffer.from(bytes)
+                            localVarFormParams.append(name, buffer, data.name);
+                        }
+                    }
+                } else {
+                    if (isPrimitiveType) {
+                        /**
+                         * FormData can only accept string or Blob so we need to convert
+                         * non-string primitives to string. We also need to convert
+                         */
+                        if (typeof data === "object") {
+                          localVarFormParams.append(name, JSON.stringify(data));
+                        } else {
+                          localVarFormParams.append(name, data);
+                        }
+                    } else {
+                        if (isBrowser()) {
+                            localVarFormParams.append(name, new Blob([JSON.stringify(data)], { type: "application/json" }))
+                        } else {
+                            localVarFormParams.append(name, JSON.stringify(data), { type: "application/json", filename: "data.json" });
+                        }
+                    }
+                }
+            }
+            if (!isBrowser()) Object.assign(localVarHeaderParameter, localVarFormParams.getHeaders());
+
+            // authentication ApiKeyAuth required
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "X-API-Key", keyParamName: "xAPIKey", configuration })
+
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+
+            if (documentLocalIngestRequestInner) {
+                for (const element of documentLocalIngestRequestInner) {
+                    await addFormParam('blob', element.blob, true, true)
+                    await addFormParam('metadata', element.metadata, false, false)
+                }
+            }
+
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+            requestBeforeHook({
+                requestBody: documentLocalIngestRequestInner,
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/v1/ingest/documents/local',
+                httpMethod: 'POST'
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Ingest documents hosted on public URLs to a GroundX bucket.   Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary ingest_remote
+         * @param {DocumentRemoteIngestRequest} [documentRemoteIngestRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        ingestRemote: async (documentRemoteIngestRequest?: DocumentRemoteIngestRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/v1/ingest/documents/remote`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication ApiKeyAuth required
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "X-API-Key", keyParamName: "xAPIKey", configuration })
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                requestBody: documentRemoteIngestRequest,
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/v1/ingest/documents/remote',
+                httpMethod: 'POST'
+            });
+            localVarRequestOptions.data = serializeDataIfNeeded(documentRemoteIngestRequest, localVarRequestOptions, configuration)
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
@@ -424,149 +567,6 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
                 options: localVarRequestOptions,
             };
         },
-        /**
-         * Upload documents hosted on a local file system to a GroundX bucket.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
-         * @summary upload_local
-         * @param {Array<DocumentLocalUploadRequestInner>} [documentLocalUploadRequestInner] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        uploadLocal: async (documentLocalUploadRequestInner?: Array<DocumentLocalUploadRequestInner>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/v1/ingest/documents/local`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
-            const localVarQueryParameter = {} as any;
-            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
-            const addFormParam = async (name: string, data: any, isBinary: boolean, isPrimitiveType: boolean) => {
-                if (isBinary) {
-                    if (data instanceof Uint8Array) {
-                        // Handle Buffer data
-                        const filetype = await fromBuffer(data)
-                        const filename = filetype === undefined ? name : `${name}.${filetype.ext}`
-                        localVarFormParams.append(name, data as any, filename);
-                    } else if ("name" in data) {
-                        // File instances in browsers and Node.js have the
-                        // "name" property "Duck typing" files to handle browser
-                        // File class or Node.js File class
-                        // Web: https://developer.mozilla.org/en-US/docs/Web/API/File
-                        // Node.js: https://nodejs.org/api/buffer.html#new-bufferfilesources-filename-options
-                        if (isBrowser()) {
-                            // FormData in browser can accept File/Blob directly
-                            localVarFormParams.append(name, data, data.name);
-                        } else {
-                            // FormData in Node.js can only accept raw Buffer so convert before passing
-                            const bytes = await data.arrayBuffer()
-                            const buffer = Buffer.from(bytes)
-                            localVarFormParams.append(name, buffer, data.name);
-                        }
-                    }
-                } else {
-                    if (isPrimitiveType) {
-                        /**
-                         * FormData can only accept string or Blob so we need to convert
-                         * non-string primitives to string. We also need to convert
-                         */
-                        if (typeof data === "object") {
-                          localVarFormParams.append(name, JSON.stringify(data));
-                        } else {
-                          localVarFormParams.append(name, data);
-                        }
-                    } else {
-                        if (isBrowser()) {
-                            localVarFormParams.append(name, new Blob([JSON.stringify(data)], { type: "application/json" }))
-                        } else {
-                            localVarFormParams.append(name, JSON.stringify(data), { type: "application/json", filename: "data.json" });
-                        }
-                    }
-                }
-            }
-            if (!isBrowser()) Object.assign(localVarHeaderParameter, localVarFormParams.getHeaders());
-
-            // authentication ApiKeyAuth required
-            await setApiKeyToObject({ object: localVarHeaderParameter, key: "X-API-Key", keyParamName: "xAPIKey", configuration })
-
-    
-            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
-
-            if (documentLocalUploadRequestInner) {
-                for (const element of documentLocalUploadRequestInner) {
-                    await addFormParam('blob', element.blob, true, true)
-                    await addFormParam('metadata', element.metadata, false, false)
-                }
-            }
-
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = localVarFormParams;
-            requestBeforeHook({
-                requestBody: documentLocalUploadRequestInner,
-                queryParameters: localVarQueryParameter,
-                requestConfig: localVarRequestOptions,
-                path: localVarPath,
-                configuration,
-                pathTemplate: '/v1/ingest/documents/local',
-                httpMethod: 'POST'
-            });
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Upload documents hosted on public URLs to a GroundX bucket.   Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
-         * @summary upload_remote
-         * @param {DocumentRemoteUploadRequest} [documentRemoteUploadRequest] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        uploadRemote: async (documentRemoteUploadRequest?: DocumentRemoteUploadRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/v1/ingest/documents/remote`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication ApiKeyAuth required
-            await setApiKeyToObject({ object: localVarHeaderParameter, key: "X-API-Key", keyParamName: "xAPIKey", configuration })
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            requestBeforeHook({
-                requestBody: documentRemoteUploadRequest,
-                queryParameters: localVarQueryParameter,
-                requestConfig: localVarRequestOptions,
-                path: localVarPath,
-                configuration,
-                pathTemplate: '/v1/ingest/documents/remote',
-                httpMethod: 'POST'
-            });
-            localVarRequestOptions.data = serializeDataIfNeeded(documentRemoteUploadRequest, localVarRequestOptions, configuration)
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
     }
 };
 
@@ -578,7 +578,7 @@ export const DocumentsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = DocumentsApiAxiosParamCreator(configuration)
     return {
         /**
-         * Upload the content of a publicly accessible website to a GroundX bucket. This is done by following links within a specified URL, recursively, up to a specified depth or number of pages.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * Upload the content of a publicly accessible website for ingestion into a GroundX bucket. This is done by following links within a specified URL, recursively, up to a specified depth or number of pages.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
          * @summary crawl_website
          * @param {DocumentsApiCrawlWebsiteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -625,7 +625,7 @@ export const DocumentsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Get the current status of an upload, initiated with documents.upload_remote, documents.upload_local, or documents.crawl_website, by specifying the processId (the processId is included in the response of the documents.upload functions).  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * Get the current status of an ingest, initiated with documents.ingest_remote, documents.ingest_local, or documents.crawl_website, by specifying the processId (the processId is included in the response of the documents.ingest functions).  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
          * @summary get_processing_status_by_id
          * @param {DocumentsApiGetProcessingStatusByIdRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -633,6 +633,32 @@ export const DocumentsApiFp = function(configuration?: Configuration) {
          */
         async getProcessingStatusById(requestParameters: DocumentsApiGetProcessingStatusByIdRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProcessStatusResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getProcessingStatusById(requestParameters.processId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Upload documents hosted on a local file system for ingestion into a GroundX bucket.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary ingest_local
+         * @param {DocumentsApiIngestLocalRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async ingestLocal(requestParameters: DocumentsApiIngestLocalRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IngestResponse>> {
+            const documentLocalIngestRequestInner: Array<DocumentLocalIngestRequestInner> = requestParameters;
+            const localVarAxiosArgs = await localVarAxiosParamCreator.ingestLocal(documentLocalIngestRequestInner, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Ingest documents hosted on public URLs to a GroundX bucket.   Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary ingest_remote
+         * @param {DocumentsApiIngestRemoteRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async ingestRemote(requestParameters: DocumentsApiIngestRemoteRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IngestResponse>> {
+            const documentRemoteIngestRequest: DocumentRemoteIngestRequest = {
+                documents: requestParameters.documents
+            };
+            const localVarAxiosArgs = await localVarAxiosParamCreator.ingestRemote(documentRemoteIngestRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -657,32 +683,6 @@ export const DocumentsApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.lookup(requestParameters.id, requestParameters.n, requestParameters.filter, requestParameters.sort, requestParameters.sortOrder, requestParameters.status, requestParameters.nextToken, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
-        /**
-         * Upload documents hosted on a local file system to a GroundX bucket.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
-         * @summary upload_local
-         * @param {DocumentsApiUploadLocalRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async uploadLocal(requestParameters: DocumentsApiUploadLocalRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IngestResponse>> {
-            const documentLocalUploadRequestInner: Array<DocumentLocalUploadRequestInner> = requestParameters;
-            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadLocal(documentLocalUploadRequestInner, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Upload documents hosted on public URLs to a GroundX bucket.   Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
-         * @summary upload_remote
-         * @param {DocumentsApiUploadRemoteRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async uploadRemote(requestParameters: DocumentsApiUploadRemoteRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IngestResponse>> {
-            const documentRemoteUploadRequest: DocumentRemoteUploadRequest = {
-                documents: requestParameters.documents
-            };
-            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadRemote(documentRemoteUploadRequest, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
     }
 };
 
@@ -694,7 +694,7 @@ export const DocumentsApiFactory = function (configuration?: Configuration, base
     const localVarFp = DocumentsApiFp(configuration)
     return {
         /**
-         * Upload the content of a publicly accessible website to a GroundX bucket. This is done by following links within a specified URL, recursively, up to a specified depth or number of pages.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * Upload the content of a publicly accessible website for ingestion into a GroundX bucket. This is done by following links within a specified URL, recursively, up to a specified depth or number of pages.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
          * @summary crawl_website
          * @param {DocumentsApiCrawlWebsiteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -734,7 +734,7 @@ export const DocumentsApiFactory = function (configuration?: Configuration, base
             return localVarFp.get(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Get the current status of an upload, initiated with documents.upload_remote, documents.upload_local, or documents.crawl_website, by specifying the processId (the processId is included in the response of the documents.upload functions).  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * Get the current status of an ingest, initiated with documents.ingest_remote, documents.ingest_local, or documents.crawl_website, by specifying the processId (the processId is included in the response of the documents.ingest functions).  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
          * @summary get_processing_status_by_id
          * @param {DocumentsApiGetProcessingStatusByIdRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -742,6 +742,26 @@ export const DocumentsApiFactory = function (configuration?: Configuration, base
          */
         getProcessingStatusById(requestParameters: DocumentsApiGetProcessingStatusByIdRequest, options?: AxiosRequestConfig): AxiosPromise<ProcessStatusResponse> {
             return localVarFp.getProcessingStatusById(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Upload documents hosted on a local file system for ingestion into a GroundX bucket.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary ingest_local
+         * @param {DocumentsApiIngestLocalRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        ingestLocal(requestParameters: DocumentsApiIngestLocalRequest, options?: AxiosRequestConfig): AxiosPromise<IngestResponse> {
+            return localVarFp.ingestLocal(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Ingest documents hosted on public URLs to a GroundX bucket.   Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * @summary ingest_remote
+         * @param {DocumentsApiIngestRemoteRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        ingestRemote(requestParameters: DocumentsApiIngestRemoteRequest, options?: AxiosRequestConfig): AxiosPromise<IngestResponse> {
+            return localVarFp.ingestRemote(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
          * lookup all documents across all resources which are currently on GroundX  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
@@ -763,26 +783,6 @@ export const DocumentsApiFactory = function (configuration?: Configuration, base
         lookup(requestParameters: DocumentsApiLookupRequest, options?: AxiosRequestConfig): AxiosPromise<DocumentLookupResponse> {
             return localVarFp.lookup(requestParameters, options).then((request) => request(axios, basePath));
         },
-        /**
-         * Upload documents hosted on a local file system to a GroundX bucket.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
-         * @summary upload_local
-         * @param {DocumentsApiUploadLocalRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        uploadLocal(requestParameters: DocumentsApiUploadLocalRequest, options?: AxiosRequestConfig): AxiosPromise<IngestResponse> {
-            return localVarFp.uploadLocal(requestParameters, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Upload documents hosted on public URLs to a GroundX bucket.   Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
-         * @summary upload_remote
-         * @param {DocumentsApiUploadRemoteRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        uploadRemote(requestParameters: DocumentsApiUploadRemoteRequest, options?: AxiosRequestConfig): AxiosPromise<IngestResponse> {
-            return localVarFp.uploadRemote(requestParameters, options).then((request) => request(axios, basePath));
-        },
     };
 };
 
@@ -803,7 +803,7 @@ export type DocumentsApiCrawlWebsiteRequest = {
 export type DocumentsApiDeleteRequest = {
     
     /**
-    * A list of documentIds which correspond to documents uploaded to GroundX
+    * A list of documentIds which correspond to documents ingested by GroundX
     * @type {Array<string>}
     * @memberof DocumentsApiDelete
     */
@@ -819,7 +819,7 @@ export type DocumentsApiDeleteRequest = {
 export type DocumentsApiDelete1Request = {
     
     /**
-    * A documentId which correspond to a document uploaded to GroundX
+    * A documentId which correspond to a document ingested by GroundX
     * @type {string}
     * @memberof DocumentsApiDelete1
     */
@@ -851,13 +851,29 @@ export type DocumentsApiGetRequest = {
 export type DocumentsApiGetProcessingStatusByIdRequest = {
     
     /**
-    * the processId for the upload process being checked
+    * the processId for the ingest process being checked
     * @type {string}
     * @memberof DocumentsApiGetProcessingStatusById
     */
     readonly processId: string
     
 }
+
+/**
+ * Request parameters for ingestLocal operation in DocumentsApi.
+ * @export
+ * @interface DocumentsApiIngestLocalRequest
+ */
+export type DocumentsApiIngestLocalRequest = Array<DocumentLocalIngestRequestInner>
+
+/**
+ * Request parameters for ingestRemote operation in DocumentsApi.
+ * @export
+ * @interface DocumentsApiIngestRemoteRequest
+ */
+export type DocumentsApiIngestRemoteRequest = {
+    
+} & DocumentRemoteIngestRequest
 
 /**
  * Request parameters for list operation in DocumentsApi.
@@ -969,22 +985,6 @@ export type DocumentsApiLookupRequest = {
 }
 
 /**
- * Request parameters for uploadLocal operation in DocumentsApi.
- * @export
- * @interface DocumentsApiUploadLocalRequest
- */
-export type DocumentsApiUploadLocalRequest = Array<DocumentLocalUploadRequestInner>
-
-/**
- * Request parameters for uploadRemote operation in DocumentsApi.
- * @export
- * @interface DocumentsApiUploadRemoteRequest
- */
-export type DocumentsApiUploadRemoteRequest = {
-    
-} & DocumentRemoteUploadRequest
-
-/**
  * DocumentsApiGenerated - object-oriented interface
  * @export
  * @class DocumentsApiGenerated
@@ -992,7 +992,7 @@ export type DocumentsApiUploadRemoteRequest = {
  */
 export class DocumentsApiGenerated extends BaseAPI {
     /**
-     * Upload the content of a publicly accessible website to a GroundX bucket. This is done by following links within a specified URL, recursively, up to a specified depth or number of pages.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+     * Upload the content of a publicly accessible website for ingestion into a GroundX bucket. This is done by following links within a specified URL, recursively, up to a specified depth or number of pages.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
      * @summary crawl_website
      * @param {DocumentsApiCrawlWebsiteRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1040,7 +1040,7 @@ export class DocumentsApiGenerated extends BaseAPI {
     }
 
     /**
-     * Get the current status of an upload, initiated with documents.upload_remote, documents.upload_local, or documents.crawl_website, by specifying the processId (the processId is included in the response of the documents.upload functions).  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+     * Get the current status of an ingest, initiated with documents.ingest_remote, documents.ingest_local, or documents.crawl_website, by specifying the processId (the processId is included in the response of the documents.ingest functions).  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
      * @summary get_processing_status_by_id
      * @param {DocumentsApiGetProcessingStatusByIdRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1049,6 +1049,30 @@ export class DocumentsApiGenerated extends BaseAPI {
      */
     public getProcessingStatusById(requestParameters: DocumentsApiGetProcessingStatusByIdRequest, options?: AxiosRequestConfig) {
         return DocumentsApiFp(this.configuration).getProcessingStatusById(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Upload documents hosted on a local file system for ingestion into a GroundX bucket.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+     * @summary ingest_local
+     * @param {DocumentsApiIngestLocalRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DocumentsApiGenerated
+     */
+    public ingestLocal(requestParameters: DocumentsApiIngestLocalRequest, options?: AxiosRequestConfig) {
+        return DocumentsApiFp(this.configuration).ingestLocal(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Ingest documents hosted on public URLs to a GroundX bucket.   Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+     * @summary ingest_remote
+     * @param {DocumentsApiIngestRemoteRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DocumentsApiGenerated
+     */
+    public ingestRemote(requestParameters: DocumentsApiIngestRemoteRequest, options?: AxiosRequestConfig) {
+        return DocumentsApiFp(this.configuration).ingestRemote(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1073,29 +1097,5 @@ export class DocumentsApiGenerated extends BaseAPI {
      */
     public lookup(requestParameters: DocumentsApiLookupRequest, options?: AxiosRequestConfig) {
         return DocumentsApiFp(this.configuration).lookup(requestParameters, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Upload documents hosted on a local file system to a GroundX bucket.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
-     * @summary upload_local
-     * @param {DocumentsApiUploadLocalRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DocumentsApiGenerated
-     */
-    public uploadLocal(requestParameters: DocumentsApiUploadLocalRequest, options?: AxiosRequestConfig) {
-        return DocumentsApiFp(this.configuration).uploadLocal(requestParameters, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Upload documents hosted on public URLs to a GroundX bucket.   Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
-     * @summary upload_remote
-     * @param {DocumentsApiUploadRemoteRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DocumentsApiGenerated
-     */
-    public uploadRemote(requestParameters: DocumentsApiUploadRemoteRequest, options?: AxiosRequestConfig) {
-        return DocumentsApiFp(this.configuration).uploadRemote(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 }

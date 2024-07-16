@@ -24,7 +24,7 @@ import frozendict  # noqa: F401
 from groundx import schemas  # noqa: F401
 
 
-class DocumentLocalUploadRequestItemMetadata(
+class DocumentRemoteIngestRequestDocumentsItem(
     schemas.DictSchema
 ):
     """
@@ -34,13 +34,13 @@ class DocumentLocalUploadRequestItemMetadata(
 
     class MetaOapg:
         required = {
-            "fileName",
+            "sourceUrl",
             "bucketId",
-            "fileType",
         }
         
         class properties:
             bucketId = schemas.IntSchema
+            sourceUrl = schemas.StrSchema
             fileName = schemas.StrSchema
         
             @staticmethod
@@ -49,17 +49,20 @@ class DocumentLocalUploadRequestItemMetadata(
             searchData = schemas.DictSchema
             __annotations__ = {
                 "bucketId": bucketId,
+                "sourceUrl": sourceUrl,
                 "fileName": fileName,
                 "fileType": fileType,
                 "searchData": searchData,
             }
     
-    fileName: MetaOapg.properties.fileName
+    sourceUrl: MetaOapg.properties.sourceUrl
     bucketId: MetaOapg.properties.bucketId
-    fileType: 'DocumentType'
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["bucketId"]) -> MetaOapg.properties.bucketId: ...
+    
+    @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["sourceUrl"]) -> MetaOapg.properties.sourceUrl: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["fileName"]) -> MetaOapg.properties.fileName: ...
@@ -73,7 +76,7 @@ class DocumentLocalUploadRequestItemMetadata(
     @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["bucketId", "fileName", "fileType", "searchData", ], str]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["bucketId", "sourceUrl", "fileName", "fileType", "searchData", ], str]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -82,10 +85,13 @@ class DocumentLocalUploadRequestItemMetadata(
     def get_item_oapg(self, name: typing_extensions.Literal["bucketId"]) -> MetaOapg.properties.bucketId: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["fileName"]) -> MetaOapg.properties.fileName: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["sourceUrl"]) -> MetaOapg.properties.sourceUrl: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["fileType"]) -> 'DocumentType': ...
+    def get_item_oapg(self, name: typing_extensions.Literal["fileName"]) -> typing.Union[MetaOapg.properties.fileName, schemas.Unset]: ...
+    
+    @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["fileType"]) -> typing.Union['DocumentType', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["searchData"]) -> typing.Union[MetaOapg.properties.searchData, schemas.Unset]: ...
@@ -93,25 +99,27 @@ class DocumentLocalUploadRequestItemMetadata(
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["bucketId", "fileName", "fileType", "searchData", ], str]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["bucketId", "sourceUrl", "fileName", "fileType", "searchData", ], str]):
         return super().get_item_oapg(name)
     
 
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        fileName: typing.Union[MetaOapg.properties.fileName, str, ],
+        sourceUrl: typing.Union[MetaOapg.properties.sourceUrl, str, ],
         bucketId: typing.Union[MetaOapg.properties.bucketId, decimal.Decimal, int, ],
-        fileType: 'DocumentType',
+        fileName: typing.Union[MetaOapg.properties.fileName, str, schemas.Unset] = schemas.unset,
+        fileType: typing.Union['DocumentType', schemas.Unset] = schemas.unset,
         searchData: typing.Union[MetaOapg.properties.searchData, dict, frozendict.frozendict, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
-    ) -> 'DocumentLocalUploadRequestItemMetadata':
+    ) -> 'DocumentRemoteIngestRequestDocumentsItem':
         return super().__new__(
             cls,
             *args,
-            fileName=fileName,
+            sourceUrl=sourceUrl,
             bucketId=bucketId,
+            fileName=fileName,
             fileType=fileType,
             searchData=searchData,
             _configuration=_configuration,

@@ -24,7 +24,7 @@ import frozendict  # noqa: F401
 from groundx import schemas  # noqa: F401
 
 
-class DocumentLocalUploadRequestItem(
+class DocumentLocalIngestRequestItem(
     schemas.DictSchema
 ):
     """
@@ -42,21 +42,21 @@ class DocumentLocalUploadRequestItem(
             blob = schemas.BinarySchema
         
             @staticmethod
-            def metadata() -> typing.Type['DocumentLocalUploadRequestItemMetadata']:
-                return DocumentLocalUploadRequestItemMetadata
+            def metadata() -> typing.Type['DocumentLocalIngestRequestItemMetadata']:
+                return DocumentLocalIngestRequestItemMetadata
             __annotations__ = {
                 "blob": blob,
                 "metadata": metadata,
             }
     
-    metadata: 'DocumentLocalUploadRequestItemMetadata'
+    metadata: 'DocumentLocalIngestRequestItemMetadata'
     blob: MetaOapg.properties.blob
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["blob"]) -> MetaOapg.properties.blob: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["metadata"]) -> 'DocumentLocalUploadRequestItemMetadata': ...
+    def __getitem__(self, name: typing_extensions.Literal["metadata"]) -> 'DocumentLocalIngestRequestItemMetadata': ...
     
     @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
@@ -70,7 +70,7 @@ class DocumentLocalUploadRequestItem(
     def get_item_oapg(self, name: typing_extensions.Literal["blob"]) -> MetaOapg.properties.blob: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["metadata"]) -> 'DocumentLocalUploadRequestItemMetadata': ...
+    def get_item_oapg(self, name: typing_extensions.Literal["metadata"]) -> 'DocumentLocalIngestRequestItemMetadata': ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
@@ -82,11 +82,11 @@ class DocumentLocalUploadRequestItem(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        metadata: 'DocumentLocalUploadRequestItemMetadata',
+        metadata: 'DocumentLocalIngestRequestItemMetadata',
         blob: typing.Union[MetaOapg.properties.blob, bytes, io.FileIO, io.BufferedReader, ],
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
-    ) -> 'DocumentLocalUploadRequestItem':
+    ) -> 'DocumentLocalIngestRequestItem':
         return super().__new__(
             cls,
             *args,
@@ -96,4 +96,4 @@ class DocumentLocalUploadRequestItem(
             **kwargs,
         )
 
-from groundx.model.document_local_upload_request_item_metadata import DocumentLocalUploadRequestItemMetadata
+from groundx.model.document_local_ingest_request_item_metadata import DocumentLocalIngestRequestItemMetadata

@@ -15,32 +15,38 @@ import { DocumentType } from './document-type';
 /**
  * 
  * @export
- * @interface DocumentLocalUploadRequestInnerMetadata
+ * @interface DocumentRemoteIngestRequestDocumentsInner
  */
-export interface DocumentLocalUploadRequestInnerMetadata {
+export interface DocumentRemoteIngestRequestDocumentsInner {
     /**
-     * the bucketId of the bucket which this local file will be uploaded to.
+     * the bucketId of the bucket which this remote file will be ingested to.
      * @type {number}
-     * @memberof DocumentLocalUploadRequestInnerMetadata
+     * @memberof DocumentRemoteIngestRequestDocumentsInner
      */
     'bucketId': number;
     /**
-     * The name of the file being uploaded
+     * The name of the file being ingested
      * @type {string}
-     * @memberof DocumentLocalUploadRequestInnerMetadata
+     * @memberof DocumentRemoteIngestRequestDocumentsInner
      */
-    'fileName': string;
+    'fileName'?: string;
     /**
      * The type of document (one of the seven currently supported file types)
      * @type {DocumentType}
-     * @memberof DocumentLocalUploadRequestInnerMetadata
+     * @memberof DocumentRemoteIngestRequestDocumentsInner
      */
-    'fileType': DocumentType;
+    'fileType'?: DocumentType;
     /**
      * Custom metadata which can be used to influence GroundX\'s search functionality. This data can be used to further hone GroundX search.
      * @type {object}
-     * @memberof DocumentLocalUploadRequestInnerMetadata
+     * @memberof DocumentRemoteIngestRequestDocumentsInner
      */
     'searchData'?: object;
+    /**
+     * The URL of the document being ingested by GroundX.
+     * @type {string}
+     * @memberof DocumentRemoteIngestRequestDocumentsInner
+     */
+    'sourceUrl': string;
 }
 

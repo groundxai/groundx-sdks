@@ -24,7 +24,7 @@ import frozendict  # noqa: F401
 from groundx import schemas  # noqa: F401
 
 
-class DocumentRemoteUploadRequest(
+class DocumentRemoteIngestRequest(
     schemas.DictSchema
 ):
     """
@@ -40,16 +40,16 @@ class DocumentRemoteUploadRequest(
         class properties:
         
             @staticmethod
-            def documents() -> typing.Type['DocumentRemoteUploadRequestDocuments']:
-                return DocumentRemoteUploadRequestDocuments
+            def documents() -> typing.Type['DocumentRemoteIngestRequestDocuments']:
+                return DocumentRemoteIngestRequestDocuments
             __annotations__ = {
                 "documents": documents,
             }
     
-    documents: 'DocumentRemoteUploadRequestDocuments'
+    documents: 'DocumentRemoteIngestRequestDocuments'
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["documents"]) -> 'DocumentRemoteUploadRequestDocuments': ...
+    def __getitem__(self, name: typing_extensions.Literal["documents"]) -> 'DocumentRemoteIngestRequestDocuments': ...
     
     @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
@@ -60,7 +60,7 @@ class DocumentRemoteUploadRequest(
     
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["documents"]) -> 'DocumentRemoteUploadRequestDocuments': ...
+    def get_item_oapg(self, name: typing_extensions.Literal["documents"]) -> 'DocumentRemoteIngestRequestDocuments': ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
@@ -72,10 +72,10 @@ class DocumentRemoteUploadRequest(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        documents: 'DocumentRemoteUploadRequestDocuments',
+        documents: 'DocumentRemoteIngestRequestDocuments',
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
-    ) -> 'DocumentRemoteUploadRequest':
+    ) -> 'DocumentRemoteIngestRequest':
         return super().__new__(
             cls,
             *args,
@@ -84,4 +84,4 @@ class DocumentRemoteUploadRequest(
             **kwargs,
         )
 
-from groundx.model.document_remote_upload_request_documents import DocumentRemoteUploadRequestDocuments
+from groundx.model.document_remote_ingest_request_documents import DocumentRemoteIngestRequestDocuments

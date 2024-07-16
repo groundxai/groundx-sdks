@@ -32,19 +32,19 @@ import frozendict  # noqa: F401
 
 from groundx import schemas  # noqa: F401
 
-from groundx.model.document_local_upload_request import DocumentLocalUploadRequest as DocumentLocalUploadRequestSchema
 from groundx.model.ingest_response import IngestResponse as IngestResponseSchema
+from groundx.model.document_local_ingest_request import DocumentLocalIngestRequest as DocumentLocalIngestRequestSchema
 
-from groundx.type.document_local_upload_request import DocumentLocalUploadRequest
+from groundx.type.document_local_ingest_request import DocumentLocalIngestRequest
 from groundx.type.ingest_response import IngestResponse
 
 from . import path
 
 # body param
-SchemaForRequestBodyMultipartFormData = DocumentLocalUploadRequestSchema
+SchemaForRequestBodyMultipartFormData = DocumentLocalIngestRequestSchema
 
 
-request_body_document_local_upload_request = api_client.RequestBody(
+request_body_document_local_ingest_request = api_client.RequestBody(
     content={
         'multipart/form-data': api_client.MediaType(
             schema=SchemaForRequestBodyMultipartFormData),
@@ -118,16 +118,16 @@ _all_accept_content_types = (
 
 class BaseApi(api_client.Api):
 
-    def _upload_local_mapped_args(
+    def _ingest_local_mapped_args(
         self,
-        body: typing.Optional[DocumentLocalUploadRequest] = None,
+        body: typing.Optional[DocumentLocalIngestRequest] = None,
     ) -> api_client.MappedArgs:
         args: api_client.MappedArgs = api_client.MappedArgs()
         _body = {}
         args.body = body if body is not None else _body
         return args
 
-    async def _aupload_local_oapg(
+    async def _aingest_local_oapg(
         self,
         body: typing.Any = None,
         skip_deserialization: bool = True,
@@ -142,7 +142,7 @@ class BaseApi(api_client.Api):
         AsyncGeneratorResponse,
     ]:
         """
-        upload_local
+        ingest_local
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
@@ -169,7 +169,7 @@ class BaseApi(api_client.Api):
             headers=_headers,
         )
         if body is not schemas.unset:
-            serialized_data = request_body_document_local_upload_request.serialize(body, content_type)
+            serialized_data = request_body_document_local_ingest_request.serialize(body, content_type)
             if 'fields' in serialized_data:
                 _fields = serialized_data['fields']
             elif 'body' in serialized_data:
@@ -241,7 +241,7 @@ class BaseApi(api_client.Api):
         return api_response
 
 
-    def _upload_local_oapg(
+    def _ingest_local_oapg(
         self,
         body: typing.Any = None,
         skip_deserialization: bool = True,
@@ -254,7 +254,7 @@ class BaseApi(api_client.Api):
         api_client.ApiResponseWithoutDeserialization,
     ]:
         """
-        upload_local
+        ingest_local
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
@@ -281,7 +281,7 @@ class BaseApi(api_client.Api):
             headers=_headers,
         )
         if body is not schemas.unset:
-            serialized_data = request_body_document_local_upload_request.serialize(body, content_type)
+            serialized_data = request_body_document_local_ingest_request.serialize(body, content_type)
             if 'fields' in serialized_data:
                 _fields = serialized_data['fields']
             elif 'body' in serialized_data:
@@ -322,37 +322,37 @@ class BaseApi(api_client.Api):
         return api_response
 
 
-class UploadLocal(BaseApi):
+class IngestLocal(BaseApi):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
-    async def aupload_local(
+    async def aingest_local(
         self,
-        body: typing.Optional[DocumentLocalUploadRequest] = None,
+        body: typing.Optional[DocumentLocalIngestRequest] = None,
         **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
         AsyncGeneratorResponse,
     ]:
-        args = self._upload_local_mapped_args(
+        args = self._ingest_local_mapped_args(
             body=body,
         )
-        return await self._aupload_local_oapg(
+        return await self._aingest_local_oapg(
             body=args.body,
             **kwargs,
         )
     
-    def upload_local(
+    def ingest_local(
         self,
-        body: typing.Optional[DocumentLocalUploadRequest] = None,
+        body: typing.Optional[DocumentLocalIngestRequest] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        args = self._upload_local_mapped_args(
+        args = self._ingest_local_mapped_args(
             body=body,
         )
-        return self._upload_local_oapg(
+        return self._ingest_local_oapg(
             body=args.body,
         )
 
@@ -361,32 +361,32 @@ class ApiForpost(BaseApi):
 
     async def apost(
         self,
-        body: typing.Optional[DocumentLocalUploadRequest] = None,
+        body: typing.Optional[DocumentLocalIngestRequest] = None,
         **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
         AsyncGeneratorResponse,
     ]:
-        args = self._upload_local_mapped_args(
+        args = self._ingest_local_mapped_args(
             body=body,
         )
-        return await self._aupload_local_oapg(
+        return await self._aingest_local_oapg(
             body=args.body,
             **kwargs,
         )
     
     def post(
         self,
-        body: typing.Optional[DocumentLocalUploadRequest] = None,
+        body: typing.Optional[DocumentLocalIngestRequest] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        args = self._upload_local_mapped_args(
+        args = self._ingest_local_mapped_args(
             body=body,
         )
-        return self._upload_local_oapg(
+        return self._ingest_local_oapg(
             body=args.body,
         )
 

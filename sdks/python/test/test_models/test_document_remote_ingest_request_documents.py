@@ -13,12 +13,12 @@
 import unittest
 
 import groundx
-from groundx.model.document_remote_upload_request import DocumentRemoteUploadRequest
+from groundx.model.document_remote_ingest_request_documents import DocumentRemoteIngestRequestDocuments
 from groundx import configuration
 
 
-class TestDocumentRemoteUploadRequest(unittest.TestCase):
-    """DocumentRemoteUploadRequest unit test stubs"""
+class TestDocumentRemoteIngestRequestDocuments(unittest.TestCase):
+    """DocumentRemoteIngestRequestDocuments unit test stubs"""
     pass
 
 

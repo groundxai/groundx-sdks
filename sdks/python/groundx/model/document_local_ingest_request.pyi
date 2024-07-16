@@ -24,7 +24,7 @@ import frozendict  # noqa: F401
 from groundx import schemas  # noqa: F401
 
 
-class DocumentRemoteUploadRequestDocuments(
+class DocumentLocalIngestRequest(
     schemas.ListSchema
 ):
     """NOTE:
@@ -35,21 +35,21 @@ class DocumentRemoteUploadRequestDocuments(
     class MetaOapg:
         
         @staticmethod
-        def items() -> typing.Type['DocumentRemoteUploadRequestDocumentsItem']:
-            return DocumentRemoteUploadRequestDocumentsItem
+        def items() -> typing.Type['DocumentLocalIngestRequestItem']:
+            return DocumentLocalIngestRequestItem
 
     def __new__(
         cls,
-        arg: typing.Union[typing.Tuple['DocumentRemoteUploadRequestDocumentsItem'], typing.List['DocumentRemoteUploadRequestDocumentsItem']],
+        arg: typing.Union[typing.Tuple['DocumentLocalIngestRequestItem'], typing.List['DocumentLocalIngestRequestItem']],
         _configuration: typing.Optional[schemas.Configuration] = None,
-    ) -> 'DocumentRemoteUploadRequestDocuments':
+    ) -> 'DocumentLocalIngestRequest':
         return super().__new__(
             cls,
             arg,
             _configuration=_configuration,
         )
 
-    def __getitem__(self, i: int) -> 'DocumentRemoteUploadRequestDocumentsItem':
+    def __getitem__(self, i: int) -> 'DocumentLocalIngestRequestItem':
         return super().__getitem__(i)
 
-from groundx.model.document_remote_upload_request_documents_item import DocumentRemoteUploadRequestDocumentsItem
+from groundx.model.document_local_ingest_request_item import DocumentLocalIngestRequestItem

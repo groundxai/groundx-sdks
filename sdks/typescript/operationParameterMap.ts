@@ -81,6 +81,17 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
+    '/v1/ingest/documents/local-POST': {
+        parameters: [
+        ]
+    },
+    '/v1/ingest/documents/remote-POST': {
+        parameters: [
+            {
+                name: 'documents'
+            },
+        ]
+    },
     '/v1/ingest/documents-GET': {
         parameters: [
             {
@@ -125,17 +136,6 @@ export const operationParameterMap: Record<string, Entry> = {
             },
             {
                 name: 'nextToken'
-            },
-        ]
-    },
-    '/v1/ingest/documents/local-POST': {
-        parameters: [
-        ]
-    },
-    '/v1/ingest/documents/remote-POST': {
-        parameters: [
-            {
-                name: 'documents'
             },
         ]
     },

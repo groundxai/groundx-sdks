@@ -75,6 +75,17 @@ operation_parameter_map = {
             },
         ]
     },
+    '/v1/ingest/documents/local-POST': {
+        'parameters': [
+        ]
+    },
+    '/v1/ingest/documents/remote-POST': {
+        'parameters': [
+            {
+                'name': 'documents'
+            },
+        ]
+    },
     '/v1/ingest/documents-GET': {
         'parameters': [
             {
@@ -119,17 +130,6 @@ operation_parameter_map = {
             },
             {
                 'name': 'nextToken'
-            },
-        ]
-    },
-    '/v1/ingest/documents/local-POST': {
-        'parameters': [
-        ]
-    },
-    '/v1/ingest/documents/remote-POST': {
-        'parameters': [
-            {
-                'name': 'documents'
             },
         ]
     },

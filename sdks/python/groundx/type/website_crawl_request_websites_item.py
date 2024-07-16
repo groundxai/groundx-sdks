@@ -17,7 +17,7 @@ from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 
 class RequiredWebsiteCrawlRequestWebsitesItem(TypedDict):
-    # the bucketId of the bucket which this website will be uploaded to.
+    # the bucketId of the bucket which this website will be ingested to.
     bucketId: int
 
     # The URL from which the crawl is initiated.
