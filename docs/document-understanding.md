@@ -29,7 +29,7 @@ Or you can get started with our APIs by following these simple steps:
 - [Upload a hosted file](https://documentation.groundx.ai/docs/ingest-remote-content)
 - [Upload a local file](https://documentation.groundx.ai/docs/ingest-local-content)
 
-The :api[Document_uploadRemote] and :api[Document_uploadLocal] endpoints return a response object indicating the status of the ingestion process. 
+The :api[Document_ingestRemote] and :api[Document_ingestLocal] endpoints return a response object indicating the status of the ingestion process. 
 
 For example:
 
@@ -58,7 +58,7 @@ while (
             process_id=ingest.body["ingest"]["processId"]
         )
 except ApiException as e:
-    print("Exception when calling DocumentApi.upload_remote: %s\n" % e)
+    print("Exception when calling DocumentApi.ingest_remote: %s\n" % e)
 ```
 
 ```typescript
@@ -67,7 +67,7 @@ except ApiException as e:
 if (!ingest || !ingest.status || ingest.status != 200 ||
       !ingest.data || !ingest.data.ingest) {
       console.error(ingest);
-      throw Error("GroundX upload request failed");
+      throw Error("GroundX ingest request failed");
     }
     
     // poll ingest status
@@ -78,7 +78,7 @@ if (!ingest || !ingest.status || ingest.status != 200 ||
       if (!ingest || !ingest.status || ingest.status != 200 ||
         !ingest.data || !ingest.data.ingest) {
         console.error(ingest);
-        throw Error("GroundX upload request failed");
+        throw Error("GroundX ingest request failed");
       }
     
       await new Promise((resolve) => setTimeout(resolve, 3000));

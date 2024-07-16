@@ -31,7 +31,7 @@ _Example:_
 
 ```python
 bucketId = 6830
-uploadLocal = "documents/Aristotle-rhetoric.pdf";
+ingestLocal = "documents/Aristotle-rhetoric.pdf";
 fileName = "aristotle-rhetoric.pdf";
 fileType = "pdf"
 ```
@@ -103,15 +103,15 @@ const groundx = new Groundx({
 :::
 
 ## API request
-Make the API request to upload local documents and include the variables in the request body.
+Make the API request to ingest local documents and include the variables in the request body.
 
 :::code
 
 ```python
-response = groundx.documents.upload_local(
+response = groundx.documents.ingest_local(
     body=[
         {
-            "blob": open(uploadLocal, "rb"),
+            "blob": open(ingestLocal, "rb"),
             "metadata": {
                 "bucketId": bucketId,
                 "fileName": fileName,
@@ -124,7 +124,7 @@ response = groundx.documents.upload_local(
 ```
 
 ```javascript
-const response = await groundx.documents.uploadLocal([
+const response = await groundx.documents.ingestLocal([
         {
             blob: fs.readFileSync(filePath),
             metadata: {
@@ -140,7 +140,7 @@ const response = await groundx.documents.uploadLocal([
 :::
 
 :::note
-Go to :api[Document_uploadLocal] for endpoint details.
+Go to :api[Document_ingestLocal] for endpoint details.
 :::
 
 ## API response

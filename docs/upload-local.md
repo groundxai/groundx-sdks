@@ -1,6 +1,6 @@
 # Upload Local Documents to GroundX
 
-This tutorial will show you how to use GroundX's Typescript and Python SDK libraries to [upload local documents](https://documentation.groundx.ai/reference/Documents/Document_uploadLocal) to your GroundX [buckets](https://documentation.groundx.ai/docs/concepts#concepts-buckets).
+This tutorial will show you how to use GroundX's Typescript and Python SDK libraries to [upload local documents](https://documentation.groundx.ai/reference/Documents/Document_ingestLocal) to your GroundX [buckets](https://documentation.groundx.ai/docs/concepts#concepts-buckets).
 
 Through a simple API request you can [effortlessly upload your content to GroundX](https://documentation.groundx.ai/docs/welcome#welcome-effortless-content-upload) and [automatically pre-process](https://documentation.groundx.ai/docs/welcome#welcome-sophisticated-automated-pre-processing) your data to get it ready to be [searched](https://documentation.groundx.ai/docs/welcome#welcome-superior-search-capabilities) through. 
 
@@ -71,7 +71,7 @@ It is recommended that you store your API key in an environment variable and acc
 :::
 
 ## Step 4: Set up content ingestion parameters
-Set up the parameters for the content ingestion request. For more information on the parameters for uploading local documents to GroundX, go to the :api[Document_uploadLocal] reference guide.
+Set up the parameters for the content ingestion request. For more information on the parameters for uploading local documents to GroundX, go to the :api[Document_ingestLocal] reference guide.
 
 1. Indicate the ID of the [bucket](https://documentation.groundx.ai/docs/concepts#concepts-buckets) you want to ingest the content into by setting the `bucket` parameter.
 
@@ -119,11 +119,11 @@ const fileType = "<FILE_TYPE>";
 :::code
 
 ```python
-uploadHosted = '<RELATIVE_LOCAL_PATH>'
+ingestLocal = '<RELATIVE_LOCAL_PATH>'
 ```
 
 ```typescript
-const uploadHosted = "<RELATIVE_LOCAL_PATH>";
+const ingestLocal = "<RELATIVE_LOCAL_PATH>";
 ```
 
 :::
@@ -168,7 +168,7 @@ Optional: Set up parameter validation to check if all the required parameters ar
 if groundxKey == "YOUR_GROUNDX_KEY":
     raise Exception("set your GroundX key")
 
-if uploadLocal == "":
+if ingestLocal == "":
     raise Exception("set the local file path")
 
 if fileType == "":
@@ -183,7 +183,7 @@ if (groundxKey === "YOUR_GROUNDX_KEY") {
   throw Error("set your GroundX key");
 }
 
-if (uploadLocal === "") {
+if (ingestLocal === "") {
   throw Error("set the local file path")
 }
 
@@ -263,17 +263,17 @@ if (bucketId === 0) {
 :::
 
 ## Step 8: Upload the content
-Upload the content by calling the :api[Document_uploadLocal] endpoint with the parameters you set in [Step 4](#step-4-set-up-content-ingestion-parameters) as arguments. For example:
+Upload the content by calling the :api[Document_ingestLocal] endpoint with the parameters you set in [Step 4](#step-4-set-up-content-ingestion-parameters) as arguments. For example:
 
 :::code
 
 ```python
 # upload local documents to GroundX
 try:
-    ingest = groundx.documents.upload_local(
+    ingest = groundx.documents.ingest_local(
         body=[
             {
-                "blob": open(uploadLocal, "rb"),
+                "blob": open(ingestLocal, "rb"),
                 "metadata": {
                     "bucketId": bucketId,
                     "fileName": fileName,
@@ -292,10 +292,10 @@ try:
 ```typescript
 // Note: Insert this code within a function.
 
-// upload local documents to GroundX
-    let ingest = await groundx.documents.uploadLocal([
+// ingest local documents to GroundX
+    let ingest = await groundx.documents.ingestLocal([
       {
-        blob: fs.readFileSync(uploadLocal),
+        blob: fs.readFileSync(ingestLocal),
         metadata: {
           bucketId: bucketId,
           fileName: fileName,
@@ -308,7 +308,7 @@ try:
 
 :::
 
-The :api[Document_uploadLocal] endpoint returns a response object indicating the status of the ingestion process. 
+The :api[Document_ingestLocal] endpoint returns a response object indicating the status of the ingestion process. 
 
 For example:
 
@@ -338,7 +338,7 @@ To check the status of the ingestion process, we'll use the request response and
             process_id=ingest.body["ingest"]["processId"]
         )
 except ApiException as e:
-    print("Exception when calling DocumentApi.upload_local: %s\n" % e)
+    print("Exception when calling DocumentApi.ingest_local: %s\n" % e)
 ```
 
 ```typescript
@@ -347,7 +347,7 @@ except ApiException as e:
     if (!ingest || !ingest.status || ingest.status != 200 ||
       !ingest.data || !ingest.data.ingest) {
       console.error(ingest);
-      throw Error("GroundX upload request failed");
+      throw Error("GroundX ingest request failed");
     }
     
     // poll ingest status
@@ -358,7 +358,7 @@ except ApiException as e:
       if (!ingest || !ingest.status || ingest.status != 200 ||
         !ingest.data || !ingest.data.ingest) {
         console.error(ingest);
-        throw Error("GroundX upload request failed");
+        throw Error("GroundX ingest request failed");
       }
     
       await new Promise((resolve) => setTimeout(resolve, 3000));

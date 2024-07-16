@@ -111,12 +111,12 @@ _Example:_
 :::code
 
 ```python
-ingest = groundx.documents.upload_remote(
+ingest = groundx.documents.ingest_remote(
     documents=[
         {
             "bucketId": bucketId,
             "searchData": searchData,
-            "sourceUrl": uploadHosted,
+            "sourceUrl": ingestHosted,
             "fileType": fileType,
         }
     ],
@@ -126,7 +126,7 @@ print(ingest.body)
 ```
 
 ```javascript
-const ingest = await groundx.documents.uploadRemote({
+const ingest = await groundx.documents.ingestRemote({
     documents: [
         {
             bucketId: bucketId,
@@ -143,7 +143,7 @@ console.log(ingest.data)
 :::
 
 :::note
-Go to :api[Document_uploadRemote] for endpoint details.
+Go to :api[Document_ingestRemote] for endpoint details.
 :::
 
 ## API response

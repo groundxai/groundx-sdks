@@ -107,7 +107,7 @@ This request will return a list of your content buckets where you can upload you
 
 ## Step 5: Upload Content
 
-To upload document content, use the [Document Upload API](/reference/Documents/Document_uploadRemote):
+To upload document content, use the [Document Upload API](/reference/Documents/Document_ingestRemote):
 
 :::code
 
@@ -120,7 +120,7 @@ curl https://api.groundx.ai/api/v1/ingest/documents \
              {
                "bucketId": bucketId,
                "fileType": fileType,
-               "sourceUrl": uploadHosted
+               "sourceUrl": ingestHosted
              }
            ]
          }'
@@ -129,10 +129,10 @@ curl https://api.groundx.ai/api/v1/ingest/documents \
 ```python
 # Upload local documents to GroundX
 
-ingest = groundx.documents.upload_local(
+ingest = groundx.documents.ingest_local(
   body=[
     {
-      "blob": open(uploadLocal, "rb"),
+      "blob": open(ingestLocal, "rb"),
       "metadata": {
         "bucketId": bucketId,
         "fileName": fileName,
@@ -145,11 +145,11 @@ ingest = groundx.documents.upload_local(
 
 # Upload hosted documents to GroundX
 
-ingest = groundx.documents.upload_remote(
+ingest = groundx.documents.ingest_remote(
   documents=[
     {
       "bucketId": bucketId,
-      "sourceUrl": uploadHosted,
+      "sourceUrl": ingestHosted,
       "fileType": fileType,
     }
   ],
@@ -159,9 +159,9 @@ ingest = groundx.documents.upload_remote(
 ```typescript
 // Upload local documents to GroundX
 
-let ingest = await groundx.documents.uploadLocal([
+let ingest = await groundx.documents.ingestLocal([
   {
-    blob: fs.readFileSync(uploadLocal),
+    blob: fs.readFileSync(ingestLocal),
     metadata: {
       bucketId: bucketId,
       fileName: fileName,
@@ -173,12 +173,12 @@ let ingest = await groundx.documents.uploadLocal([
 
 // Upload hosted documents to GroundX
 
-let ingest = await groundx.documents.uploadRemote({
+let ingest = await groundx.documents.ingestRemote({
   documents: [
     {
       bucketId: bucketId,
       fileType: fileType,
-      sourceUrl: uploadHosted,
+      sourceUrl: ingestHosted,
     }
   ]
 });
@@ -186,7 +186,7 @@ let ingest = await groundx.documents.uploadRemote({
 
 :::
 
-Replace `uploadLocal` with the path to your local file, `uploadHosted` to the URL of your hosted file, `fileType` with one of the enumerated file types (e.g. txt, pdf), `fileName` with a name for your file, and `bucketId` with the content bucket you would like to add the document to.
+Replace `ingestLocal` with the path to your local file, `ingestHosted` to the URL of your hosted file, `fileType` with one of the enumerated file types (e.g. txt, pdf), `fileName` with a name for your file, and `bucketId` with the content bucket you would like to add the document to.
 
 If your request is successful, will receive a response that looks something like this:
 

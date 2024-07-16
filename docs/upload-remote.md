@@ -1,6 +1,6 @@
 # Upload Documents from a Remote Location to GroundX
 
-This tutorial will show you how to use GroundX's Typescript and Python SDK libraries to [upload hosted documents](https://documentation.groundx.ai/reference/Documents/Document_uploadRemote) to your GroundX [buckets](https://documentation.groundx.ai/docs/concepts#concepts-buckets).
+This tutorial will show you how to use GroundX's Typescript and Python SDK libraries to [upload hosted documents](https://documentation.groundx.ai/reference/Documents/Document_ingestRemote) to your GroundX [buckets](https://documentation.groundx.ai/docs/concepts#concepts-buckets).
 
 Through a simple API request you can [effortlessly upload your content to GroundX](https://documentation.groundx.ai/docs/welcome#welcome-effortless-content-upload) and [automatically pre-process](https://documentation.groundx.ai/docs/welcome#welcome-sophisticated-automated-pre-processing) your data to get it ready to be [searched](https://documentation.groundx.ai/docs/welcome#welcome-superior-search-capabilities) through. 
 
@@ -71,7 +71,7 @@ It is recommended that you store your API key in an environment variable and acc
 :::
 
 ## Step 4: Set up content ingestion parameters
-Set up the parameters for the content ingestion request. For more information on the parameters for uploading hosted documents to GroundX, go to the :api[Document_uploadRemote] reference guide.
+Set up the parameters for the content ingestion request. For more information on the parameters for uploading hosted documents to GroundX, go to the :api[Document_ingestRemote] reference guide.
 
 1. Indicate the ID of the [bucket](https://documentation.groundx.ai/docs/concepts#concepts-buckets) you want to ingest the content into by setting the `bucket` parameter.
 
@@ -119,11 +119,11 @@ const fileType = "<FILE_TYPE>";
 :::code
 
 ```python
-uploadHosted = '<URL>'
+ingestHosted = '<URL>'
 ```
 
 ```typescript
-const uploadHosted = "<URL>";
+const ingestHosted = "<URL>";
 ```
 
 :::
@@ -168,7 +168,7 @@ Optional: Set up parameter validation to check if all the required parameters ar
 if groundxKey == "":
     raise Exception("set your GroundX key")
 
-if uploadHosted == "":
+if ingestHosted == "":
     raise Exception("set the hosted file URL")
 
 if fileType == "":
@@ -180,7 +180,7 @@ if (groundxKey === "YOUR_GROUNDX_KEY") {
     throw Error("set your GroundX key");
 }
 
-if (uploadHosted === "") {
+if (ingestHosted === "") {
     throw Error("set the hosted file URL");
 }
 
@@ -256,19 +256,19 @@ if (bucketId === 0) {
 :::
 
 ## Step 8: Upload the content
-Upload the content by calling the :api[Document_uploadRemote] endpoint with the parameters you set in [Step 4](#step-4-set-up-content-ingestion-parameters) as arguments. For example:
+Upload the content by calling the :api[Document_ingestRemote] endpoint with the parameters you set in [Step 4](#step-4-set-up-content-ingestion-parameters) as arguments. For example:
 
 :::code
 
 ```python
 # Upload hosted documents to GroundX request
 try:
-    ingest = groundx.documents.upload_remote(
+    ingest = groundx.documents.ingest_remote(
         documents=[
             {
                 "bucketId": bucketId,
                 "metadata": contentMetadata,
-                "sourceUrl": uploadHosted,
+                "sourceUrl": ingestHosted,
                 "fileType": fileType,
             }
         ],
@@ -279,13 +279,13 @@ try:
 // Note: Insert this code within a function.
 
 // Upload hosted documents to GroundX
-    let ingest = await groundx.documents.uploadRemote({
+    let ingest = await groundx.documents.ingestRemote({
       documents: [
         {
           bucketId: bucketId,
           type: fileType,
           metadata: contentMetadata,
-          sourceUrl: uploadHosted,
+          sourceUrl: ingestHosted,
         }
       ]
     });
@@ -293,7 +293,7 @@ try:
 
 :::
 
-The :api[Document_uploadRemote] endpoint returns a response object indicating the status of the ingestion process. 
+The :api[Document_ingestRemote] endpoint returns a response object indicating the status of the ingestion process. 
 
 For example:
 
@@ -323,7 +323,7 @@ while (
             process_id=ingest.body["ingest"]["processId"]
         )
 except ApiException as e:
-    print("Exception when calling DocumentApi.upload_remote: %s\n" % e)
+    print("Exception when calling DocumentApi.ingest_remote: %s\n" % e)
 ```
 
 ```typescript
@@ -332,7 +332,7 @@ except ApiException as e:
 if (!ingest || !ingest.status || ingest.status != 200 ||
       !ingest.data || !ingest.data.ingest) {
       console.error(ingest);
-      throw Error("GroundX upload request failed");
+      throw Error("GroundX ingest request failed");
     }
     
     // poll ingest status
@@ -343,7 +343,7 @@ if (!ingest || !ingest.status || ingest.status != 200 ||
       if (!ingest || !ingest.status || ingest.status != 200 ||
         !ingest.data || !ingest.data.ingest) {
         console.error(ingest);
-        throw Error("GroundX upload request failed");
+        throw Error("GroundX ingest request failed");
       }
     
       await new Promise((resolve) => setTimeout(resolve, 3000));
