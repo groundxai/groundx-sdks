@@ -28,10 +28,10 @@ Ground Your RAG Apps in Fact not Fiction
   * [`groundx.documents.delete1`](#groundxdocumentsdelete1)
   * [`groundx.documents.get`](#groundxdocumentsget)
   * [`groundx.documents.getProcessingStatusById`](#groundxdocumentsgetprocessingstatusbyid)
+  * [`groundx.documents.ingestLocal`](#groundxdocumentsingestlocal)
+  * [`groundx.documents.ingestRemote`](#groundxdocumentsingestremote)
   * [`groundx.documents.list`](#groundxdocumentslist)
   * [`groundx.documents.lookup`](#groundxdocumentslookup)
-  * [`groundx.documents.uploadLocal`](#groundxdocumentsuploadlocal)
-  * [`groundx.documents.uploadRemote`](#groundxdocumentsuploadremote)
   * [`groundx.health.get`](#groundxhealthget)
   * [`groundx.health.list`](#groundxhealthlist)
   * [`groundx.projects.addBucket`](#groundxprojectsaddbucket)
@@ -276,7 +276,7 @@ The bucketId of the bucket being updated.
 
 ### `groundx.documents.crawlWebsite`<a id="groundxdocumentscrawlwebsite"></a>
 
-Upload the content of a publicly accessible website to a GroundX bucket. This is done by following links within a specified URL, recursively, up to a specified depth or number of pages.
+Upload the content of a publicly accessible website for ingestion into a GroundX bucket. This is done by following links within a specified URL, recursively, up to a specified depth or number of pages.
 
 Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
 
@@ -332,7 +332,7 @@ const deleteResponse = await groundx.documents.delete({
 
 ##### documentIds: `string`[]<a id="documentids-string"></a>
 
-A list of documentIds which correspond to documents uploaded to GroundX
+A list of documentIds which correspond to documents ingested by GroundX
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -366,7 +366,7 @@ const delete1Response = await groundx.documents.delete1({
 
 ##### documentId: `string`<a id="documentid-string"></a>
 
-A documentId which correspond to a document uploaded to GroundX
+A documentId which correspond to a document ingested by GroundX
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -417,7 +417,7 @@ The documentId of the document for which GroundX information will be provided.
 
 ### `groundx.documents.getProcessingStatusById`<a id="groundxdocumentsgetprocessingstatusbyid"></a>
 
-Get the current status of an upload, initiated with documents.upload_remote, documents.upload_local, or documents.crawl_website, by specifying the processId (the processId is included in the response of the documents.upload functions).
+Get the current status of an ingest, initiated with documents.ingest_remote, documents.ingest_local, or documents.crawl_website, by specifying the processId (the processId is included in the response of the documents.ingest functions).
 
 Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
 
@@ -435,7 +435,7 @@ const getProcessingStatusByIdResponse =
 
 ##### processId: `string`<a id="processid-string"></a>
 
-the processId for the upload process being checked
+the processId for the ingest process being checked
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -444,6 +444,84 @@ the processId for the upload process being checked
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/v1/ingest/{processId}` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `groundx.documents.ingestLocal`<a id="groundxdocumentsingestlocal"></a>
+
+Upload documents hosted on a local file system for ingestion into a GroundX bucket.
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const ingestLocalResponse = await groundx.documents.ingestLocal([
+  {
+    blob: fs.readFileSync("/path/to/file"),
+    metadata: {
+      bucketId: 1234,
+      fileName: "my_file.txt",
+      fileType: "txt",
+    },
+  },
+]);
+```
+
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
+
+[`DocumentLocalIngestRequestInner`](./models/document-local-ingest-request-inner.ts)[]
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[IngestResponse](./models/ingest-response.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/v1/ingest/documents/local` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `groundx.documents.ingestRemote`<a id="groundxdocumentsingestremote"></a>
+
+Ingest documents hosted on public URLs to a GroundX bucket. 
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const ingestRemoteResponse = await groundx.documents.ingestRemote({
+  documents: [
+    {
+      bucketId: 1234,
+      fileName: "my_file.txt",
+      fileType: "txt",
+      sourceUrl: "https://my.source.url.com/file.txt",
+    },
+  ],
+});
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### documents: [`DocumentRemoteIngestRequestDocumentsInner`](./models/document-remote-ingest-request-documents-inner.ts)[]<a id="documents-documentremoteingestrequestdocumentsinnermodelsdocument-remote-ingest-request-documents-innerts"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[IngestResponse](./models/ingest-response.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/v1/ingest/documents/remote` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -561,84 +639,6 @@ A token for pagination. If the number of documents for a given query is larger t
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/v1/ingest/documents/{id}` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `groundx.documents.uploadLocal`<a id="groundxdocumentsuploadlocal"></a>
-
-Upload documents hosted on a local file system to a GroundX bucket.
-
-Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```typescript
-const uploadLocalResponse = await groundx.documents.uploadLocal([
-  {
-    blob: fs.readFileSync("/path/to/file"),
-    metadata: {
-      bucketId: 1234,
-      fileName: "my_file.txt",
-      fileType: "txt",
-    },
-  },
-]);
-```
-
-#### ⚙️ Request Body<a id="⚙️-request-body"></a>
-
-[`DocumentLocalUploadRequestInner`](./models/document-local-upload-request-inner.ts)[]
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[IngestResponse](./models/ingest-response.ts)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/v1/ingest/documents/local` `POST`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `groundx.documents.uploadRemote`<a id="groundxdocumentsuploadremote"></a>
-
-Upload documents hosted on public URLs to a GroundX bucket. 
-
-Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```typescript
-const uploadRemoteResponse = await groundx.documents.uploadRemote({
-  documents: [
-    {
-      bucketId: 1234,
-      fileName: "my_file.txt",
-      fileType: "txt",
-      sourceUrl: "https://my.source.url.com/file.txt",
-    },
-  ],
-});
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### documents: [`DocumentRemoteUploadRequestDocumentsInner`](./models/document-remote-upload-request-documents-inner.ts)[]<a id="documents-documentremoteuploadrequestdocumentsinnermodelsdocument-remote-upload-request-documents-innerts"></a>
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[IngestResponse](./models/ingest-response.ts)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/v1/ingest/documents/remote` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

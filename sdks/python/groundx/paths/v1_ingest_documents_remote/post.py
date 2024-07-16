@@ -33,20 +33,20 @@ import frozendict  # noqa: F401
 from groundx import schemas  # noqa: F401
 
 from groundx.model.ingest_response import IngestResponse as IngestResponseSchema
-from groundx.model.document_remote_upload_request import DocumentRemoteUploadRequest as DocumentRemoteUploadRequestSchema
-from groundx.model.document_remote_upload_request_documents import DocumentRemoteUploadRequestDocuments as DocumentRemoteUploadRequestDocumentsSchema
+from groundx.model.document_remote_ingest_request_documents import DocumentRemoteIngestRequestDocuments as DocumentRemoteIngestRequestDocumentsSchema
+from groundx.model.document_remote_ingest_request import DocumentRemoteIngestRequest as DocumentRemoteIngestRequestSchema
 
-from groundx.type.document_remote_upload_request import DocumentRemoteUploadRequest
-from groundx.type.document_remote_upload_request_documents import DocumentRemoteUploadRequestDocuments
+from groundx.type.document_remote_ingest_request import DocumentRemoteIngestRequest
+from groundx.type.document_remote_ingest_request_documents import DocumentRemoteIngestRequestDocuments
 from groundx.type.ingest_response import IngestResponse
 
 from . import path
 
 # body param
-SchemaForRequestBodyApplicationJson = DocumentRemoteUploadRequestSchema
+SchemaForRequestBodyApplicationJson = DocumentRemoteIngestRequestSchema
 
 
-request_body_document_remote_upload_request = api_client.RequestBody(
+request_body_document_remote_ingest_request = api_client.RequestBody(
     content={
         'application/json': api_client.MediaType(
             schema=SchemaForRequestBodyApplicationJson),
@@ -120,9 +120,9 @@ _all_accept_content_types = (
 
 class BaseApi(api_client.Api):
 
-    def _upload_remote_mapped_args(
+    def _ingest_remote_mapped_args(
         self,
-        documents: DocumentRemoteUploadRequestDocuments,
+        documents: DocumentRemoteIngestRequestDocuments,
     ) -> api_client.MappedArgs:
         args: api_client.MappedArgs = api_client.MappedArgs()
         _body = {}
@@ -131,7 +131,7 @@ class BaseApi(api_client.Api):
         args.body = _body
         return args
 
-    async def _aupload_remote_oapg(
+    async def _aingest_remote_oapg(
         self,
         body: typing.Any = None,
         skip_deserialization: bool = True,
@@ -146,7 +146,7 @@ class BaseApi(api_client.Api):
         AsyncGeneratorResponse,
     ]:
         """
-        upload_remote
+        ingest_remote
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
@@ -173,7 +173,7 @@ class BaseApi(api_client.Api):
             headers=_headers,
         )
         if body is not schemas.unset:
-            serialized_data = request_body_document_remote_upload_request.serialize(body, content_type)
+            serialized_data = request_body_document_remote_ingest_request.serialize(body, content_type)
             if 'fields' in serialized_data:
                 _fields = serialized_data['fields']
             elif 'body' in serialized_data:
@@ -245,7 +245,7 @@ class BaseApi(api_client.Api):
         return api_response
 
 
-    def _upload_remote_oapg(
+    def _ingest_remote_oapg(
         self,
         body: typing.Any = None,
         skip_deserialization: bool = True,
@@ -258,7 +258,7 @@ class BaseApi(api_client.Api):
         api_client.ApiResponseWithoutDeserialization,
     ]:
         """
-        upload_remote
+        ingest_remote
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
@@ -285,7 +285,7 @@ class BaseApi(api_client.Api):
             headers=_headers,
         )
         if body is not schemas.unset:
-            serialized_data = request_body_document_remote_upload_request.serialize(body, content_type)
+            serialized_data = request_body_document_remote_ingest_request.serialize(body, content_type)
             if 'fields' in serialized_data:
                 _fields = serialized_data['fields']
             elif 'body' in serialized_data:
@@ -326,37 +326,37 @@ class BaseApi(api_client.Api):
         return api_response
 
 
-class UploadRemote(BaseApi):
+class IngestRemote(BaseApi):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
-    async def aupload_remote(
+    async def aingest_remote(
         self,
-        documents: DocumentRemoteUploadRequestDocuments,
+        documents: DocumentRemoteIngestRequestDocuments,
         **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
         AsyncGeneratorResponse,
     ]:
-        args = self._upload_remote_mapped_args(
+        args = self._ingest_remote_mapped_args(
             documents=documents,
         )
-        return await self._aupload_remote_oapg(
+        return await self._aingest_remote_oapg(
             body=args.body,
             **kwargs,
         )
     
-    def upload_remote(
+    def ingest_remote(
         self,
-        documents: DocumentRemoteUploadRequestDocuments,
+        documents: DocumentRemoteIngestRequestDocuments,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        args = self._upload_remote_mapped_args(
+        args = self._ingest_remote_mapped_args(
             documents=documents,
         )
-        return self._upload_remote_oapg(
+        return self._ingest_remote_oapg(
             body=args.body,
         )
 
@@ -365,32 +365,32 @@ class ApiForpost(BaseApi):
 
     async def apost(
         self,
-        documents: DocumentRemoteUploadRequestDocuments,
+        documents: DocumentRemoteIngestRequestDocuments,
         **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
         AsyncGeneratorResponse,
     ]:
-        args = self._upload_remote_mapped_args(
+        args = self._ingest_remote_mapped_args(
             documents=documents,
         )
-        return await self._aupload_remote_oapg(
+        return await self._aingest_remote_oapg(
             body=args.body,
             **kwargs,
         )
     
     def post(
         self,
-        documents: DocumentRemoteUploadRequestDocuments,
+        documents: DocumentRemoteIngestRequestDocuments,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        args = self._upload_remote_mapped_args(
+        args = self._ingest_remote_mapped_args(
             documents=documents,
         )
-        return self._upload_remote_oapg(
+        return self._ingest_remote_oapg(
             body=args.body,
         )
 

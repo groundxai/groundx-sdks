@@ -13,12 +13,12 @@
 import unittest
 
 import groundx
-from groundx.model.document_local_upload_request_item_metadata import DocumentLocalUploadRequestItemMetadata
+from groundx.model.document_local_ingest_request_item_metadata import DocumentLocalIngestRequestItemMetadata
 from groundx import configuration
 
 
-class TestDocumentLocalUploadRequestItemMetadata(unittest.TestCase):
-    """DocumentLocalUploadRequestItemMetadata unit test stubs"""
+class TestDocumentLocalIngestRequestItemMetadata(unittest.TestCase):
+    """DocumentLocalIngestRequestItemMetadata unit test stubs"""
     pass
 
 

@@ -15,6 +15,6 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
-from groundx.type.document_local_upload_request_item import DocumentLocalUploadRequestItem
+from groundx.type.document_remote_ingest_request_documents_item import DocumentRemoteIngestRequestDocumentsItem
 
-DocumentLocalUploadRequest = typing.List[DocumentLocalUploadRequestItem]
+DocumentRemoteIngestRequestDocuments = typing.List[DocumentRemoteIngestRequestDocumentsItem]

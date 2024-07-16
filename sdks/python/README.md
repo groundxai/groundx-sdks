@@ -32,10 +32,10 @@ Ground Your RAG Apps in Fact not Fiction
   * [`groundx.documents.delete1`](#groundxdocumentsdelete1)
   * [`groundx.documents.get`](#groundxdocumentsget)
   * [`groundx.documents.get_processing_status_by_id`](#groundxdocumentsget_processing_status_by_id)
+  * [`groundx.documents.ingest_local`](#groundxdocumentsingest_local)
+  * [`groundx.documents.ingest_remote`](#groundxdocumentsingest_remote)
   * [`groundx.documents.list`](#groundxdocumentslist)
   * [`groundx.documents.lookup`](#groundxdocumentslookup)
-  * [`groundx.documents.upload_local`](#groundxdocumentsupload_local)
-  * [`groundx.documents.upload_remote`](#groundxdocumentsupload_remote)
   * [`groundx.health.get`](#groundxhealthget)
   * [`groundx.health.list`](#groundxhealthlist)
   * [`groundx.projects.add_bucket`](#groundxprojectsadd_bucket)
@@ -308,7 +308,7 @@ The bucketId of the bucket being updated.
 
 ### `groundx.documents.crawl_website`<a id="groundxdocumentscrawl_website"></a>
 
-Upload the content of a publicly accessible website to a GroundX bucket. This is done by following links within a specified URL, recursively, up to a specified depth or number of pages.
+Upload the content of a publicly accessible website for ingestion into a GroundX bucket. This is done by following links within a specified URL, recursively, up to a specified depth or number of pages.
 
 Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
 
@@ -366,7 +366,7 @@ delete_response = groundx.documents.delete(
 
 ##### document_ids: List[`str`]<a id="document_ids-liststr"></a>
 
-A list of documentIds which correspond to documents uploaded to GroundX
+A list of documentIds which correspond to documents ingested by GroundX
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -399,7 +399,7 @@ delete1_response = groundx.documents.delete1(
 
 ##### document_id: `str`<a id="document_id-str"></a>
 
-A documentId which correspond to a document uploaded to GroundX
+A documentId which correspond to a document ingested by GroundX
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -448,7 +448,7 @@ The documentId of the document for which GroundX information will be provided.
 
 ### `groundx.documents.get_processing_status_by_id`<a id="groundxdocumentsget_processing_status_by_id"></a>
 
-Get the current status of an upload, initiated with documents.upload_remote, documents.upload_local, or documents.crawl_website, by specifying the processId (the processId is included in the response of the documents.upload functions).
+Get the current status of an ingest, initiated with documents.ingest_remote, documents.ingest_local, or documents.crawl_website, by specifying the processId (the processId is included in the response of the documents.ingest functions).
 
 Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
 
@@ -465,7 +465,7 @@ get_processing_status_by_id_response = groundx.documents.get_processing_status_b
 
 ##### process_id: `str`<a id="process_id-str"></a>
 
-the processId for the upload process being checked
+the processId for the ingest process being checked
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -474,6 +474,86 @@ the processId for the upload process being checked
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/v1/ingest/{processId}` `get`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `groundx.documents.ingest_local`<a id="groundxdocumentsingest_local"></a>
+
+Upload documents hosted on a local file system for ingestion into a GroundX bucket.
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+ingest_local_response = groundx.documents.ingest_local(
+    body=[
+        {
+            "blob": open("/path/to/file", "rb"),
+            "metadata": {
+                "bucket_id": 1234,
+                "file_name": "my_file.txt",
+                "file_type": "txt",
+            },
+        }
+    ],
+)
+```
+
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
+
+[`DocumentLocalIngestRequest`](./groundx/type/document_local_ingest_request.py)
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`IngestResponse`](./groundx/type/ingest_response.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/v1/ingest/documents/local` `post`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `groundx.documents.ingest_remote`<a id="groundxdocumentsingest_remote"></a>
+
+Ingest documents hosted on public URLs to a GroundX bucket. 
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+ingest_remote_response = groundx.documents.ingest_remote(
+    documents=[
+        {
+            "bucket_id": 1234,
+            "file_name": "my_file.txt",
+            "file_type": "txt",
+            "source_url": "https://my.source.url.com/file.txt",
+        }
+    ],
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### documents: [`DocumentRemoteIngestRequestDocuments`](./groundx/type/document_remote_ingest_request_documents.py)<a id="documents-documentremoteingestrequestdocumentsgroundxtypedocument_remote_ingest_request_documentspy"></a>
+
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
+
+[`DocumentRemoteIngestRequest`](./groundx/type/document_remote_ingest_request.py)
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`IngestResponse`](./groundx/type/ingest_response.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/v1/ingest/documents/remote` `post`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -595,86 +675,6 @@ A token for pagination. If the number of documents for a given query is larger t
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/v1/ingest/documents/{id}` `get`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-### `groundx.documents.upload_local`<a id="groundxdocumentsupload_local"></a>
-
-Upload documents hosted on a local file system to a GroundX bucket.
-
-Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```python
-upload_local_response = groundx.documents.upload_local(
-    body=[
-        {
-            "blob": open("/path/to/file", "rb"),
-            "metadata": {
-                "bucket_id": 1234,
-                "file_name": "my_file.txt",
-                "file_type": "txt",
-            },
-        }
-    ],
-)
-```
-
-#### ⚙️ Request Body<a id="⚙️-request-body"></a>
-
-[`DocumentLocalUploadRequest`](./groundx/type/document_local_upload_request.py)
-#### 🔄 Return<a id="🔄-return"></a>
-
-[`IngestResponse`](./groundx/type/ingest_response.py)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/v1/ingest/documents/local` `post`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-### `groundx.documents.upload_remote`<a id="groundxdocumentsupload_remote"></a>
-
-Upload documents hosted on public URLs to a GroundX bucket. 
-
-Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```python
-upload_remote_response = groundx.documents.upload_remote(
-    documents=[
-        {
-            "bucket_id": 1234,
-            "file_name": "my_file.txt",
-            "file_type": "txt",
-            "source_url": "https://my.source.url.com/file.txt",
-        }
-    ],
-)
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### documents: [`DocumentRemoteUploadRequestDocuments`](./groundx/type/document_remote_upload_request_documents.py)<a id="documents-documentremoteuploadrequestdocumentsgroundxtypedocument_remote_upload_request_documentspy"></a>
-
-#### ⚙️ Request Body<a id="⚙️-request-body"></a>
-
-[`DocumentRemoteUploadRequest`](./groundx/type/document_remote_upload_request.py)
-#### 🔄 Return<a id="🔄-return"></a>
-
-[`IngestResponse`](./groundx/type/ingest_response.py)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/v1/ingest/documents/remote` `post`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
