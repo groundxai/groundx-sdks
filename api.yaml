@@ -22,18 +22,18 @@ paths:
     post:
       tags:
         - Documents
-      summary: upload_remote
+      summary: ingest_remote
       description: >
-        Upload documents hosted on public URLs to a GroundX bucket. 
+        Ingest documents hosted on public URLs to a GroundX bucket. 
         
         
         Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
-      operationId: Document_uploadRemote
+      operationId: Document_ingestRemote
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DocumentRemoteUploadRequest'
+              $ref: '#/components/schemas/DocumentRemoteIngestRequest'
       responses:
         '200':
           description: Documents successfully uploaded
@@ -49,18 +49,18 @@ paths:
     post:
       tags:
         - Documents
-      summary: upload_local
+      summary: ingest_local
       description: >
-        Upload documents hosted on a local file system to a GroundX bucket.
+        Upload documents hosted on a local file system for ingestion into a GroundX bucket.
         
         
         Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
-      operationId: Document_uploadLocal
+      operationId: Document_ingestLocal
       requestBody:
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/DocumentLocalUploadRequest'
+              $ref: '#/components/schemas/DocumentLocalIngestRequest'
       responses:
         '200':
           description: Documents successfully uploaded
@@ -78,7 +78,7 @@ paths:
         - Documents
       summary: crawl_website
       description: >
-        Upload the content of a publicly accessible website to a GroundX bucket. This is done by following links within a specified URL, recursively, up to a specified depth or number of pages.
+        Upload the content of a publicly accessible website for ingestion into a GroundX bucket. This is done by following links within a specified URL, recursively, up to a specified depth or number of pages.
         
         
         Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
@@ -106,13 +106,13 @@ paths:
       summary: get_processing_status_by_id
       operationId: Document_getProcessingStatusById
       description: >
-        Get the current status of an upload, initiated with documents.upload_remote, documents.upload_local, or documents.crawl_website, by specifying the processId (the processId is included in the response of the documents.upload functions).
+        Get the current status of an ingest, initiated with documents.ingest_remote, documents.ingest_local, or documents.crawl_website, by specifying the processId (the processId is included in the response of the documents.ingest functions).
         
         
         Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
       parameters:
         - name: processId
-          description: the processId for the upload process being checked
+          description: the processId for the ingest process being checked
           in: path
           required: true
           schema:
@@ -262,7 +262,7 @@ paths:
       parameters:
         - name: documentIds
           in: query
-          description: A list of documentIds which correspond to documents uploaded to GroundX
+          description: A list of documentIds which correspond to documents ingested by GroundX
           required: true
           schema:
             type: array
@@ -295,7 +295,7 @@ paths:
       operationId: Document_delete1
       parameters:
         - name: documentId
-          description: A documentId which correspond to a document uploaded to GroundX
+          description: A documentId which correspond to a document ingested by GroundX
           in: path
           required: true
           schema:
@@ -1041,7 +1041,7 @@ components:
               type: string
               description: Document X-Ray results
               format: uri
-    DocumentRemoteUploadRequest:
+    DocumentRemoteIngestRequest:
       type: object
       required:
         - documents
@@ -1055,11 +1055,11 @@ components:
               - sourceUrl
             properties:
               bucketId:
-                description: the bucketId of the bucket which this remote file will be uploaded to.
+                description: the bucketId of the bucket which this remote file will be ingested to.
                 type: integer
                 example: 1234
               fileName:
-                description: The name of the file being uploaded
+                description: The name of the file being ingested
                 type: string
                 example: my_file.txt
               fileType:
@@ -1071,7 +1071,7 @@ components:
                   key: value
               sourceUrl:
                 type: string
-                description: The URL of the document being uploaded to GroundX.
+                description: The URL of the document being ingested by GroundX.
                 format: uri
                 example: https://my.source.url.com/file.txt
     DocumentType:
@@ -1088,7 +1088,7 @@ components:
         - csv
         - tsv
         - json
-    DocumentLocalUploadRequest:
+    DocumentLocalIngestRequest:
       type: array
       items:
         type: object
@@ -1097,7 +1097,7 @@ components:
           - metadata
         properties:
           blob:
-            description: The actual file being uploaded.
+            description: The actual file being ingested.
             type: string
             format: binary
           metadata:
@@ -1108,11 +1108,11 @@ components:
               - fileType
             properties:
               bucketId:
-                description: the bucketId of the bucket which this local file will be uploaded to.
+                description: the bucketId of the bucket which this local file will be ingested to.
                 type: integer
                 example: 1234
               fileName:
-                description: The name of the file being uploaded
+                description: The name of the file being ingested
                 type: string
                 example: my_file.txt
               fileType:
@@ -1260,7 +1260,7 @@ components:
               - sourceUrl
             properties:
               bucketId:
-                description: the bucketId of the bucket which this website will be uploaded to.
+                description: the bucketId of the bucket which this website will be ingested to.
                 type: integer
                 example: 123
               cap:
