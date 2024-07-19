@@ -1,9 +1,6 @@
 # X-Ray: Document Understanding
-
 ## Comprehensive Document Parsing for Modern Applications
-
 In this guide, we'll introduce EyeLevel's X-Ray, a modern parser designed to extract high quality data from complicated real-world documents. X-Ray employs cutting edge parsing techniques which are specifically designed to support modern workflows like RAG, Agents, and Document Summarization, allowing developers to connect data from human-centric documents to LLM powered applications.
-
 ## X-Ray in a Nutshell
 You can think of X-Ray as a cocktail of document understanding and advanced parsing approaches packaged together under a single API. To give you an idea, these are some of the components which X-Ray employs to understand human-centric documents:
 
@@ -13,7 +10,6 @@ You can think of X-Ray as a cocktail of document understanding and advanced pars
 - A re-contextualization system that promotes fully contextualized summarizations of parsed results.
 
 The upshot is a system which can extract complete ideas from complex documents, and represent those ideas in a way which is easy for both developers and LLMs to understand.
-
 ## See it for yourself
 X-Ray's fine tuned vision model is one of the most critical components of the system. Over the last 4 years, EyeLevel has collected a comprehensive set of documents from a variety of domains which have been used to train, in our opinion, the highest quality vision model for understanding complex real-world documents to date. You can use [this demo](https://dashboard.eyelevel.ai/xray) to get an idea of how X-Ray works with your documents.
 
@@ -21,15 +17,10 @@ X-Ray's fine tuned vision model is one of the most critical components of the sy
 *An example of X-Ray identifying and extracting key elements from a real-world document.*
 
 Or you can get started with our APIs by following these simple steps:
-
 ## How to use X-Ray
-
 ### 1) Account Setup
-
 X-Ray exists as a sub-component of a product called GroundX. We won't be using GroundX's core functionality in this article, but we will use GroundX to invoke X-Ray and query the results. Thus, our first step is to set up a GroundX API Key. [First set up an account](https://dashboard.groundx.ai/auth/register), then you can find your API key by navigating to the [API Key page](https://dashboard.groundx.ai/apikey). GroundX has a free trial tier which you can use to experiment with X-Ray.
-
 ### 2) Creating a Bucket
-
 Once you have a GroundX API key you may wish to create a bucket. Buckets can be used to organize documents into different groupings, which can be useful for certain applications. We can list all available buckets via :api[Bucket_list], and create a new bucket via :api[Bucket_create].
 
 :::code
@@ -54,37 +45,35 @@ bucket_id = response.body["bucket"]['bucketId']
 ```typescript
 import { Groundx } from "groundx-typescript-sdk";
 
-# authenticating
+// authenticating
 const groundx = new Groundx({
   apiKey: "XXXX",
 });
 
-# creating a new bucket
+// creating a new bucket
 const response = await groundx.buckets.create({
   name: "parsed_documents_bucket",
 });
 
-# storing the bucket_id
+// storing the bucket_id
 const bucket_id = response.data.bucket.bucketId;
 ```
 
 :::
 
 ### 3) Uploading Documents
-
 Uploading documents to a GroundX bucket will automatically trigger X-Ray. There are a variety of uploading options which might be useful for a variety of use cases. In this example we're uploading a document which is stored locally using :api[Document_ingestLocal].
-
 
 :::code
 
 ```python
 response = groundx.documents.ingest_local([{
-    "blob": open("sample.pdf", "rb"),
-    "metadata": {
-        "bucketId": bucket_id,
-        "fileName": "sample",
-        "fileType": "pdf"
-    }
+  "blob": open("sample.pdf", "rb"),
+  "metadata": {
+    "bucketId": bucket_id,
+    "fileName": "sample",
+    "fileType": "pdf"
+  }
 }])
 ```
 
@@ -105,49 +94,40 @@ const response =
 :::
 
 ### 4) Querying Upload Status
-
 Ingesting returns a `process_id`, which can be used with :api[Document_getProcessingStatusById] to query the progress of the upload. This code checks the status of the process every 10 seconds until ingestion is done.
 
 :::code
 
 ```python
 while (
-        ingest.body["ingest"]["status"] != "complete"
-        and ingest.body["ingest"]["status"] != "error"
-    ):
-        ingest = groundx.documents.get_processing_status_by_id(
-            process_id=ingest.body["ingest"]["processId"]
-        )
+  ingest.body["ingest"]["status"] != "complete"
+  and ingest.body["ingest"]["status"] != "error"
+):
+  ingest = groundx.documents.get_processing_status_by_id(
+    process_id=ingest.body["ingest"]["processId"]
+  )
 except ApiException as e:
     print("Exception when calling DocumentApi.ingest_remote: %s\n" % e)
 ```
 
-```typescript
-if (!ingest || !ingest.status || ingest.status != 200 ||
-      !ingest.data || !ingest.data.ingest) {
-      console.error(ingest);
-      throw Error("GroundX ingest request failed");
-    }
-    
-    // poll ingest status
-    while (ingest.data.ingest.status !== "complete" && ingest.data.ingest.status !== "error") {
-      ingest = await groundx.documents.getProcessingStatusById({
-        processId: ingest.data.ingest.processId,
-      });
-      if (!ingest || !ingest.status || ingest.status != 200 ||
-        !ingest.data || !ingest.data.ingest) {
-        console.error(ingest);
-        throw Error("GroundX ingest request failed");
-      }
-    
-      await new Promise((resolve) => setTimeout(resolve, 3000));
-    }
+```typescript 
+while (ingest.data.ingest.status !== "complete" && ingest.data.ingest.status !== "error") {
+  ingest = await groundx.documents.getProcessingStatusById({
+    processId: ingest.data.ingest.processId,
+  });
+  if (!ingest || !ingest.status || ingest.status != 200 ||
+    !ingest.data || !ingest.data.ingest) {
+    console.error(ingest);
+    throw Error("GroundX ingest request failed");
+  }
+
+  await new Promise((resolve) => setTimeout(resolve, 3000));
+}
 ```
 
 :::
 
 ### 5) Getting X-Ray Results
-
 Now that our documents are fully uploaded we can get all the documents in our bucket via :api[Document_lookup]. We only uploaded a single document, so we can get the one and only document at index `0`, and then get the URL in which the X-Ray output is stored.
 
 :::code
@@ -183,7 +163,6 @@ print(data)
 :::
 
 ### 6) Interpreting X-Ray Results
-
 X-Ray provides a rich set of results which may be useful in a variety of use cases. Here are some noteworthy outputs of X-Ray:
 - **fileKeywords:** A list of keywords which describe the document
 - **fileSummary:** A summary of the entire document

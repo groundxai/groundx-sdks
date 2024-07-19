@@ -28,7 +28,7 @@ portal:
               label: Hosted Content Ingest
               path: docs/remoteingest.md
             - id: x-ray
-              label: X-Ray - GroundX Document Understanding
+              label: X-Ray - Document Understanding
               path: docs/document-understanding.md
             - id: search
               label: Search
