@@ -17,10 +17,8 @@ The upshot is a system which can extract complete ideas from complex documents, 
 ## See it for yourself
 X-Ray's fine tuned vision model is one of the most critical components of the system. Over the last 4 years, EyeLevel has collected a comprehensive set of documents from a variety of domains which have been used to train, in our opinion, the highest quality vision model for understanding complex real-world documents to date. You can use [this demo](https://dashboard.eyelevel.ai/xray) to get an idea of how X-Ray works with your documents.
 
-<figure align="center">
-  <img src="imgs/im1.png" alt="Medical billing receipt" width="300">
-  <figcaption>An example of X-Ray identifying and extracting key elements from a real-world document.</figcaption>
-</figure>
+![Medical billing receipt](../imgs/im1.png "Medical billing receipt")
+*An example of X-Ray identifying and extracting key elements from a real-world document.*
 
 Or you can get started with our APIs by following these simple steps:
 
