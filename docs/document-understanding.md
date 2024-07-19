@@ -1,55 +1,118 @@
 # X-Ray: Document Understanding
 
-## Introduction
-In this tutorial, we’ll explore the GroundX document ingestion pipeline.
+## Comprehensive Document Parsing for Modern Applications
 
-What makes GroundX document ingestion unique?
+In this guide, we'll introduce EyeLevel's X-Ray, a modern parser designed to extract high quality data from complicated real-world documents. X-Ray employs cutting edge parsing techniques which are specifically designed to support modern workflows like RAG, Agents, and Document Summarization, allowing developers to connect data from human-centric documents to LLM powered applications.
 
-**Under the hood, the GroundX document ingestion pipeline goes through the following process:**
+## X-Ray in a Nutshell
+You can think of X-Ray as a cocktail of document understanding and advanced parsing approaches packaged together under a single API. To give you an idea, these are some of the components which X-Ray employs to understand human-centric documents:
 
-- After you upload a document, the GroundX document ingestion pipeline uses an object detection model, fine tuned with millions of pages of documents, to identify the text, table, and figure elements within your document.
+- Bespoke document understanding models to detect key elements within documents.
+- Advanced OCR processes which facilitate textual extraction from a variety of document representations.
+- A repairing and reformatting pipeline that improves parse interpretability.
+- A re-contextualization system that promotes fully contextualized summarizations of parsed results.
 
-- Next, the text elements go through an advanced OCR extraction to extract the text from the page. Table and figure elements are clipped and stored for multimodal processing.
-
-- Table, figure, and text elements go through dedicated pipelines for repair and reformatting. Text elements are cleaned, reformatted, and enhanced with additional information when necessary using an LLM, fine tuned for text repair. Table and figure elements are converted into formats that are more compatible with search and LLM completion, using a fine tuned multimodal LLM.
-
-- Then, document and section metadata are generated, using an LLM fine tuned for text summarization, to preserve contextual information surrounding the table, figure, and text elements.
-
-- The elements within your document are then grouped into "semantic objects", which contain the original extracted text or clipped visual elements, reformatted text for search and LLM completion, and document and section metadata.
-
-- Semantic objects are stored in our search database for search retrievals.
+The upshot is a system which can extract complete ideas from complex documents, and represent those ideas in a way which is easy for both developers and LLMs to understand.
 
 ## See it for yourself
-It's very simple to see for yourself. You can [try out our X-Ray demo tool](https://dashboard.eyelevel.ai/xray), which will visualize what our document ingestion pipeline can do with your documents.
+X-Ray's fine tuned vision model is one of the most critical components of the system. Over the last 4 years, EyeLevel has collected a comprehensive set of documents from a variety of domains which have been used to train, in our opinion, the highest quality vision model for understanding complex real-world documents to date. You can use [this demo](https://dashboard.eyelevel.ai/xray) to get an idea of how X-Ray works with your documents.
+
+<figure align="center">
+  <img src="imgs/im1.png" alt="Medical billing receipt" width="300">
+  <figcaption>An example of X-Ray identifying and extracting key elements from a real-world document.</figcaption>
+</figure>
 
 Or you can get started with our APIs by following these simple steps:
 
-## Step 1: Upload a document
+## How to use X-Ray
 
-- [Upload a hosted file](https://documentation.groundx.ai/docs/ingest-remote-content)
-- [Upload a local file](https://documentation.groundx.ai/docs/ingest-local-content)
+### 1) Account Setup
 
-The :api[Document_ingestRemote] and :api[Document_ingestLocal] endpoints return a response object indicating the status of the ingestion process. 
+X-Ray exists as a sub-component of a product called GroundX. We won't be using GroundX's core functionality in this article, but we will use GroundX to invoke X-Ray and query the results. Thus, our first step is to set up a GroundX API Key. [First set up an account](https://dashboard.groundx.ai/auth/register), then you can find your API key by navigating to the [API Key page](https://dashboard.groundx.ai/apikey). GroundX has a free trial tier which you can use to experiment with X-Ray.
 
-For example:
+### 2) Creating a Bucket
 
-```json
-// Successful request response
-{
-  "ingest": {
-    "processId": "string", // Object ID of the ingest process
-    "status": "string" // "queued" | "processing" | "error" | "complete"
-  }
-}
-```
-
-## Step 2: Get ingest status
-To check the status of the ingestion process, use the request response and the :api[Document_getProcessingStatusById] endpoint. For example:
+Once you have a GroundX API key you may wish to create a bucket. Buckets can be used to organize documents into different groupings, which can be useful for certain applications. We can list all available buckets via :api[Bucket_list], and create a new bucket via :api[Bucket_create].
 
 :::code
 
 ```python
-# Insert this code after the Try block in Step 8.
+from groundx import Groundx
+
+# authenticating
+groundx = Groundx(
+    api_key="XXXX"
+)
+
+# creating a new bucket
+response = groundx.buckets.create(
+  name="parsed_documents_bucket"
+)
+
+# storing the bucket_id
+bucket_id = response.body["bucket"]['bucketId']
+```
+
+```typescript
+import { Groundx } from "groundx-typescript-sdk";
+
+# authenticating
+const groundx = new Groundx({
+  apiKey: "XXXX",
+});
+
+# creating a new bucket
+const response = await groundx.buckets.create({
+  name: "parsed_documents_bucket",
+});
+
+# storing the bucket_id
+const bucket_id = response.data.bucket.bucketId;
+```
+
+:::
+
+### 3) Uploading Documents
+
+Uploading documents to a GroundX bucket will automatically trigger X-Ray. There are a variety of uploading options which might be useful for a variety of use cases. In this example we're uploading a document which is stored locally using :api[Document_ingestLocal].
+
+
+:::code
+
+```python
+response = groundx.documents.ingest_local([{
+    "blob": open("sample.pdf", "rb"),
+    "metadata": {
+        "bucketId": bucket_id,
+        "fileName": "sample",
+        "fileType": "pdf"
+    }
+}])
+```
+
+```typescript
+const response =
+  await groundx.documents.ingestLocal([
+    {
+      blob: fs.readFileSync("sample.pdf"),
+      metadata: {
+        bucketId: bucket_id,
+        fileName: "sample",
+        fileType: "pdf",
+      },
+    },
+  ]);
+```
+
+:::
+
+### 4) Querying Upload Status
+
+Ingesting returns a `process_id`, which can be used with :api[Document_getProcessingStatusById] to query the progress of the upload. This code checks the status of the process every 10 seconds until ingestion is done.
+
+:::code
+
+```python
 while (
         ingest.body["ingest"]["status"] != "complete"
         and ingest.body["ingest"]["status"] != "error"
@@ -62,8 +125,6 @@ except ApiException as e:
 ```
 
 ```typescript
-// Note: Insert this code within a function.
-
 if (!ingest || !ingest.status || ingest.status != 200 ||
       !ingest.data || !ingest.data.ingest) {
       console.error(ingest);
@@ -87,38 +148,54 @@ if (!ingest || !ingest.status || ingest.status != 200 ||
 
 :::
 
-## Step 3: Get the processed document data
-Once the document ingestion process has completed, you can use the `processId` to query for the document information with the :api[Document_lookup] endpoint.
+### 5) Getting X-Ray Results
 
-You will receive a response similar to this one:
+Now that our documents are fully uploaded we can get all the documents in our bucket via :api[Document_lookup]. We only uploaded a single document, so we can get the one and only document at index `0`, and then get the URL in which the X-Ray output is stored.
 
-```json
-// Successful lookup response
-{
-  "count": number, // Number of documents returned in response
-  "documents": [
-    {
-      "documentId": "string", // Object ID of the document
-      "fileName": "string", // Name you gave the document when it was uploaded
-      "fileSize": "string", // Calculated size of your document
-      "fileTokens": number, // Tokens generated and billed to your account for ingestion
-      "bucketId": number, // ID of the bucket the document was uploaded to
-      "processId": "string", // Object ID of the processing request
-      "sourceUrl": "string", // Hosted URL for your document
-      "status": "string", // "queued" | "processing" | "error" | "complete"
-      "xrayUrl": "string" // Hosted URL for the document information generated during processing
-    },
-  ],
-  "nextToken": "string", // A token that can be used to request the next set of results
-  "total": number // Total number of documents found
-}
+:::code
+
+```python
+import urllib.request, json 
+
+# Getting parsed documents from the bucket
+response = groundx.documents.lookup(
+    id=bucket_id
+)
+
+# Getting the X-Ray parsing results for one of the documents
+xray_url = response.body['documents'][0]['xrayUrl']
+with urllib.request.urlopen(xray_url) as url:
+    data = json.loads(url.read().decode())
+    print(data)
 ```
 
-The `xrayUrl` points to a JSON file containing the information generated about your document by the GroundX document ingestion pipeline. The structure of this information is [explained further below](#x-ray-document-data).
+```typescript
+import axios from 'axios';
 
-## X-Ray Document Data
+// Getting parsed documents from the bucket
+const response = await groundx.documents.lookup({
+  id: 1,
+});
 
-The structure of the X-Ray document data looks something like this:
+const data = await axios.get(response.data.documents[0].xrayUrl);
+
+print(data)
+```
+
+:::
+
+### 6) Interpreting X-Ray Results
+
+X-Ray provides a rich set of results which may be useful in a variety of use cases. Here are some noteworthy outputs of X-Ray:
+- **fileKeywords:** A list of keywords which describe the document
+- **fileSummary:** A summary of the entire document
+- **boundingBoxes:** Key regions within the document which contain meaningful content.
+- **contentType:** The type of content a certain chunk is. Textual paragraph, graphical figures, or tables.
+- **json:** A reformatted representation of graphs and figures in a json format, useful for both LLM and programatic workflows.
+- **narrative:** A reformatted representation of graphs and figures in a narrative format, often useful in LLM applications.
+- **sectionSummary:** A contextually summarized representation of a particular section of the document.
+
+This is the full structure of an X-Ray parse:
 
 ```json
 // Successful lookup response
