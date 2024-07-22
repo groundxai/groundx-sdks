@@ -20,6 +20,21 @@ Or you can get started with our APIs by following these simple steps:
 ## How to use X-Ray
 ### 1) Account Setup
 X-Ray exists as a sub-component of a product called GroundX. We won't be using GroundX's core functionality in this article, but we will use GroundX to invoke X-Ray and query the results. Thus, our first step is to set up a GroundX API Key. [First set up an account](https://dashboard.groundx.ai/auth/register), then you can find your API key by navigating to the [API Key page](https://dashboard.groundx.ai/apikey). GroundX has a free trial tier which you can use to experiment with X-Ray.
+
+Once you're set up, install the SDK
+
+:::code
+
+```python
+pip install groundx-python-sdk
+```
+
+```typescript
+npm install groundx-typescript-sdk --save
+```
+
+:::
+
 ### 2) Creating a Bucket
 Once you have a GroundX API key you may wish to create a bucket. Buckets can be used to organize documents into different groupings, which can be useful for certain applications. We can list all available buckets via :api[Bucket_list], and create a new bucket via :api[Bucket_create].
 
@@ -99,26 +114,34 @@ Ingesting returns a `process_id`, which can be used with :api[Document_getProces
 :::code
 
 ```python
-while (
-  ingest.body["ingest"]["status"] != "complete"
-  and ingest.body["ingest"]["status"] != "error"
-):
-  ingest = groundx.documents.get_processing_status_by_id(
-    process_id=ingest.body["ingest"]["processId"]
-  )
-except ApiException as e:
-    print("Exception when calling DocumentApi.ingest_remote: %s\n" % e)
+process_id = response.body["ingest"]["processId"]
+
+while (True):
+
+    ingest = groundx.documents.get_processing_status_by_id(
+        process_id=process_id)
+    if (ingest.body["ingest"]["status"] == "complete"):
+        break
+    if (ingest.body["ingest"]["status"] == "error"):
+        raise ValueError('Error Ingesting Document')
 ```
 
 ```typescript 
-while (ingest.data.ingest.status !== "complete" && ingest.data.ingest.status !== "error") {
+const process_id = response.data.ingest.processId;
+let ingest;
+
+while (true) {
   ingest = await groundx.documents.getProcessingStatusById({
-    processId: ingest.data.ingest.processId,
+    processId: process_id,
   });
   if (!ingest || !ingest.status || ingest.status != 200 ||
     !ingest.data || !ingest.data.ingest) {
     console.error(ingest);
     throw Error("GroundX ingest request failed");
+  }
+
+  if (ingest.data.ingest.status === "complete" || ingest.data.ingest.status === "error") {
+    break;
   }
 
   await new Promise((resolve) => setTimeout(resolve, 3000));
@@ -152,7 +175,7 @@ import axios from 'axios';
 
 // Getting parsed documents from the bucket
 const response = await groundx.documents.lookup({
-  id: 1,
+  id: bucket_id,
 });
 
 const data = await axios.get(response.data.documents[0].xrayUrl);
