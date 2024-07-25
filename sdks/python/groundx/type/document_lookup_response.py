@@ -15,7 +15,7 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
-from groundx.type.document_response import DocumentResponse
+from groundx.type.document_detail import DocumentDetail
 
 class RequiredDocumentLookupResponse(TypedDict):
     pass
@@ -24,7 +24,7 @@ class OptionalDocumentLookupResponse(TypedDict, total=False):
     # The number of results returned in the current response
     count: int
 
-    documents: typing.List[DocumentResponse]
+    documents: typing.List[DocumentDetail]
 
     nextToken: str
 

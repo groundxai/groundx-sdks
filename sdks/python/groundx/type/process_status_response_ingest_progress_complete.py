@@ -15,13 +15,13 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
-from groundx.type.document_response import DocumentResponse
+from groundx.type.document_detail import DocumentDetail
 
 class RequiredProcessStatusResponseIngestProgressComplete(TypedDict):
     pass
 
 class OptionalProcessStatusResponseIngestProgressComplete(TypedDict, total=False):
-    documents: typing.List[DocumentResponse]
+    documents: typing.List[DocumentDetail]
 
     total: int
 
