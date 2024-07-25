@@ -13,12 +13,12 @@
 import unittest
 
 import groundx
-from groundx.model.document_response_document import DocumentResponseDocument
+from groundx.model.document_detail import DocumentDetail
 from groundx import configuration
 
 
-class TestDocumentResponseDocument(unittest.TestCase):
-    """DocumentResponseDocument unit test stubs"""
+class TestDocumentDetail(unittest.TestCase):
+    """DocumentDetail unit test stubs"""
     pass
 
 

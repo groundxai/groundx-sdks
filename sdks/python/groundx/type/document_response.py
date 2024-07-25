@@ -15,13 +15,13 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
-from groundx.type.document_response_document import DocumentResponseDocument
+from groundx.type.document_detail import DocumentDetail
 
 class RequiredDocumentResponse(TypedDict):
     pass
 
 class OptionalDocumentResponse(TypedDict, total=False):
-    document: DocumentResponseDocument
+    document: DocumentDetail
 
 class DocumentResponse(RequiredDocumentResponse, OptionalDocumentResponse):
     pass

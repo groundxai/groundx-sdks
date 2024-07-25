@@ -18,6 +18,7 @@ from groundx.model.bucket_response import BucketResponse
 from groundx.model.bucket_update_detail import BucketUpdateDetail
 from groundx.model.bucket_update_request import BucketUpdateRequest
 from groundx.model.bucket_update_response import BucketUpdateResponse
+from groundx.model.document_detail import DocumentDetail
 from groundx.model.document_list_response import DocumentListResponse
 from groundx.model.document_local_ingest_request import DocumentLocalIngestRequest
 from groundx.model.document_local_ingest_request_item import DocumentLocalIngestRequestItem
@@ -27,7 +28,6 @@ from groundx.model.document_remote_ingest_request import DocumentRemoteIngestReq
 from groundx.model.document_remote_ingest_request_documents import DocumentRemoteIngestRequestDocuments
 from groundx.model.document_remote_ingest_request_documents_item import DocumentRemoteIngestRequestDocumentsItem
 from groundx.model.document_response import DocumentResponse
-from groundx.model.document_response_document import DocumentResponseDocument
 from groundx.model.document_type import DocumentType
 from groundx.model.health_response import HealthResponse
 from groundx.model.health_response_health import HealthResponseHealth

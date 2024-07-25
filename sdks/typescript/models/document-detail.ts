@@ -16,73 +16,73 @@ import { ProcessingStatus } from './processing-status';
 /**
  * 
  * @export
- * @interface DocumentResponseDocument
+ * @interface DocumentDetail
  */
-export interface DocumentResponseDocument {
+export interface DocumentDetail {
     /**
      * 
      * @type {number}
-     * @memberof DocumentResponseDocument
+     * @memberof DocumentDetail
      */
     'bucketId'?: number;
     /**
      * Unique system generated ID for the document
      * @type {string}
-     * @memberof DocumentResponseDocument
+     * @memberof DocumentDetail
      */
-    'documentId'?: string;
+    'documentId': string;
     /**
      * 
      * @type {string}
-     * @memberof DocumentResponseDocument
+     * @memberof DocumentDetail
      */
     'fileName'?: string;
     /**
      * The file size of the file stored in GroundX
      * @type {string}
-     * @memberof DocumentResponseDocument
+     * @memberof DocumentDetail
      */
     'fileSize'?: string;
     /**
      * The type of document (one of the seven currently supported file types)
      * @type {DocumentType}
-     * @memberof DocumentResponseDocument
+     * @memberof DocumentDetail
      */
     'fileType'?: DocumentType;
     /**
      * Unique system generated ID for the ingest request
      * @type {string}
-     * @memberof DocumentResponseDocument
+     * @memberof DocumentDetail
      */
     'processId'?: string;
     /**
      * 
      * @type {object}
-     * @memberof DocumentResponseDocument
+     * @memberof DocumentDetail
      */
     'searchData'?: object;
     /**
      * Source document URL
      * @type {string}
-     * @memberof DocumentResponseDocument
+     * @memberof DocumentDetail
      */
     'sourceUrl'?: string;
     /**
      * 
      * @type {ProcessingStatus}
-     * @memberof DocumentResponseDocument
+     * @memberof DocumentDetail
      */
     'status'?: ProcessingStatus;
     /**
      * 
      * @type {string}
-     * @memberof DocumentResponseDocument
+     * @memberof DocumentDetail
      */
     'statusMessage'?: string;
     /**
      * Document X-Ray results
      * @type {string}
-     * @memberof DocumentResponseDocument
+     * @memberof DocumentDetail
      */
     'xrayUrl'?: string;
 }

@@ -1003,44 +1003,48 @@ components:
           description: The new name of the project being renamed.
           type: string
           example: your_project_name
+    DocumentDetail:
+      type: object
+      required:
+        - documentId
+      properties:
+        bucketId:
+          type: integer
+        documentId:
+          type: string
+          description: Unique system generated ID for the document
+          format: uuid
+        fileName:
+          type: string
+        fileSize:
+          type: string
+          description: The file size of the file stored in GroundX
+          example: 1.4MB
+        fileType:
+          $ref: '#/components/schemas/DocumentType'
+        processId:
+          type: string
+          description: Unique system generated ID for the ingest request
+          format: uuid
+        searchData:
+          type: object
+        sourceUrl:
+          type: string
+          description: Source document URL
+          format: uri
+        status:
+          $ref: "#/components/schemas/ProcessingStatus"
+        statusMessage:
+          type: string
+        xrayUrl:
+          type: string
+          description: Document X-Ray results
+          format: uri
     DocumentResponse:
       type: object
       properties:
         document:
-          type: object
-          properties:
-            bucketId:
-              type: integer
-            documentId:
-              type: string
-              description: Unique system generated ID for the document
-              format: uuid
-            fileName:
-              type: string
-            fileSize:
-              type: string
-              description: The file size of the file stored in GroundX
-              example: 1.4MB
-            fileType:
-              $ref: '#/components/schemas/DocumentType'
-            processId:
-              type: string
-              description: Unique system generated ID for the ingest request
-              format: uuid
-            searchData:
-              type: object
-            sourceUrl:
-              type: string
-              description: Source document URL
-              format: uri
-            status:
-              $ref: "#/components/schemas/ProcessingStatus"
-            statusMessage:
-              type: string
-            xrayUrl:
-              type: string
-              description: Document X-Ray results
-              format: uri
+          $ref: "#/components/schemas/DocumentDetail"
     DocumentRemoteIngestRequest:
       type: object
       required:
@@ -1223,7 +1227,7 @@ components:
         documents:
           type: array
           items:
-            $ref: '#/components/schemas/DocumentResponse'
+            $ref: "#/components/schemas/DocumentDetail"
         nextToken:
           type: string
     DocumentLookupResponse:

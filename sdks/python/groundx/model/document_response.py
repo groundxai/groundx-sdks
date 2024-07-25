@@ -37,14 +37,14 @@ class DocumentResponse(
         class properties:
         
             @staticmethod
-            def document() -> typing.Type['DocumentResponseDocument']:
-                return DocumentResponseDocument
+            def document() -> typing.Type['DocumentDetail']:
+                return DocumentDetail
             __annotations__ = {
                 "document": document,
             }
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["document"]) -> 'DocumentResponseDocument': ...
+    def __getitem__(self, name: typing_extensions.Literal["document"]) -> 'DocumentDetail': ...
     
     @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
@@ -55,7 +55,7 @@ class DocumentResponse(
     
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["document"]) -> typing.Union['DocumentResponseDocument', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["document"]) -> typing.Union['DocumentDetail', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
@@ -67,7 +67,7 @@ class DocumentResponse(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        document: typing.Union['DocumentResponseDocument', schemas.Unset] = schemas.unset,
+        document: typing.Union['DocumentDetail', schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
     ) -> 'DocumentResponse':
@@ -79,4 +79,4 @@ class DocumentResponse(
             **kwargs,
         )
 
-from groundx.model.document_response_document import DocumentResponseDocument
+from groundx.model.document_detail import DocumentDetail
