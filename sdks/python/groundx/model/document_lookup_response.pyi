@@ -46,12 +46,12 @@ class DocumentLookupResponse(
                 class MetaOapg:
                     
                     @staticmethod
-                    def items() -> typing.Type['DocumentResponse']:
-                        return DocumentResponse
+                    def items() -> typing.Type['DocumentDetail']:
+                        return DocumentDetail
             
                 def __new__(
                     cls,
-                    arg: typing.Union[typing.Tuple['DocumentResponse'], typing.List['DocumentResponse']],
+                    arg: typing.Union[typing.Tuple['DocumentDetail'], typing.List['DocumentDetail']],
                     _configuration: typing.Optional[schemas.Configuration] = None,
                 ) -> 'documents':
                     return super().__new__(
@@ -60,7 +60,7 @@ class DocumentLookupResponse(
                         _configuration=_configuration,
                     )
             
-                def __getitem__(self, i: int) -> 'DocumentResponse':
+                def __getitem__(self, i: int) -> 'DocumentDetail':
                     return super().__getitem__(i)
             nextToken = schemas.StrSchema
             total = schemas.IntSchema
@@ -131,4 +131,4 @@ class DocumentLookupResponse(
             **kwargs,
         )
 
-from groundx.model.document_response import DocumentResponse
+from groundx.model.document_detail import DocumentDetail
