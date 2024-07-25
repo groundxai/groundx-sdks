@@ -18,14 +18,13 @@ from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 from groundx.type.document_type import DocumentType
 from groundx.type.processing_status import ProcessingStatus
 
-class RequiredDocumentResponseDocument(TypedDict):
-    pass
-
-class OptionalDocumentResponseDocument(TypedDict, total=False):
-    bucketId: int
-
+class RequiredDocumentDetail(TypedDict):
     # Unique system generated ID for the document
     documentId: str
+
+
+class OptionalDocumentDetail(TypedDict, total=False):
+    bucketId: int
 
     fileName: str
 
@@ -49,5 +48,5 @@ class OptionalDocumentResponseDocument(TypedDict, total=False):
     # Document X-Ray results
     xrayUrl: str
 
-class DocumentResponseDocument(RequiredDocumentResponseDocument, OptionalDocumentResponseDocument):
+class DocumentDetail(RequiredDocumentDetail, OptionalDocumentDetail):
     pass
