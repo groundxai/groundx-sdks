@@ -7,7 +7,7 @@
 Ground Your RAG Apps in Fact not Fiction
 
 
-[![PyPI](https://img.shields.io/badge/PyPI-v1.3.19-blue)](https://pypi.org/project/groundx-python-sdk/1.3.19)
+[![PyPI](https://img.shields.io/badge/PyPI-v1.3.20-blue)](https://pypi.org/project/groundx-python-sdk/1.3.20)
 [![README.md](https://img.shields.io/badge/README-Click%20Here-green)](https://github.com/groundxai/groundx-sdks/tree/main/sdks/python#readme)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://www.groundx.ai/)
 
@@ -56,7 +56,7 @@ Python >=3.7
 ## Installation<a id="installation"></a>
 
 ```sh
-pip install groundx-python-sdk==1.3.19
+pip install groundx-python-sdk==1.3.20
 ```
 
 ## Getting Started<a id="getting-started"></a>
