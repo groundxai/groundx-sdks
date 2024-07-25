@@ -21,7 +21,7 @@ Or you can get started with our APIs by following these simple steps:
 ### 1) Account Setup
 X-Ray exists as a sub-component of a product called GroundX. We won't be using GroundX's core functionality in this article, but we will use GroundX to invoke X-Ray and query the results. Thus, our first step is to set up a GroundX API Key. [First set up an account](https://dashboard.groundx.ai/auth/register), then you can find your API key by navigating to the [API Key page](https://dashboard.groundx.ai/apikey). GroundX has a free trial tier which you can use to experiment with X-Ray.
 
-Once you're set up, install the SDK
+Once you're set up, install the SDK.
 
 :::code
 
@@ -35,13 +35,32 @@ npm install groundx-typescript-sdk --save
 
 :::
 
-### 2) Creating a Bucket
+:::note
+X-Ray was added to the SDKs in versions `Python 1.3.19` and `TypeScript 1.3.24`. Older versions of the SDKs do not contain X-Ray support.
+:::
+
+### 2) Install Dependencies for this Guide
+
+If you are using Python, you may skip this step. The TypeScript version of this guide uses third party dependencies to demonstrate the GroundX APIs.
+
+You may already have these installed on your system. If not, you will need to install the following dependencies to run the code in this guide.
+
+:::code
+
+```typescript
+npm install axios --save
+```
+
+:::
+
+### 3) Creating a Bucket
 Once you have a GroundX API key you may wish to create a bucket. Buckets can be used to organize documents into different groupings, which can be useful for certain applications. We can list all available buckets via :api[Bucket_list], and create a new bucket via :api[Bucket_create].
 
 :::code
 
 ```python
 from groundx import Groundx
+import urllib.request, json, time
 
 # authenticating
 groundx = Groundx(
@@ -49,16 +68,18 @@ groundx = Groundx(
 )
 
 # creating a new bucket
-response = groundx.buckets.create(
+bucket_response = groundx.buckets.create(
   name="parsed_documents_bucket"
 )
 
 # storing the bucket_id
-bucket_id = response.body["bucket"]['bucketId']
+bucket_id = bucket_response.body["bucket"]['bucketId']
 ```
 
 ```typescript
 import { Groundx } from "groundx-typescript-sdk";
+import axios from 'axios';
+import * as fs from "fs";
 
 // authenticating
 const groundx = new Groundx({
@@ -66,23 +87,23 @@ const groundx = new Groundx({
 });
 
 // creating a new bucket
-const response = await groundx.buckets.create({
+const bucket_response = await groundx.buckets.create({
   name: "parsed_documents_bucket",
 });
 
 // storing the bucket_id
-const bucket_id = response.data.bucket.bucketId;
+const bucket_id = bucket_response.data.bucket.bucketId;
 ```
 
 :::
 
-### 3) Uploading Documents
+### 4) Uploading Documents
 Uploading documents to a GroundX bucket will automatically trigger X-Ray. There are a variety of uploading options which might be useful for a variety of use cases. In this example we're uploading a document which is stored locally using :api[Document_ingestLocal].
 
 :::code
 
 ```python
-response = groundx.documents.ingest_local([{
+ingest_response = groundx.documents.ingest_local([{
   "blob": open("sample.pdf", "rb"),
   "metadata": {
     "bucketId": bucket_id,
@@ -93,7 +114,7 @@ response = groundx.documents.ingest_local([{
 ```
 
 ```typescript
-const response =
+const ingest_response =
   await groundx.documents.ingestLocal([
     {
       blob: fs.readFileSync("sample.pdf"),
@@ -108,26 +129,27 @@ const response =
 
 :::
 
-### 4) Querying Upload Status
+### 5) Querying Upload Status
 Ingesting returns a `process_id`, which can be used with :api[Document_getProcessingStatusById] to query the progress of the upload. This code checks the status of the process every 10 seconds until ingestion is done.
 
 :::code
 
 ```python
-process_id = response.body["ingest"]["processId"]
+process_id = ingest_response.body["ingest"]["processId"]
 
 while (True):
-
     ingest = groundx.documents.get_processing_status_by_id(
         process_id=process_id)
     if (ingest.body["ingest"]["status"] == "complete"):
         break
     if (ingest.body["ingest"]["status"] == "error"):
         raise ValueError('Error Ingesting Document')
+    print(ingest.body["ingest"]["status"])
+    time.sleep(3)
 ```
 
 ```typescript 
-const process_id = response.data.ingest.processId;
+const process_id = ingest_response.data.ingest.processId;
 let ingest;
 
 while (true) {
@@ -144,20 +166,19 @@ while (true) {
     break;
   }
 
+  console.log(ingest.data.ingest.status);
   await new Promise((resolve) => setTimeout(resolve, 3000));
 }
 ```
 
 :::
 
-### 5) Getting X-Ray Results
+### 6) Getting X-Ray Results
 Now that our documents are fully uploaded we can get all the documents in our bucket via :api[Document_lookup]. We only uploaded a single document, so we can get the one and only document at index `0`, and then get the URL in which the X-Ray output is stored.
 
 :::code
 
 ```python
-import urllib.request, json 
-
 # Getting parsed documents from the bucket
 response = groundx.documents.lookup(
     id=bucket_id
@@ -171,21 +192,19 @@ with urllib.request.urlopen(xray_url) as url:
 ```
 
 ```typescript
-import axios from 'axios';
-
 // Getting parsed documents from the bucket
-const response = await groundx.documents.lookup({
-  id: bucket_id,
-});
+const document_response = await groundx.documents.lookup({
+    id: bucket_id,
+  });
 
-const data = await axios.get(response.data.documents[0].xrayUrl);
+const data = await axios.get(document_response?.data?.documents?.[0]?.xrayUrl || '');
 
-print(data)
+console.log(data?.data);
 ```
 
 :::
 
-### 6) Interpreting X-Ray Results
+### 7) Interpreting X-Ray Results
 X-Ray provides a rich set of results which may be useful in a variety of use cases. Here are some noteworthy outputs of X-Ray:
 - **fileKeywords:** A list of keywords which describe the document
 - **fileSummary:** A summary of the entire document
