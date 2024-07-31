@@ -851,9 +851,17 @@ components:
     SearchResultItem:
       type: object
       properties:
+        boundingBoxes:
+          description: Coordinates corresponding to the areas of the document where the chunk appears
+          type: array
+          items:
+            $ref: "#/components/schemas/BoundingBoxDetail"
         bucketId:
           description: Content bucket the search result belongs to
           type: integer
+        chunkId:
+          description: Unique system generated ID for the chunk
+          type: string
         documentId:
           description: Unique system generated ID for the document
           format: uuid
@@ -861,6 +869,16 @@ components:
         fileName:
           description: Name of ingested file
           type: string
+        multimodalUrl:
+          description: An image clipping of the table or figure object from the document
+          format: uri
+          type: string
+        pageImages:
+          type: array
+          items:
+            description: A jpg of the page the chunk appears on
+            format: uri
+            type: string
         score:
           description: Confidence score in the search result
           type: number
@@ -1003,6 +1021,24 @@ components:
           description: The new name of the project being renamed.
           type: string
           example: your_project_name
+    BoundingBoxDetail:
+      type: object
+      properties:
+        bottomRightX:
+          type: number
+          description: The x coordinate of the lower right corner of the bounding box
+        bottomRightY:
+          type: number
+          description: The y coordinate of the lower right corner of the bounding box
+        pageNumber:
+          type: integer
+          description: The page number the bounding box appears on, using a 1-based array indexing (starts with page 1, not page 0)
+        topLeftX:
+          type: number
+          description: The x coordinate of the upper left corner of the bounding box
+        topLeftY:
+          type: number
+          description: The y coordinate of the upper left corner of the bounding box
     DocumentDetail:
       type: object
       required:
