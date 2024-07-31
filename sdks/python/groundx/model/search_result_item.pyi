@@ -35,18 +35,54 @@ class SearchResultItem(
     class MetaOapg:
         
         class properties:
+            
+            
+            class boundingBoxes(
+                schemas.ListSchema
+            ):
+            
+            
+                class MetaOapg:
+                    
+                    @staticmethod
+                    def items() -> typing.Type['BoundingBoxDetail']:
+                        return BoundingBoxDetail
+            
+                def __new__(
+                    cls,
+                    arg: typing.Union[typing.Tuple['BoundingBoxDetail'], typing.List['BoundingBoxDetail']],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'boundingBoxes':
+                    return super().__new__(
+                        cls,
+                        arg,
+                        _configuration=_configuration,
+                    )
+            
+                def __getitem__(self, i: int) -> 'BoundingBoxDetail':
+                    return super().__getitem__(i)
             bucketId = schemas.IntSchema
+            chunkId = schemas.StrSchema
             documentId = schemas.UUIDSchema
             fileName = schemas.StrSchema
+            multimodalUrl = schemas.StrSchema
+        
+            @staticmethod
+            def pageImages() -> typing.Type['SearchResultItemPageImages']:
+                return SearchResultItemPageImages
             score = schemas.NumberSchema
             searchData = schemas.DictSchema
             sourceUrl = schemas.StrSchema
             suggestedText = schemas.StrSchema
             text = schemas.StrSchema
             __annotations__ = {
+                "boundingBoxes": boundingBoxes,
                 "bucketId": bucketId,
+                "chunkId": chunkId,
                 "documentId": documentId,
                 "fileName": fileName,
+                "multimodalUrl": multimodalUrl,
+                "pageImages": pageImages,
                 "score": score,
                 "searchData": searchData,
                 "sourceUrl": sourceUrl,
@@ -55,13 +91,25 @@ class SearchResultItem(
             }
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["boundingBoxes"]) -> MetaOapg.properties.boundingBoxes: ...
+    
+    @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["bucketId"]) -> MetaOapg.properties.bucketId: ...
+    
+    @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["chunkId"]) -> MetaOapg.properties.chunkId: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["documentId"]) -> MetaOapg.properties.documentId: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["fileName"]) -> MetaOapg.properties.fileName: ...
+    
+    @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["multimodalUrl"]) -> MetaOapg.properties.multimodalUrl: ...
+    
+    @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["pageImages"]) -> 'SearchResultItemPageImages': ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["score"]) -> MetaOapg.properties.score: ...
@@ -81,19 +129,31 @@ class SearchResultItem(
     @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["bucketId", "documentId", "fileName", "score", "searchData", "sourceUrl", "suggestedText", "text", ], str]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["boundingBoxes", "bucketId", "chunkId", "documentId", "fileName", "multimodalUrl", "pageImages", "score", "searchData", "sourceUrl", "suggestedText", "text", ], str]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["boundingBoxes"]) -> typing.Union[MetaOapg.properties.boundingBoxes, schemas.Unset]: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["bucketId"]) -> typing.Union[MetaOapg.properties.bucketId, schemas.Unset]: ...
+    
+    @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["chunkId"]) -> typing.Union[MetaOapg.properties.chunkId, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["documentId"]) -> typing.Union[MetaOapg.properties.documentId, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["fileName"]) -> typing.Union[MetaOapg.properties.fileName, schemas.Unset]: ...
+    
+    @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["multimodalUrl"]) -> typing.Union[MetaOapg.properties.multimodalUrl, schemas.Unset]: ...
+    
+    @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["pageImages"]) -> typing.Union['SearchResultItemPageImages', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["score"]) -> typing.Union[MetaOapg.properties.score, schemas.Unset]: ...
@@ -113,16 +173,20 @@ class SearchResultItem(
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["bucketId", "documentId", "fileName", "score", "searchData", "sourceUrl", "suggestedText", "text", ], str]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["boundingBoxes", "bucketId", "chunkId", "documentId", "fileName", "multimodalUrl", "pageImages", "score", "searchData", "sourceUrl", "suggestedText", "text", ], str]):
         return super().get_item_oapg(name)
     
 
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
+        boundingBoxes: typing.Union[MetaOapg.properties.boundingBoxes, list, tuple, schemas.Unset] = schemas.unset,
         bucketId: typing.Union[MetaOapg.properties.bucketId, decimal.Decimal, int, schemas.Unset] = schemas.unset,
+        chunkId: typing.Union[MetaOapg.properties.chunkId, str, schemas.Unset] = schemas.unset,
         documentId: typing.Union[MetaOapg.properties.documentId, str, uuid.UUID, schemas.Unset] = schemas.unset,
         fileName: typing.Union[MetaOapg.properties.fileName, str, schemas.Unset] = schemas.unset,
+        multimodalUrl: typing.Union[MetaOapg.properties.multimodalUrl, str, schemas.Unset] = schemas.unset,
+        pageImages: typing.Union['SearchResultItemPageImages', schemas.Unset] = schemas.unset,
         score: typing.Union[MetaOapg.properties.score, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         searchData: typing.Union[MetaOapg.properties.searchData, dict, frozendict.frozendict, schemas.Unset] = schemas.unset,
         sourceUrl: typing.Union[MetaOapg.properties.sourceUrl, str, schemas.Unset] = schemas.unset,
@@ -134,9 +198,13 @@ class SearchResultItem(
         return super().__new__(
             cls,
             *args,
+            boundingBoxes=boundingBoxes,
             bucketId=bucketId,
+            chunkId=chunkId,
             documentId=documentId,
             fileName=fileName,
+            multimodalUrl=multimodalUrl,
+            pageImages=pageImages,
             score=score,
             searchData=searchData,
             sourceUrl=sourceUrl,
@@ -145,3 +213,6 @@ class SearchResultItem(
             _configuration=_configuration,
             **kwargs,
         )
+
+from groundx.model.bounding_box_detail import BoundingBoxDetail
+from groundx.model.search_result_item_page_images import SearchResultItemPageImages

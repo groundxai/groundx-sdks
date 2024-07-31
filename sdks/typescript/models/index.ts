@@ -1,3 +1,4 @@
+export * from './bounding-box-detail';
 export * from './bucket-create-request';
 export * from './bucket-detail';
 export * from './bucket-list-response';

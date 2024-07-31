@@ -15,19 +15,32 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
+from groundx.type.bounding_box_detail import BoundingBoxDetail
+from groundx.type.search_result_item_page_images import SearchResultItemPageImages
 
 class RequiredSearchResultItem(TypedDict):
     pass
 
 class OptionalSearchResultItem(TypedDict, total=False):
+    # Coordinates corresponding to the areas of the document where the chunk appears
+    boundingBoxes: typing.List[BoundingBoxDetail]
+
     # Content bucket the search result belongs to
     bucketId: int
+
+    # Unique system generated ID for the chunk
+    chunkId: str
 
     # Unique system generated ID for the document
     documentId: str
 
     # Name of ingested file
     fileName: str
+
+    # An image clipping of the table or figure object from the document
+    multimodalUrl: str
+
+    pageImages: SearchResultItemPageImages
 
     # Confidence score in the search result
     score: typing.Union[int, float]

@@ -11,6 +11,7 @@
 # import sys
 # sys.setrecursionlimit(n)
 
+from groundx.model.bounding_box_detail import BoundingBoxDetail
 from groundx.model.bucket_create_request import BucketCreateRequest
 from groundx.model.bucket_detail import BucketDetail
 from groundx.model.bucket_list_response import BucketListResponse
@@ -52,6 +53,7 @@ from groundx.model.search_request import SearchRequest
 from groundx.model.search_response import SearchResponse
 from groundx.model.search_response_search import SearchResponseSearch
 from groundx.model.search_result_item import SearchResultItem
+from groundx.model.search_result_item_page_images import SearchResultItemPageImages
 from groundx.model.sort import Sort
 from groundx.model.sort_order import SortOrder
 from groundx.model.website_crawl_request import WebsiteCrawlRequest
