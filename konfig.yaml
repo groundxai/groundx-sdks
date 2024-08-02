@@ -55,7 +55,7 @@ portal:
 infoContactUrl: https://www.eyelevel.ai/
 readmeHeader:
   image: header.png
-  title: Groundx
+  title: EyeLevel's GroundX APIs
   url: https://www.eyelevel.ai
 generators:
   python:
