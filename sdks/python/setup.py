@@ -1,13 +1,13 @@
 # coding: utf-8
 
 """
-    GroundX API
+    EyeLevel's GroundX APIs
 
-    Ground Your RAG Apps in Fact not Fiction
+    RAG Made Simple, Secure and Hallucination Free
 
-    The version of the OpenAPI document: 1.0.0
-    Contact: support@groundx.ai
-    Created by: https://www.groundx.ai/
+    The version of the OpenAPI document: 1.3.26
+    Contact: support@eyelevel.ai
+    Created by: https://www.eyelevel.ai/
 """
 
 from setuptools import setup, find_packages  # noqa: H301
@@ -39,11 +39,11 @@ REQUIRES = [
 setup(
     name=NAME,
     version=VERSION,
-    description="GroundX API",
+    description="EyeLevel&#x27;s GroundX APIs",
     author="Konfig",
-    author_email="support@groundx.ai",
+    author_email="support@eyelevel.ai",
     url="https://github.com/groundxai/groundx-sdks/tree/main/sdks/python",
-    keywords=["Konfig", "GroundX API"],
+    keywords=["Konfig", "EyeLevel's GroundX APIs"],
     python_requires=">=3.7",
     install_requires=REQUIRES,
     packages=find_packages(exclude=["test", "tests"]),
