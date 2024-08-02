@@ -16,5 +16,6 @@ xlsx
 pdf
 png
 jpg
-Document Uploading Limitations
-There is currently no limit on the number of documents you can upload. However, there is a 10 MB limit on the size of a document.
+tsv
+csv
+json
