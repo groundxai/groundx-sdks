@@ -1,13 +1,13 @@
 <div align="center">
 
-[![Visit Groundx](./header.png)](https://www.groundx.ai)
+[![Visit EyeLevel's GroundX APIs](./header.png)](https://www.eyelevel.ai)
 
-# [Groundx](https://www.groundx.ai)<a id="groundx"></a>
+# [EyeLevel's GroundX APIs](https://www.eyelevel.ai)<a id="eyelevels-groundx-apis"></a>
 
-Ground Your RAG Apps in Fact not Fiction
+RAG Made Simple, Secure and Hallucination Free
 
 [![npm](https://img.shields.io/badge/npm-v1.3.25-blue)](https://www.npmjs.com/package/groundx-typescript-sdk/v/1.3.25)
-[![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://www.groundx.ai/)
+[![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://www.eyelevel.ai/)
 
 </div>
 
@@ -23,6 +23,7 @@ Ground Your RAG Apps in Fact not Fiction
   * [`groundx.buckets.get`](#groundxbucketsget)
   * [`groundx.buckets.list`](#groundxbucketslist)
   * [`groundx.buckets.update`](#groundxbucketsupdate)
+  * [`groundx.customer.get`](#groundxcustomerget)
   * [`groundx.documents.crawlWebsite`](#groundxdocumentscrawlwebsite)
   * [`groundx.documents.delete`](#groundxdocumentsdelete)
   * [`groundx.documents.delete1`](#groundxdocumentsdelete1)
@@ -268,6 +269,30 @@ The bucketId of the bucket being updated.
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/v1/bucket/{bucketId}` `PUT`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `groundx.customer.get`<a id="groundxcustomerget"></a>
+
+Get the account information associated with the API key.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const getResponse = await groundx.customer.get();
+```
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[CustomerResponse](./models/customer-response.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/v1/customer` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

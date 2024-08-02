@@ -10,4 +10,5 @@ class TagValues(str, enum.Enum):
     SEARCH = "Search"
     PROJECTS = "Projects"
     BUCKETS = "Buckets"
+    CUSTOMER = "Customer"
     HEALTH = "Health"

@@ -14,6 +14,7 @@ from groundx.apis.paths.v1_project_project_id import V1ProjectProjectId
 from groundx.apis.paths.v1_project_project_id_bucket_bucket_id import V1ProjectProjectIdBucketBucketId
 from groundx.apis.paths.v1_bucket import V1Bucket
 from groundx.apis.paths.v1_bucket_bucket_id import V1BucketBucketId
+from groundx.apis.paths.v1_customer import V1Customer
 from groundx.apis.paths.v1_health import V1Health
 from groundx.apis.paths.v1_health_service import V1HealthService
 
@@ -33,6 +34,7 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.V1_PROJECT_PROJECT_ID_BUCKET_BUCKET_ID: V1ProjectProjectIdBucketBucketId,
         PathValues.V1_BUCKET: V1Bucket,
         PathValues.V1_BUCKET_BUCKET_ID: V1BucketBucketId,
+        PathValues.V1_CUSTOMER: V1Customer,
         PathValues.V1_HEALTH: V1Health,
         PathValues.V1_HEALTH_SERVICE: V1HealthService,
     }
@@ -53,6 +55,7 @@ path_to_api = PathToApi(
         PathValues.V1_PROJECT_PROJECT_ID_BUCKET_BUCKET_ID: V1ProjectProjectIdBucketBucketId,
         PathValues.V1_BUCKET: V1Bucket,
         PathValues.V1_BUCKET_BUCKET_ID: V1BucketBucketId,
+        PathValues.V1_CUSTOMER: V1Customer,
         PathValues.V1_HEALTH: V1Health,
         PathValues.V1_HEALTH_SERVICE: V1HealthService,
     }
