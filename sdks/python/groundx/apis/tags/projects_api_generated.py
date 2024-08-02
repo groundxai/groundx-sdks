@@ -1,12 +1,12 @@
 # coding: utf-8
 """
-    GroundX API
+    GroundX APIs
 
-    Ground Your RAG Apps in Fact not Fiction
+    RAG Made Simple, Secure and Hallucination Free
 
-    The version of the OpenAPI document: 1.0.0
-    Contact: support@groundx.ai
-    Created by: https://www.groundx.ai/
+    The version of the OpenAPI document: 1.3.26
+    Contact: support@eyelevel.ai
+    Created by: https://www.eyelevel.ai/
 """
 
 from groundx.paths.v1_project_project_id_bucket_bucket_id.post import AddBucket

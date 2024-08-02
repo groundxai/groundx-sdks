@@ -40,6 +40,10 @@ operation_parameter_map = {
             },
         ]
     },
+    '/v1/customer-GET': {
+        'parameters': [
+        ]
+    },
     '/v1/ingest/documents/website-POST': {
         'parameters': [
             {
