@@ -3,13 +3,13 @@
 outputDirectory: /tmp/groundx-sdks-out
 specPath: api.yaml
 portal:
-  primaryColor: '#6b37d9'
+  primaryColor: '#2B3359'
   title: GroundX
   logo: portal-logo.png
   googleAnalyticsId: G-JHGLN0JCT0
   favicon: favicon.png
   socials:
-    website: https://www.groundx.ai/
+    website: https://www.eyelevel.ai/
   documentation:
     sidebar:
       sections:
@@ -50,11 +50,11 @@ portal:
             - id: upload-local
               label: Upload Documents Stored Locally
               path: docs/upload-local.md
-infoContactUrl: https://www.groundx.ai/
+infoContactUrl: https://www.eyelevel.ai/
 readmeHeader:
   image: header.png
   title: Groundx
-  url: https://www.groundx.ai
+  url: https://www.eyelevel.ai
 generators:
   python:
     version: 1.3.22
