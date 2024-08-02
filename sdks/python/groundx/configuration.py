@@ -408,7 +408,7 @@ conf = groundx.Configuration(
                "OS: {env}\n"\
                "Python Version: {pyversion}\n"\
                "Version of the API: 1.3.26\n"\
-               "SDK Package Version: 1.3.22".\
+               "SDK Package Version: 1.3.23".\
                format(env=sys.platform, pyversion=sys.version)
 
     def get_host_settings(self):
