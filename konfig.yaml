@@ -5,7 +5,9 @@ specPath: api.yaml
 portal:
   primaryColor: '#2B3359'
   title: GroundX
-  logo: portal-logo.png
+  logo:
+    dark: portal-logo-dark.png
+    light: portal-logo-light.png
   googleAnalyticsId: G-JHGLN0JCT0
   favicon: favicon.png
   socials:
