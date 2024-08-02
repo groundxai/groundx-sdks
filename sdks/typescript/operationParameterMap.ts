@@ -46,6 +46,10 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
+    '/v1/customer-GET': {
+        parameters: [
+        ]
+    },
     '/v1/ingest/documents/website-POST': {
         parameters: [
             {
