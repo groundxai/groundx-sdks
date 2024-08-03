@@ -2,32 +2,15 @@
 
 import hashlib
 import json
-import logging
 from queue import Queue, Empty
 from threading import get_ident, Thread, Event, Lock
 import os
 from pathlib import Path
-import requests
 import signal
 import time
 from typing import Union, List
 
-
-TRACE_LEVEL_NUM = 5
-logging.addLevelName(TRACE_LEVEL_NUM, "TRACE")
-
-
-def trace(self, message, *args, **kws):
-    if self.isEnabledFor(TRACE_LEVEL_NUM):
-        self._log(TRACE_LEVEL_NUM, message, args, **kws)
-
-
-logging.Logger.trace = trace
-logger = logging.getLogger(__file__)
-logging.basicConfig(
-    level=logging.DEBUG,
-    format="[groundx] - %(levelname)s - %(message)s",
-)
+from groundx.xray.logger import CustomLogger, setup_custom_logger
 
 
 LOCK_FILE = "xray_uploader.lock"
@@ -37,7 +20,10 @@ TOKEN_BUCKET_INTERVAL = 60 / MAX_CALLS_PER_MINUTE
 UPLOAD_LOG_FILE = "xray_uploader.log.json"
 
 
-class XRayUploader:
+logger: CustomLogger = setup_custom_logger(__file__)
+
+
+class XRayLoader:
     def __init__(self, lock_file=None, upload_log_file=None):
         self.lock_file = lock_file or LOCK_FILE
         self.queue = Queue()
@@ -146,7 +132,7 @@ class XRayUploader:
             if os.path.exists(temp_log_file):
                 os.remove(temp_log_file)
 
-    def start(self, file_path: Union[str, List[str], Path, List[Path]]):
+    def upload(self, file_path: Union[str, List[str], Path, List[Path]]):
         self._create_lock_file()
         try:
             self._upload(file_path)
@@ -168,7 +154,10 @@ class XRayUploader:
 
     def _upload(self, file_path: Union[str, List[str], Path, List[Path]]):
         if isinstance(file_path, (str, Path)):
-            file_path = [file_path]
+            if isinstance(file_path, Path):
+                file_path = [str(file_path)]
+            else:
+                file_path = [file_path]
         file_path = [str(p) for p in file_path]
 
         file_paths = []
@@ -215,6 +204,7 @@ class XRayUploader:
         logger.trace(f"upload [{file_path}]")
         return
 
+        """
         try:
             with open(file_path, "rb") as file_data:
                 response = requests.put(presigned_url, data=file_data)
@@ -232,6 +222,7 @@ class XRayUploader:
                     self.exception = e
             self.stop_event.set()
             raise
+        """
 
     def _worker(self, common_path):
         logger.trace(f"[{get_ident()}] starting")

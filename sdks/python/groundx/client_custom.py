@@ -11,7 +11,7 @@
 
 import typing
 
-from groundx.xray import XRay
+from groundx.xray.handler import XRay
 
 from groundx.configuration import Configuration
 from groundx.api_client import ApiClient

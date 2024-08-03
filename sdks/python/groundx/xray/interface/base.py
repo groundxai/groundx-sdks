@@ -7,7 +7,7 @@ Abstraction of langchain base loader methods and classes
 from abc import ABC
 from typing import Iterator, List
 
-from groundx.iface.document import Document
+from groundx.xray.interface.document import Document
 
 
 class BaseLoader(ABC):

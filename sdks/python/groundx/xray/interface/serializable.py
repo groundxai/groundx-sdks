@@ -18,7 +18,7 @@ from typing import (
 
 from typing_extensions import NotRequired
 
-from groundx.pydantic_v1 import BaseModel
+from groundx.pydantic import BaseModel
 
 
 class BaseSerialized(TypedDict):

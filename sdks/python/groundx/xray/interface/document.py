@@ -7,8 +7,8 @@ Abstraction of langchain document methods and classes
 from pathlib import PurePath
 from typing import Any, List, Literal, Optional, Union
 
-from groundx.iface.serializable import Serializable
-from groundx.pydantic_v1 import Field
+from groundx.xray.interface.serializable import Serializable
+from groundx.pydantic import Field
 
 PathLike = Union[str, PurePath]
 
