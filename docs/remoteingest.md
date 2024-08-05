@@ -33,12 +33,6 @@ sourceUrl = "https://data.chhs.ca.gov/dataset/hci_walk_bicycle.xls";
 ```javascript
 const bucketId = 6839;
 const sourceUrl = "https://data.chhs.ca.gov/dataset/hci_walk_bicycle.xls";
-const searchData = {
-    title: "Time Walk Bike to Work, 2001-2011",
-    publisher: "California Department of Public Health",
-    homepage: "https://catalog.data.gov/dataset/,
-    abstract: "This table contains data on the percent of population aged 16 years or older whose commute to work is 10 or more minutes/day by walking or biking for California, its regions, counties, and cities/towns."
-};
 ```
 
 :::
