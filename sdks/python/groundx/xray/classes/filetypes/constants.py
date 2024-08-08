@@ -1,0 +1,6 @@
+# coding: utf-8
+
+IMG_TOKENS = 4000
+MIN_TOKENS = 500
+TABLE_ADD_ON = 2
+TXT_MODIFIER = 10

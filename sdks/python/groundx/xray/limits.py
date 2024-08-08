@@ -1,9 +1,7 @@
 # coding: utf-8
 
 
-from typing import (
-    TypedDict,
-)
+from typing import Optional, TypedDict
 
 from groundx.apis.tags.customer_api import CustomerApi
 from groundx.type.customer_response import CustomerResponse
@@ -32,10 +30,20 @@ DEFAULT_LIMITS=Limits(fileTokens=DEFAULT_FILE_TOKENS, searches=DEFAULT_SEARCH)
 class XRayLimits:
     def __init__(self, customer: CustomerApi):
         self.customer = customer
+        self.limits: Limits = {
+            "fileTokens": {"max": 0, "value": 0},
+            "searches": {"max": 0, "value": 0},
+        }
+
+    def get_limits(self) -> Optional[Limits]:
+        if (self.limits["fileTokens"]["max"] == 0 and self.limits["fileTokens"]["value"] == 0 and
+            self.limits["searches"]["max"] == 0 and self.limits["searches"]["value"] == 0):
+            return None
+
+        return self.limits
 
     def update(self):
         self._load_limits()
-        print(self.limits)
 
     def _load_limits(self):
         resp = self.customer.get()

@@ -8,13 +8,11 @@ import os
 from pathlib import Path
 from threading import get_ident, Event, Lock, Thread
 import time
-from typing import Any, Dict, Union, List
-from typing_extensions import TypeAlias
+from typing import Any, Dict, List, Optional, Union
 
+from groundx.xray.classes.document import XRayDocument
+from groundx.xray.classes.factory import create_xray_document
 from groundx.xray.logger import CustomLogger
-
-
-Element: TypeAlias = Any
 
 
 NUM_WORKERS = 5
@@ -29,20 +27,24 @@ class XRayDirectory:
         logger: CustomLogger,
         stop_event: Event,
         file_path: Union[str, List[str], Path, List[Path]],
+        exclude_list: Optional[List[Union[str, Path]]] = None,
         upload_log_file=None,
-    ):
+    ) -> None:
+        self.exclude_list = [str(path) for path in exclude_list] if exclude_list else []
         self.file_path = file_path
         self.logger = logger
         self.stop_event = stop_event
 
-        self.files = []
+        self.files: List[XRayDocument] = []
         self.threads = []
         self.exception_lock = Lock()
         self.request_queue = Queue()
         self.result_queue = Queue()
         self.token_bucket = Event()
         self.token_bucket.set()
+        self.token_lock = Lock()
         self.token_thread = None
+        self._total_tokens = 0
 
         self.exception = None
         self.upload_log_file = upload_log_file or UPLOAD_LOG_FILE
@@ -54,7 +56,7 @@ class XRayDirectory:
             self._graceful_shutdown()
             raise e
 
-    def _clear_uploaded_files_log(self):
+    def _clear_uploaded_files_log(self) -> None:
         if os.path.exists(self.upload_log_file):
             try:
                 os.remove(self.upload_log_file)
@@ -71,21 +73,26 @@ class XRayDirectory:
             hasher.update(buf)
         return hasher.hexdigest()
 
-    def get_files(self) -> List[Element]:
+    def get_documents(self, sort_by_tokens: bool = False) -> List[XRayDocument]:
+        if sort_by_tokens:
+            return sorted(self.files, key=lambda doc: doc.tokens, reverse=True)
+
         return self.files
 
     def _get_files_in_directory(self, directory_path) -> List[str]:
         file_paths = []
         for root, _, files in os.walk(directory_path):
             for file in files:
-                file_paths.append(os.path.join(root, file))
+                file_path = os.path.join(root, file)
+                if not self._should_exclude(file_path):
+                    file_paths.append(file_path)
 
         return file_paths
 
     def _get_presigned_url(self, object_name) -> str:
         return f"{object_name}"
 
-    def _graceful_shutdown(self):
+    def _graceful_shutdown(self) -> None:
         self.stop_event.set()
 
         if self.token_thread and self.token_thread.is_alive():
@@ -96,7 +103,7 @@ class XRayDirectory:
 
         self.logger.debug("directory shutdown complete")
 
-    def _load(self):
+    def _load(self) -> None:
         if isinstance(self.file_path, (str, Path)):
             if isinstance(self.file_path, Path):
                 file_path = [str(self.file_path)]
@@ -106,7 +113,7 @@ class XRayDirectory:
 
         file_paths = []
         for path in file_path:
-            if os.path.isfile(path):
+            if os.path.isfile(path) and not self._should_exclude(path):
                 file_paths.append(path)
             elif os.path.isdir(path):
                 file_paths.extend(self._get_files_in_directory(path))
@@ -114,15 +121,13 @@ class XRayDirectory:
         if not file_paths:
             raise Exception("No files found to upload.")
 
-        common_path = os.path.commonpath(file_paths)
-
         for fp in file_paths:
             self.request_queue.put(fp)
 
         self.threads = []
         for i in range(NUM_WORKERS):
             thread = Thread(
-                target=self._worker_load, args=(common_path,), name=f"WorkerThread-{i+1}"
+                target=self._worker_load, args=(), name=f"WorkerThread-{i+1}"
             )
             thread.start()
             self.threads.append(thread)
@@ -142,7 +147,7 @@ class XRayDirectory:
 
         self._load_shutdown()
 
-    def _load_shutdown(self):
+    def _load_shutdown(self) -> None:
         for _ in range(NUM_WORKERS):
             self.request_queue.put(None)
 
@@ -159,7 +164,7 @@ class XRayDirectory:
                 self.logger.error(f"Error reading log file: {e}")
         return {}
 
-    def _save_uploaded_files_log(self):
+    def _save_uploaded_files_log(self) -> None:
         temp_log_file = f"{self.upload_log_file}.tmp"
         try:
             with open(temp_log_file, "w") as f:
@@ -170,7 +175,10 @@ class XRayDirectory:
             if os.path.exists(temp_log_file):
                 os.remove(temp_log_file)
 
-    def _token_bucket_refill(self):
+    def _should_exclude(self, file_path) -> bool:
+        return any(exclude in file_path for exclude in self.exclude_list)
+
+    def _token_bucket_refill(self) -> None:
         while not self.stop_event.is_set():
             self.token_bucket.set()
             time.sleep(TOKEN_BUCKET_INTERVAL)
@@ -180,7 +188,10 @@ class XRayDirectory:
                 break
         self.logger.trace("token bucket exiting")
 
-    def upload(self):
+    def total_tokens(self) -> int:
+        return self._total_tokens
+
+    def upload(self) -> None:
         if isinstance(self.file_path, (str, Path)):
             if isinstance(self.file_path, Path):
                 file_path = [str(self.file_path)]
@@ -248,7 +259,7 @@ class XRayDirectory:
             raise
         """
 
-    def _worker_load(self, common_path):
+    def _worker_load(self):
         self.logger.trace(f"[{get_ident()}] starting")
         while not self.stop_event.is_set():
             try:
@@ -258,13 +269,16 @@ class XRayDirectory:
                     self.request_queue.task_done()
                     break
 
-                file_hash = self._compute_file_hash(file_path)
-                if file_hash not in self.uploaded_files:
-                    object_name = os.path.relpath(file_path, common_path)
-                    self.result_queue.put(object_name)
+                xray_file = create_xray_document(file_path)
+                if xray_file is not None:
+                    with self.token_lock:
+                        self._total_tokens += xray_file.tokens
+                    self.logger.trace(f"added [{file_path}]")
+                    self.result_queue.put(xray_file)
+                else:
+                    self.logger.trace(f"ignored [{file_path}]")
 
                 self.request_queue.task_done()
-                self.logger.debug(f"[{get_ident()}] done [{file_path}]")
             except Empty:
                 continue
             except Exception as e:
@@ -272,6 +286,7 @@ class XRayDirectory:
                     if not self.exception:
                         self.exception = e
                 self.stop_event.set()
+                self.logger.error(f"Error processing file {file_path}: {e}")
                 break
 
         self.logger.trace(f"[{get_ident()}] exiting")
