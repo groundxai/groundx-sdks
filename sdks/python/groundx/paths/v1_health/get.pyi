@@ -256,6 +256,7 @@ class List(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
+        """ List the current health status of all services. Statuses update every 5 minutes.  """
         args = self._list_mapped_args(
         )
         return self._list_oapg(
@@ -284,6 +285,7 @@ class ApiForget(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
+        """ List the current health status of all services. Statuses update every 5 minutes.  """
         args = self._list_mapped_args(
         )
         return self._list_oapg(

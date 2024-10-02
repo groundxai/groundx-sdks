@@ -417,6 +417,7 @@ class List(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
+        """ lookup all documents across all resources which are currently on GroundX  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.  """
         args = self._list_mapped_args(
             n=n,
             filter=filter,
@@ -471,6 +472,7 @@ class ApiForget(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
+        """ lookup all documents across all resources which are currently on GroundX  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.  """
         args = self._list_mapped_args(
             n=n,
             filter=filter,

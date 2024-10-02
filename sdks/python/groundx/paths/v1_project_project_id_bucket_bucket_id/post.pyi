@@ -369,6 +369,7 @@ class AddBucket(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
+        """ Add an existing bucket to an existing project. Buckets and projects can be associated many to many.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.  """
         args = self._add_bucket_mapped_args(
             project_id=project_id,
             bucket_id=bucket_id,
@@ -407,6 +408,7 @@ class ApiForpost(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
+        """ Add an existing bucket to an existing project. Buckets and projects can be associated many to many.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.  """
         args = self._add_bucket_mapped_args(
             project_id=project_id,
             bucket_id=bucket_id,

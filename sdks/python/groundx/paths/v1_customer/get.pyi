@@ -256,6 +256,7 @@ class Get(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
+        """ Get the account information associated with the API key.  """
         args = self._get_mapped_args(
         )
         return self._get_oapg(
@@ -284,6 +285,7 @@ class ApiForget(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
+        """ Get the account information associated with the API key.  """
         args = self._get_mapped_args(
         )
         return self._get_oapg(
