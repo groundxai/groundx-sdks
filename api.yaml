@@ -833,6 +833,12 @@ components:
           default: my search query
           type: string
           example: 'my search query'
+        relevance:
+          description: The minimum search relevance score required to include the result. By default, this is 10.0.
+          default: 10.0
+          type: number
+          format: float
+          example: 10.0
     SearchResponse:
       type: object
       required:
