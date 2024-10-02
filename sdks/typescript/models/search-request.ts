@@ -23,5 +23,11 @@ export interface SearchRequest {
      * @memberof SearchRequest
      */
     'query': string;
+    /**
+     * The minimum search relevance score required to include the result. By default, this is 10.0.
+     * @type {number}
+     * @memberof SearchRequest
+     */
+    'relevance'?: number;
 }
 

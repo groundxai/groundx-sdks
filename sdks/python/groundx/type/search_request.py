@@ -20,8 +20,10 @@ class RequiredSearchRequest(TypedDict):
     # The search query to be used to find relevant documentation.
     query: str
 
+
 class OptionalSearchRequest(TypedDict, total=False):
-    pass
+    # The minimum search relevance score required to include the result. By default, this is 10.0.
+    relevance: typing.Union[int, float]
 
 class SearchRequest(RequiredSearchRequest, OptionalSearchRequest):
     pass

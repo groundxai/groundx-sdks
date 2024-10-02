@@ -357,7 +357,7 @@ paths:
         
         Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
       parameters:
-        - description: The bucketId or projectId of the bucket or project being searched. The documents within the specified container will be compared to the query, and relevant information will be extracted.
+        - description: The bucketId, projectId, or documentId to be searched. The document or documents within the specified container will be compared to the query, and relevant information will be extracted.
           in: path
           name: id
           required: true
@@ -833,6 +833,12 @@ components:
           default: my search query
           type: string
           example: 'my search query'
+        relevance:
+          description: The minimum search relevance score required to include the result. By default, this is 10.0.
+          default: 10.0
+          type: number
+          format: float
+          example: 10.0
     SearchResponse:
       type: object
       required:

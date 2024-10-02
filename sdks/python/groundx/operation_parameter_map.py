@@ -221,6 +221,9 @@ operation_parameter_map = {
                 'name': 'id'
             },
             {
+                'name': 'relevance'
+            },
+            {
                 'name': 'n'
             },
             {
