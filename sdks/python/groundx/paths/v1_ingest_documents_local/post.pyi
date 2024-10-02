@@ -339,6 +339,7 @@ class IngestLocal(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
+        """ Upload documents hosted on a local file system for ingestion into a GroundX bucket.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.  """
         args = self._ingest_local_mapped_args(
             body=body,
         )
@@ -373,6 +374,7 @@ class ApiForpost(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
+        """ Upload documents hosted on a local file system for ingestion into a GroundX bucket.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.  """
         args = self._ingest_local_mapped_args(
             body=body,
         )

@@ -227,6 +227,9 @@ export const operationParameterMap: Record<string, Entry> = {
                 name: 'id'
             },
             {
+                name: 'relevance'
+            },
+            {
                 name: 'n'
             },
             {

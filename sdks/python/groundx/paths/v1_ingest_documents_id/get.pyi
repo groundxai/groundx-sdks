@@ -506,6 +506,7 @@ class Lookup(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
+        """ lookup the document(s) associated with a processId, bucketId, or projectId.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.  """
         args = self._lookup_mapped_args(
             id=id,
             n=n,
@@ -566,6 +567,7 @@ class ApiForget(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
+        """ lookup the document(s) associated with a processId, bucketId, or projectId.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.  """
         args = self._lookup_mapped_args(
             id=id,
             n=n,

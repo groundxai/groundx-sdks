@@ -190,6 +190,7 @@ class BaseApi(api_client.Api):
         self,
         query: str,
         id: int,
+        relevance: typing.Optional[typing.Union[int, float]] = None,
         n: typing.Optional[int] = None,
         next_token: typing.Optional[str] = None,
         verbosity: typing.Optional[int] = None,
@@ -200,6 +201,8 @@ class BaseApi(api_client.Api):
         _body = {}
         if query is not None:
             _body["query"] = query
+        if relevance is not None:
+            _body["relevance"] = relevance
         args.body = _body
         if n is not None:
             _query_params["n"] = n
@@ -481,6 +484,7 @@ class Content(BaseApi):
         self,
         query: str,
         id: int,
+        relevance: typing.Optional[typing.Union[int, float]] = None,
         n: typing.Optional[int] = None,
         next_token: typing.Optional[str] = None,
         verbosity: typing.Optional[int] = None,
@@ -493,6 +497,7 @@ class Content(BaseApi):
         args = self._content_mapped_args(
             query=query,
             id=id,
+            relevance=relevance,
             n=n,
             next_token=next_token,
             verbosity=verbosity,
@@ -508,6 +513,7 @@ class Content(BaseApi):
         self,
         query: str,
         id: int,
+        relevance: typing.Optional[typing.Union[int, float]] = None,
         n: typing.Optional[int] = None,
         next_token: typing.Optional[str] = None,
         verbosity: typing.Optional[int] = None,
@@ -515,9 +521,11 @@ class Content(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
+        """ Search documents on GroundX for the most relevant information to a given query.  The result of this query is typically used in one of two ways; result['search']['text'] can be used to provide context to a language model, facilitating RAG, or result['search']['results'] can be used to observe chunks of text which are relevant to the query, facilitating citation.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.  """
         args = self._content_mapped_args(
             query=query,
             id=id,
+            relevance=relevance,
             n=n,
             next_token=next_token,
             verbosity=verbosity,
@@ -535,6 +543,7 @@ class ApiForpost(BaseApi):
         self,
         query: str,
         id: int,
+        relevance: typing.Optional[typing.Union[int, float]] = None,
         n: typing.Optional[int] = None,
         next_token: typing.Optional[str] = None,
         verbosity: typing.Optional[int] = None,
@@ -547,6 +556,7 @@ class ApiForpost(BaseApi):
         args = self._content_mapped_args(
             query=query,
             id=id,
+            relevance=relevance,
             n=n,
             next_token=next_token,
             verbosity=verbosity,
@@ -562,6 +572,7 @@ class ApiForpost(BaseApi):
         self,
         query: str,
         id: int,
+        relevance: typing.Optional[typing.Union[int, float]] = None,
         n: typing.Optional[int] = None,
         next_token: typing.Optional[str] = None,
         verbosity: typing.Optional[int] = None,
@@ -569,9 +580,11 @@ class ApiForpost(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
+        """ Search documents on GroundX for the most relevant information to a given query.  The result of this query is typically used in one of two ways; result['search']['text'] can be used to provide context to a language model, facilitating RAG, or result['search']['results'] can be used to observe chunks of text which are relevant to the query, facilitating citation.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.  """
         args = self._content_mapped_args(
             query=query,
             id=id,
+            relevance=relevance,
             n=n,
             next_token=next_token,
             verbosity=verbosity,

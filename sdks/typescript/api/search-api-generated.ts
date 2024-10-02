@@ -117,7 +117,8 @@ export const SearchApiFp = function(configuration?: Configuration) {
          */
         async content(requestParameters: SearchApiContentRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SearchResponse>> {
             const searchRequest: SearchRequest = {
-                query: requestParameters.query
+                query: requestParameters.query,
+                relevance: requestParameters.relevance
             };
             const localVarAxiosArgs = await localVarAxiosParamCreator.content(requestParameters.id, requestParameters.n, requestParameters.nextToken, requestParameters.verbosity, searchRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);

@@ -1035,6 +1035,7 @@ Interact with the "Request Body" below to explore the arguments of this function
 content_response = groundx.search.content(
     query="my search query",
     id=1,
+    relevance=10,
     n=20,
     next_token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9",
     verbosity=0,
@@ -1050,6 +1051,10 @@ The search query to be used to find relevant documentation.
 ##### id: `int`<a id="id-int"></a>
 
 The bucketId or projectId of the bucket or project being searched. The documents within the specified container will be compared to the query, and relevant information will be extracted.
+
+##### relevance: `Union[int, float]`<a id="relevance-unionint-float"></a>
+
+The minimum search relevance score required to include the result. By default, this is 10.0.
 
 ##### n: `int`<a id="n-int"></a>
 

@@ -39,8 +39,10 @@ class SearchRequest(
         
         class properties:
             query = schemas.StrSchema
+            relevance = schemas.Float32Schema
             __annotations__ = {
                 "query": query,
+                "relevance": relevance,
             }
     
     query: MetaOapg.properties.query
@@ -49,9 +51,12 @@ class SearchRequest(
     def __getitem__(self, name: typing_extensions.Literal["query"]) -> MetaOapg.properties.query: ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["relevance"]) -> MetaOapg.properties.relevance: ...
+    
+    @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["query", ], str]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["query", "relevance", ], str]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -60,9 +65,12 @@ class SearchRequest(
     def get_item_oapg(self, name: typing_extensions.Literal["query"]) -> MetaOapg.properties.query: ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["relevance"]) -> typing.Union[MetaOapg.properties.relevance, schemas.Unset]: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["query", ], str]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["query", "relevance", ], str]):
         return super().get_item_oapg(name)
     
 
@@ -70,6 +78,7 @@ class SearchRequest(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
         query: typing.Union[MetaOapg.properties.query, str, ],
+        relevance: typing.Union[MetaOapg.properties.relevance, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
     ) -> 'SearchRequest':
@@ -77,6 +86,7 @@ class SearchRequest(
             cls,
             *args,
             query=query,
+            relevance=relevance,
             _configuration=_configuration,
             **kwargs,
         )

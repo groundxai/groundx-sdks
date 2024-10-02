@@ -346,6 +346,7 @@ class Get(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
+        """ Look up the current health status of a specific service. Statuses update every 5 minutes.  """
         args = self._get_mapped_args(
             service=service,
         )
@@ -380,6 +381,7 @@ class ApiForget(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
+        """ Look up the current health status of a specific service. Statuses update every 5 minutes.  """
         args = self._get_mapped_args(
             service=service,
         )

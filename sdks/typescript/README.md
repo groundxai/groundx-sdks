@@ -1003,6 +1003,7 @@ const contentResponse = await groundx.search.content({
   n: 20,
   nextToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9",
   query: "my search query",
+  relevance: 10,
 });
 ```
 
@@ -1015,6 +1016,10 @@ The search query to be used to find relevant documentation.
 ##### id: `number`<a id="id-number"></a>
 
 The bucketId or projectId of the bucket or project being searched. The documents within the specified container will be compared to the query, and relevant information will be extracted.
+
+##### relevance: `number`<a id="relevance-number"></a>
+
+The minimum search relevance score required to include the result. By default, this is 10.0.
 
 ##### n: `number`<a id="n-number"></a>
 
