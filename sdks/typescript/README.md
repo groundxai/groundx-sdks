@@ -999,7 +999,7 @@ Interact with the "Request Body" below to explore the arguments of this function
 
 ```typescript
 const contentResponse = await groundx.search.content({
-  id: null,
+  id: 1,
   n: 20,
   nextToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9",
   query: "my search query",
@@ -1013,7 +1013,7 @@ const contentResponse = await groundx.search.content({
 
 The search query to be used to find relevant documentation.
 
-##### id: [`SearchContentIdParameter`](./models/search-content-id-parameter.ts)<a id="id-searchcontentidparametermodelssearch-content-id-parameterts"></a>
+##### id: `number`<a id="id-number"></a>
 
 The bucketId, projectId, or documentId to be searched. The document or documents within the specified container will be compared to the query, and relevant information will be extracted.
 
