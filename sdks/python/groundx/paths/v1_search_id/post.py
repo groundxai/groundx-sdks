@@ -101,49 +101,11 @@ request_query_verbosity = api_client.QueryParameter(
     explode=True,
 )
 # Path params
-
-
-class IdSchema(
-    schemas.ComposedSchema,
-):
-
-
-    class MetaOapg:
-        one_of_0 = schemas.IntSchema
-        one_of_1 = schemas.UUIDSchema
-        
-        @classmethod
-        @functools.lru_cache()
-        def one_of(cls):
-            # we need this here to make our import statements work
-            # we must store _composed_schemas in here so the code is only run
-            # when we invoke this method. If we kept this at the class
-            # level we would get an error because the class level
-            # code would be run when this module is imported, and these composed
-            # classes don't exist yet because their module has not finished
-            # loading
-            return [
-                cls.one_of_0,
-                cls.one_of_1,
-            ]
-
-
-    def __new__(
-        cls,
-        *args: typing.Union[dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
-        _configuration: typing.Optional[schemas.Configuration] = None,
-        **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
-    ) -> 'IdSchema':
-        return super().__new__(
-            cls,
-            *args,
-            _configuration=_configuration,
-            **kwargs,
-        )
+IdSchema = schemas.IntSchema
 RequestRequiredPathParams = typing_extensions.TypedDict(
     'RequestRequiredPathParams',
     {
-        'id': typing.Union[IdSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
+        'id': typing.Union[IdSchema, decimal.Decimal, int, ],
     }
 )
 RequestOptionalPathParams = typing_extensions.TypedDict(
@@ -245,7 +207,7 @@ class BaseApi(api_client.Api):
     def _content_mapped_args(
         self,
         query: str,
-        id: typing.Union[int, str],
+        id: int,
         relevance: typing.Optional[typing.Union[int, float]] = None,
         n: typing.Optional[int] = None,
         next_token: typing.Optional[str] = None,
@@ -539,7 +501,7 @@ class Content(BaseApi):
     async def acontent(
         self,
         query: str,
-        id: typing.Union[int, str],
+        id: int,
         relevance: typing.Optional[typing.Union[int, float]] = None,
         n: typing.Optional[int] = None,
         next_token: typing.Optional[str] = None,
@@ -568,7 +530,7 @@ class Content(BaseApi):
     def content(
         self,
         query: str,
-        id: typing.Union[int, str],
+        id: int,
         relevance: typing.Optional[typing.Union[int, float]] = None,
         n: typing.Optional[int] = None,
         next_token: typing.Optional[str] = None,
@@ -598,7 +560,7 @@ class ApiForpost(BaseApi):
     async def apost(
         self,
         query: str,
-        id: typing.Union[int, str],
+        id: int,
         relevance: typing.Optional[typing.Union[int, float]] = None,
         n: typing.Optional[int] = None,
         next_token: typing.Optional[str] = None,
@@ -627,7 +589,7 @@ class ApiForpost(BaseApi):
     def post(
         self,
         query: str,
-        id: typing.Union[int, str],
+        id: int,
         relevance: typing.Optional[typing.Union[int, float]] = None,
         n: typing.Optional[int] = None,
         next_token: typing.Optional[str] = None,
