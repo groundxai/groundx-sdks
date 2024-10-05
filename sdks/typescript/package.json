@@ -1,6 +1,6 @@
 {
   "name": "groundx-typescript-sdk",
-  "version": "1.3.29",
+  "version": "1.3.30",
   "description": "Client for GroundX APIs",
   "author": "Konfig",
   "engines": {

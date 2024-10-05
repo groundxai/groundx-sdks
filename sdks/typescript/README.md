@@ -6,7 +6,7 @@
 
 RAG Made Simple, Secure and Hallucination Free
 
-[![npm](https://img.shields.io/badge/npm-v1.3.29-blue)](https://www.npmjs.com/package/groundx-typescript-sdk/v/1.3.29)
+[![npm](https://img.shields.io/badge/npm-v1.3.30-blue)](https://www.npmjs.com/package/groundx-typescript-sdk/v/1.3.30)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://www.eyelevel.ai/)
 
 </div>
