@@ -362,7 +362,10 @@ paths:
           name: id
           required: true
           schema:
-            type: integer
+            oneOf:
+              - type: integer
+              - type: string
+                format: uuid
         - description: The maximum number of returned documents. Accepts 1-100 with a default of 20.
           in: query
           name: 'n'
