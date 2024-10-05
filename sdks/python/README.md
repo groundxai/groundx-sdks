@@ -1034,7 +1034,7 @@ Interact with the "Request Body" below to explore the arguments of this function
 ```python
 content_response = groundx.search.content(
     query="my search query",
-    id=1,
+    id=None,
     relevance=10,
     n=20,
     next_token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9",
@@ -1048,7 +1048,8 @@ content_response = groundx.search.content(
 
 The search query to be used to find relevant documentation.
 
-##### id: `int`<a id="id-int"></a>
+##### id: Union[`int`, `str`]<a id="id-unionint-str"></a>
+
 
 The bucketId, projectId, or documentId to be searched. The document or documents within the specified container will be compared to the query, and relevant information will be extracted.
 
