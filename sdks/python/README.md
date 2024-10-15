@@ -7,7 +7,7 @@
 RAG Made Simple, Secure and Hallucination Free
 
 
-[![PyPI](https://img.shields.io/badge/PyPI-v1.3.27-blue)](https://pypi.org/project/groundx-python-sdk/1.3.27)
+[![PyPI](https://img.shields.io/badge/PyPI-v1.3.28-blue)](https://pypi.org/project/groundx-python-sdk/1.3.28)
 [![README.md](https://img.shields.io/badge/README-Click%20Here-green)](https://github.com/groundxai/groundx-sdks/tree/main/sdks/python#readme)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://www.eyelevel.ai/)
 
@@ -58,7 +58,7 @@ Python >=3.7
 ## Installation<a id="installation"></a>
 
 ```sh
-pip install groundx-python-sdk==1.3.27
+pip install groundx-python-sdk==1.3.28
 ```
 
 ## Getting Started<a id="getting-started"></a>
