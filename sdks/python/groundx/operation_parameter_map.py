@@ -234,4 +234,26 @@ operation_parameter_map = {
             },
         ]
     },
+    '/v1/search/documents-POST': {
+        'parameters': [
+            {
+                'name': 'query'
+            },
+            {
+                'name': 'documentIds'
+            },
+            {
+                'name': 'relevance'
+            },
+            {
+                'name': 'n'
+            },
+            {
+                'name': 'nextToken'
+            },
+            {
+                'name': 'verbosity'
+            },
+        ]
+    },
 };

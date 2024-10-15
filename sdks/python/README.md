@@ -47,6 +47,7 @@ RAG Made Simple, Secure and Hallucination Free
   * [`groundx.projects.remove_bucket`](#groundxprojectsremove_bucket)
   * [`groundx.projects.update`](#groundxprojectsupdate)
   * [`groundx.search.content`](#groundxsearchcontent)
+  * [`groundx.search.documents`](#groundxsearchdocuments)
 
 <!-- tocstop -->
 
@@ -1079,6 +1080,67 @@ The amount of data returned with each search result. 0 == no search results, onl
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/v1/search/{id}` `post`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `groundx.search.documents`<a id="groundxsearchdocuments"></a>
+
+Search documents on GroundX for the most relevant information to a given query by documentId(s).
+
+The result of this query is typically used in one of two ways; result['search']['text'] can be used to provide context to a language model, facilitating RAG, or result['search']['results'] can be used to observe chunks of text which are relevant to the query, facilitating citation.
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+documents_response = groundx.search.documents(
+    query="my search query",
+    document_ids=["docUUID1", "docUUID2"],
+    relevance=10,
+    n=20,
+    next_token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9",
+    verbosity=0,
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### query: `str`<a id="query-str"></a>
+
+The search query to be used to find relevant documentation.
+
+##### document_ids: [`SearchDocumentsRequestDocumentIds`](./groundx/type/search_documents_request_document_ids.py)<a id="document_ids-searchdocumentsrequestdocumentidsgroundxtypesearch_documents_request_document_idspy"></a>
+
+##### relevance: `Union[int, float]`<a id="relevance-unionint-float"></a>
+
+The minimum search relevance score required to include the result. By default, this is 10.0.
+
+##### n: `int`<a id="n-int"></a>
+
+The maximum number of returned documents. Accepts 1-100 with a default of 20.
+
+##### next_token: `str`<a id="next_token-str"></a>
+
+A token for pagination. If the number of search results for a given query is larger than n, the response will include a \"nextToken\" value. That token can be included in this field to retrieve the next batch of n search results.
+
+##### verbosity: `int`<a id="verbosity-int"></a>
+
+The amount of data returned with each search result. 0 == no search results, only the recommended context. 1 == search results but no searchData. 2 == search results and searchData.
+
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
+
+[`SearchDocumentsRequest`](./groundx/type/search_documents_request.py)
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`SearchResponse`](./groundx/type/search_response.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/v1/search/documents` `post`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
