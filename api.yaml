@@ -406,6 +406,61 @@ paths:
           description: Invalid request data
         '401':
           description: Unauthorized to access project or bucket with given ID
+  /v1/search/documents:
+    post:
+      tags:
+        - Search
+      summary: search.documents
+      operationId: Search_documents
+      description: >
+        Search documents on GroundX for the most relevant information to a given query by documentId(s).
+
+
+        The result of this query is typically used in one of two ways; result['search']['text'] can be used to provide context to a language model, facilitating RAG, or result['search']['results'] can be used to observe chunks of text which are relevant to the query, facilitating citation.
+
+
+        Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+      parameters:
+        - description: The maximum number of returned documents. Accepts 1-100 with a default of 20.
+          in: query
+          name: 'n'
+          required: false
+          schema:
+            type: integer
+            default: 20
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          description: A token for pagination. If the number of search results for a given query is larger than n, the response will include a "nextToken" value. That token can be included in this field to retrieve the next batch of n search results.
+          in: query
+          required: false
+          schema:
+            type: string
+            example: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
+        - description: The amount of data returned with each search result. 0 == no search results, only the recommended context. 1 == search results but no searchData. 2 == search results and searchData.
+          in: query
+          name: 'verbosity'
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchDocumentsRequest'
+      responses:
+        '200':
+          description: Search query success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+        '400':
+          description: Invalid request data
+        '401':
+          description: Unauthorized to access project or bucket with given ID
   /v1/project:
     get:
       tags:
@@ -836,6 +891,29 @@ components:
           default: my search query
           type: string
           example: 'my search query'
+        relevance:
+          description: The minimum search relevance score required to include the result. By default, this is 10.0.
+          default: 10.0
+          type: number
+          format: float
+          example: 10.0
+    SearchDocumentsRequest:
+      type: object
+      required:
+        - query
+        - documentIds
+      properties:
+        query:
+          description: The search query to be used to find relevant documentation.
+          default: my search query
+          type: string
+          example: 'my search query'
+        documentIds:
+          description: An array of unique documentIds to be searched.
+          type: array
+          items:
+            type: string
+          example: ['docUUID1', 'docUUID2']
         relevance:
           description: The minimum search relevance score required to include the result. By default, this is 10.0.
           default: 10.0
