@@ -240,4 +240,26 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
+    '/v1/search/documents-POST': {
+        parameters: [
+            {
+                name: 'query'
+            },
+            {
+                name: 'documentIds'
+            },
+            {
+                name: 'relevance'
+            },
+            {
+                name: 'n'
+            },
+            {
+                name: 'nextToken'
+            },
+            {
+                name: 'verbosity'
+            },
+        ]
+    },
 }

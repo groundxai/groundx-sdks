@@ -52,6 +52,8 @@ from groundx.model.project_detail import ProjectDetail
 from groundx.model.project_list_response import ProjectListResponse
 from groundx.model.project_response import ProjectResponse
 from groundx.model.project_update_request import ProjectUpdateRequest
+from groundx.model.search_documents_request import SearchDocumentsRequest
+from groundx.model.search_documents_request_document_ids import SearchDocumentsRequestDocumentIds
 from groundx.model.search_request import SearchRequest
 from groundx.model.search_response import SearchResponse
 from groundx.model.search_response_search import SearchResponseSearch

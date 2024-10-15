@@ -43,6 +43,7 @@ RAG Made Simple, Secure and Hallucination Free
   * [`groundx.projects.removeBucket`](#groundxprojectsremovebucket)
   * [`groundx.projects.update`](#groundxprojectsupdate)
   * [`groundx.search.content`](#groundxsearchcontent)
+  * [`groundx.search.documents`](#groundxsearchdocuments)
 
 <!-- tocstop -->
 
@@ -1040,6 +1041,66 @@ The amount of data returned with each search result. 0 == no search results, onl
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/v1/search/{id}` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `groundx.search.documents`<a id="groundxsearchdocuments"></a>
+
+Search documents on GroundX for the most relevant information to a given query by documentId(s).
+
+The result of this query is typically used in one of two ways; result['search']['text'] can be used to provide context to a language model, facilitating RAG, or result['search']['results'] can be used to observe chunks of text which are relevant to the query, facilitating citation.
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const documentsResponse = await groundx.search.documents({
+  n: 20,
+  nextToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9",
+  query: "my search query",
+  documentIds: ["docUUID1", "docUUID2"],
+  relevance: 10,
+});
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### query: `string`<a id="query-string"></a>
+
+The search query to be used to find relevant documentation.
+
+##### documentIds: `string`[]<a id="documentids-string"></a>
+
+An array of unique documentIds to be searched.
+
+##### relevance: `number`<a id="relevance-number"></a>
+
+The minimum search relevance score required to include the result. By default, this is 10.0.
+
+##### n: `number`<a id="n-number"></a>
+
+The maximum number of returned documents. Accepts 1-100 with a default of 20.
+
+##### nextToken: `string`<a id="nexttoken-string"></a>
+
+A token for pagination. If the number of search results for a given query is larger than n, the response will include a \"nextToken\" value. That token can be included in this field to retrieve the next batch of n search results.
+
+##### verbosity: `number`<a id="verbosity-number"></a>
+
+The amount of data returned with each search result. 0 == no search results, only the recommended context. 1 == search results but no searchData. 2 == search results and searchData.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[SearchResponse](./models/search-response.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/v1/search/documents` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
