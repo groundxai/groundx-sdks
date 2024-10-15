@@ -12,7 +12,7 @@
     Created by: https://www.eyelevel.ai/
 """
 
-__version__ = "1.3.27"
+__version__ = "1.3.28"
 
 # import ApiClient
 from groundx.api_client import ApiClient
