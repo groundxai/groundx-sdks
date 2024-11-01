@@ -40,8 +40,8 @@ export const SearchApiAxiosParamCreator = function (configuration?: Configuratio
         /**
          * Search documents on GroundX for the most relevant information to a given query.  The result of this query is typically used in one of two ways; result[\'search\'][\'text\'] can be used to provide context to a language model, facilitating RAG, or result[\'search\'][\'results\'] can be used to observe chunks of text which are relevant to the query, facilitating citation.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
          * @summary search.content
-         * @param {SearchContentIdParameter} id The bucketId, projectId, or documentId to be searched. The document or documents within the specified container will be compared to the query, and relevant information will be extracted.
-         * @param {number} [n] The maximum number of returned documents. Accepts 1-100 with a default of 20.
+         * @param {SearchContentIdParameter} id The bucketId, groupId, projectId, or documentId to be searched. The document or documents within the specified container will be compared to the query, and relevant information will be extracted.
+         * @param {number} [n] The maximum number of returned search results. Accepts 1-100 with a default of 20.
          * @param {string} [nextToken] A token for pagination. If the number of search results for a given query is larger than n, the response will include a \&quot;nextToken\&quot; value. That token can be included in this field to retrieve the next batch of n search results.
          * @param {number} [verbosity] The amount of data returned with each search result. 0 &#x3D;&#x3D; no search results, only the recommended context. 1 &#x3D;&#x3D; search results but no searchData. 2 &#x3D;&#x3D; search results and searchData.
          * @param {SearchRequest} [searchRequest] 
@@ -105,7 +105,7 @@ export const SearchApiAxiosParamCreator = function (configuration?: Configuratio
         /**
          * Search documents on GroundX for the most relevant information to a given query by documentId(s).  The result of this query is typically used in one of two ways; result[\'search\'][\'text\'] can be used to provide context to a language model, facilitating RAG, or result[\'search\'][\'results\'] can be used to observe chunks of text which are relevant to the query, facilitating citation.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
          * @summary search.documents
-         * @param {number} [n] The maximum number of returned documents. Accepts 1-100 with a default of 20.
+         * @param {number} [n] The maximum number of returned search results. Accepts 1-100 with a default of 20.
          * @param {string} [nextToken] A token for pagination. If the number of search results for a given query is larger than n, the response will include a \&quot;nextToken\&quot; value. That token can be included in this field to retrieve the next batch of n search results.
          * @param {number} [verbosity] The amount of data returned with each search result. 0 &#x3D;&#x3D; no search results, only the recommended context. 1 &#x3D;&#x3D; search results but no searchData. 2 &#x3D;&#x3D; search results and searchData.
          * @param {SearchDocumentsRequest} [searchDocumentsRequest] 
@@ -245,14 +245,14 @@ export const SearchApiFactory = function (configuration?: Configuration, basePat
 export type SearchApiContentRequest = {
     
     /**
-    * The bucketId, projectId, or documentId to be searched. The document or documents within the specified container will be compared to the query, and relevant information will be extracted.
+    * The bucketId, groupId, projectId, or documentId to be searched. The document or documents within the specified container will be compared to the query, and relevant information will be extracted.
     * @type {SearchContentIdParameter}
     * @memberof SearchApiContent
     */
     readonly id: SearchContentIdParameter
     
     /**
-    * The maximum number of returned documents. Accepts 1-100 with a default of 20.
+    * The maximum number of returned search results. Accepts 1-100 with a default of 20.
     * @type {number}
     * @memberof SearchApiContent
     */
@@ -282,7 +282,7 @@ export type SearchApiContentRequest = {
 export type SearchApiDocumentsRequest = {
     
     /**
-    * The maximum number of returned documents. Accepts 1-100 with a default of 20.
+    * The maximum number of returned search results. Accepts 1-100 with a default of 20.
     * @type {number}
     * @memberof SearchApiDocuments
     */

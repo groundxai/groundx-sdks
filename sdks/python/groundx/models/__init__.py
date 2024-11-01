@@ -32,6 +32,11 @@ from groundx.model.document_remote_ingest_request_documents import DocumentRemot
 from groundx.model.document_remote_ingest_request_documents_item import DocumentRemoteIngestRequestDocumentsItem
 from groundx.model.document_response import DocumentResponse
 from groundx.model.document_type import DocumentType
+from groundx.model.group_create_request import GroupCreateRequest
+from groundx.model.group_detail import GroupDetail
+from groundx.model.group_list_response import GroupListResponse
+from groundx.model.group_response import GroupResponse
+from groundx.model.group_update_request import GroupUpdateRequest
 from groundx.model.health_response import HealthResponse
 from groundx.model.health_response_health import HealthResponseHealth
 from groundx.model.health_service import HealthService
@@ -47,11 +52,6 @@ from groundx.model.process_status_response_ingest_progress_complete import Proce
 from groundx.model.process_status_response_ingest_progress_errors import ProcessStatusResponseIngestProgressErrors
 from groundx.model.process_status_response_ingest_progress_processing import ProcessStatusResponseIngestProgressProcessing
 from groundx.model.processing_status import ProcessingStatus
-from groundx.model.project_create_request import ProjectCreateRequest
-from groundx.model.project_detail import ProjectDetail
-from groundx.model.project_list_response import ProjectListResponse
-from groundx.model.project_response import ProjectResponse
-from groundx.model.project_update_request import ProjectUpdateRequest
 from groundx.model.search_documents_request import SearchDocumentsRequest
 from groundx.model.search_documents_request_document_ids import SearchDocumentsRequestDocumentIds
 from groundx.model.search_request import SearchRequest

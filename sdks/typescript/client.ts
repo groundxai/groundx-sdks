@@ -14,8 +14,8 @@ import {
   BucketsApi,
   CustomerApi,
   DocumentsApi,
+  GroupsApi,
   HealthApi,
-  ProjectsApi,
   SearchApi,
 } from "./api";
 import { Configuration, ConfigurationParameters } from "./configuration";
@@ -25,8 +25,8 @@ export class Groundx extends GroundxCustom {
   readonly buckets: BucketsApi;
   readonly customer: CustomerApi;
   readonly documents: DocumentsApi;
+  readonly groups: GroupsApi;
   readonly health: HealthApi;
-  readonly projects: ProjectsApi;
   readonly search: SearchApi;
 
   constructor(configurationParameters: ConfigurationParameters) {
@@ -35,8 +35,8 @@ export class Groundx extends GroundxCustom {
     this.buckets = new BucketsApi(configuration);
     this.customer = new CustomerApi(configuration);
     this.documents = new DocumentsApi(configuration);
+    this.groups = new GroupsApi(configuration);
     this.health = new HealthApi(configuration);
-    this.projects = new ProjectsApi(configuration);
     this.search = new SearchApi(configuration);
   }
 

@@ -19,8 +19,8 @@ from groundx.type_util import copy_signature
 from groundx.apis.tags.buckets_api import BucketsApi
 from groundx.apis.tags.customer_api import CustomerApi
 from groundx.apis.tags.documents_api import DocumentsApi
+from groundx.apis.tags.groups_api import GroupsApi
 from groundx.apis.tags.health_api import HealthApi
-from groundx.apis.tags.projects_api import ProjectsApi
 from groundx.apis.tags.search_api import SearchApi
 
 
@@ -37,6 +37,6 @@ class Groundx(ClientCustom):
         self.buckets: BucketsApi = BucketsApi(api_client)
         self.customer: CustomerApi = CustomerApi(api_client)
         self.documents: DocumentsApi = DocumentsApi(api_client)
+        self.groups: GroupsApi = GroupsApi(api_client)
         self.health: HealthApi = HealthApi(api_client)
-        self.projects: ProjectsApi = ProjectsApi(api_client)
         self.search: SearchApi = SearchApi(api_client)
