@@ -33,15 +33,15 @@ RAG Made Simple, Secure and Hallucination Free
   * [`groundx.documents.ingestRemote`](#groundxdocumentsingestremote)
   * [`groundx.documents.list`](#groundxdocumentslist)
   * [`groundx.documents.lookup`](#groundxdocumentslookup)
+  * [`groundx.groups.addBucket`](#groundxgroupsaddbucket)
+  * [`groundx.groups.create`](#groundxgroupscreate)
+  * [`groundx.groups.delete`](#groundxgroupsdelete)
+  * [`groundx.groups.get`](#groundxgroupsget)
+  * [`groundx.groups.list`](#groundxgroupslist)
+  * [`groundx.groups.removeBucket`](#groundxgroupsremovebucket)
+  * [`groundx.groups.update`](#groundxgroupsupdate)
   * [`groundx.health.get`](#groundxhealthget)
   * [`groundx.health.list`](#groundxhealthlist)
-  * [`groundx.projects.addBucket`](#groundxprojectsaddbucket)
-  * [`groundx.projects.create`](#groundxprojectscreate)
-  * [`groundx.projects.delete`](#groundxprojectsdelete)
-  * [`groundx.projects.get`](#groundxprojectsget)
-  * [`groundx.projects.list`](#groundxprojectslist)
-  * [`groundx.projects.removeBucket`](#groundxprojectsremovebucket)
-  * [`groundx.projects.update`](#groundxprojectsupdate)
   * [`groundx.search.content`](#groundxsearchcontent)
   * [`groundx.search.documents`](#groundxsearchdocuments)
 
@@ -218,11 +218,11 @@ const listResponse = await groundx.buckets.list({});
 
 ##### n: `number`<a id="n-number"></a>
 
-The maximum number of returned documents. Accepts 1-100 with a default of 20.
+The maximum number of returned buckets. Accepts 1-100 with a default of 20.
 
 ##### nextToken: `string`<a id="nexttoken-string"></a>
 
-A token for pagination. If the number of documents for a given query is larger than n, the response will include a \"nextToken\" value. That token can be included in this field to retrieve the next batch of n documents.
+A token for pagination. If the number of buckets for a given query is larger than n, the response will include a \"nextToken\" value. That token can be included in this field to retrieve the next batch of n buckets.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -612,7 +612,7 @@ A token for pagination. If the number of documents for a given query is larger t
 
 ### `groundx.documents.lookup`<a id="groundxdocumentslookup"></a>
 
-lookup the document(s) associated with a processId, bucketId, or projectId.
+lookup the document(s) associated with a processId, bucketId, groupId, or projectId.
 
 Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
 
@@ -632,7 +632,7 @@ const lookupResponse = await groundx.documents.lookup({
 
 ##### id: `number`<a id="id-number"></a>
 
-a processId, bucketId, or projectId
+a processId, bucketId, groupId, or projectId
 
 ##### n: `number`<a id="n-number"></a>
 
@@ -665,6 +665,266 @@ A token for pagination. If the number of documents for a given query is larger t
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/v1/ingest/documents/{id}` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `groundx.groups.addBucket`<a id="groundxgroupsaddbucket"></a>
+
+Add an existing bucket to an existing group. Buckets and groups can be associated many to many.
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const addBucketResponse = await groundx.groups.addBucket({
+  groupId: 1,
+  bucketId: 1,
+});
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### groupId: `number`<a id="groupid-number"></a>
+
+The groupId of the group which the bucket will be added to.
+
+##### bucketId: `number`<a id="bucketid-number"></a>
+
+The bucketId of the bucket being added to the group.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[MessageResponse](./models/message-response.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/v1/group/{groupId}/bucket/{bucketId}` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `groundx.groups.create`<a id="groundxgroupscreate"></a>
+
+create a new group, a group being a collection of buckets which can be searched.
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const createResponse = await groundx.groups.create({
+  name: "your_group_name",
+  bucketName: "your_new_bucket_name",
+});
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### name: `string`<a id="name-string"></a>
+
+The name of the group being created.
+
+##### bucketName: `string`<a id="bucketname-string"></a>
+
+Specify bucketName to automatically create a bucket, by the name specified, and add it to the created group.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[GroupResponse](./models/group-response.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/v1/group` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `groundx.groups.delete`<a id="groundxgroupsdelete"></a>
+
+Delete a group.
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const deleteResponse = await groundx.groups.delete({
+  groupId: 1,
+});
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### groupId: `number`<a id="groupid-number"></a>
+
+The groupId of the group to be deleted.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[MessageResponse](./models/message-response.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/v1/group/{groupId}` `DELETE`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `groundx.groups.get`<a id="groundxgroupsget"></a>
+
+look up a specific group by its groupId.
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const getResponse = await groundx.groups.get({
+  groupId: 1,
+});
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### groupId: `number`<a id="groupid-number"></a>
+
+The groupId of the group to look up.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[GroupResponse](./models/group-response.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/v1/group/{groupId}` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `groundx.groups.list`<a id="groundxgroupslist"></a>
+
+list all groups within your GroundX account.
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const listResponse = await groundx.groups.list({});
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### n: `number`<a id="n-number"></a>
+
+The maximum number of returned groups. Accepts 1-100 with a default of 20.
+
+##### nextToken: `string`<a id="nexttoken-string"></a>
+
+A token for pagination. If the number of groups for a given query is larger than n, the response will include a \"nextToken\" value. That token can be included in this field to retrieve the next batch of n groups.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[GroupListResponse](./models/group-list-response.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/v1/group` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `groundx.groups.removeBucket`<a id="groundxgroupsremovebucket"></a>
+
+remove a bucket from a group. Buckets and groups can be associated many to many, this removes one bucket to group association without disturbing others.
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const removeBucketResponse = await groundx.groups.removeBucket({
+  groupId: 1,
+  bucketId: 1,
+});
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### groupId: `number`<a id="groupid-number"></a>
+
+The groupId of the group which the bucket will be removed from.
+
+##### bucketId: `number`<a id="bucketid-number"></a>
+
+The bucketId of the bucket which will be removed from the group.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[MessageResponse](./models/message-response.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/v1/group/{groupId}/bucket/{bucketId}` `DELETE`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `groundx.groups.update`<a id="groundxgroupsupdate"></a>
+
+Rename a group
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const updateResponse = await groundx.groups.update({
+  groupId: 1,
+  newName: "your_group_name",
+});
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### newName: `string`<a id="newname-string"></a>
+
+The new name of the group being renamed.
+
+##### groupId: `number`<a id="groupid-number"></a>
+
+The groupId of the group to update.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[GroupResponse](./models/group-response.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/v1/group/{groupId}` `PUT`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -727,266 +987,6 @@ const listResponse = await groundx.health.list();
 ---
 
 
-### `groundx.projects.addBucket`<a id="groundxprojectsaddbucket"></a>
-
-Add an existing bucket to an existing project. Buckets and projects can be associated many to many.
-
-Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```typescript
-const addBucketResponse = await groundx.projects.addBucket({
-  projectId: 1,
-  bucketId: 1,
-});
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### projectId: `number`<a id="projectid-number"></a>
-
-The projectId of the project which the bucket will be added to.
-
-##### bucketId: `number`<a id="bucketid-number"></a>
-
-The bucketId of the bucket being added to the project.
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[MessageResponse](./models/message-response.ts)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/v1/project/{projectId}/bucket/{bucketId}` `POST`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `groundx.projects.create`<a id="groundxprojectscreate"></a>
-
-create a new project, a project being a collection of buckets which can be searched.
-
-Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```typescript
-const createResponse = await groundx.projects.create({
-  name: "your_project_name",
-  bucketName: "your_new_bucket_name",
-});
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### name: `string`<a id="name-string"></a>
-
-The name of the project being created.
-
-##### bucketName: `string`<a id="bucketname-string"></a>
-
-Specify bucketName to automatically create a bucket, by the name specified, and add it to the created project.
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[ProjectResponse](./models/project-response.ts)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/v1/project` `POST`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `groundx.projects.delete`<a id="groundxprojectsdelete"></a>
-
-Delete a project.
-
-Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```typescript
-const deleteResponse = await groundx.projects.delete({
-  projectId: 1,
-});
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### projectId: `number`<a id="projectid-number"></a>
-
-The projectId of the project to be deleted.
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[MessageResponse](./models/message-response.ts)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/v1/project/{projectId}` `DELETE`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `groundx.projects.get`<a id="groundxprojectsget"></a>
-
-look up a specific project by its projectId.
-
-Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```typescript
-const getResponse = await groundx.projects.get({
-  projectId: 1,
-});
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### projectId: `number`<a id="projectid-number"></a>
-
-The projectId of the project to look up.
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[ProjectResponse](./models/project-response.ts)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/v1/project/{projectId}` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `groundx.projects.list`<a id="groundxprojectslist"></a>
-
-list all projects within your GroundX account.
-
-Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```typescript
-const listResponse = await groundx.projects.list({});
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### n: `number`<a id="n-number"></a>
-
-The maximum number of returned documents. Accepts 1-100 with a default of 20.
-
-##### nextToken: `string`<a id="nexttoken-string"></a>
-
-A token for pagination. If the number of documents for a given query is larger than n, the response will include a \"nextToken\" value. That token can be included in this field to retrieve the next batch of n documents.
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[ProjectListResponse](./models/project-list-response.ts)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/v1/project` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `groundx.projects.removeBucket`<a id="groundxprojectsremovebucket"></a>
-
-remove a bucket from a project. Buckets and projects can be associated many to many, this removes one bucket to project association without disturbing others.
-
-Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```typescript
-const removeBucketResponse = await groundx.projects.removeBucket({
-  projectId: 1,
-  bucketId: 1,
-});
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### projectId: `number`<a id="projectid-number"></a>
-
-The projectId of the project which the bucket will be removed from.
-
-##### bucketId: `number`<a id="bucketid-number"></a>
-
-The bucketId of the bucket which will be removed from the project.
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[MessageResponse](./models/message-response.ts)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/v1/project/{projectId}/bucket/{bucketId}` `DELETE`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `groundx.projects.update`<a id="groundxprojectsupdate"></a>
-
-Rename a project
-
-Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```typescript
-const updateResponse = await groundx.projects.update({
-  projectId: 1,
-  newName: "your_project_name",
-});
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### newName: `string`<a id="newname-string"></a>
-
-The new name of the project being renamed.
-
-##### projectId: `number`<a id="projectid-number"></a>
-
-The projectId of the project to update.
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[ProjectResponse](./models/project-response.ts)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/v1/project/{projectId}` `PUT`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
 ### `groundx.search.content`<a id="groundxsearchcontent"></a>
 
 Search documents on GroundX for the most relevant information to a given query.
@@ -1016,7 +1016,7 @@ The search query to be used to find relevant documentation.
 
 ##### id: [`SearchContentIdParameter`](./models/search-content-id-parameter.ts)<a id="id-searchcontentidparametermodelssearch-content-id-parameterts"></a>
 
-The bucketId, projectId, or documentId to be searched. The document or documents within the specified container will be compared to the query, and relevant information will be extracted.
+The bucketId, groupId, projectId, or documentId to be searched. The document or documents within the specified container will be compared to the query, and relevant information will be extracted.
 
 ##### relevance: `number`<a id="relevance-number"></a>
 
@@ -1024,7 +1024,7 @@ The minimum search relevance score required to include the result. By default, t
 
 ##### n: `number`<a id="n-number"></a>
 
-The maximum number of returned documents. Accepts 1-100 with a default of 20.
+The maximum number of returned search results. Accepts 1-100 with a default of 20.
 
 ##### nextToken: `string`<a id="nexttoken-string"></a>
 
@@ -1084,7 +1084,7 @@ The minimum search relevance score required to include the result. By default, t
 
 ##### n: `number`<a id="n-number"></a>
 
-The maximum number of returned documents. Accepts 1-100 with a default of 20.
+The maximum number of returned search results. Accepts 1-100 with a default of 20.
 
 ##### nextToken: `string`<a id="nexttoken-string"></a>
 

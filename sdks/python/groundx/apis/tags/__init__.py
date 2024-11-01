@@ -8,7 +8,7 @@ import enum
 class TagValues(str, enum.Enum):
     DOCUMENTS = "Documents"
     SEARCH = "Search"
-    PROJECTS = "Projects"
     BUCKETS = "Buckets"
+    GROUPS = "Groups"
     CUSTOMER = "Customer"
     HEALTH = "Health"

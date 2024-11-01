@@ -37,15 +37,15 @@ RAG Made Simple, Secure and Hallucination Free
   * [`groundx.documents.ingest_remote`](#groundxdocumentsingest_remote)
   * [`groundx.documents.list`](#groundxdocumentslist)
   * [`groundx.documents.lookup`](#groundxdocumentslookup)
+  * [`groundx.groups.add_bucket`](#groundxgroupsadd_bucket)
+  * [`groundx.groups.create`](#groundxgroupscreate)
+  * [`groundx.groups.delete`](#groundxgroupsdelete)
+  * [`groundx.groups.get`](#groundxgroupsget)
+  * [`groundx.groups.list`](#groundxgroupslist)
+  * [`groundx.groups.remove_bucket`](#groundxgroupsremove_bucket)
+  * [`groundx.groups.update`](#groundxgroupsupdate)
   * [`groundx.health.get`](#groundxhealthget)
   * [`groundx.health.list`](#groundxhealthlist)
-  * [`groundx.projects.add_bucket`](#groundxprojectsadd_bucket)
-  * [`groundx.projects.create`](#groundxprojectscreate)
-  * [`groundx.projects.delete`](#groundxprojectsdelete)
-  * [`groundx.projects.get`](#groundxprojectsget)
-  * [`groundx.projects.list`](#groundxprojectslist)
-  * [`groundx.projects.remove_bucket`](#groundxprojectsremove_bucket)
-  * [`groundx.projects.update`](#groundxprojectsupdate)
   * [`groundx.search.content`](#groundxsearchcontent)
   * [`groundx.search.documents`](#groundxsearchdocuments)
 
@@ -249,11 +249,11 @@ list_response = groundx.buckets.list(
 
 ##### n: `int`<a id="n-int"></a>
 
-The maximum number of returned documents. Accepts 1-100 with a default of 20.
+The maximum number of returned buckets. Accepts 1-100 with a default of 20.
 
 ##### next_token: `str`<a id="next_token-str"></a>
 
-A token for pagination. If the number of documents for a given query is larger than n, the response will include a \"nextToken\" value. That token can be included in this field to retrieve the next batch of n documents.
+A token for pagination. If the number of buckets for a given query is larger than n, the response will include a \"nextToken\" value. That token can be included in this field to retrieve the next batch of n buckets.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -644,7 +644,7 @@ A token for pagination. If the number of documents for a given query is larger t
 
 ### `groundx.documents.lookup`<a id="groundxdocumentslookup"></a>
 
-lookup the document(s) associated with a processId, bucketId, or projectId.
+lookup the document(s) associated with a processId, bucketId, groupId, or projectId.
 
 Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
 
@@ -667,7 +667,7 @@ lookup_response = groundx.documents.lookup(
 
 ##### id: `int`<a id="id-int"></a>
 
-a processId, bucketId, or projectId
+a processId, bucketId, groupId, or projectId
 
 ##### n: `int`<a id="n-int"></a>
 
@@ -700,6 +700,268 @@ A token for pagination. If the number of documents for a given query is larger t
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/v1/ingest/documents/{id}` `get`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `groundx.groups.add_bucket`<a id="groundxgroupsadd_bucket"></a>
+
+Add an existing bucket to an existing group. Buckets and groups can be associated many to many.
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+add_bucket_response = groundx.groups.add_bucket(
+    group_id=1,
+    bucket_id=1,
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### group_id: `int`<a id="group_id-int"></a>
+
+The groupId of the group which the bucket will be added to.
+
+##### bucket_id: `int`<a id="bucket_id-int"></a>
+
+The bucketId of the bucket being added to the group.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`MessageResponse`](./groundx/type/message_response.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/v1/group/{groupId}/bucket/{bucketId}` `post`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `groundx.groups.create`<a id="groundxgroupscreate"></a>
+
+create a new group, a group being a collection of buckets which can be searched.
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+create_response = groundx.groups.create(
+    name="your_group_name",
+    bucket_name="your_new_bucket_name",
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### name: `str`<a id="name-str"></a>
+
+The name of the group being created.
+
+##### bucket_name: `str`<a id="bucket_name-str"></a>
+
+Specify bucketName to automatically create a bucket, by the name specified, and add it to the created group.
+
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
+
+[`GroupCreateRequest`](./groundx/type/group_create_request.py)
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`GroupResponse`](./groundx/type/group_response.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/v1/group` `post`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `groundx.groups.delete`<a id="groundxgroupsdelete"></a>
+
+Delete a group.
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+delete_response = groundx.groups.delete(
+    group_id=1,
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### group_id: `int`<a id="group_id-int"></a>
+
+The groupId of the group to be deleted.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`MessageResponse`](./groundx/type/message_response.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/v1/group/{groupId}` `delete`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `groundx.groups.get`<a id="groundxgroupsget"></a>
+
+look up a specific group by its groupId.
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+get_response = groundx.groups.get(
+    group_id=1,
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### group_id: `int`<a id="group_id-int"></a>
+
+The groupId of the group to look up.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`GroupResponse`](./groundx/type/group_response.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/v1/group/{groupId}` `get`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `groundx.groups.list`<a id="groundxgroupslist"></a>
+
+list all groups within your GroundX account.
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+list_response = groundx.groups.list(
+    n=1,
+    next_token="string_example",
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### n: `int`<a id="n-int"></a>
+
+The maximum number of returned groups. Accepts 1-100 with a default of 20.
+
+##### next_token: `str`<a id="next_token-str"></a>
+
+A token for pagination. If the number of groups for a given query is larger than n, the response will include a \"nextToken\" value. That token can be included in this field to retrieve the next batch of n groups.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`GroupListResponse`](./groundx/type/group_list_response.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/v1/group` `get`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `groundx.groups.remove_bucket`<a id="groundxgroupsremove_bucket"></a>
+
+remove a bucket from a group. Buckets and groups can be associated many to many, this removes one bucket to group association without disturbing others.
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+remove_bucket_response = groundx.groups.remove_bucket(
+    group_id=1,
+    bucket_id=1,
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### group_id: `int`<a id="group_id-int"></a>
+
+The groupId of the group which the bucket will be removed from.
+
+##### bucket_id: `int`<a id="bucket_id-int"></a>
+
+The bucketId of the bucket which will be removed from the group.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`MessageResponse`](./groundx/type/message_response.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/v1/group/{groupId}/bucket/{bucketId}` `delete`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `groundx.groups.update`<a id="groundxgroupsupdate"></a>
+
+Rename a group
+
+Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+update_response = groundx.groups.update(
+    new_name="your_group_name",
+    group_id=1,
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### new_name: `str`<a id="new_name-str"></a>
+
+The new name of the group being renamed.
+
+##### group_id: `int`<a id="group_id-int"></a>
+
+The groupId of the group to update.
+
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
+
+[`GroupUpdateRequest`](./groundx/type/group_update_request.py)
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`GroupResponse`](./groundx/type/group_response.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/v1/group/{groupId}` `put`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -759,268 +1021,6 @@ list_response = groundx.health.list()
 
 ---
 
-### `groundx.projects.add_bucket`<a id="groundxprojectsadd_bucket"></a>
-
-Add an existing bucket to an existing project. Buckets and projects can be associated many to many.
-
-Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```python
-add_bucket_response = groundx.projects.add_bucket(
-    project_id=1,
-    bucket_id=1,
-)
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### project_id: `int`<a id="project_id-int"></a>
-
-The projectId of the project which the bucket will be added to.
-
-##### bucket_id: `int`<a id="bucket_id-int"></a>
-
-The bucketId of the bucket being added to the project.
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[`MessageResponse`](./groundx/type/message_response.py)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/v1/project/{projectId}/bucket/{bucketId}` `post`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-### `groundx.projects.create`<a id="groundxprojectscreate"></a>
-
-create a new project, a project being a collection of buckets which can be searched.
-
-Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```python
-create_response = groundx.projects.create(
-    name="your_project_name",
-    bucket_name="your_new_bucket_name",
-)
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### name: `str`<a id="name-str"></a>
-
-The name of the project being created.
-
-##### bucket_name: `str`<a id="bucket_name-str"></a>
-
-Specify bucketName to automatically create a bucket, by the name specified, and add it to the created project.
-
-#### ⚙️ Request Body<a id="⚙️-request-body"></a>
-
-[`ProjectCreateRequest`](./groundx/type/project_create_request.py)
-#### 🔄 Return<a id="🔄-return"></a>
-
-[`ProjectResponse`](./groundx/type/project_response.py)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/v1/project` `post`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-### `groundx.projects.delete`<a id="groundxprojectsdelete"></a>
-
-Delete a project.
-
-Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```python
-delete_response = groundx.projects.delete(
-    project_id=1,
-)
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### project_id: `int`<a id="project_id-int"></a>
-
-The projectId of the project to be deleted.
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[`MessageResponse`](./groundx/type/message_response.py)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/v1/project/{projectId}` `delete`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-### `groundx.projects.get`<a id="groundxprojectsget"></a>
-
-look up a specific project by its projectId.
-
-Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```python
-get_response = groundx.projects.get(
-    project_id=1,
-)
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### project_id: `int`<a id="project_id-int"></a>
-
-The projectId of the project to look up.
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[`ProjectResponse`](./groundx/type/project_response.py)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/v1/project/{projectId}` `get`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-### `groundx.projects.list`<a id="groundxprojectslist"></a>
-
-list all projects within your GroundX account.
-
-Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```python
-list_response = groundx.projects.list(
-    n=1,
-    next_token="string_example",
-)
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### n: `int`<a id="n-int"></a>
-
-The maximum number of returned documents. Accepts 1-100 with a default of 20.
-
-##### next_token: `str`<a id="next_token-str"></a>
-
-A token for pagination. If the number of documents for a given query is larger than n, the response will include a \"nextToken\" value. That token can be included in this field to retrieve the next batch of n documents.
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[`ProjectListResponse`](./groundx/type/project_list_response.py)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/v1/project` `get`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-### `groundx.projects.remove_bucket`<a id="groundxprojectsremove_bucket"></a>
-
-remove a bucket from a project. Buckets and projects can be associated many to many, this removes one bucket to project association without disturbing others.
-
-Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```python
-remove_bucket_response = groundx.projects.remove_bucket(
-    project_id=1,
-    bucket_id=1,
-)
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### project_id: `int`<a id="project_id-int"></a>
-
-The projectId of the project which the bucket will be removed from.
-
-##### bucket_id: `int`<a id="bucket_id-int"></a>
-
-The bucketId of the bucket which will be removed from the project.
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[`MessageResponse`](./groundx/type/message_response.py)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/v1/project/{projectId}/bucket/{bucketId}` `delete`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-### `groundx.projects.update`<a id="groundxprojectsupdate"></a>
-
-Rename a project
-
-Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```python
-update_response = groundx.projects.update(
-    new_name="your_project_name",
-    project_id=1,
-)
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### new_name: `str`<a id="new_name-str"></a>
-
-The new name of the project being renamed.
-
-##### project_id: `int`<a id="project_id-int"></a>
-
-The projectId of the project to update.
-
-#### ⚙️ Request Body<a id="⚙️-request-body"></a>
-
-[`ProjectUpdateRequest`](./groundx/type/project_update_request.py)
-#### 🔄 Return<a id="🔄-return"></a>
-
-[`ProjectResponse`](./groundx/type/project_response.py)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/v1/project/{projectId}` `put`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
 ### `groundx.search.content`<a id="groundxsearchcontent"></a>
 
 Search documents on GroundX for the most relevant information to a given query.
@@ -1052,7 +1052,7 @@ The search query to be used to find relevant documentation.
 ##### id: Union[`int`, `str`]<a id="id-unionint-str"></a>
 
 
-The bucketId, projectId, or documentId to be searched. The document or documents within the specified container will be compared to the query, and relevant information will be extracted.
+The bucketId, groupId, projectId, or documentId to be searched. The document or documents within the specified container will be compared to the query, and relevant information will be extracted.
 
 ##### relevance: `Union[int, float]`<a id="relevance-unionint-float"></a>
 
@@ -1060,7 +1060,7 @@ The minimum search relevance score required to include the result. By default, t
 
 ##### n: `int`<a id="n-int"></a>
 
-The maximum number of returned documents. Accepts 1-100 with a default of 20.
+The maximum number of returned search results. Accepts 1-100 with a default of 20.
 
 ##### next_token: `str`<a id="next_token-str"></a>
 
@@ -1121,7 +1121,7 @@ The minimum search relevance score required to include the result. By default, t
 
 ##### n: `int`<a id="n-int"></a>
 
-The maximum number of returned documents. Accepts 1-100 with a default of 20.
+The maximum number of returned search results. Accepts 1-100 with a default of 20.
 
 ##### next_token: `str`<a id="next_token-str"></a>
 

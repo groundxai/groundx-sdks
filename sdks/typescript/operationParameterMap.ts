@@ -143,28 +143,17 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
-    '/v1/health/{service}-GET': {
+    '/v1/group/{groupId}/bucket/{bucketId}-POST': {
         parameters: [
             {
-                name: 'service'
-            },
-        ]
-    },
-    '/v1/health-GET': {
-        parameters: [
-        ]
-    },
-    '/v1/project/{projectId}/bucket/{bucketId}-POST': {
-        parameters: [
-            {
-                name: 'projectId'
+                name: 'groupId'
             },
             {
                 name: 'bucketId'
             },
         ]
     },
-    '/v1/project-POST': {
+    '/v1/group-POST': {
         parameters: [
             {
                 name: 'name'
@@ -174,21 +163,21 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
-    '/v1/project/{projectId}-DELETE': {
+    '/v1/group/{groupId}-DELETE': {
         parameters: [
             {
-                name: 'projectId'
+                name: 'groupId'
             },
         ]
     },
-    '/v1/project/{projectId}-GET': {
+    '/v1/group/{groupId}-GET': {
         parameters: [
             {
-                name: 'projectId'
+                name: 'groupId'
             },
         ]
     },
-    '/v1/project-GET': {
+    '/v1/group-GET': {
         parameters: [
             {
                 name: 'n'
@@ -198,24 +187,35 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
-    '/v1/project/{projectId}/bucket/{bucketId}-DELETE': {
+    '/v1/group/{groupId}/bucket/{bucketId}-DELETE': {
         parameters: [
             {
-                name: 'projectId'
+                name: 'groupId'
             },
             {
                 name: 'bucketId'
             },
         ]
     },
-    '/v1/project/{projectId}-PUT': {
+    '/v1/group/{groupId}-PUT': {
         parameters: [
             {
                 name: 'newName'
             },
             {
-                name: 'projectId'
+                name: 'groupId'
             },
+        ]
+    },
+    '/v1/health/{service}-GET': {
+        parameters: [
+            {
+                name: 'service'
+            },
+        ]
+    },
+    '/v1/health-GET': {
+        parameters: [
         ]
     },
     '/v1/search/{id}-POST': {

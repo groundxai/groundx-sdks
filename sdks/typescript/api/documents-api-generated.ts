@@ -494,9 +494,9 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * lookup the document(s) associated with a processId, bucketId, or projectId.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * lookup the document(s) associated with a processId, bucketId, groupId, or projectId.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
          * @summary lookup
-         * @param {number} id a processId, bucketId, or projectId
+         * @param {number} id a processId, bucketId, groupId, or projectId
          * @param {number} [n] The maximum number of returned documents. Accepts 1-100 with a default of 20.
          * @param {string} [filter] Only documents with names that contain the filter string will be returned in the results.
          * @param {Sort} [sort] The document attribute that will be used to sort the results.
@@ -673,7 +673,7 @@ export const DocumentsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * lookup the document(s) associated with a processId, bucketId, or projectId.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * lookup the document(s) associated with a processId, bucketId, groupId, or projectId.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
          * @summary lookup
          * @param {DocumentsApiLookupRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -774,7 +774,7 @@ export const DocumentsApiFactory = function (configuration?: Configuration, base
             return localVarFp.list(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * lookup the document(s) associated with a processId, bucketId, or projectId.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+         * lookup the document(s) associated with a processId, bucketId, groupId, or projectId.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
          * @summary lookup
          * @param {DocumentsApiLookupRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -934,7 +934,7 @@ export type DocumentsApiListRequest = {
 export type DocumentsApiLookupRequest = {
     
     /**
-    * a processId, bucketId, or projectId
+    * a processId, bucketId, groupId, or projectId
     * @type {number}
     * @memberof DocumentsApiLookup
     */
@@ -1088,7 +1088,7 @@ export class DocumentsApiGenerated extends BaseAPI {
     }
 
     /**
-     * lookup the document(s) associated with a processId, bucketId, or projectId.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
+     * lookup the document(s) associated with a processId, bucketId, groupId, or projectId.  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
      * @summary lookup
      * @param {DocumentsApiLookupRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

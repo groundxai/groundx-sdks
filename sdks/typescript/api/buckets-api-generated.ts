@@ -180,8 +180,8 @@ export const BucketsApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * List all buckets within your GroundX account  Interact with the \"Request Body\" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments. 
          * @summary list
-         * @param {number} [n] The maximum number of returned documents. Accepts 1-100 with a default of 20.
-         * @param {string} [nextToken] A token for pagination. If the number of documents for a given query is larger than n, the response will include a \&quot;nextToken\&quot; value. That token can be included in this field to retrieve the next batch of n documents.
+         * @param {number} [n] The maximum number of returned buckets. Accepts 1-100 with a default of 20.
+         * @param {string} [nextToken] A token for pagination. If the number of buckets for a given query is larger than n, the response will include a \&quot;nextToken\&quot; value. That token can be included in this field to retrieve the next batch of n buckets.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -462,14 +462,14 @@ export type BucketsApiGetRequest = {
 export type BucketsApiListRequest = {
     
     /**
-    * The maximum number of returned documents. Accepts 1-100 with a default of 20.
+    * The maximum number of returned buckets. Accepts 1-100 with a default of 20.
     * @type {number}
     * @memberof BucketsApiList
     */
     readonly n?: number
     
     /**
-    * A token for pagination. If the number of documents for a given query is larger than n, the response will include a \"nextToken\" value. That token can be included in this field to retrieve the next batch of n documents.
+    * A token for pagination. If the number of buckets for a given query is larger than n, the response will include a \"nextToken\" value. That token can be included in this field to retrieve the next batch of n buckets.
     * @type {string}
     * @memberof BucketsApiList
     */
