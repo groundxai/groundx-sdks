@@ -14,8 +14,8 @@ servers:
 tags:
   - name: Documents
   - name: Search
-  - name: Projects
   - name: Buckets
+  - name: Groups
   - name: Customer
   - name: Health
 paths:
@@ -137,13 +137,13 @@ paths:
       summary: lookup
       operationId: Document_lookup
       description: >
-        lookup the document(s) associated with a processId, bucketId, or projectId.
+        lookup the document(s) associated with a processId, bucketId, groupId, or projectId.
         
         
         Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
       parameters:
         - name: id
-          description: a processId, bucketId, or projectId
+          description: a processId, bucketId, groupId, or projectId
           in: path
           required: true
           schema:
@@ -192,9 +192,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/DocumentLookupResponse'
         '400':
-          description: Invalid process, bucket, or project ID
+          description: Invalid process, bucket, group, or project ID
         '401':
-          description: Unauthorized to access process, bucket, or project with given ID
+          description: Unauthorized to access process, bucket, group, or project with given ID
   /v1/ingest/documents:
     get:
       tags:
@@ -357,7 +357,7 @@ paths:
         
         Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
       parameters:
-        - description: The bucketId, projectId, or documentId to be searched. The document or documents within the specified container will be compared to the query, and relevant information will be extracted.
+        - description: The bucketId, groupId, projectId, or documentId to be searched. The document or documents within the specified container will be compared to the query, and relevant information will be extracted.
           in: path
           name: id
           required: true
@@ -366,7 +366,7 @@ paths:
               - type: integer
               - type: string
                 format: uuid
-        - description: The maximum number of returned documents. Accepts 1-100 with a default of 20.
+        - description: The maximum number of returned search results. Accepts 1-100 with a default of 20.
           in: query
           name: 'n'
           required: false
@@ -405,7 +405,7 @@ paths:
         '400':
           description: Invalid request data
         '401':
-          description: Unauthorized to access project or bucket with given ID
+          description: Unauthorized to access resource with given ID
   /v1/search/documents:
     post:
       tags:
@@ -421,7 +421,7 @@ paths:
 
         Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
       parameters:
-        - description: The maximum number of returned documents. Accepts 1-100 with a default of 20.
+        - description: The maximum number of returned search results. Accepts 1-100 with a default of 20.
           in: query
           name: 'n'
           required: false
@@ -460,223 +460,7 @@ paths:
         '400':
           description: Invalid request data
         '401':
-          description: Unauthorized to access project or bucket with given ID
-  /v1/project:
-    get:
-      tags:
-        - Projects
-      summary: list
-      description: >
-        list all projects within your GroundX account.
-        
-        
-        Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
-      operationId: Project_list
-      parameters:
-        - name: n
-          description: The maximum number of returned documents. Accepts 1-100 with a default of 20.
-          in: query
-          required: false
-          schema:
-            type: integer
-        - name: nextToken
-          description: A token for pagination. If the number of documents for a given query is larger than n, the response will include a "nextToken" value. That token can be included in this field to retrieve the next batch of n documents.
-          in: query
-          required: false
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful retrieval of projects
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProjectListResponse'
-    post:
-      tags:
-        - Projects
-      summary: create
-      operationId: Project_create
-      description: >
-        create a new project, a project being a collection of buckets which can be searched.
-        
-        
-        Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ProjectCreateRequest'
-      responses:
-        '200':
-          description: Project successfully created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProjectResponse'
-        '400':
-          description: Invalid body parameter
-  /v1/project/{projectId}:
-    get:
-      tags:
-        - Projects
-      summary: get
-      operationId: Project_get
-      description: >
-        look up a specific project by its projectId.
-        
-        
-        Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
-      parameters:
-        - description: The projectId of the project to look up.
-          in: path
-          name: projectId
-          required: true
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Successful retrieval of project
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProjectResponse'
-        '400':
-          description: Invalid project ID
-        '401':
-          description: Unauthorized to access project with given ID
-    put:
-      tags:
-        - Projects
-      summary: update
-      operationId: Project_update
-      description: >
-        Rename a project
-        
-        
-        Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
-      parameters:
-        - description: The projectId of the project to update.
-          in: path
-          name: projectId
-          required: true
-          schema:
-            type: integer
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ProjectUpdateRequest'
-      responses:
-        '200':
-          description: Successful update of project
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProjectResponse'
-        '400':
-          description: Invalid body parameter
-        '401':
-          description: Unauthorized to update project with given ID
-    delete:
-      tags:
-        - Projects
-      summary: delete
-      description: >
-        Delete a project.
-        
-        
-        Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
-      operationId: Project_delete
-      parameters:
-        - name: projectId
-          description: The projectId of the project to be deleted.
-          in: path
-          required: true
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Project successfully deleted
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MessageResponse'
-        '400':
-          description: Invalid project ID
-        '401':
-          description: Unauthorized to delete project with given ID
-  /v1/project/{projectId}/bucket/{bucketId}:
-    post:
-      tags:
-        - Projects
-      summary: addBucket
-      operationId: Project_addBucket
-      description: >
-        Add an existing bucket to an existing project. Buckets and projects can be associated many to many.
-        
-        
-        Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
-      parameters:
-        - description: The projectId of the project which the bucket will be added to.
-          in: path
-          name: projectId
-          required: true
-          schema:
-            type: integer
-        - description: The bucketId of the bucket being added to the project.
-          in: path
-          name: bucketId
-          required: true
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Successful update of project
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MessageResponse'
-        '400':
-          description: Invalid path parameter
-        '401':
-          description: Unauthorized to update project with given ID
-    delete:
-      tags:
-        - Projects
-      summary: removeBucket
-      operationId: Project_removeBucket
-      description: >
-        remove a bucket from a project. Buckets and projects can be associated many to many, this removes one bucket to project association without disturbing others.
-        
-        
-        Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
-      parameters:
-        - description: The projectId of the project which the bucket will be removed from.
-          in: path
-          name: projectId
-          required: true
-          schema:
-            type: integer
-        - description: The bucketId of the bucket which will be removed from the project.
-          in: path
-          name: bucketId
-          required: true
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Successful update of project
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MessageResponse'
-        '400':
-          description: Invalid path parameter
-        '401':
-          description: Unauthorized to update project with given ID
+          description: Unauthorized to access resource with given ID
   /v1/bucket:
     get:
       tags:
@@ -690,13 +474,13 @@ paths:
       operationId: Bucket_list
       parameters:
         - name: n
-          description: The maximum number of returned documents. Accepts 1-100 with a default of 20.
+          description: The maximum number of returned buckets. Accepts 1-100 with a default of 20.
           in: query
           required: false
           schema:
             type: integer
         - name: nextToken
-          description: A token for pagination. If the number of documents for a given query is larger than n, the response will include a "nextToken" value. That token can be included in this field to retrieve the next batch of n documents.
+          description: A token for pagination. If the number of buckets for a given query is larger than n, the response will include a "nextToken" value. That token can be included in this field to retrieve the next batch of n buckets.
           in: query
           required: false
           schema:
@@ -824,6 +608,222 @@ paths:
           description: Invalid bucket ID
         '401':
           description: Unauthorized to delete bucket with given ID
+  /v1/group:
+    get:
+      tags:
+        - Groups
+      summary: list
+      description: >
+        list all groups within your GroundX account.
+        
+        
+        Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+      operationId: Group_list
+      parameters:
+        - name: n
+          description: The maximum number of returned groups. Accepts 1-100 with a default of 20.
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: nextToken
+          description: A token for pagination. If the number of groups for a given query is larger than n, the response will include a "nextToken" value. That token can be included in this field to retrieve the next batch of n groups.
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful retrieval of groups
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupListResponse'
+    post:
+      tags:
+        - Groups
+      summary: create
+      operationId: Group_create
+      description: >
+        create a new group, a group being a collection of buckets which can be searched.
+        
+        
+        Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupCreateRequest'
+      responses:
+        '200':
+          description: Group successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupResponse'
+        '400':
+          description: Invalid body parameter
+  /v1/group/{groupId}:
+    get:
+      tags:
+        - Groups
+      summary: get
+      operationId: Group_get
+      description: >
+        look up a specific group by its groupId.
+        
+        
+        Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+      parameters:
+        - description: The groupId of the group to look up.
+          in: path
+          name: groupId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful retrieval of group
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupResponse'
+        '400':
+          description: Invalid group ID
+        '401':
+          description: Unauthorized to access group with given ID
+    put:
+      tags:
+        - Groups
+      summary: update
+      operationId: Group_update
+      description: >
+        Rename a group
+        
+        
+        Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+      parameters:
+        - description: The groupId of the group to update.
+          in: path
+          name: groupId
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupUpdateRequest'
+      responses:
+        '200':
+          description: Successful update of group
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupResponse'
+        '400':
+          description: Invalid body parameter
+        '401':
+          description: Unauthorized to update group with given ID
+    delete:
+      tags:
+        - Groups
+      summary: delete
+      description: >
+        Delete a group.
+        
+        
+        Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+      operationId: Group_delete
+      parameters:
+        - name: groupId
+          description: The groupId of the group to be deleted.
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Group successfully deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '400':
+          description: Invalid group ID
+        '401':
+          description: Unauthorized to delete group with given ID
+  /v1/group/{groupId}/bucket/{bucketId}:
+    post:
+      tags:
+        - Groups
+      summary: addBucket
+      operationId: Group_addBucket
+      description: >
+        Add an existing bucket to an existing group. Buckets and groups can be associated many to many.
+        
+        
+        Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+      parameters:
+        - description: The groupId of the group which the bucket will be added to.
+          in: path
+          name: groupId
+          required: true
+          schema:
+            type: integer
+        - description: The bucketId of the bucket being added to the group.
+          in: path
+          name: bucketId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful update of group
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '400':
+          description: Invalid path parameter
+        '401':
+          description: Unauthorized to update group with given ID
+    delete:
+      tags:
+        - Groups
+      summary: removeBucket
+      operationId: Group_removeBucket
+      description: >
+        remove a bucket from a group. Buckets and groups can be associated many to many, this removes one bucket to group association without disturbing others.
+        
+        
+        Interact with the "Request Body" below to explore the arguments of this function. Enter your GroundX API key to send a request directly from this web page. Select your language of choice to structure a code snippet based on your specified arguments.
+      parameters:
+        - description: The groupId of the group which the bucket will be removed from.
+          in: path
+          name: groupId
+          required: true
+          schema:
+            type: integer
+        - description: The bucketId of the bucket which will be removed from the group.
+          in: path
+          name: bucketId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful update of group
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '400':
+          description: Invalid path parameter
+        '401':
+          description: Unauthorized to update group with given ID
   /v1/customer:
     get:
       tags:
@@ -998,42 +998,42 @@ components:
         text:
           description: Original text from the source document
           type: string
-    ProjectResponse:
+    GroupResponse:
       type: object
       required:
-        - project
+        - group
       properties:
-        project:
-          $ref: '#/components/schemas/ProjectDetail'
-    ProjectDetail:
+        group:
+          $ref: '#/components/schemas/GroupDetail'
+    GroupDetail:
       type: object
       required:
-        - projectId
+        - groupId
       properties:
         buckets:
           type: array
-          description: The content buckets associated with the project
+          description: The content buckets associated with the group
           items:
             $ref: '#/components/schemas/BucketDetail'
         created:
           type: string
-          description: The data time when the project was created, in RFC3339 format
+          description: The data time when the group was created, in RFC3339 format
           format: date-time
           example: '2023-10-03T08:59:39.312Z'
         fileCount:
           type: integer
-          description: The number of files contained in the content buckets associated with the project
+          description: The number of files contained in the content buckets associated with the group
         fileSize:
           type: string
-          description: The total file size of files contained in the content buckets associated with the project
+          description: The total file size of files contained in the content buckets associated with the group
           example: 3.1GB
-        projectId:
+        groupId:
           type: integer
         name:
           type: string
         updated:
           type: string
-          description: The data time when the project was last updated, in RFC3339 format
+          description: The data time when the group was last updated, in RFC3339 format
           format: date-time
           example: '2023-10-03T08:59:39.312Z'
     BucketDetail:
@@ -1102,28 +1102,28 @@ components:
           description: The new name of the bucket being renamed.
           type: string
           example: your_bucket_name
-    ProjectCreateRequest:
+    GroupCreateRequest:
       type: object
       required:
        - name
       properties:
         name:
-          description: The name of the project being created.
+          description: The name of the group being created.
           type: string
-          example: your_project_name
+          example: your_group_name
         bucketName:
           type: string
-          description: Specify bucketName to automatically create a bucket, by the name specified, and add it to the created project.
+          description: Specify bucketName to automatically create a bucket, by the name specified, and add it to the created group.
           example: your_new_bucket_name
-    ProjectUpdateRequest:
+    GroupUpdateRequest:
       type: object
       required:
        - newName
       properties:
         newName:
-          description: The new name of the project being renamed.
+          description: The new name of the group being renamed.
           type: string
-          example: your_project_name
+          example: your_group_name
     BoundingBoxDetail:
       type: object
       properties:
@@ -1346,13 +1346,13 @@ components:
         - error
         - complete
         - cancelled
-    ProjectListResponse:
+    GroupListResponse:
       type: object
       properties:
-        projects:
+        groups:
           type: array
           items:
-            $ref: '#/components/schemas/ProjectDetail'
+            $ref: '#/components/schemas/GroupDetail'
     BucketListResponse:
       type: object
       properties:
