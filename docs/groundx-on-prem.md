@@ -109,7 +109,7 @@ That endpoint, in conjuction with the `admin.api_key`, can be used to configure 
 from groundx import Groundx
 from groundx.configuration import Configuration
 
-external_ip = 'b941a120ecd91455fa7b8682be2a9e41-1427794132.us-east-2.elb.amazonaws.com'
+external_ip = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-xxxxxxxxxx.us-east-2.elb.amazonaws.com'
 
 groundx = Groundx(
     configuration=Configuration(
@@ -120,9 +120,16 @@ groundx = Groundx(
 ```
 
 ```javascript
-?
-```
 
+import { Groundx } from "groundx-typescript-sdk";
+
+const external_ip = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-xxxxxxxxxx.us-east-2.elb.amazonaws.com'
+
+const groundx = new Groundx({
+  apiKey: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+  basePath: `http://${external_ip}/api`;,
+});
+```
 :::
 
 ## Taredown
