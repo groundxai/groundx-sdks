@@ -2,4 +2,4 @@
 
 **THIS REPOSITORY AND SDK ARE DEPRECATED**
 
-## Please visit the [PYTHON](https://github.com/eyelevelai/groundx-python) repository for the supported version of this SDK.
+## Please visit the [TYPESCRIPT](https://github.com/eyelevelai/groundx-typescript) repository for the supported version of this SDK.
